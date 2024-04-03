@@ -1,0 +1,5 @@
+algebra/*.gz
+algebra/*.log
+algebra/*.fls
+algebra/*.fdb_latexmk
+algebra/*.aux
