@@ -3,3 +3,11 @@ algebra/*.log
 algebra/*.fls
 algebra/*.fdb_latexmk
 algebra/*.aux
+*/*.gz 
+*/*.log
+*/*.fls
+*/*.fdb_latexmk
+*/*.aux
+*/*.tex
+*/*.out
+.vscode
