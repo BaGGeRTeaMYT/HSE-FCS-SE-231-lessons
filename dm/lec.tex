@@ -1,0 +1,1206 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[T2A]{fontenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathabx}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\title{Лекции по дискретной математике 4 модуль.}
+\author{Андрей Тищенко}
+\date{2023/2024}
+
+\newcommand{\tg}{\operatorname{tg}}
+\newcommand{\Bold}[1]{$\textbf{#1}$}
+\newcommand{\Underl}[1]{$\underline{\text{#1}}$}
+\newcommand{\BU}[1]{$\underline{\textbf{#1}}$}
+\newcommand{\DS}{\displaystyle}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Rg}{\operatorname{Rg}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\oo}{\infty}
+\newcommand{\arctg}{\operatorname{arctg}}
+\newcommand{\Abs}[1]{\left| #1 \right|}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\AutoBr}[1]{\left(#1\right)}
+
+\begin{document}
+    \maketitle
+    \[\textbf{Лекция 12 апреля.}\]
+    \[\text{Деревья}\]
+    $\forall T$ $T$ - $(m,\ n)$ граф тогда:\\
+    $T$ дерево $\Leftrightarrow T$ связный ациклический\\
+    $\Leftrightarrow T$ минимально связен\\
+    $\Leftrightarrow$ $T$ связен $m = n - 1$\\
+    $\Leftrightarrow$ в $T$ любые 2 вершины соединены ровно $1$ простым путём.\\
+    \begin{enumerate}
+        \item[Определение:] граф называется \Underl{минимально связным} если из него нельзя удалить ребро без потери связности.
+        \item[Определение:] Пусть $G = (V,\ E)$ - связный граф. Любое дерево $T = (V,\ E')$, такое что $E' \subseteq E$, (то есть $T$ - подграф) называется остовным.
+        \item[Теорема:] В любом связном $(n,\ m)$ графе $G = (V,\ E)$ есть остовное дерево $T$
+        \item[Доказательство:] Индукция по $m$\\
+        \begin{enumerate}
+            \item[$m = 0$:] $n = 1,\ T = G$.
+            \item[$m > 0$:]
+            \begin{enumerate}
+                \item[1.] $G$ - дерево, тогда $T = G$
+                \item[2.] $G$ не деревоо $\Rightarrow$  не минимально связный $\Rightarrow \exists x,\ y\quad xEy \wedge$ ребро $xy$ можно удалить без потери связности.\\
+                $G'$ - результат удаления ребра $xy$\\
+                $G'$ - $(n,\ m - 1)$ связный граф $\underset{\text{ПИ}}{\Rightarrow}$ в $G'$ есть остовное дерево $T'$\\
+                $G = (V,\ E),\ G' = (V,\ E\setminus\{xy,\ yx\})$. То есть $T'$ подграф $G'$, а $G'$ подграф $G\Rightarrow T:= T'$\\
+            \end{enumerate}  
+        \end{enumerate}  
+    \end{enumerate}
+    \[\text{Двудольные графы}\]
+    \begin{enumerate}
+        \item[Определение:] граф $G = (V,\ E)$ \Underl{двудольный} $\Leftrightarrow \exists V_1,\ V_2:$\\
+        \[\begin{cases}
+            V_1 \cap V_2 = \emptyset\\
+            V_1 \cup V_2 = V\\
+            V_1,\ V_2 \neq \emptyset\\
+            x,\ y\in V_i \Rightarrow xy \notin E
+        \end{cases}\]
+        \item[Определение:] граф $G = (V,\ E)$ раскрашиваем в $k$ цветов
+        $\Leftrightarrow \exists c: V\rightarrow \underline{k}\\
+        \forall  x,\ y\ \big(c(x) = c(y)\Rightarrow xy \in E\big)$
+        \item[Утверждение:] $G\ k$-дольный $\Rightarrow \forall l \geq k,\ G$ можно раскрасить в $l$ цветов.
+        \item[Теорема 2:] (Кёнинга).\\
+        $\forall$ графа $G = (V,\ E),\ \Abs{V}\geq 2$ следующие условия равносильны:
+        \begin{enumerate}
+            \item $G$ двудольныйв
+            \item в $G$ нет циклов нечётной длины
+            \item в $G$ нет простого цикла нечётной длины
+        \end{enumerate}
+        \item[Доказательство:] $a\Rightarrow b$ допустим есть цикл нечётной длины:\\
+        $x_1 x_2 x_3 x_4 \dots x_{2n} x_{2n + 1} x_1$\\
+        Без ограничения общности:\\
+        $x_1 \in V_1\Rightarrow x_2 \in V_2\Rightarrow\dots \Rightarrow x_{2n}\in V_2\Rightarrow x_{2n + 1}\in V_1 \Rightarrow x_1 \in V_2\ \bot$\\
+        $b \Rightarrow c$. Если нет никакого цикла нечётной длины, то простого также не будет.
+        $c \Rightarrow a$.
+        \item[Лемма*] если граф $G$ связен и $|V| \geq 2$ и в $G$ нет простых циклов нечётной длины, то $G$ двудольный.\\
+        $G = G_1 \sqcup G_2 \sqcup \dots \sqcup G_n$\\
+        Ещё не может быть компонент порядка $1$.\\
+        $G' = (V',\ E)$ связен, $|V'| \geq 2,$ в $G'$ нет простого цикла нечётной длины.\\
+        Рассмотрим произвольную $z\in V$, тогда $\exists y\ zEy\\
+        d(u,\ w) := $ длина кратчайшего пути между $u,\ w$ в $G'$\\
+        $d(z,\ z) = 0,\ d(z,\ y) = 1\\
+        V_1 = \{x\in V'\ |\ d(z,\ x) \equiv 1 (2)\}\\
+        V_2 = \{x \in V'\ |\ d(z,\ x) \equiv 0 (2)\}\Rightarrow\\
+        \Rightarrow \begin{cases}
+            V_1 \cap V_2 = \emptyset\\
+            V_1 \cup V_2 = V'\\
+            y\in V_1\neq \emptyset\wedge z \in V_2 \neq \emptyset
+        \end{cases}$\\
+        Предположим $\exists u,\ w\in V_i\quad uEw\Rightarrow u\neq w\\
+        d(z,\ u) \equiv d(z,\ w) (2)$\\
+        Рассмотрим кратчайшие $(\rightarrow\text{простые})$ пути $z\xrightarrow[]{p}u\wedge z\xrightarrow[]{q} w$\\
+        Пусть $t :=$ самая правая общая точка $z\xrightarrow[]{p} u,\ z\xrightarrow[]{q} w$ (самая правая - такая, что путь до u и w минимален).\\
+        $z\xrightarrow[]{p} w = z\xrightarrow[]{p_1} t \xrightarrow[]{p_2} w\\
+        z\xrightarrow[]{q}u = z\xrightarrow[]{q_1} t \xrightarrow[]{q_2} u$\\
+        \item[Утверждение:] $\Abs{z\xrightarrow[]{p_1} t} = \Abs{z\xrightarrow[]{q_1}} t$
+        \item[Доказательство:] Иначе без ограничения общности:\\ 
+        $\Abs{z\xrightarrow[]{p_1} t} > \Abs{z \xrightarrow[]{q_1}t}\\
+        \Abs{z\xrightarrow[]{q_1} t \xrightarrow[]{p_2}} < \Abs{z\xrightarrow[]{p}w}\ \bot$
+        $\Abs{z\xrightarrow[]{p} w} = d(z,\ w) = d(z,\ u)\\
+        \Abs{z\xrightarrow[]{p_1} t} + \Abs{t\xrightarrow[]{p_2} w} \equiv \Abs{z\xrightarrow[]{q_1}t} + \Abs{t\xrightarrow[]{q_2} u}$\\
+        $\Abs{t \xrightarrow[]{p_2} w} \equiv \Abs{t \xrightarrow[]{q_2} u}$\\
+        Рассмотрим цикл $twu$, он является простым, его длина будет равна:
+        \[\Abs{t \xrightarrow[]{p_2} w} + \Abs{t \xrightarrow[]{q_2} y} + 1 \equiv 1 (2)\]
+        Но простых циклов длины $2$ тут быть не может $\bot$.
+        \item[Лемма 4.]
+        Если $(n,\ m)$ граф $G = (V,\ E)$ двудольный с долями $V_1$ и $V_2$, то
+        \[\sum_{x\in V_1} d(x) = m = \sum_{x \in V_2} d(x)\]
+        \item[Доказательство:] Индуция по количеству рёбер.
+        \begin{enumerate}
+            \item[$m = 0$:] $\forall x\ d(x) = 0$
+            \item[$m > 0$:] есть ребро $uw$, удалим его и получим $G'$\\
+            Без ограничения общности:\\
+            $uw \in E\Rightarrow u\in V_1,\ w\in V_2$\\
+            $G'$ - двудольный $(n,\ m-1)$ граф с долями $V-1,\ V_2$\\
+            $\DS\sum_{x \in V_1} d(x) = \sum_{x\in V_1\setminus \{u\}} + \big(d_{G'} + 1\big) = \sum_{x\in V_1} d_{G'} (x) + 1 = (m - 1) + 1 = m$
+        \end{enumerate} 
+    \end{enumerate}
+    \[\text{Задача о свадьбах}\]
+    \begin{enumerate}
+        \item[Определение:] граф $G$ называется \Underl{паросочетанием}\\
+        $\Leftrightarrow \forall x\ d(x) = 1$\\
+        Условие для выдачи женщин замуж $\forall S\subseteq V_1\ \Abs{E[S]} \geq \Abs{S}$
+    \end{enumerate}
+    $T = \{t_1,\ t_2,\dots,\ t_n\}$. Хотим построить инъекцию $T \overset{f}{\lesssim} \bigcup T = t_1\cup\dots\cup t_n$, также хотим $\forall t\in T\ f(t) \in t$.\\
+    Тогда нужно $\forall S \subseteq T\ \Abs{\bigcup S} \geq \Abs{S}$
+    \[\textbf{Лекция 19 апреля}\]
+\begin{enumerate}
+    \item[\textbf{Теорема Холла:}]
+\end{enumerate}
+Дано: двудольный граф $G$ $\big(W (\text{женщины}), M (\text{мужчины}), E\big), k = |W|$\\
+Требуется выдать всех женщин замуж по любви без многоженства и многомужества\\
+\begin{enumerate}
+    \item[\textbf{Формально:}]
+\end{enumerate}
+$\exists f:\ W\rightarrow M$
+\begin{enumerate}
+    \item [1.] $f$ - инъективно
+    \item [2.] $\forall t\ t\ E\ f(t)$
+\end{enumerate}
+$$\exists f\text{ удовлетворяющее условию} \underset{\text{т. Холла}}{\Longleftrightarrow} \forall S\subseteq W\quad |S| \leq \Big|E[S]\Big|\quad (*)$$\newpage
+\begin{enumerate}
+    \item[\textbf{Доказательство:}]
+\end{enumerate}
+\subsection*{$"\Leftarrow"$}
+$\forall S\subseteq W\quad f$ -  инъективно
+$$S\sim f[S]\subseteq E[S]$$
+$$S\lesssim E[S]\Rightarrow |S| \leq |E[S]|$$
+\subsection*{$"\Rightarrow"$}
+Индукция по $m$
+$$\forall t\ 1 = |\{ t \}| \leq |E[\{ 
+t \}]|\Rightarrow \forall t\in W\ \exists x\ tEx\Rightarrow E\text{ - тотально для }W$$
+\subsubsection*{1й случай: E - инъективно}
+$f(x) := $ любой $x\in E[\{x\}]$. Тогда мы в шоколаде
+\subsubsection*{2й случай: E - не инъективно}
+\begin{enumerate}
+    \item [a.] $\exists S_0\ (S_0\neq \emptyset\wedge |S_0| = |E[S_0]|)$
+    Рассмотрим подграф $G$, индуцированный множеством $S_0$
+    $$S_0 \neq W\Rightarrow |S_0| < |W|$$
+    $$\Rightarrow |W\setminus S_0|\neq \emptyset\Rightarrow \text{не все ребра в } G_0$$
+    $$\Rightarrow \text{размер}(G_0) < m$$
+    Допустим для $G_0$ выполнено условие $(*)$
+    $$S^{\prime}\subseteq S_0\Rightarrow E[S^{\prime}]\subseteq E[S_0]\Rightarrow |S^{\prime}| \leq |E[S^{\prime}]|$$
+    Вывод: по проедположению индукции для $G_0$ есть соответствуется фукнкция $f_0:\ S_0\rightarrow E[S_0]$\\
+    $G_1 =$ это те вершины и ребра, которые не вошли в $G_0$.\\
+    Утверждение: Для $G_1$ выполнено $(*)$.\\
+    Пусть $S^{\prime} \subseteq W\setminus S_0$
+    $$\big|E[S_0]\big| + |S^{\prime}| = |S_0| + |S^{\prime}| = |S_0\cup S^{\prime}| \leq \big|E[S_0\sup S^{\prime}]\big| = \big|E[S_0]\cup E[S^{\prime}]\big| = $$
+    $$= \big|(E[S^{\prime}] \ E[S_0]) \cup E[S_0]\big| = \big|E[S^{\prime}] \setminus E[S_0]\big| + \big|E[S_0]\big|$$
+    Получаем сокращением $|S^{\prime}| = \big|E[S^{\prime}] \setminus E[S_0]\big|$\\
+    Так как $|S_0| \neq 0$, то размер $(G_0) > 0\Rightarrow$ размер $(G_1) < m$.\\
+    По принципу индукуции для $G_1$, есть $f_1:\ W\setminus S_0\rightarrow E_{G_1}[W\setminus S_0]$
+    $$f := f_0\cup f_1$$
+    \item [б.] $\forall S \left(S\neq W\wedge S\neq \emptyset \Rightarrow |S| < \big|E[S]\big|\right)$\\
+    так как $E$ - не инъекция, то:
+    \[\exists x\in M\ \exists\ t_1, t_2\in W (t_1\neq t_2\wedge t_1Ex\wedge t_2Ex)\Rightarrow \text{размер} (G_1) < 1\]
+    $$\big|E_{G_1}[S]\big| \geq \big|E[S]\big| - 1$$
+    $$\Rightarrow |S| < \big|E[S]\big| \leq \big|E_{G_1}[S]\big| + 1\Rightarrow |S| \leq \big|E_{G_1}[S]\big|$$
+    По предположению индукции для $G_1$, есть $f_1:\ S\rightarrow E_{G_1}[S]\subseteq E_G[S]$
+    $$f := f_1$$
+\end{enumerate}
+\begin{enumerate}
+    \item[\textbf{Теорем Холла}] \textbf{о "представителях"} 
+\end{enumerate}
+Дано $U$ - конечное (не обязательно):
+$$T = \{ t_1, \dots, t_k \}\subseteq \mathcal{P}(U)$$
+тогда в конкретном $t$ можно инъективно выбрать по элементу $\Leftrightarrow\\
+\Leftrightarrow \forall S\subseteq T\ |S| \leq \underset{= t_{i_1}\cup \dots \cup t_{i_q}}{|\bigcup S|}$\\
+Строим граф $(T, U, E)$
+$$tEx :\Leftrightarrow x\in t$$
+$$E[\{ t_{i_1}\cup \dots \cup t_{i_q} \}] = t_{i_1}\cup \dots \cup t_{i_q}$$
+
+\begin{enumerate}
+    \item[\textbf{т. Дилуорса}] \textbf{$\Rightarrow$ т. Холла}
+\end{enumerate}
+тут идут рисуночки, сам нарисуешь (демонстрация без доказательства). Понял, Вова. Скиньте рисуночки, пожалуйста
+\newpage
+\[\textbf{Ориентированные графы}\]
+\begin{enumerate}
+    \item[\textbf{Определение:}]
+\end{enumerate}
+Ориентированный граф (орграф) - это пара $(V, A)$, где $V \neq \emptyset,\ A\subseteq V^2$
+$$N_+(x) := A[\{ x \}]$$
+$$N_-(x) := A^{-1}[\{ x \}]$$
+Показатель исхода
+$$d_+(x) = |N_+(x)|$$
+Показатель захода
+$$d_-(x) = |N_-(x)|$$
+\begin{enumerate}
+    \item[\textbf{Утверждение:}]
+\end{enumerate}
+$\sum\limits_{x\in V} d_+(x) = |A| = \sum\limits_{x\in V} d_-(x)$
+\begin{enumerate}
+    \item[\textbf{Определение:}]
+\end{enumerate}
+Турнир - это орграф, такой, что
+\begin{enumerate}
+    \item [1] $\forall x\ \neg xAx$
+    \item [2] $\forall x, y\ (x\neq y\Rightarrow (xAy\Leftrightarrow \neg yAx) )$
+\end{enumerate}
+\[\textbf{Беспредельный анализ}\]
+Рассматриваем последовательности: $\mathbb{R}^{\mathbb{N}},\ (\mathbb{C}^{\mathbb{N}})$
+$$f^{\prime}(x) = \lim_{\delta x\to 0}\dfrac{f(x + \delta x) - f(x)}{\delta x}$$
+Перефразируем в терминах "бесконечно малых"
+$$f^{\prime}(x) = \dfrac{f(x + \delta x) - f(x)}{\delta x}, \text{ где } \delta x \text{ бесконечно малая}$$
+Для последовательностей зададим
+$$\Delta a_n := a_{n + 1} - a_n$$
+Вторая производная 
+$$f^{\prime\prime} = \dfrac{f^{\prime}(x + \delta x) - f^{\prime}(x)}{\delta x} = \dfrac{1}{\delta x}\left( \dfrac{f(x + 2\delta x) - 2f(x + \delta x) + f(x)}{\delta x} \right) = $$
+$$ = \dfrac{f(x + 2\delta x) - 2f(x + \delta x) + f(x)}{(\delta x)^2}$$
+чем то похоже на $(x - y)^2 = x^2 -2xy + y^2$\\
+Для последовательнотей
+$$\Delta^2 a_n = \Delta a_{n + 1} - \Delta a_n = a_{n + 2} - 2a_{n + 1} + a_n$$
+$$\Delta^3 a_n = \Delta^2 a_{n + 1} - \Delta^2 a_n = a_{n + 3} - 3a_{n + 2} + 3a_{n + 1} - a_n$$
+
+Зададим $S$:
+$$S:\ \mathbb{R}^{\mathbb{N}}\rightarrow \mathbb{R}^{\mathbb{N}}\quad S\ a_n = a_{n+1}$$
+Тогда получаем дельту
+$$\Delta a_n = a_{n + 1} - a_n = S\ a_n + a_n = (S - 1) a_n$$
+Получаем $\Delta = S - 1\Rightarrow S = \Delta + 1\Rightarrow S^k = (\Delta + 1)^k$
+Веселый результат
+$$a_{n + k} = S^k\ a_n = (\Delta + 1)^ka_n = \sum_{t = 0}^{k}C_{k}^{t}\Delta^t\ a_n = \sum_{t = 0}^{k}\dfrac{\Delta^t\ a_n}{t!}k^{(t)}$$
+где $k^{(t)} = k\cdot (k - 1)\cdot \dots \cdot (k - t + 1)$
+\[\textbf{Лекция 26 апреля}\]
+\[\text{Линейное пространство (Seq)}\]
+\begin{enumerate}
+    \item[\textbf{Носитель:}] $\mathbb{R}^{\mathbb{N}}\owns \vec{a} = (a_0,\ a_1,\dots) = (a_n)_{n\in \mathbb{N}},\ \vec{a}: \mathbb{N}\longrightarrow \mathbb{R}$
+\end{enumerate}
+\begin{enumerate}
+    \item[\textbf{Скаляр:}] $\mathbb{R}$
+\end{enumerate}
+\[\alpha \in \mathbb{R}: \alpha \vec{a} = (\alpha a_0,\ \alpha a_1,\dots),\ (\alpha \vec{a})_n = \alpha a_n\]
+\begin{enumerate}
+    \item[\textbf{Сложение:}]
+\end{enumerate}
+\[\vec{a} + \vec{b} = (a_0 + b_0,\ a_1 + b_1,\dots),\ (\vec{a} + \vec{b})_n = a_n + b_n\]
+\begin{enumerate}
+    \item[\textbf{Утверждение 1:}] При этом выполняются все аксиомы линейного пространства.
+\end{enumerate}
+\subsubsection*{Проверим дистрибутивность:}
+\[\bigg(\alpha \left(\vec{a} + \vec{b}\right)\bigg)_n  =\alpha (a_n + b_n) = \alpha a_n + \alpha b_n = (\alpha \vec{a})_n + (\alpha \vec{b})_n = (\alpha \vec{a} + \alpha \vec{b})_n\]
+\[\Big((\alpha + \beta) \vec{a}\Big)_n = (\alpha + \beta)a_n = \alpha a_n + \beta a_n = (\alpha \vec{a} + \beta \vec{a})_n\]
+\subsubsection*{Ещё факты:}
+\[\vec{a} + \vec{0} = \vec{a}\]
+\[\vec{0} = (0,\ 0,\ 0,\dots)\]
+\[\vec{a} + \vec{b} = \vec{b} + \vec{a}\]
+\[\vec{a} + \left(-\vec{a}\right) = \vec{0}\]
+\[\left(-\vec{a}\right)_n = -a_n\]
+\begin{enumerate}
+    \item[\textbf{Определение:}] $F: Seq\longrightarrow Seq$ \Underl{линейная}
+\end{enumerate}
+\[\Leftrightarrow \forall \vec{a},\ \vec{b} \in Seq\ \forall \alpha,\ \beta\in \mathbb{R}\]
+\[F(\alpha \vec{a} + \beta\vec{b}) = \alpha F(\vec{a}) + \beta F(\vec{b})\]
+\begin{enumerate}
+    \item[\textbf{Утверждение 2:}]
+\end{enumerate}
+Каждый скаляр $\alpha \in \mathbb{R}$ можно рассматривать как линейный оператор:
+\[\alpha: Seq\rightarrow Seq\quad \alpha(\vec{a}) = (\alpha a_0,\ \alpha a_1,\dots)\]
+\[\alpha(\alpha'\vec{a} + \beta'\vec{b}) = \alpha (\alpha'\vec{a}) + \alpha (\beta'\vec{b}) = \alpha'(\alpha \vec{a}) + \beta'(\alpha \vec{b})\]
+\[\underline{\text{Ещё линейные операторы}}\]
+\begin{enumerate}
+    \item[\textbf{Сдвиг:}] $S: Seq\longrightarrow Seq$
+\end{enumerate}
+\[S(a_0,\ a_1,\ a_2,\dots) = (a_1,\ a_2,\ a_3,\dots)\]
+\[\underset{=Sa_n}{\left(S\vec{a}\right)_n} = a_{n + 1}\]
+\[S(\alpha a_n + \beta b_n) = \left(\alpha \vec{a} + \beta \vec{b} \right)_{n + 1} = \alpha a_{n + 1} + \beta b_{n + 1} = \alpha Sa_{n} + \beta Sb_{n}\]
+\begin{enumerate}
+    \item[\textbf{Разность:}] $\Delta: Seq\longrightarrow Seq$
+\end{enumerate}
+\[\underset{=\Delta a_n}{\left(\Delta \vec{a}\right)_n} = a_{n + 1} - a_{n}\]
+\newpage
+\[\left(\Delta\left(\alpha \vec{a} + \beta \vec{b} \right) \right)_n = \left( \alpha \vec{a} + \beta \vec{b} \right)_{n + 1} - \left(\alpha \vec{a} + \beta \vec{b}\right)_{n} = \alpha a_{n + 1} + \beta b_{n + 1} - \alpha a_n - \beta b_n =\]
+\[= \alpha(a_{n + 1} - a_n) + \beta(b_{n + 1} - b_n) = \alpha \Delta a_n + \beta\Delta b_n = \left(\alpha \Delta \vec{a} + \beta \Delta \vec{b}\right)_n\]
+\begin{enumerate}
+    \item[\textbf{Утверждение 3:}]
+\end{enumerate}
+Линейные оператры $Seq\longrightarrow Seq$ образуют кольцо, то есть их можно "разумным образом" складывать и умножать друг на друга.\par
+Допустим $F,\ G\in L(Seq)$:
+\[(F + G)(\vec{a}) = F(\vec{a}) + G(\vec{a})\]
+\[F\cdot G = F\circ G\text{ ассоциативно}\]
+\subsubsection*{Есть нулевой элемент}
+\[F + 0 = F,\ 0\in L(Seq)\]
+\[\AutoBr{F + 0}\AutoBr{\vec{a}} = F(\vec{a}) + 0(\vec{a}) = F(\vec{a})\]
+\subsubsection*{Обратный по сложению}
+\[F+ (-F) = 0,\ -F = -1\circ F\]
+\subsubsection*{Нейтральный по умножению}
+\[F\cdot 1 = F = 1\cdot F,\ 1(\vec{a}) = \vec{a}\]
+\subsubsection*{Дистрибутивность}
+\[F(G + H) = FG + FH\]
+Применим это к $\vec{a}$:
+\[\AutoBr{F\big(G + H\big)}(\vec{a}) = \AutoBr{F\circ\big(G + H\big)}(\vec{a}) = F\big(\big( G + H \big)\vec{a}\big) = F(G(\vec{a})) + F(H(\vec{a})) =\]
+\[= (FG + FH)(\vec{a}) = (G + H)(F(\vec{a})) = G(F(\vec{a})) + H(F(\vec{a})) = (GF + HF)(\vec{a})\]
+\[\]
+\begin{enumerate}
+    \item[\textbf{Утверждение 4:}]
+\end{enumerate}
+Скаляр коммутирует с любым линейным оператором:
+\begin{enumerate}
+    \item[\textbf{Доказательство:}] пользуемся линейностью $F$
+\end{enumerate}
+\[(\alpha F)(\vec{a}) = \alpha(F(\vec{a})) = F(\alpha \vec{a}) = (F\alpha )(\vec{a})\]
+\begin{enumerate}
+    \item[\textbf{Уточнение:}]
+\end{enumerate}
+\[\Delta_{n} = Sa_n - 1a_n = ((S - 1)\vec{a})_n\Rightarrow \Delta = S - 1\Rightarrow S = \Delta + 1\]
+\[\text{Вспомним биномиальную теорему:}\]
+\[\forall x\in \mathbb{R}\ \forall n\in \mathbb{N}\quad (x + 1)^n = \sum_{k = 0}^{n} C_n^k x^k 1^{n - k}\]
+\begin{enumerate}
+    \item[\textbf{Лемма 5:}]
+\end{enumerate}
+\[\forall F\in L(Seq)\forall \alpha \in \mathbb{R}\ \forall n\in \mathbb{N}\quad (F + \alpha)^n = \sum_{k = 0}^{n} C_n^k F^k (\alpha)^{n - k}\]
+\begin{enumerate}
+    \item[\textbf{Доказательство:}] индукция по $n$
+\end{enumerate}
+\begin{enumerate}
+    \item[База:]
+\end{enumerate}
+\[(F + \alpha)^0 = 1 = \sum_{k = 0}^{0}C_0^0F^0\alpha^{0 - 0} = 1\cdot 1\cdot 1 = 1\]
+\begin{enumerate}
+    \item[Шаг:] пользуемся предположением индукции, дистрибутивностью
+\end{enumerate}
+\[(F + \alpha)^{n + 1} = (F + \alpha)(F + \alpha)^n = (F + \alpha)\sum_{k = 0}^n C_n^k F^k\alpha^{n - k} = \sum_{k =0}^{n} FC^k_n F^k \alpha^{n -k} +\]
+\[+ \sum_{k = 0}^{n} \alpha C_n^k F^k\alpha^{n - k} \overset{\text{Утв 4}}{=} C_n^k F^{k + 1}\alpha^{n - k} + \sum_{k = 0}^{n} C_n^k F^k \alpha^{n + 1 - k} = \sum_{k = 1}^{n + 1}C_n^{k - 1}F^k\alpha^{n + 1 - k} +\]
+\[+ \sum_{k = 0}^{n}C_n^k F^k \alpha^{n + 1 - k} = \underset{C_{n + 1}^0}{C_n^0}F^0\alpha^{n + 1} + \sum_{k = 1}^n\underset{=C^k_{n + 1}}{\underbrace{(C_{n}^{k + 1} + C_n^k)}}F^k\alpha^{n + 1 - k} + \underset{=C_{n + 1}^{n + 1}}{C_n^n} F^{k + 1}\alpha^0 =\]
+\[= \sum_{k = 0}^{n + 1}C_{n + 1}^k F^k \alpha^{n + 1 - k}\]
+\newpage
+\begin{enumerate}
+    \item[\textbf{Следствие 6:}] разность порядка $t$
+\end{enumerate}
+\[\Delta^t = (s - 1)^t = \sum_{k = 0}^{t}\  \underset{=C^{t - k}_{k}}{C_t^k} S^k (-1)^{t - k} = \sum_{k = 0}^{t} C_t^k S^{t - k}(-1)^k =\]
+\[= \sum_{k = 0}^{t}(-1)^k C_t^k S^{t - k}\]
+\begin{enumerate}
+    \item[\textbf{Следствие 7:}]
+\end{enumerate}
+\[\Delta^t a_n = \sum_{k = 0}^t (-1)^k C_t^k S^{t - k} a_n = \sum_{k = 0}^t (-1)^k C_t^k a_{n + t - k}\]
+\[\Delta^2 a_n = C_2^0 a_{n + 2} - 1C_2^1 a_{n + 1} + C_2^2a_n = a_{n + 2} - 2a_{n + 1} + a_n\]
+\[\Delta^3 a_n = a_{n + 3} - 3a_{n + 2} + 3a_{n + 1} - a_{n}\]
+\begin{enumerate}
+    \item[\textbf{Пример:}]
+\end{enumerate}
+\[\text{Первая степень}\]
+\begin{align*}
+    a_n =& a + dn\\  
+    \Delta a_n =& a_{n + 1} - a_{n} = a + d(n + 1) - a - dn = d\\
+    \Delta^2 a_n =& \Delta d = d - d = 0
+\end{align*}
+\[\text{Вторая степень}\]
+\begin{align*}
+    a_n =& a + bn + cn^2\\
+    \Delta a_n =& a_{n + 1} - a_n\\
+    =& c(n + 1)^2 + b(n + 1) - cn^2 - bn\\
+    =& 2cn + c + b\\
+    \Delta^2 a_n =& 2c(n + 1) - 2cn = 2c\\
+    \Delta^3 a_n =& 0
+\end{align*}
+\newpage
+\begin{enumerate}
+    \item[\textbf{Лемма 8:}]
+\end{enumerate}
+Если $P(n)$ - многочлен степени $m > 0$, то\\
+$\Delta P(n)$ - многочлен степени $m - 1$, а $\Delta^{m + 1}P(n) = 0$
+\begin{enumerate}
+    \item[\textbf{Доказательство:}] индукция по $m$
+\end{enumerate}
+\begin{enumerate}
+    \item[База:]
+\end{enumerate}
+\begin{enumerate}
+    \item[Шаг:]
+\end{enumerate}
+\[P(n) = \overset{\neq 0}{\alpha} n^m + \overset{\deg \leq m - 1}{Q(n)}\]
+\[\Delta P(n) = P(n + 1) - P(n) = \alpha(n + 1)^m + Q(n + 1) - \alpha n^m - Q_n =\]
+\[= \alpha \AutoBr{(n + 1)^m - n^m} + \Delta Q(n) = \alpha(C_m^1 n^{m - 1} + C_m^2 n^{m - 2}+\dots)+ \overset{\text{по ПИ } \deg\leq m - 2}{Q'(n)}\]
+Итак, степень $m - 1$.
+\begin{enumerate}
+    \item[Следствие:]
+\end{enumerate}
+$\deg(\Delta^m P(n)) = 0\Rightarrow \Delta^m P(n) = const\Rightarrow \Delta^{m + 1} P(n) = 0$. Отсюда рассмотрим:
+\[0 = \Delta^{m + 1}a_n = \sum_{k = 0}^{m + 1}(-1)^k C_{m + 1}^k a_{n + m + 1 - k}\]
+\[a_{n + m + 1} = \sum_{k = 1}^{m + 1}(-1)^{k - 1} C_{m + 1}^k a_{n + m + 1 - k}\]
+\begin{enumerate}
+    \item[\textbf{Следствие 9:}]
+\end{enumerate}
+Если $a_n = P(n)$, многочлен степени $m > 0$, то
+\[a_{n + m + 1 = \sum_{k = 1}^{m + 1}} (-1)^{k - 1} C_{m + 1}^{k} a_{n + m + 1 - k}\]
+\begin{enumerate}
+    \item[\textbf{Пример:}]
+\end{enumerate}
+$\deg a_n = 1\Rightarrow a_{n + 2} = 2a_{n + 1} - a_n$\\
+$\deg a_n = 2\Rightarrow a_{n + 3} = 3a_{n + 2} - 3a_{n + 1} + a_n$
+\begin{enumerate}
+    \item[\textbf{Следствие 10:}]
+\end{enumerate}
+\[S^t = (\Delta + 1)^t = \sum_{k = 0}^{t} C_t^k\Delta^k\]\newpage
+\[a_{n + t} = S^ta_n = \sum_{k = 0}^{t} C_t^k \Delta^k a_n = \sum_{k = 0}^t \frac{\overset{t^{(k)}}{\overbrace{t(t - 1)\dots(t - k + 1)}}}{k!}\Delta^k a_n =\]
+\[= a_n + \frac{\Delta a_n}{1!}t^{(1)} + \frac{\Delta^2 a_n}{2!}t^{(2)} + \dots + \frac{\Delta^t a_n}{t!} t^{(t)}\]
+\[\textbf{Лекция 10 мая.}\]
+Воспоминания:\\
+(1). $\Delta^t a_n = \DS \sum_{k = 0}^{t}(-1)^k C_t^k a_{n + t - k}\\
+\Delta^3 a_n = a_{n + 3} - 3 a_{n + 2} + 3a_{n + 1} - a_n$\\
+(2). если $a_n$ - многочлен степени $m > 0$, то $\Delta^{m + 1} a_n = 0$.\\
+Из этих фактов:
+\[0 = \Delta^{m + 1} a_n = \sum_{k = 0}^{m + 1} (-1)^k C_{m + 1}^{k} a_{n + m + 1 - k}\Rightarrow\]
+\[\Rightarrow \sum_{k = 1}^{m + 1} (-1)^{k - 1} C^k_{m + 1} a_{n + m + 1 - k} = a_{n + m + 1}\]
+При $m = 2$ получим рекуррентное соотношение:
+\[a_{n + 3} = 3a_{n + 2} - 3a_{n + 1} + a_n\]
+\begin{enumerate}
+    \item[Определение:]
+\end{enumerate}
+Пусть $\vec{a} = (a_n)_{n\in \mb{N}}$ удовлетворяет рекуррентному сооношению $\varphi$ порядка $k > 0$, тогда
+\[\varphi: \mb{R}^{k + 1}\to \mb{R}\wedge \forall n\ a_{n + k} = \varphi(a_{n + k - 1},\ a_{n + k - 2},\dots,\ a_n,\ n)\]
+\begin{enumerate}
+    \item[Определение:]
+\end{enumerate}
+Если $\varphi$ не зависит от $n,\ \left(\forall \vec{x} \in \mb{R}^k\ \forall n,\ m\ \varphi(\vec{x},\ n) = \varphi(\vec{x},\ m)\right)$, то такое рекуррентное соотношение называется стационарным.\\
+Попробуем привести нестационарное к стационарному, выразим факториал.
+\[\begin{cases}
+    a_{n + 1} = (n + 1)a_n\\
+    a_{n + 2} = (n + 2)a_{n + 1}
+\end{cases}\Rightarrow \frac{a_{n + 1}}{a_n} + 1 = \frac{a_{n + 2}}{a_{n + 1}}\Rightarrow\]
+\[\Rightarrow a_{n + 2} = \frac{a_{n + 1}^2 + a_{n + 1}a_n}{a_n}\]
+Получили стационарное рекуррентное соотношение порядка 2.\par
+Рассмотрим последовательность $a_{n + 1} = a_n$. Ему удовлетворяют все константы (и только они).\\
+Добавим условие:
+\[\begin{cases}
+    a_{n + 1} = a_n\\
+    a_0 = \alpha
+\end{cases}\Rightarrow \exists! \text{последовательность}:\ \forall n\ a_n = \alpha\]
+\begin{enumerate}
+    \item[Теорема 1:]
+\end{enumerate}
+Пусть $\varphi$ - рекуррентное соотношение порядка $k$ и $\forall i\ \alpha_i\in \mb{R}$, тогда рекуррентная задача
+\[\begin{cases}
+    \forall n\ a_{n + k} = \varphi(a_{n + k - 1},\dots,\ a_n,\ n)\\
+    a_0 = \alpha_0,\dots,\ a_{k - 1} = \alpha_{k - 1}
+\end{cases}\]
+имеет ровно одно решение.
+\begin{enumerate}
+    \item[Доказательство:]
+\end{enumerate}
+Существование очевидно (по первым $k$ членам последовательность восстанавливается), то есть $\varphi$ даёт "рецепт" вычисления последовательности $a_n$.\\
+Пусть $\vec{a}$ и $\vec{b}$ удовлетворяют условию. Допустим $\vec{a} \neq \vec{b}\Rightarrow \exists n\ a_n \neq b_n\Rightarrow\\
+\Rightarrow \exists n\ (a_n \neq b_n \wedge  \forall m < n\ a_m = b_m)$\\
+1 случай. $n < k$\\
+$a_n = \alpha_n = b_n\Rightarrow \bot$\\
+2 случай. $n \geq k$\\
+$a_{n + k} = \varphi(a_{n + k - 1,\dots,\ a_n,\ n})\\
+a_{n + k} = \varphi(b_{n + k - 1,\dots,\ b_n,\ n})$\\
+По предположению индукции все аргументы функции равны, значит равны $a_{n + k}$ и $b_{n + k}$
+\[\text{Линейное стационарное рекуррентное соотношение}\]
+$a_{n + k} = c_1 a_{n + k - 1} + c_2a_{n + k - 2} + \dots + c_k a_n + c_0$\\
+Если $c_0 = 0$, то соотношение однородное.
+\begin{enumerate}
+    \item[Теорема 2:]
+\end{enumerate}
+$\exists c_1',\dots,\ c_{k + 1}'\in \mb{R},\ \exists \beta_0,\dots,\ \beta_k\in \mb{R}$
+\[(*)\begin{cases}
+    a_{n + k} = c_1a_{n + k - 1} + \dots + c_k a_n + c_0\\
+    a_0 = \alpha_0,\dots,\ a_{k - 1} = \alpha_{k - 1}
+\end{cases}\Leftrightarrow\]
+\[\Leftrightarrow (\#)\begin{cases}
+    a_{n + k + 1} = c_1' a_{n + k} + \dots + c_{k + 1}' a_n\\
+    a_0 = \beta_0,\dots,\ a_{k - 1} = \beta_{k - 1},\ a_{k} = \beta_{k}
+\end{cases}\]
+$a_{n + k} = c_1 a_{n + k - 1} + c_2 a_{n + k - 2} + \dots + c_k a_n + c_0\\
+a_{n + k + 1} = a_{(n + 1) + k} = c_1 a_{n + k} + c_2 a_{n + k - 1} + \dots + c_k a_{n + 1} + c_0\\$
+Домножм первое на $-1$, сложим со вторым:\\
+$a_{n + k + 1} = \overset{c_1'}{\overbrace{(c_1 + 1)}} a_{n + k} + \overset{c_2'}{\overbrace{(c_2 - c_1)}}a_{n + k - 1} + \overset{c_3'}{\overbrace{(c_3 - c_2)}}a_{n + k - 2} +\dots\\
+\dots + \underset{c'_k}{\underbrace{(c_k - c_{k - 1})}}a_{n + 1} -\underset{c_{k + 1}'}{\underbrace{c_k}} a_n + 0$\\
+Тогда $\beta_0 := \alpha_0,\dots,\ \beta_{k - 1} = \alpha_{k - 1},\ \beta_k = c_1 \alpha_{k - 1} + c_2 \alpha_{k - 2} + \dots + c_k \alpha_o + c_0$\\
+У $(\#)$ не может быть других решений, так как у неё может быть не более одного решения, а решение $(*)$ является решением $(\#)$, значит их решения совпадают.\\
+\begin{enumerate}
+    \item[Пример:]
+\end{enumerate}
+$\begin{cases}
+    a_{n + 1} = c a_n\\
+    a_0 = \alpha
+\end{cases} \Rightarrow a_1 = c\alpha,\ a_2 = c^2 \alpha,\ a_3 = c^3 \alpha,\dots$\\
+Видно, что $a_n = c^n \alpha$ - это решение, по теореме 1 других решений нет.
+\[\text{В терминах линейных операторов}\]
+$a_{n + 1} - ca_n = 0\Leftrightarrow \exists u\ a_n = c^n u\\
+Sa_n - ca_n = 0\\
+\forall n\ (S - c)a_n = 0\\
+(S - c)\vec{a} = \vec{0}\Leftrightarrow \vec{a} \in \ker (S - c)\\
+\ker (S - c) = \{u,\ (1,\ c,\ c^2,\ c^3,\dots)\ |\ u\in \mb{R}\} = \left< (1,\ c,\ c^2,\dots) \right>$,\\
+то есть в ядре находятся всевозможные геометрические последовательности.\\
+\begin{enumerate}
+    \item[Пример:] порядок 2.
+\end{enumerate}
+\[\begin{cases}
+    a_{n + 2} = 5a_{n + 1} - 6a_n\\
+    a_0 = \pi,\ a_1 = e
+\end{cases}\]
+Рассмотрим характеристичекий многочлен $x^2 - 5x + 6$, то $\forall n\ x^{n + 2} = 5x^{n + 1} - 6x^n$, то есть $a_n = x^n$ удовлетворяет рекуррентному соотношению\\
+$x_{1,\ 2} = \frac{5 +\pm \sqrt{25 - 24}}{2} = 3,\ 2$\\
+Итак, последовательности $2^n,\ 3^n$ удовлетворяют рекуррентному соотношению.\\
+Легко видеть, что $\forall u,\ v\in\mathbb{C}\ a_n = u2^n + v3^n$ также удовлетворяет рекуррентному соотношению.\\
+$a_{n + 2} = u2^{n + 2} + v3^{n + 2} = u(6\cdot 2^{n + 1} - 6\cdot 2^n) + v(5\cdot 3^{n + 1} - 6\cdot 3^n) = 5(u\cdot 2^{n + 1} + v\cdot 3^{n + 1}) - 6(u\cdot 2^n + v3^n) = 5 a_{n + 1} - 6a_n$\\
+Подберём $u,\ v$ так, что
+\[\begin{cases}
+    u + v = u2^0 + v3^0 = a_0 = \pi\\
+    2u + 3v = u2^1 + v3^1 = a_1 = e
+\end{cases}\]
+$\det = \begin{vmatrix}
+    1 & 1\\
+    2 & 3
+\end{vmatrix} = 3 - 2 \neq 0,\ 2u + 3(\pi - u) = e\Rightarrow \begin{cases}
+    u = 3\pi - e\\
+    v = e - 2\pi
+\end{cases}$\\
+Ответ: $a_n = (3\pi - e)2^n + (e - 2\pi)3^n$\\
+В терминах операторов:
+\[a_{n + 2} - 5 a_{n + 1} + 6 a_n = 0\]
+\[S^2 a_n - 5 S a_n + 6 a_n = 0\]
+\[(S^2 - 5S + 6)\vec{a} = \vec{0}\]
+\[(S - 3)(S - 2)\vec{a}\Rightarrow \begin{cases}
+    \ker (S - 2)(S - 3)\supseteq \ker (S - 3) = \left< (1,\ 3,\ 3^2,\dots) \right>\\
+    \ker (S - 3)(S - 2) \supseteq \ker (S - 2) = \left< (1,\ 2,\ 2^2,\dots) \right>
+\end{cases}\Rightarrow\]
+\[\Rightarrow \left< (1,\ 2,\ 2^2,\dots),\ (1,\ 3,\ 3^2,\dots) \right>\subseteq \ker (S - 2)(S - 3)\]
+
+\[\textbf{Лекция 17 мая.}\]
+$a_{n + 2} = c_1 a_{n + 1} + c_2 a_n$. Характеристичекий многоЧлен $x^2 = c_1 x + c_2$
+\[a_{n + 2} - c_1 a_{n + 1} - c_2 a_n = 0\Leftrightarrow (S^2 - c_1 S - c_2)\vec{a} = \vec{a}\]
+$\begin{cases}
+    a_{n + 2} = a_{n + 1} + a_n\quad (*)\\
+    a_1 = 1;\ a_0 = 0
+\end{cases}$ - числа Фибоначчи. Рассмотрим характеристический многочлен:
+\[x^2 = x + 1\Rightarrow x^2 - x - 1 = 0\Rightarrow \left[\begin{gathered}
+    x_1 = \frac{1 + \sqrt{5}}{2}\approx 1,618 = \phi\\
+    x_2 = \frac{1 - \sqrt{5}}{2}\approx -0,618
+\end{gathered}\right.\]
+$x_2 = -\frac{1}{x_1} = (-\phi)^{-1},\ |x_2| < 1\\
+x_i^2 = x_i + 1\Rightarrow x_i^{n + 2} = x_i^{n + 1} + x_i$. Тогда последовательность $x_i^n$ будет удовлетворять $(*)$. Из линейности:
+\[\forall u,\ v\in \mb{R}\ ux_1^n + vx_2^n\text{ удовлетворяет $(*)$}\]
+Хотим выбрать $u,\ v$ такие, чтобы удовлетворять начальным условиям:
+\[\begin{cases}
+    0  = a_0 = ux_1^0 + vx_2^0 = u + v\\
+    1 = a_1 = ux_1 + vx_2 = u\phi - \frac{v}{\phi}
+\end{cases},\ \det = \begin{vmatrix}
+    1 & 1\\
+    \phi & \frac{1}{\phi}
+\end{vmatrix} = \frac{1}{\phi} - \phi \neq 0\Rightarrow\]
+\[\Rightarrow v = -u,\ 1 = u\phi + \frac{u}{\phi} = u\left(\phi  +\frac{1}{\phi}\right)\Rightarrow u = \frac{\phi}{\phi^2 + 1} = \frac{\phi}{\phi + 2} = \frac{1}{1 + \frac{2}{\phi}}=\]
+\[= \frac{1}{1 + \frac{4}{1 + \sqrt{5}}} = \frac{1 + \sqrt{5}}{5 + \sqrt{5}} = \frac{1 + \sqrt{5}}{\sqrt{5}(1 + \sqrt{5})} = \frac{1}{\sqrt{5}}\Rightarrow v = -\frac{1}{\sqrt{5}}\]
+Пользовались соотношением $x^2 = x + 1\Rightarrow x^2 + 1 = x + 2\Rightarrow \phi^2 + 1 = \phi + 2$\\
+Тогда $\DS a_n = \frac{x_1^n}{\sqrt{5}} - \frac{x_2^n}{\sqrt{5}} = \frac{\phi^n - (-\phi)^n}{\sqrt{5}} \xrightarrow[n\to \infty]{} \frac{\phi^n}{\sqrt{5}}$\\
+Рассмотрим систему:
+$\begin{cases}
+    a_{n + 2} = 6a_{n + 1} - 9 a_n\quad (*)\\
+    a_1 = 1;\ a_0 = 2
+\end{cases},\ x^2 - 6x + 9 = 0\Rightarrow (x - 3)^2 = 0,\ x_{1,\ 2} = 3$ Нужно ещё одно линейно независимое решение, иначе $\det$ обнулится. Домножим характеристический многоЧлен на $x^{n + 1}$:
+\[x^{n + 1}(x - 3)^2 = x^{n + 3} - 6x^{n + 2} + 9x^{n + 1} = 0\]
+Корни: $0$ кратности $n + 1$ и $3$ кратности $2$.
+\subsubsection*{Утверждение:}
+Если $x_0$ - корень многочлена $P(x)$ кратности $\geq 2$, то $x_0$ - корень $P'(x)$.
+\subsubsection*{Доказательство:}
+$P(x) = (x - x_0)^2 Q(x)\Rightarrow P'(x) = 2(x - x_0) Q(x) + (x - x_0)^2Q'(x)\Rightarrow P'(x_0) = 0$\\
+Вернёмся к нашей задаче:
+\[P'(x) = (n + 3)x^{n + 2} - 6(n + 2)x^{n + 1} + 9(n + 1)x^n,\ P'(3) = 0\]
+\[\underset{a_{n + 2}}{\underbrace{(n + 3)3^{n + 2}}} = 6\underset{a_{n + 1}}{\underbrace{(n + 2)3^{n + 1}}} - 9\underset{a_n}{\underbrace{(n + 1)3^n}}\]
+Итак, $a_n = (n + 1)3^n$ удовлетворяет $(*)$
+\[\forall u,\ v:\ u3^n + v(n + 1)3^n,\ \text{удовлетворяет $(*)$}\]
+Получаем систему: $\begin{cases}
+    2 = a_0 = u + v\\
+    1 = a_1 = 3u + 6v
+\end{cases},\ \det = \begin{vmatrix}
+    1 & 1\\
+    3 & 6
+\end{vmatrix} = 6 - 3 = 3\neq 0$
+\begin{align*}
+    v =&\ 2 - u\\
+    1 =&\ 3u + 6(2 - u) = -3u + 12\\
+    u =&\ \frac{11}{3}\\
+    v =&\ -\frac{5}{3}
+\end{align*}
+Рассмотрим для комплексных чисел (изначальное рекурретное соотношение поменяется):\\
+$x^2 + 5x + 9 = 0\Rightarrow x_{1,\ 2} = \frac{-5 \pm \sqrt{-11}}{2} = \frac{-5 \pm i\sqrt{11}}{2},\ x_1\neq x_2\Rightarrow\\
+\Rightarrow \begin{cases}
+    2 = u + v\\
+    1 = ux_1 + vx_2 \big|\cdot 2
+\end{cases}\Rightarrow \begin{cases}
+    v = 2 - u\\
+    2 = u(-5 + i\sqrt{11}) + (2 - u)(-5 - i\sqrt{11})
+\end{cases}\Rightarrow\\
+\Rightarrow \begin{cases}
+    v = 2 - u\\
+    2 = 2ui\sqrt{11} - 10 - 2i\sqrt{11}
+\end{cases}\Rightarrow \begin{cases}
+    v = 2 - u\\
+    12 + i2\sqrt{11} = ui2\sqrt{11}
+\end{cases}\Rightarrow\\
+\Rightarrow \begin{cases}
+    v = 2 - u\\
+    12i - 2\sqrt{11} = - 2u\sqrt{11}
+\end{cases}\Rightarrow \begin{cases}
+    v = 1 + \frac{6i}{\sqrt{11}}\\
+    u = 1 - \frac{6i}{\sqrt{11}}
+\end{cases}$\\
+$a_n = \left(1 - \frac{6i}{\sqrt{11}}\right)\left(\frac{-5 + \sqrt{11}}{2}\right)^n + \left(1 + \frac{6i}{\sqrt{11}}\right)\left(\frac{-5 - i\sqrt{11}}{2}\right)^n$
+\subsubsection*{Теорема 1:}
+Рассмотрим рекурретную задачу
+\[\begin{cases}
+    a_{n + 2} = c_1 a_{n + 1} + c_2 a_n\\
+    a_0 = \alpha,\ a_1 = \beta
+\end{cases},\text{ где } c_2\neq 0\]
+Тогда:\\
+1. Если $D = c_1^2 + 4c_2 \neq 0$ (определитель характеристического многоЧлена), то
+\[\exists u,\ v\ a_n = ux_1^n + vx_2^n,\ \text{где }x_1,\ x_2 -\text{корни } P(x) = x^2 - c_1 x - c_2 \]
+2. Если $D = 0$, то
+\[\exists u,\ v\ a_n = ux_1^n + v(n + 1)x_1^n\]
+\subsubsection*{Доказательство:}
+\subsubsection*{1.}
+Как мы видели $\forall n,\ v\ ux_1^n + vx_2^n$ удовлетворяют $(*)$, СЛАУ:
+\[\begin{cases}
+    \alpha = u + v\\
+    \beta = ux_1 + vx_2
+\end{cases},\ \text{имеет }\det = \begin{vmatrix}
+    1 & 1\\
+    x_1 & x_2
+\end{vmatrix} = x_2 - x_1 \neq 0\Rightarrow \text{ решаема}\]
+\subsubsection*{2.}
+Как мы видели $\forall u,\ v\ ux_1^n + v(n + 1)x^n_1$ удовлетворяет $(*)$, СЛАУ:
+\[\begin{cases}
+    \alpha = u + v\\
+    \beta = ux_1 + 2vx_1
+\end{cases},\text{имеет }\det = \begin{vmatrix}
+    1 & 1\\
+    x_1 & 2x_1
+\end{vmatrix} = x_1 \neq 0\]
+Единственный корень не равен $0$, так как свободный член не равен $0$ (требовали $c_2 \neq 0$).
+
+\[\textbf{Производящие функции}\]
+
+Рассмотрим конечные последовательности:\\
+$(a_0,\ a_1,\dots,\ a_n)$. Её можно закодировать многочленом:
+\[P_{\vec{a}}(x) = a_0 + a_1 x + a_2 x^2 + \dots + a_n x^n = \sum_{k = 0}^{n} a_k x^k\]
+Многочлены мы умеем складывать:
+\[P_{\vec{a}}(x) + P_{\vec{b}}(x) = (a_0 + a_1x + \dots + a_nx^n) + (b_0 + b_1 x + \dots + b_m x^m) =\]
+Без ограничения общности полагаем $n \leq m$:
+\[= (a_0 + b_0) + (a_1 + b_1)x + \dots + (a_n + b_n)x^n + (0 + b_{n + 1})x^{n + 1} + \dots + (0 + b_m)x^m = P_{\vec{a} + \vec{b}}(x)\]
+Также мы умеем умножать многочлены:\\
+$P_{\vec{a}}(x)\cdot P_{\vec{b}}(x) = (a_0 + a_1 x + a_2 x^2+ \dots + a_n x^n)\cdot (b_0 + b_1 x + b_2 x^2 + \dots + b_m x^m) = a_0 b_0 + x(a_0 b_1 + a_1 b_0) +\\
++ x^2(a_0 b_2 + a_1 b_1 + a_2 b_0) + \dots + x^t \sum_{k = 0}^t a_k b_{t - k} = P_{\vec{a}\cdot \vec{b}}(x)$. Раскодировав данный многочлен, получаем \Underl{определение произведения последовательностей} (конечных).
+\subsubsection*{Определение:}
+Для последовательностей $(a_n),\ (b_n)_{n \in \mb{N}}$ $n$-ый элемент их произведения определяется:
+\[\left(\vec{a}\cdot \vec{b}\right)_n = \sum_{k = 0}^{n} a_k b_{n - k}\]
+Мы можем рассматривать данную операцию как умножение "бесконечных многочленов" (\Underl{формальные} степенные ряды).\\
+\subsubsection*{Определение:}
+Формальным рядом называется ряд, о сходимости которого мы не говорим:
+\[A(x) = \sum_{n = 0}^{+\oo} a_n x^n = a_0 + a_1 x + a_2 x^2 + \dots \]
+$A(x)$ - производящая функция последовательности $\vec{a}$
+\subsubsection*{Свойства операций с последовательностями:}
+$A(S) + B(S) = \DS\sum_n (a_n + b_n)S^n\\
+A(S)\cdot B(S) = \sum_n \left( \sum_{k = 0}^na_k b_{n - k}\right)S^n$
+\subsubsection*{Теорема 2.}
+\begin{enumerate}
+    \item Сложение коммутативно и ассоциативно.
+    \item Любой многоЧлен - это производящая функция последовательности, где лишь конечно много ненулевых членов.
+    \item Умножение коммутативно, ассоциативно и дистрибутивно относительно сложения:
+\end{enumerate}
+    \[A(S)\big(B(S) + C(S)\big) = A(S)B(S) + A(S) C(S)\]
+\subsubsection*{Доказательство:}
+    Коммутативность умножения:
+    \[(A + B)S^n = \sum_{k = 0}^{n} a_k b_{n - k} \underset{m = n - k}{=} = \sum_{m = 0}^{n}a_{n - m}b_m = \sum_{k = 0}^{n} b_k a_{n - k} = (B + A)S^n\]
+    Ассоциативность умножения ($[x](S^n)$ подразумевает, что $x$ является коэффициентом при $S^n$):
+    \[[(A + B)C](S^n) = \sum_{k = 0}^{n} \left( \sum_{l = 0}^k a_l b_{k - l} \right) c_{n - k} = \sum_{k =0}^{n}\sum_{l = 0}^{k} a_l b_{k - l} c_{n - k} = \sum_{\underset{x_1 + x_2 + x_3 = n}{(x_1,\ x_2,\ x_3)}} a_{x_1} b_{x_2} c_{c_3} =\]
+    $=[A(B + C)](S^n)$\\
+    Дистрибутивность умножения:
+    \[[A(B + C)](S^n) = \sum_{k =0}^{n} a_k(b_{n - k} + c_{n - k}) = \sum_{k = 0}^n a_{k}b_{n - k} + \sum_{k = 0}^n a_k c_{n - k} = [AB](S^n) + [AC](S^n)\]
+\subsubsection*{Определение:}
+\Underl{Операция подстановки} для $A(S) = \sum_{n} a_n S^n,\ B(t) = \sum_n b_n t^n,\ b_0 = 0$:
+\[A\big( B(t)\big) = a_0 + \underset{\deg \geq 1}{\underbrace{a_1 B(t)}} + a_2 \underset{\deg \geq 2}{\underbrace{\big(B(t)\big)}}^2 + \underset{\deg \geq 3}{\underbrace{\big(a_3 B(t)\big)}}^3 + \dots\]
+Тогда:
+\begin{align*}
+    d_0 &= a_0\\
+    d_1 &= a_1 b_1\\
+    d_2 &= a_1 b_2 + a_2 b_1^2\\
+    d_3 &= a_1 b_3 + a_2 (b_1 b_2 + b_2 b_1) + a_3 b_1^3\\
+    d_4 &= a_1 b_4 + a_2 (b_1 b_3 + b_2^2 + b_3 b_1) + a_3(b_1^2 b_2 + b_1 b_2 b_1 + b_2 b_1^2) + a_4 b_4^4
+\end{align*}
+\subsubsection*{Определение (строгое):}
+    Операция подстановки $D(t)$:
+    \[\begin{cases}
+        b_0 = 0\\
+        D(t) = A\big(B(t)\big)
+    \end{cases},\ d_n = \sum_{k = 1}^{n}a_k\cdot \sum_{\underset{x_i > 1}{x_1 +\dots + x_k = n}} b_{x_1} b_{x_2} \dots b_{x_k}\]
+    \subsubsection*{Теорема 3:}
+    $\forall B$, где $b_0 = 0\wedge b_1 \neq 0$
+    \[\exists! A,\ C:\ \begin{cases}
+        A\big( B(t) \big) = t\\
+        B\big( C(S) \big) = S
+    \end{cases}  \]
+
+\[\textbf{Лекция 24 мая}\]    
+    
+    \[\text{Производящие функции}\]
+    \[\vec{a} = (a_0,\ a_1,\dots) \rightsquigarrow \sum_{n\in \mb{N}} a_n S^n = A(S)\]
+    \subsubsection*{Пример.}
+    \[(-7,\ 1,\ 0,\ 0,\ 5,\ 0,\dots)\leftrightsquigarrow 5s^4 + s - 7\]
+    \subsubsection*{Подстановка.}
+    $B(t) = b_1 t + b_2 t^2 + b_3 t^3 + \dots,\quad b_0 = 0$\\
+    $A\big( B(t) \big) = a_0 + \underset{\deg \geq 1}{\underbrace{a_1 B(t)}} + \underset{\deg \geq 2}{\underbrace{a_2 B^2(t)}} + \underset{\deg \geq 3}{\underbrace{a_3 B^3 (t)}} + \underset{\deg \geq 4}{\underbrace{a_4 B^4(t)}} + \dots\\
+    A\big( B(t) \big) = a_0 + a_1 b_1 t + t^2 (a_1 b_2 + a_2 b_1^2) + t^3 \big(a_1 b_3 + a_2(b_1 b_2 + b_2 b_1) + a_3 b_1^3\big) +\\
+    +t^4 \big(a_1 b_4 + a_2(b_1 b_3 + b_2^2 + b_3 b_1) + a_3 (b_1^2 b_2 + b_1b_2 b_1 + b_2 b_1^2) + a_4 b_1^4\big)$
+    \subsubsection*{Определение.}
+    $C(t) = A\big( B(t) \big)$, если $b_0 = 0$\\
+    $c_0 = a_0$\\
+    $n \geq 1:\ c_n = \DS \sum_{k = 1}^{n} a_k \sum_{\underset{x_i \geq 1}{x_1 + \dots + x_k = n}} b_{x_1} b_{x_2}\dots b_{x_k}$
+    \subsubsection*{Определение.}
+    Пусть $b_0 = a_0$, тогда производящая функция $D(t) = A\big( B(t) \big)$ такова:\\
+    $d_0 = a_0,\ \forall n\geq 1\ d_n = \DS \sum_{k = 1}^{n} a_k \sum_{\underset{x_i \geq 1}{x_1 + \dots + x_k = n}} b_{x_1} b_{x_2}\dots b_{x_k}$\\
+    Таким образом мы можем подставлять аргументы в производящую функцию, то есть:
+    \[A(0) = a_0,\ A(1) - \text{не является производящей, так как } 1_0 \neq 0\]
+    \subsubsection*{Теорема 1. (об обратимости подстановки)}
+    Пусть производящая функция $B(t)$ такова, что $b_0 = 0$ и $b_1 \neq 0$, тогда:
+    \[\exists! A(S)\ \exists! C(S):\ \begin{cases}
+        A\big( B(t) \big) = t\\
+        B\big( C(S) \big) = S
+    \end{cases}\]
+    \subsubsection*{Доказательство.}
+    Пусть $D(t) = A\big( B(t) \big)$, хотим:
+    $\begin{cases}
+        d_0 = 0\\
+        d_1 = 1\\
+        d_n = 0,\ (n\geq 2)
+    \end{cases}$\\
+    Можно взять
+    $(*) = \begin{cases}
+        a_0 = d_0 = 0\\
+        a_1 b_1 = d_1 = 1\\
+        \DS \sum_{k = 1}^{n} a_k \sum_{\underset{x_i \geq 1}{x_1 + \dots + x_k = n}} b_{x_1} b_{x_2}\dots b_{x_k} = d_n = 0
+    \end{cases}$\\
+    Решаем $(*)$ относительно $a_0,\ a_1,\dots:$
+    \[\begin{cases}
+        a_0 = 0\\
+        a_1 = \frac{1}{b_1}\\
+        a_n = -\frac{1}{b_1^n}\DS \sum_{k = 1}^{n - 1} a_k \sum_{\underset{x_i \geq 1}{x_1 + \dots + x_k = n}} b_{x_1} b_{x_2}\dots b_{x_k}
+    \end{cases}\] 
+    Пусть $D(S) = B\big(C(S)\big)$
+    \[(\#)\begin{cases}
+        0 = d_0 = b_0\\
+        1 = d_1 = b_1 c_1\\
+        0 = d_n = \DS \sum_{k = 1}^{n} b_k \sum_{\underset{x_i \geq 1}{x_1 + \dots + x_k = n}} c_{x_1} c_{x_2}\dots c_{x_k}
+    \end{cases}\]
+    Решаем $(\#)$ относительно $\vec{c}$:
+    \[\begin{cases}
+        c_0 = 0,\ \text{иначе не определена } B\big(C(S)\big) \\
+        c_1 = \frac{1}{b_1}\\
+        c_n = -\frac{1}{b_1} \DS \sum_{k = 2}^{n} b_k \sum_{\underset{x_i \geq 1}{x_1 + \dots + x_k = n}} c_{x_1} c_{x_2}\dots c_{x_k}
+    \end{cases}\Rightarrow c_n = f(c_1,\dots,\ c_{n - 1},\ n)\]
+    \subsubsection*{Теорема 2. (о делении)}
+    Пусть производящая функция $A(S)$ такова, что $a_0 = A(0) \neq 0$. Тогда
+    \[\exists! B(S)\ A(S) \cdot B(S) = 1\Leftrightarrow \begin{cases}
+        a_0 b_0 = 1,\ n = 0\\
+        \DS\sum_{k = 0}^{n} a_k b_{n - k} = 0,\ n \geq 1
+    \end{cases}\]
+    Решаем относительно $\vec{b}$:
+    \[\begin{cases}
+        b_0 = \frac{1}{a_0}\\
+        a_0 b_n + \sum_{k  =1}^n a_k b_{n - k} = 0
+    \end{cases}\Leftrightarrow b_n = -\frac{1}{a_0}\sum_{k = 1}^n a_k b_{n - k},\ n - k < n\]
+    \subsubsection*{Определение. (элементарные производящие функции)}
+    $\alpha \in \mb{R}$
+    \begin{enumerate}
+        \item[1.] $(1 + s)^{\alpha} = \sum_{n} \dfrac{\alpha^{(n)}}{n!}s^n$, где $\alpha^{(n)} = \alpha (\alpha - 1)\dots (\alpha - n + 1)$
+    \end{enumerate}
+    \subsubsection*{Определение.}
+    $\begin{pmatrix}
+        \alpha\\
+        n
+    \end{pmatrix} = \dfrac{\alpha^{(n)}}{n!}$
+    \subsubsection*{Утверждение (1 случай).}
+    Если $\alpha \in \mb{N}\wedge n \leq \alpha\quad \begin{pmatrix}
+        \alpha\\
+        n
+    \end{pmatrix} = C^n_{\alpha}\\
+    \alpha \in \mb{N}\Rightarrow \dfrac{\alpha^{(n)}}{n!} = \dfrac{\alpha (\alpha - 1)\dots (\alpha - n + 1)}{n!} = C_{\alpha}^n$
+    \subsubsection*{Следствие.}
+    Если $\alpha \in \mb{N}$, то:
+    \[(1 + s)^{\alpha} = \sum_{n \leq \alpha} \begin{pmatrix}
+        \alpha\\
+        n
+    \end{pmatrix} s^n = \sum_{n = 0}^{\alpha} C_a^{\alpha}s^n\]
+    Проверяем: $(1 + s)^1 = C^0_1 + C_1^1\cdot s = 1 + s$
+    \subsubsection*{Утверждение (2 случай).}
+    $n > \alpha$:
+    $C_{\alpha}^{n} = 0\Rightarrow \dfrac{\alpha^{(n)}}{n!} = \dfrac{\alpha (\alpha - 1)\dots (\alpha - \alpha)\dots (\alpha - n + 1)}{n!} = 0$
+    \subsubsection*{Утвреждение (3 случай).}
+    $\alpha \notin \mb{N}\\
+    (1 + s)^{-1} = \DS\sum_{n} \frac{(-1)^{(n)}}{n!} s^n = \sum_{n}(-1)^n s^n\\
+    \dfrac{ (-1)^{(n)} }{n!} = \dfrac{(-1)(-2)(-3)\dots (-n)}{n!} = (-1)^n \dfrac{n!}{n!} = (-1)^n\\
+    (1 - s)^{-1} = \sum_{n}(-1)^n (-s)^n = \sum_{n} s^n$\\
+    Рассмотрим $G(s) = 1 + s + s^2 + s^3 + \dots = \DS \sum_n s^n\\
+    s(G(s)) = s + s^2 + s^3 + \dots\Rightarrow G(s) = 1 + sG(s)\\
+    G(s)(1 - s) = 1\Rightarrow G(s) = \dfrac{1}{1 - s} = (1 - s)^{-1} = \sum_n s^n$
+    \subsubsection*{Утверждение.}
+    \[\forall \alpha,\ \beta\ (1 + s)^{\alpha} (1 + s)^{\beta} = (1 + s)^{\alpha + \beta}\]
+    \subsubsection*{Доказательство.}
+    \[\left[ (1 + s)^{\alpha}(1 + s)^{\beta} \right] (s^n) = \sum_{k = 0}^n \left[(1 + s)^{\alpha}\right](s^k)\left[ (1 + s)^{\beta} \right](s^{n - k}) = \sum_{k = 0}^{n} \begin{pmatrix}
+        \alpha \\ k
+    \end{pmatrix} \begin{pmatrix}
+        \beta \\ n - k
+    \end{pmatrix} = (*)\]
+    Здесь $[\dots](s^n)$ обозначает коэффициент при $s^n$\\
+    Было: $\forall \alpha,\ \beta \in \mb{N}$:
+    \[\sum_{k =0}^{n} C_{\alpha}^k C^{n - k}_{\beta} = C^n_{\alpha + \beta}\Leftrightarrow\]
+    \[\Leftrightarrow \sum_{k = 0}^{n} \begin{pmatrix}
+        \alpha \\ k
+    \end{pmatrix} \begin{pmatrix}
+        \beta \\ n - k
+    \end{pmatrix} = \begin{pmatrix}
+        \alpha + \beta\\ n
+    \end{pmatrix}\]
+    В левой части равенства стоит многочлен от $\alpha,\ \beta$. Из алгебры знаем, что если два многочлена равны на бесконечном количестве точек, то они совпадают всюду (так как у многочлена конечное множество корней, а разность многочленов от $\alpha$ и $\beta$ тоже многочлен).
+    \[(*) = \begin{pmatrix}
+        \alpha + \beta\\
+        n
+    \end{pmatrix} = \left[ (1 + s)^{\alpha + \beta} \right](s^n)\]
+    \subsubsection*{Элементарные производящие функции}
+    \begin{enumerate}
+        \item[2.] $e^s = \DS\sum_{n} \frac{s^n}{n!} = 1 + s + \frac{s^2}{2} + \frac{s^3}{6} + \dots$
+    \end{enumerate}
+    \subsubsection*{Утвержедние.}
+    \[e^s\cdot e^{-s} = 1\]
+    \[\left[e^s\cdot e^{-s}\right](s^n) = \sum_{k = 0}^n \frac{(-1)^{n - k} }{k!(n - k)!} = \frac{1}{n!}\sum_{k =0}^n C_n^k (-1)^{n - k}(-1)^k = \frac{1}{n!} \big(1 + (-1)\big)^n = \begin{cases}
+        0,\ n > 0\\
+        1,\ n = 0
+    \end{cases}\]
+    \begin{enumerate}
+        \item[3.] $\DS\ln(\frac{1}{1 - s}) = \sum_{n} \frac{s^{n + 1} }{n + 1} = s + \frac{s^2}{2} + \frac{s^3}{3} + \dots$
+        \item[4.] $\DS \sin s = s - \frac{s^3}{3!} + \frac{s^5}{5!} + \dots = \sum_{n} (-1)^n \frac{s^{2n + 1}}{(2n + 1)!}$
+        \item[5.] $\DS \cos s = 1 - \frac{s^2}{2!} + \frac{s^4}{4!} - \dots = \sum_{n} (-1)^n \frac{s^{2n}}{(2n)!}$  
+    \end{enumerate}
+    \subsubsection*{Упражнение.}
+    Доказать:
+    \[\sin^2 s + \cos^2 s = 1\]
+    \subsubsection*{Пример.}
+    $\DS e^{is} = 1 + is - \frac{s^2}{2} - \frac{is^3}{6} + \frac{s^4}{24} + \dots = \cos s + i\sin s$
+    \subsubsection*{Определение (производная и первообразная).}
+    $\big( A(S) \big)' = (a_0 + a_1 s + a_2 s^2 + a_3 s^3 + \dots)' = a_1 + 2a_2 s + 3a_3 s^2 + \dots =\\
+    = \sum_{n} (n + 1)a_{n + 1}s^n$\\
+    $\DS \int A(s) = \int (a_0 + a_1 s + a_2 s^2 + a_3 s^3 + \dots) = a_0 s + \frac{a_1}{2}s^2 + \frac{a_2}{3}s^3 + \frac{a_3}{4}s^4 + \dots =\\
+    = \sum_{n} \frac{a_n}{n + 1}s^{n + 1}$
+    \subsubsection*{Утверждение.}
+    \[\DS \left( \int A(s) \right)' = A(s)\]
+    \subsubsection*{Доказательство.}
+    Пусть $\DS \int A(s) = B(s)\Rightarrow\\
+    \Rightarrow B'(s) = \sum_{n}(n + 1)n_{n + 1} s^n = \sum_{n} (n + 1)\frac{a_n}{(n + 1)} s^n = A(s)$
+    \subsubsection*{Пример.}
+    \[\left(e^s\right)' = 1 + \frac{2}{2} s + \frac{3}{3!}s^2 + \frac{4}{4!}s^3 + \dots = 1 + s + \frac{s^2}{2!} + \frac{s^3}{3!} + \dots = e^s\]
+
+\[\textbf{Лекция 31 мая.}\]
+    \subsubsection*{Было:}
+    $\forall \alpha,\ \beta \in \mb{N}$
+    \[\begin{pmatrix}
+        \alpha + \beta\\
+         n
+    \end{pmatrix} = \sum_{k = 0}^{n} \begin{pmatrix}
+        \alpha\\
+        k
+    \end{pmatrix}\begin{pmatrix}
+        \beta\\
+        n - k
+    \end{pmatrix}\]
+    Хотим: $\forall \alpha,\ \beta \in \mathbb{R}$\\
+    Рассмотрим $P(\alpha,\ \beta) = \begin{pmatrix}
+        \alpha + \beta\\
+        n
+    \end{pmatrix} - \sum_{k = 0}^{n}\begin{pmatrix}
+        \alpha\\
+        k
+    \end{pmatrix} \begin{pmatrix}
+        \beta\\
+        n - k
+    \end{pmatrix}$ - многочлен степени $n$\\
+    Напоминание: $\begin{pmatrix}
+        x\\
+        n
+    \end{pmatrix} = \dfrac{x(x - 1)\dots(x - n + 1)}{n!}$\\
+    Зафиксируем $\beta_0\in \mathbb{N}$:
+    \[P_{\beta_0}(\alpha) = P(\alpha,\ \beta_0)\text{ - многочлен степени $n$ от $\alpha$}\]
+    У $P_{\beta_0}(\alpha)$ - корни во всех $\alpha \in \mathbb{N}\Rightarrow \forall \alpha \in \mathbb{R}\ P_{\beta_0}(\alpha) = 0\Rightarrow\\
+    \Rightarrow \forall \alpha\in \mathbb{R}\ \forall \beta \in \mathbb{N}\ P(\alpha,\ \beta) = 0$\\
+    Рассмотрим $\hat{P}_{\alpha_0}(\beta) = P(\alpha_0,\ \beta)$ - многочлен степени $n$ от $\beta$. Получается, что для всех $\alpha$ у $\hat{P}_{\alpha_0}(\beta)$ корни во всех $\beta\in \mathbb{N}\Rightarrow\\
+    \Rightarrow \forall \beta\in \mathbb{R}\ \hat{P}_{\alpha_0}(\beta) = 0$.\\
+    Итак, $\forall \alpha,\ \beta\in \mathbb{R}\ P(\alpha,\ \beta) = 0$\\
+
+    \subsubsection*{Было:}
+    \[(1,\ 1,\ 1,\dots) \rightsquigarrow G(S) = 1 + s + s^2 + \dots\]
+    \[G(S) = 1 + s + s^2 + s^3 + \dots\]
+    \[sG(S) = s + s^2 + s^3 + s^4 +\dots\]
+    \[G(S) - sG(S) = 1\]
+    \[(1 - s)G(S) = 1\]
+    \[G(S) = = \dfrac{1}{1 - s} (1 - s)^{-1}\]
+    Возьмём последовательность Фибоначчи
+    \[(f_n)_{n\in\mb{N}}(0,\ 1,\ 1,\ 2,\ 3,\ 5,\ 8,\dots)\rightsquigarrow Fib(S) := \sum\limits_n f_n s^n\]
+    \begin{align*}
+        Fib(s) =& s + s^2 + 2s^3 + 3s^4 + 5s^5 + \dots\\
+        s\cdot Fib(s) =& f_0 s + f_1s^2 + f_2s^3 + f_3s^4 + 3s^5 +\dots\\
+        s^2 Fib(s) =& 0 + 0^2 + f_0s^3 + f_1s^4 + f_2s^5 + \dots\\
+        (s + s^2) Fib(s) =& f_0 s + \sum_{n\geq 2} (f_{n - 1} + f_{n - 2})s^n = f_0s + \sum_{n \geq 2} f_n s^n =\\
+        =& f_0 s + (Fib(s) - f_0 - f_1 s) = Fib(S) + (f_0 - f_1)s - f_0 =\\
+        =& Fib(s) - s\\
+        Fib(s)(s^2 + s - 1) =& -s\\
+        Fib(s) =& \dfrac{-s}{s^2 + s - 1}
+    \end{align*}
+    Числа Фибоначчи задаются следующим образом:
+    \[\begin{cases}
+        f_0 = 0\\
+        f_1 = 1\\
+        f_{n + 2} = f_{n + 1} + f_n
+    \end{cases}\Rightarrow x^2 - x - 1 = 0\Rightarrow \left[ \begin{gathered}
+        x_1 = \dfrac{1 + \sqrt{5}}{2}\\
+        x_2 = \dfrac{1 - \sqrt{5}}{2}
+    \end{gathered} \right.\]
+    Тогда $s^2 + s - 1 = (s + x_1)(s + x_2)$ (легко проверить подстановкой)
+    \[Fib(s) = \frac{-s}{(s + x_1)(s + x_2)} = (*)\]
+    \[ \frac{1}{s + x_1} - \frac{1}{s + x_2} = \frac{x_2 - x_1}{(s + x_1)(s + x_2)} = \frac{-\sqrt{5}}{(s + x_1)(s + x_2)}\]
+    С этим знанием можно сказать
+    \[(*) = \frac{s}{\sqrt{5}} \left( \frac{1}{s + x_1} - \frac{1}{s + x_2} \right) = \frac{s}{\sqrt{5}}\left( \frac{1}{x_1(1 + \frac{s}{x_1})} - \frac{1}{x_2(1 + \frac{s}{x_2})} \right)=\]
+    \[=\frac{s}{\sqrt{5}} = \left( \frac{1}{x_1}\left( 1 + \frac{s}{x_1} \right)^{-1} - \frac{1}{x_2}\left( 1 + \frac{s}{x_2} \right)^{-1} \right)=\]
+    \[=\frac{s}{\sqrt{5}}\left(\frac{1}{x_1}\sum_{n} (-1)^n \frac{s^n}{x_1^n} - \frac{1}{x_2}\sum_{n} (-1)^n \frac{s^n}{x_2^n}  \right) = \frac{1}{\sqrt{5}} \sum_{n} (-1)^{n+1}\left( \frac{1}{x_2^{n + 1}} - \frac{1}{x_1^{n + 1}} \right) s^{n + 1}= Fib(S)\]\newpage
+    \[f_{n + 1} = \frac{(-1)^{n + 1}}{\sqrt{5}}\left( \frac{1}{x_2^{n + 1}  - \frac{1}{x_1^{n + 1}}}\right) = \frac{(-1)^{n + 1}}{\sqrt{5}}\left( x_2^{-(n + 1)} - x_1^{-(n + 1)} \right) =\]
+    \[= \frac{(-1)^{n + 1}}{\sqrt{5}}\left( (-1)^{-(n + 1)}x_1^{n + 1} - (-1)^{n + 1}x_2^{n + 1} \right) = \frac{x_1^{n + 1} - x_2^{n + 1}}{\sqrt{5}}\]
+
+\subsubsection*{Теорема 1.}
+    Пусть $(a_n)_{n\in \mb{N}}$ удовлетворяет стационарному линейному однорондному рекуррентному соотношению порядка $k$, то есть
+    \[\forall n\ a_{n + k} = c_1 a_{n + k - 1} + c_2 a_{n + k - 2} + \dots + c_k + a_n\]
+    Тогда существует многочлен $P(s)$ такой, что 
+    \[\deg P < k \wedge \DS \sum a_n S^n = A(S) = \frac{P(S)}{1 - c_1 s - c_2 s^2 - \dots - c_k s^k}\]
+
+\subsubsection*{Доказательство:}
+    $c_1sA(s) = \DS\sum_{n = 1}^{k - 1}c_1 a_{n - 1}s^{n} + \sum_{n\geq k} c_1a_{n - 1} s^n\\
+    c_2s^2 A(s) = \sum_{n = 2}^{k - 1}c_2 a_{n - 2}s^n + \sum_{n \geq k} c_2 a_{n - 2} s^n\\
+    \dots\dots\dots\dots\dots\dots\dots\dots\dots\dots\dots\dots\\
+    c_{k - 1}s^{k - 1} A(s) = \sum_{n = k - 1}^{k - 1} c_{k - 1} a_{n - k + 1} s^n + \sum_{n \geq k} c_{k - 1}a_{n - k + 1}s^n\\
+    c_k s^k A(s) = 0 + \sum_{n \geq k} c_k a_{n - k} s^n$\\
+    Тогда $\DS\left(c_1s + c_2s^2 + \dots + c_k s^k\right) A(s) =\\
+    = R(s) + \sum_{n \geq k} \underset{= a_n}{\underbrace{(c_1 a_{n - 1} + c_2 a_{n - 2} + \dots + c_k a_{n - k})}}s^n,\ \deg R \leq k - 1\\
+    R(s) + \sum_{n\geq k} a_n s^n = R(s) + \left( A(s) - \sum_{n = 0}^{k - 1} a_n s^n \right) = A(s) + \left( R(s) - \sum_{n = 0}^{k - 1} a_n s^n \right) =\\
+    = A(s) - P(s),\ \deg P \leq k - 1\Rightarrow P(s) = A(s)(1 - c_1 s - c_2 s^2 - \dots - c_k s^k)\\
+    A(s) = \frac{P(s)}{1 - c_1 s - c_2 s^2 - \dots - c_k s^k}$
+
+    \[\text{Числа Каталана}\]
+    Рассмотрим правильные скобочные последовательности. Введём понятие баланса последовательности
+    \[b(\sigma) = |\sigma|_( - |\sigma|_)\]
+    \subsubsection*{Определение:}
+    $\sigma_1,\dots,\ \sigma_n = \sigma$ правильная $\Leftrightarrow \begin{cases}
+        b(\sigma) = 0\\
+        \forall i \b(\sigma_1,\dots,\ \sigma_i) \geq 0 
+    \end{cases}\Leftrightarrow$ $p(\sigma)$ (путь) возвращается в $0$ и никогда не бывает ниже 0. (см \href{https://yandex.ru/images/search?family=yes&from=tabbar&img_url=https%3A%2F%2Fi.stack.imgur.com%2F4l9RU.png&lr=213&pos=14&rpt=simage&text=%D1%87%D0%B8%D1%81%D0%BB%D0%B0%20%D0%BA%D0%B0%D1%82%D0%B0%D0%BB%D0%B0%D0%BD%D0%B0%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B8}{картинку})
+    
+    \subsubsection*{Определение:}
+    n-ое число Каталана $c_n = \#\text{правильных скобочных последовательностей длины $2n$}$\\
+    \[c_0 = 1,\quad c_1 = 1,\quad c_2 = 2,\quad c_3 = 5,\dots\]
+
+    \subsubsection*{Утвержедние:}
+    $\forall \sigma$ - правильный, если $\sigma \neq \varepsilon$ (непустое), то $\exists ! (\tau,\ \rho)$ правильное
+    \[\sigma = (\tau)\rho\]
+    \subsubsection*{Доказательство:}
+    1. $\sigma$ начинается с '(' и заканчивается ')'\\
+    2. $\tau:=$ кратчайшее $\tau'$ такое, что:
+    \[\tau' \text{ правильный} \wedge \exists \rho\ \sigma = (\tau')\rho\]
+    3. Полученное в пункте 2 $\rho$.\\
+    
+    \subsubsection*{Утверждение:}
+    \[c_{n + 1} = \sum_{k = 0}^{n} C_k C_{n - k}\]
+    
+\[\textbf{Лекция 7 июня}\]    
+    Вспоминаем, что такое правильная скобочная последовательность.
+    
+    \subsubsection*{Утверждение:}
+    Для любой непустой правильной скобочной последовательности $\sigma\ \exists! (\tau,\ \rho)$, такие что $\sigma = (\tau)\rho$, где $\tau,\ \rho$ - правильные скобочные последовательности.\\
+    Единственность:\\
+    $(\tau) \rho = \sigma = (\tau ')\rho '$\\
+    Допустим $\tau \neq \tau '$, без ограничений общности положим $|\tau'| > |\tau|$\\
+    $(\tau ') = (\tau) \pi$. Заметим, что $\tau)$ - начало $\tau'$ (левая скобочка имеет закрывающую в $\pi$), так как она правильная, получаем $b[\tau)]\geq 0\Rightarrow b[\tau)] = b[\tau] - 1 = 0 - 1\Rightarrow \bot$\\
+    Существование:\\
+    Введём понятие кратчайшего непустого правильного начала - первые $i$ элементов со свойством $b[\tau_i] = 0$ (первый раз зануляется баланс в последовательности).\\
+    Рассмотрим $\pi :=$ кратчайшеее правильное непустое начало $\sigma$ (оно существует).\\
+    $\exists \tau\hspace{0.5cm}\pi = (\tau)\Rightarrow \sigma = (\tau)\rho$ \\
+    Докажем, что $\rho,\ \tau$ - правильные.\\
+    Допустим $\tau$ не является правильной:\\
+    $\forall \xi$ (начало $\tau$) $b[(\xi] \geq 0\Rightarrow b[\xi] \geq -1$. Тогда $\exists \xi$ (начало $\tau$) $b[\xi] < 0\Rightarrow\\
+    \Rightarrow \exists \xi\hspace{0.5cm} = -1\Rightarrow b[(\xi] = 0 \longrightarrow$ это более короткое, чем $\pi = (\tau)$ правильное непустое начало $\sigma\Rightarrow \bot$\\
+    Рассмотрим $\rho$:\\
+    $(\tau)\underset{\rho}{\underbrace{\rho' \rho''}}$, тогда
+    \[b[p'] = b[(\tau) \rho'] \geq 0\]
+
+    \subsubsection*{Определение:}
+    $B_n$ = множество правильный последовательностией из $2n$ скобочек $c_n = |B_n|$
+    \subsubsection*{Следствие:}
+    $B_{n + 1} \sim \bigcup\limits_{k = 0}^{n} (B_k \times B_{n - k})$\\
+    $\forall B_{n + 1}\ \exists ! k\hspace{0.5cm} \sigma = (\underset{\in B_k}{\underbrace{\tau}})\underset{B_{n - k}}{\underbrace{\rho}}\\
+    C_{n + 1} = \sum_{k = 0}^{n} C_k C_{n - k}$\\
+    Рассмотрим производящую функцию для $(c_n)_{n\in \mathbb{N}}$:
+    \[Cat(S) = \sum_{n} c_n s^n\]
+    Тогда
+    \[\frac{Cat(s) - 1}{s}[S^n] = c_{n + 1} = [s^n](Cat(s)Cat(s))\]
+    $Cat(s) - c_0 = s(c_1 + c_2 s + c_3 s) = \sum_{n}{c_{n + 1} s^n} = \dfrac{Cat(s) -  1}{s}$\\
+    Тогда $Cat(s) - 1 = sCat^2(s)\Rightarrow sCat^2(s) + Cat(s) - 1 = 0\Rightarrow\\
+    \Rightarrow Cat(s) = \dfrac{1 \pm \sqrt{1 - 4s}}{2s} = \dfrac{1 \pm (1 - 4s)^{\frac{1}{2}}}{2s}$\\
+    $1 + (1 - 4s)^{\frac{1}{2}} = 1 + \DS\sum_{n} \begin{pmatrix}
+        \frac{1}{2}\\
+        n
+    \end{pmatrix} (-4)^n s^n = 1 + 1 - \begin{pmatrix}
+        \frac{1}{2}\\
+        1
+    \end{pmatrix} 4 s + \dots\Rightarrow$ свободный член $2$, то есть она не делится на $s$ и поэтому не является производящей функцией.\\
+    Рассмотрим второй корень:\\
+    $\DS\dfrac{1 - (1 - 4s)^{\frac{1}{2}}}{2s} = \frac{1 - \sum_{n} \begin{pmatrix}\frac{1}{2} \\ n\end{pmatrix} (-4)^n s^n }{2s} = \frac{1 - 1 - \sum_{n} \begin{pmatrix}\frac{1}{2} \\ n\end{pmatrix} (-4)^n s^n }{2s} = \dots$, что уже делится на $s$\\
+    Продолжим преобразовывать полученную сумму:
+    \[\dots= \frac{4}{2} \DS\sum_{n \geq 1} \begin{pmatrix}
+        \frac{1}{2} \\ n
+    \end{pmatrix} (-4)^{n - 1} s^{n - 1} = 2\sum_{n = 0}^{+\oo} \begin{pmatrix}
+        \frac{1}{2} \\ n + 1
+    \end{pmatrix} (-4)^{n} s^n\]
+    \[(n + 1)!\begin{pmatrix}
+        \frac{1}{2} \\ n + 1
+    \end{pmatrix} = \frac{1}{2}\left( -\frac{1}{2} \right)\left( -\frac{3}{2} \right)\dots \left( -\frac{1 - 2n}{2} \right) = \frac{(-1)^n1\cdot3\cdot 5\dots (2n - 1)}{2^{n + 1}}=\]
+    \[=\frac{(-1)^n (2n - 1)!!}{2^{n + 1}}\]
+    Подставим это в формулу $= 2\DS \sum_{n} \frac{1}{(n + 1)!} \frac{(-1)^n (2n - 1)!! (-1)^n 4^n s^n}{2^{n + 1}} =\\
+    = \sum_{n} \frac{2^n(2n - 1)!!}{(n + 1)!}s^n = \sum_{n} \frac{n! 2^n(2n - 1)!!}{n!(n + 1)!}s^n = \dots$ Знаем $2^n n! = (2n)!!\Rightarrow\\
+    \DS\Rightarrow \dots = \sum_n \frac{(2n)!!(2n - 1)!!}{n! (n + 1)!} s^n = \sum_n \frac{(2n)!}{n! (n + 1)!} s^n = \sum_n \frac{1}{n + 1} \frac{(2n)!}{n! n!}s^n =\\
+    = \sum_{n}\frac{1}{n + 1}C^n_{2n}s^n = Cat(s)$.\\
+    \subsubsection*{Вывод:}
+    $\forall n\in \mathbb{N}\hspace{0.5cm} c_n = \frac{1}{n + 1} C_{2n}^n$\\
+    Тогда $c_{n + 1} = \frac{1}{n + 2} C^{n + 1}_{2n + 2}\Rightarrow \DS\frac{c_{n + 1}}{c_n} = \frac{n + 1}{n + 2} C_{2n + 2}^{n + 1}\frac{1}{C^{n}_{2n}} = \frac{n + 1}{n + 2}\frac{(2n + 2)!}{(n + 1)!(n + 1)!} \frac{n! n!}{(2n)!} =\\
+    = \frac{n + 1}{n + 2}\frac{(2n + 1)(2n + 2)}{(n + 1)^2} = \frac{4n + 2}{n + 2}$\\
+    \subsubsection*{Следствие:}
+    $\begin{cases}
+        c_0 = 1\\
+        c_{n + 1} = \frac{4n + 2}{n + 2} c_n
+    \end{cases}$\\
+    \subsubsection*{Упражнение:}
+    $c_0 = 0,\ c_1 = 1,\ C_{n + 2} = \frac{2c_{n + 1}(8c_n + c_{n + 1})}{10 c_n - c_{n + 1}}$.
+    
+    \[\text{Задача Муавра}\]
+    Попробуем решить задачу, используя производящие функции. Вспомним условие:
+    \[\begin{cases}
+        x_ 1+ \dots + x_m = n\\
+        x_i \in \mathbb{N}
+    \end{cases}\]
+    $q_n^m = \text{$\#$ решений системы}$. Было: $q_n^m = C_{n + m - 1}^{m - 1}$\\
+    Построим производящую функцию для фиксированного $m$. Тогда
+    \[Q_m(s) = \sum_{n} q_n^m s^n\]
+    $q_n^1 = 1$, тогда $q_{n}^{m + 1}$, зафиксируем $x_1 := k$, тогда
+    \[q_n^{m + 1} = \sum_{k = 0}^n q_{n - k}^m = \sum_{k = 0}^{n} q_{n - k}^m = \sum_{k = 0}^{n} \underset{a_k b_{n - k}}{\underbrace{1 q_{n - k}^{m}}} = [s^n](G(s) Q_m(s))\]
+    Тогда $\DS Q_{m + 1}(s) = G(s) Q_m(s) = \frac{Q_m(s)}{1 - s}\\
+    Q_1(s) = G(s) = \frac{1}{1 - s}$
+
+    \subsubsection*{Следствие:}
+    $\forall m \geq 1\hspace{0.5cm} Q_m(s) = \left( \frac{1}{1 - s} \right)^m$\\
+    Было (со звёздочкой):\\
+    Сколько есть шестизначных чисел с суммой цифр $29$.
+    \[\begin{cases}
+        x_1 + \dots + x_6 = 29\\
+        1 \leq x_1 \leq 9\\
+        0 \leq x_{2\dots 6} \leq 9
+    \end{cases}\]
+    Ответом было $49467$. Попробуем решить с помощью производящих функций.\\
+    Перефразируем задачу $\begin{cases}
+        x_1 + \dots + x_n = n\\
+        \forall i\ x_i\in T\subseteq \mathbb{N}
+    \end{cases}$\\
+    Зададим ограничение с помощью производящей функции:
+    \[T(s) = \DS\sum_n 1_T(n) s^n = \sum_{n\in T}s^n\]
+    $T = \{1,\ 2,\dots,\ 9\}\Rightarrow T(s) = s + s^2 + s^3 + \dots + s^9$. Рассмотрим количество способов разбить на множество из $1$ элемента, попадающего в $T$?
+    Это будет $q^{T,\ 1}_n = 1_T(n)$, тогда $q^{T,\ m + 1}{n} = \DS\sum_{k = 0}^{n} 1_T(k) q^{T,\ m}_{n - k}$.\\
+    Тогда $Q_{m + 1}^T(s) = T(s) Q^T_m (s)\\
+    Q_1^T(s) = T(s)\Rightarrow \forall m \geq 1\ Q_m(s) = (T(s))^m$\\
+    С таким знанием верёмся к задаче:
+    \[\begin{cases}
+        x_1 + \dots + x_6 = 29\\
+        1 \leq x_1 \leq 9\ (\hat{T})\\
+        0 \leq x_{2\dots 6} \leq 9\ (T)
+    \end{cases}\]
+    Заметим $T(s) = 1 + \hat{T}(s)$
+    Тогда составим функцию:
+    \[P(s) = \hat{T}(s) (T(s))^5 = \hat{T}(s)(\hat{T}(s) + 1)^5\]
+    Проверили на вольфраме, получается магия (совпало).
+
+\[\textbf{Лекция 14 июня.}\]
+    Решали задачу Муавра через производящие функции:
+    $T_i\subseteq \mathbb{N}m\ x_i\in \mathbb{N},\ n\in \mathbb{N},\ m\in \mathbb{N}_+\\
+    \begin{cases}
+        x_1 + \dots + x_m = n\\
+        x_1\in T_1,\dots x_m\in T_m
+    \end{cases}\\
+    q_n^{T_1,\dots,\ T_m} := \#\text{решений системы}$. Здесь верхний индекс - список ограничений, наложенных на решения.\\
+    Возьмём производящую функцию $T(s) = \DS\sum_{n\in T} s^n = \sum_{n = 0}^{\oo} 1_{T}(n) s^n$\\
+    $T = \{2,\ 3,\ 5,\ 7,\ 11,\ 13\} \rightsquigarrow T(s) = s^2 + s^3 + s^5 + s^7 + s^{11} + s^{13}$.\\
+    $T = $все нечётные $\rightsquigarrow T(s) = s + s^3 + s^5 + s^7 + \dots = \DS\sum_{n} s^{2n + 1}$\\
+    Допустим $x_1 = k$, тогда $q_n^{T_1,\ T_2,\dots,\ T_m} = 1_{T_1}(k)q_{n - k}^{T_2,\dots,\ T_m}$\\
+    В общем случае: $q_n^{T_1,\ T_2,\dots,\ T_m} = \DS \sum_{k = 0}^{n} 1_{T_1}(k)\cdot q_{n - k}^{T_2,\dots,\ T_m} = [s^n]\Big( T_1(s)\cdot Q^{T_2,\dots,\ T_m}(s) \Big)$. Но при этом справделиво: $q_n^{T_1,\ T_2,\dots,\ T_m} = [s^n] Q^{T_1,\ T_2,\dots,\ T_m}(s)\Rightarrow\\
+    \Rightarrow Q^{T_1,\ T_2,\dots,\ T_m}(s) = T_1(s) Q^{T_2,\dots,\ T_m}(s)$.\\
+    Значит $q^{T_m}_n = 1_{T_m}(n)\Rightarrow Q^{T_m}(s) = T_m(s)$.
+    \subsubsection*{Следствие:}
+    $Q^{T_1,\dots T_m}(s) = T_1(s)\cdot T_2(s)\dots T_m(s)$
+    \subsubsection*{Пример:}
+    Сколько есть 8-значных чисел, где первые 3 цифра чётна, 5 цифра $\leq 6$ и сумма цифр $39$.\\
+    Тогда построим ограничения:\\
+    $T_1(s) = T_2(s) = T_4(s) = T_6(s) = T_7(s) = T_8(s) = s + s^2 + s^3 + \dots + s^9\\
+    T_3(s) = 1 + s^2 + s^4 + s^6 + s^8\\
+    T_5(s) = 1 + s + s^2 + s^3 + s^4 + s^5 + s^6$
+    \subsubsection*{Новая задача:}
+    Сколько есть способов отсчитать $100$ рублей монетами по $3,\ 5,\ 7$ рублей.\\
+    $\begin{cases}
+        3x_1 + 5x_2 + 7x_3 = n\\
+        x_i\in\mb{N}
+    \end{cases}$\\
+    $a_n := \#\text{решений системы}$. $A(s) = \DS \sum_n a_n s^n$\\
+    Рассмотрим $A_3(s) = \DS\sum a_n^3 s^n\\
+    a_n^3 := \#\text{решений } \begin{cases}
+        3x = n\\
+        x \in \mb{N}
+    \end{cases}\Rightarrow a_n^3 = \begin{cases}
+        1,\ 3\big| n\\
+        0,\ \text{иначе}
+    \end{cases},\\
+    A_3(s) = 1 + s^3 + s^6 + s^9 + s^{12} = \sum_{n} s^{3n} = \frac{1}{1 - s^3}$\\
+    Аналогично $\DS A_5(s) = \frac{1}{1 - s^5},\ A_7(s) = \frac{1}{1 - s^7}\\
+    A_{3,\ 5}(s) = \sum_n a_n^{3,\ 5} s^n$, где $a_n^{3,\ 5} := \#\text{решений } \begin{cases}
+        3x + 5y = n\\
+        x,\ y\in \mb{N}
+    \end{cases}$\\
+    Допустим, что сумма трёхрублёвых равна $k$, тогда:
+    \[a_n^{3,\ 5} = \sum_{k = 0}^{n} a_k^3\cdot a_{n - k}^5 = \Big(A_3(s)\cdot A_5(s)\Big)[s^n]\Rightarrow A_{3,\ 5}(s) = A_3(s)\cdot A_5(s)\]
+    Вернёмся к нашей задаче:\\
+    $a_n = a_n^{3,\ 5,\ 7} = \DS\sum_{k = 0}^{n} a_k^{3,\ 5}\cdot a_{n - k}^{7} = \Big(A_{3,\ 5}(s)\cdot A_7(s)\Big)[s^n]\Rightarrow\\
+    \Rightarrow A(s) = A_3(s)\cdot A_5(s)\cdot A_7(s) = \frac{1}{(1 - s^3)(1 - s^5)(1 - s^7)}$. При разложении этого добра в ряд Тейлора мы получаем ответ на задачу для всех $n$.\\
+    \subsubsection*{Замечание:}
+    Допустим, что монету $5$ можно использовать не более одного раза, тогда:
+    \[A_5(s) = 1+ s^5\Rightarrow A(s) = \frac{1 + s^5}{(1 - s^3)(1 - s^7)}\]
+    
+    \newpage
+    \[\text{\Underl{Задача о числе разбиений}}\]
+    Сколькими способами можно разбить число в натуральные слагаемые (без учёта порядка):
+    \begin{align*}
+        4 &= 4\\
+        &= 3 + 1\\
+        &= 2 + 2\\
+        &= 2 + 1 + 1\\
+        &= 1 + 1 + 1 + 1
+    \end{align*}
+    Пусть $p_n := \#\text{разбиений }n = \#\text{способов представить n рублей монетами $\{1,\ 2,\dots,\ n\}$}$\\
+    Тогда $P(s) = \DS\sum p_ns^{n}$.\\
+    При фиксированном $n$ это равно $\dfrac{1}{(1 - s)(1 - s^2)(1 - s^3)\dots(1 - s^n)}$\\
+    Введём $\DS\sum_n p_n^m s^n = P_m(s) = \dfrac{1}{\prod\limits_{k = 1}^{m}(1 - s^k)}$, тогда $p_n^m := \#\text{способов разложить $n$ на $1,\ 2,\dots, m$}$.\\
+    Получается $\forall m \geq n\hspace{0.5cm} p_n = p_n^m$ (монеты номинала больше $n$ не могут быть использованы). Получается (с жульничеством):
+    \[p_n = [s^n]P(s) = [s^n]P_m(s) = [s]^n \frac{1}{(1 - s)\dots(1 - s^n)(1 - s^{n + 1})\dots(1 - s^m)} \overset{?!}{=} \frac{1}{\prod\limits_{k = 1}^{\oo} (1 - s^k)}\]
+    $?!$ - момент, в котором мы сжульничали.\\
+    Тогда $P(s) = \dfrac{1}{\prod\limits_{k = 1}^{\oo} (1 - s^k)}$. Раскладываем в ряд, получаем ответ на задачу.\\
+    \subsubsection*{Замечание:}
+    Если хотим брать разбиения, где все слагаемые разные, то будем брать следующую производящую функцию $P'$:
+    \[P'(s) = \prod_{k = 1}^{\oo}(1 + s^k)\]
+    \newpage
+    \subsubsection*{Задача 11 с семинара.}
+    Вспоминаем числа Каталана:\\
+    $\#\text{правильный скобочных последовательностей длины $2n$} = c_n$.\\
+    Усовершенствуем числа Каталана:\\
+    $\tilde{c}_n = \begin{cases}
+        c_{n/2},\ 2 \big| n\\
+        0,\ \text{иначе}
+    \end{cases}\Rightarrow (\tilde{c}) = (c_0,\ 0,\ c_1,\ 0,\ c_2,\dots)$\\
+    Эта последовательность имеет производящую функцию:\\
+    $\DS\sum_n \tilde{c}_n s^n = \tilde{\operatorname{Cat}}(s) = \sum_n c_ns^{2n} = \operatorname{Cat}(s^2)$
+    \subsubsection*{Задача:}
+    Сколько существует траекторий движения частицы таких, что она никогда не оказывается ниже $0$.\\
+    Общее число путей: $2^n$\\
+    Для такого числа производящая функция выглядит так:\ $\dfrac{1}{1 - 2s}$.\\
+    Так как $G(s) = \dfrac{1}{1 - s},\ G(\alpha s) = \dfrac{1}{1 - \alpha s}$, здесь мы моложили $\alpha = 2$.\\
+    Рассмотрим все пути, на которых траектория находится в отрицательной области в какой-то момент.\\
+    $d_n := \#\text{путей до $n$, опускающихся ниже $0$}$.\\
+    $d_0 = 0$. В каждом таком пути есть хотя бы один шаг "вниз".\\
+    Возьмём наименьший $k$ такой, что путь из первых $k$ шагов правильный. Тогда если $k + 1$ шаг вниз, то путь уже будет "плохим" и это не зависит от следующих шагов, то есть можно сделать различных $2^{n - k}$ шагов. То есть:
+    \[d_{n + 1} = \sum_{k = 0}^{n} \tilde{c}_k 2^{n - k}\]
+    $\DS\frac{D(s) - d_0}{s}[s^n] = d_{n + 1} = \sum_{k = 0}^{n} \tilde{c}_k 2^{n - k} = [s^n]\Big(\tilde{\operatorname{Cat}}(s) \frac{1}{1 - 2s} \Big)\Rightarrow\\
+    \Rightarrow \frac{D(s)}{s} = \frac{\tilde{ \operatorname{Cat} }(s) }{1 - 2s^2}\Rightarrow D(s) = \frac{s\operatorname{Cat}(s^2)}{1 - 2s}$\\
+    Тогда производящая функция для "хороших" путей:
+    \[P(s) = \frac{1}{1 - 2s} - \frac{s\operatorname{Cat}(s^2)}{1 - 2s} = \frac{1 - s\operatorname{Cat}(s^2)}{1 - 2s} \]
+\end{document}

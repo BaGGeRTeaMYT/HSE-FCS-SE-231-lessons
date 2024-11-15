@@ -1,0 +1,200 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[T2A]{fontenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathabx}
+\usepackage{graphicx}
+
+\title{Консультация перед контрольной номер 3}
+\author{Андрей Тищенко}
+\date{2023/2024 гг.}
+
+\newcommand{\tg}{\operatorname{tg}}
+\newcommand{\Bold}[1]{$\textbf{#1}$}
+\newcommand{\Underl}[1]{$\underline{\text{#1}}$}
+\newcommand{\BU}[1]{$\underline{\textbf{#1}}$}
+\newcommand{\DS}{\displaystyle}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Rg}{\operatorname{Rg}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\oo}{\infty}
+
+\begin{document}
+    \maketitle
+    \begin{enumerate}
+        \item[Номер 1] Будет ли подгурппой
+        \begin{enumerate}
+            \item[а.] Объединение подгрупп?
+            \item[б.] Пересечение подгрупп? 
+        \end{enumerate}
+        Критерий подгруппы:
+        \[ab^{-1} \in H,\ \text{при}\ a,\ b\in H\]
+        Проверим $\underset{\in a}{H_1} \cup \underset{\in b}{H_2}$:\\
+        Рассмотрим группу $D_4$,\ выделим две подгруппы:\\
+        $H_1$ - повороты (их 4)\\
+        $H_2 = \{p_0,\ S_1\}$ - одна симметриия + единичный элемент.
+        $H_1 \cup H_2 = \{p_0,\ p_{\frac{\pi}{2}},\ p_{\pi},\ p_{\frac{3\pi}{2}},\ S_1\}$ не является подгруппой, так как нет замкнутости по умножению. Например взяли симметрию $(24)$, тогда:\\
+        $S_1 \cdot p_{\pi} = (24)(13)(24) = (13)$ - вторая симметрия, которой нет в объединении.\\
+        Проверим $H_1 \cap H_2$\\
+        $\left. \begin{matrix} 
+            ab^{-1} \in H_1\\
+            ab^{-1} \in H_2    
+        \end{matrix}\right\} \Rightarrow ab^{-1} \in H_1\cap H_2\Rightarrow \text{подгруппа}$
+        \[\text{Идеал группы}\]
+        $\mathbb{Z}_{20}$, подгруппы:\\
+        $20 = 2^2 \cdot 5^1 \Rightarrow (2 + 1)(1 + 1) = 6$ подгрупп\\
+        $|H_1| = 1,\ H_1 = \left<\overline{0}\right>\\
+        |H_2| = 2,\ H_2 = \left<\overline{\frac{20}{2}}\right> = \left<\overline{10}\right>\\
+        |H_3| = 4,\ H_3 = \left<\overline{5}\right>\\
+        |H_4| = 5,\ H_4 = \left<\overline{4}\right>\\
+        |H_5| = 10,\ H_5 = \left<\overline{2}\right>\\
+        |H_6| = 20,\ H_6 = \left<\overline{1}\right>$\\
+        Мощности идут по делителям 20.\\
+        Какой порядок будет у $\left< \overline{18} \right>$ в $\mathbb{Z}_{20}$\\
+        $\operatorname{ord} g^k = \dfrac{\operatorname{ord} g}{\gcd(\operatorname{ord} g),\ k}$,\\
+        Для циклической группы $\left< g \right>,\ \operatorname{ord} g = \left| \left< g \right> \right|\\
+        \operatorname{ord} \overline{18} = \dfrac{20}{(18,\ 20)} = 10$
+        \item[Номер 2.] В циклической группе $\left< a \right>$ порядка $1000$, рассмотрим следующие элементы: $a^{-250},\ a^{-251},\dots,\ a^{-400} = a^{600},\dots,\ a^{750}$. Указать среди них те, порядок которых равен $50$\\
+        $\operatorname{ord}g^k = \dfrac{1000}{(k,\ 1000)} = 50\Rightarrow (k,\ 1000) = 20,\ k\in [600,\ 750]$\\
+        Пусть $l = \dfrac{k}{20}\Rightarrow (l,\ 50) = 1,\ l\in [30,\ 37]\Rightarrow \left[\begin{gathered}
+            l = 31\\
+            l = 33\\
+            l = 37
+        \end{gathered}\right. \Rightarrow \left[ \begin{gathered}
+            k_1 = 620 = -380\\
+            k_2 = 660 = -340\\
+            k_3 = 740 = -260
+        \end{gathered} \right.$\\
+        Ответ: $a^{-260},\ a^{-340},\ a^{-380}$
+        \item[Группы:] $D_n,\ S_n,\ A_n,\ Q_8,\ V_4,\ Z_n$\\
+        $V_4 = \{1,\ a,\ b,\ ab\},\ \operatorname{ord} a = \operatorname{ord} b = 2$ - группа Клейна.
+        \item[Номер 3.] Изоморфны ли группы:\\
+        \item[а.]$\mathbb{Z}_6 \times \mathbb{Z}_{36}$ и $\mathbb{Z}_{12}\times \mathbb{Z}_{18}$?\\
+        $\mathbb{Z}_2 \times \mathbb{Z}_3 \times \mathbb{Z}_4\times \mathbb{Z}_9 \cong \mathbb{Z}_3\times \mathbb{Z}_4 \times \mathbb{Z}_2 \times \mathbb{Z}_9$. Можно заменять на Декартвое произведение циклических групп, порядки которых в произведении дают порядок исходной группы и взаимнопросты между собой.
+        \item[б.] $\mathbb{Z}_6\times \mathbb{Z}_{36} $ и $\mathbb{Z}_9 \times \mathbb{Z}_{24}$?\\
+        $\mathbb{Z}_2 \times \mathbb{Z}_3 \times \mathbb{Z}_4 \times \mathbb{Z}_9$ и $\mathbb{Z}_9 \times \mathbb{Z}_3 \times \mathbb{Z}_8$\\
+        Группа $\mathbb{Z}_2 \times \mathbb{Z}_4 \ncong \mathbb{Z}_8$, так как слева максимальный порядок - 4, а справа - 8.
+        \item[Номер 4.] Сколько элементов порядка $2,\ 4,\ 6$ в группе:
+        \item[а.] $\mathbb{Z}_2\times \mathbb{Z}_4 \times \mathbb{Z}_3$
+        \item[б.] $D_2(\mathbb{C})^* = \left\{\begin{pmatrix}
+            \mathbb{Z}_1 & 0\\
+            0 & \mathbb{Z}_2
+        \end{pmatrix}\ \middle|\text{ где $\mathbb{Z}_i$ - корни 6 степени из 1}\right\}\sim \mathbb{Z}_6 \times \mathbb{Z}_6$
+        \item[Номер 5.] $R = \mathbb{Z}_5[x]/\left< x^2 + 4x + 1 \right>$ является ли полем? Сколько элементов? Представить в виде $\overline{f}$, где $\deg \overline{f} \leq 1$\\
+        $\overline{\dfrac{x}{x^3 + x^2 + 2x + 1}} = \overline{x}\cdot \overline{(x^3 + x^2 + 2x + 1)^{-1}}$\\
+        1. $R\text{ - поле} \Leftrightarrow g(x) = x^2 + 4x + 1$ - неприводимы в $\mathbb{Z}_5$
+        \[\begin{tabular}{c | c}
+            & g(x)\\
+            \hline
+            0 & 1\\
+            1 & 1\\
+            2 & 3\\
+            3 & 2\\
+            4 & 3 
+        \end{tabular}\]
+        Значит $g(x)$ неприводим (нет нулей), значит $R$ - поле $|R| = p^n = 5^2 = 25$\\
+        Элементы $R: \left\{ \overline{ax + b} \middle| a,\ b\in \mathbb{Z}_5 \right\}$\\
+        2. $\overline{x^2 + 4x + 1 + x} = \overline{x}$. Осуществим деление в столбик\\
+        $x^3 + x^2 + 2x + 1 = \underset{g(x)}{(x^2 + 4x + 1)}\underset{q_1(x)}{(x + 2)} + \underset{r_1(x)}{(3x + 4)}\\
+        x^2 + 4x + 1 = (2x + 2)(3x + 4) + 3$. Тогда $3 = \gcd(g,\ f) = (1 + q_1 q_2)g - fq_2$\\
+        $\overline{3} = \overline{f}(-\overline{q_2}) = \overline{f}(\overline{3x + 3}) | \cdot 2\\
+        \overline{1} = \overline{f}(\overline{x + 1})\Rightarrow \overline{f^{-1}} = \overline{x + 1}\\
+        x\cdot f^{-1} = \overline{x}(\overline{x + 1}) = \overline{x^2 + x} = \overline{x^2 + x} - g = \overline{x^2 + x - x^2 + 4x - 1} =\\= \overline{2x + 4}\leftarrow$ ответ. 
+        \item[Номер 6.] $\left< 2x + 6,\ x^2 - 9,\ x \right>$
+    \end{enumerate}
+    \[\textbf{Консультация 24 апреля}\]
+    $q(x) = (x_1 + x_3)^2 - (x_2 - x_3)^2\\
+    \Rg q(x) = 2,\ (1,\ 1) = (i_+,\ i_-)$ - сигнатура\\
+    $\begin{cases}
+        y_1 = x_1 + x_3\\
+        2_2 = x_2 - x_3\\
+        y_3 = x_3
+    \end{cases}\Rightarrow C = \begin{pmatrix}
+        1 & 0 & 1\\
+        0 & 1 & -1\\
+        0 & 0 & 1
+    \end{pmatrix},\ \det C \neq 0\Rightarrow C$ невырожденное линейное преобразование\\
+    Матрица перехода от исходного базиса к базису, в котором квадратичная форма имеет канонический вид:
+    \[C^{-1} = C_{x\rightarrow y}\]
+    \[\underline{\text{Линейное отображение}}\]
+    $A:V_1\rightarrow V_2,\ e$ - базис в $V_1$, $f$ - базис в $V_2$\\
+    $e = \{e_1,\dots,\ e_n\},\ \dim V_1 = n\\
+    f = \{f_1,\dots,\ f_m\},\ \dim V_2 = m\\
+    A_{e\, f} = \begin{pmatrix}
+        a_{1\, 1} & \dots & a_{1\, n}\\
+        a_{2\, 1} & \dots & a_{2\, n}\\
+        \vdots & \ddots & \vdots\\
+        a_{m\, 1} & \dots & a_{m\, n}
+    \end{pmatrix}_{m\times n}\\
+    A(e_1) = a_{1\,1}f_1 + a_{2\,1}f_2 + \dots + a_{m\, 1}f_m$\\
+    \begin{enumerate}
+        \item[\textbf{Линейный оператор}]
+    \end{enumerate}
+    Раскладываем по тому же базису:\\
+    $A_e = \begin{pmatrix}
+        \\
+        -//-\\
+        \\
+    \end{pmatrix}_{n\times n}\quad \begin{cases}
+        A(e_1) = a_{1\, 1} e_1 + \dots + a_{n\, 1}e_n\\
+        \dots\dots\dots\dots\dots\dots\dots\dots\dots\\
+        A(e_n) = a_{1\, n} e_1 + \dots + a_{n\, n}e_n
+    \end{cases}$\\
+    \begin{enumerate}
+        \item[\textbf{Матрица перехода:}]
+    \end{enumerate}
+    Линейное пространство $V$, есть $2$ базиса $(e_1,\dots,\ e_n) = e,\ (e_1',\dots,\ e_n') = e'$
+    \[\begin{cases}
+        e_1' = t_{1\, 1}e_1 + \dots + t_{n\, 1}e_n\\
+        \dots\dots\dots\dots\dots\dots\dots\\
+        e_n' = t_{1\, n}e_1 + \dots + t_{n\, n}e_n
+    \end{cases}\]
+    Получается, что $e' = e\cdot T_{e\rightarrow e'}$. Пусть $x\in V$,\ $x^e$ - его коордианты в $e$, $x^{e'}$ - его координаты в $e'$\\
+    $T_{e\rightarrow e'} =\begin{pmatrix}
+        t_{1\,1} & \dots & t_{1\, n}\\
+        t_{2\, 1} & \dots & t_{2\, n}\\
+        \vdots & \ddots & \vdots\\
+        t_{n\, 1} & \dots & t_{n\, n}
+    \end{pmatrix}_{n\times n},\ x^e = T_{e\rightarrow e'} x^{e'}\\
+    x_{n\times 1} = x_1e_1 + \dots + x_n e_n = e_{n\times n} x^e_{n\times 1}\\
+    x = e' x^{e'} = e\cdot T_{e\rightarrow e'}x^{e'} = e'x^{e'}$\\
+    Разложение по базису единственно:
+    \[ex^e = e'x^{e'} = eT_{e\rightarrow e'}x^{e'} \Rightarrow x^e = T_{e\rightarrow e'}x^{e'}\]
+    \begin{enumerate}
+        \item[\textbf{Задача:}] (из домашки)
+    \end{enumerate}
+    $e_1 = \begin{pmatrix}
+        -1 & 1 & 0
+    \end{pmatrix}^T,\ e_2 = \begin{pmatrix}
+        1 & 2 & 0
+    \end{pmatrix}^T,\ e_3 = \begin{pmatrix}
+        0 & 2 & 1
+    \end{pmatrix}^T\\
+    A_e = \begin{pmatrix}
+        2 & -1 & 0\\
+        -1 & 0 & 1\\
+         1 & 1 & 1
+    \end{pmatrix}$\\
+    Найти значение линейного оператора $A$ на векторе $\begin{pmatrix}
+        1\\
+        2\\
+        3
+    \end{pmatrix}$ в каноническом базисе.\\
+    $A(x)$, где известно $x^S$ и $A_e$. $T_{S\rightarrow e} = \begin{pmatrix}
+        e_1 & e_2 & e_3
+    \end{pmatrix}.\\
+    A_S = T_{S\rightarrow e} A_e T_{e\rightarrow S} = TA_e T^{-1}$\\
+    Ответ: $A(x) = A_S x^S$
+    \begin{enumerate}
+        \item[\textbf{Повторение:}]
+    \end{enumerate}
+    $\ker \varphi = \{x\in V_1\ |\ \varphi(x) = 0\}\subseteq V_1\\
+    \operatorname{Im} \varphi = \{y \in V_2\ |\ \exists x\in V_1: \varphi(x) = y \}\subseteq V_2$\\
+    Как искать?\\
+    $\varphi(x) = A\cdot x$ в некотором базисе.\\
+    $A_{m\times n} = (A_1,\dots,\ A_n)$ - как набор столбцов.\\
+    $\ker \varphi$ - множество решений ОСЛАУ $Ax = 0$\\
+    $\operatorname{Im}\varphi$ - такие $y:\ \exists x\ Ax = y$ - НСЛАУ\\
+    $y$ - линейная комбинация столбцов $A_1,\dots,\ A_n\Rightarrow \operatorname{Im} = \mathcal{L}(A_1,\dots,\ A_n)$
+\end{document}
