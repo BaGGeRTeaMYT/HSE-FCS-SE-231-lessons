@@ -895,4 +895,49 @@
             \[\mathcal{D}(\xi^* + \eta^*) = \mathcal{D}\xi^* + \mathcal{D}\eta^* + 2\operatorname{cov}(\xi^*\, \eta^*) = 2(1 + \rho_{\xi\, \eta}) = 0\]
         \end{enumerate}
     \end{enumerate}
+    \subsection*{Пример}
+    Пусть $\xi \sim R(-a, a)$, $\eta = \xi^2$. Посчитаем коэффициент корелляции:
+    \[\operatorname{cov}(\xi,\ \eta) = E\xi \eta - \underset{=0}{\underbrace{E\xi}} E\eta = E\xi^3 = \int\limits_{-a}^{a} x^3 \frac{1}{2a}\, dx = 0\Rightarrow \rho_{\xi\, \eta} = 0\]
+    Итого, величины зависимы, но не коррелированы (так как корелляция показывает линейную зависимость, а $\eta$ зависит от $\xi$ квадратично).
+    \subsection*{Определение}
+    \underline{Ковариационной матрицей} вектора $\xi = \{\xi_1,\dots,\ \xi_n\}$ называется матрица $K_{\xi} = \begin{pmatrix}
+        k_{i\, j}
+    \end{pmatrix}$, где $k_{i\, j} = \operatorname{cov}(\xi_i,\ \xi_j),\ i,\ j = \overline{1,\ n}$
+    \begin{center}
+        Свойства $K_{\xi}$
+    \end{center}
+    \begin{enumerate}
+        \item $k_{i\, j} = k_{j\, i}\Rightarrow K_{\xi}$ симметричная
+        \item $k_{i\, i} = \mathcal{D}\xi_{i},\ i = \overline{1,\ n}$
+        \item $K_{\xi}$ неотрицательно определённая, то есть 
+        \[\forall \lambda_1,\dots,\ \lambda_n\in\mathbb{R}\quad \sum_i\sum_j \lambda_i\lambda_j k_{i\, j} \geq 0\]
+        \textit{Доказательство:}
+        \[0 \leq E\left(\sum_{i = 1}^{n} \lambda_ii \overset{\circ}{\xi_i}\right)^2 = E\left( \sum_i \sum_j \lambda_i \lambda_j \overset{\circ}{\xi_i}\overset{\circ}{\xi_j} \right) = \sum_i \sum_j \lambda_i \lambda_j \underset{k_{i\, j}}{\underbrace{E\overset{\circ}{\xi_i}\overset{\circ}{\xi_j}}}\]
+    \end{enumerate}
+    \subsection*{Определение}
+    \underline{Корреляционной матрицей} случайного вектора $\xi = (\xi_1,\dots,\ \xi_n)$ называется матрица $R_{\xi} = \begin{pmatrix}
+        \rho_{i\, j}
+    \end{pmatrix}$, где $\rho_{i\, j} = \rho_{\xi_1\, \xi_2}$
+    \begin{enumerate}
+        \item $\forall i,\ j = \overline{1,\ n}\quad \rho_{i\, j} = \rho_{j\, i}$
+        \item $\forall i = \overline{1,\ n}\quad \rho_{i\, i} = 1$
+    \end{enumerate}
+    \subsection*{Формула свёртки}
+    Пусть случайные величины $\xi_1$ и $\xi_2$ --- независимы, $\xi_1\sim f_{\xi_1}(x),\ \xi_2 \sim f_{\xi_2}(y)$\\
+    Случайная величина $\eta = \xi_1 + \xi_2$.\\
+    Найти: $f_{\eta}(z) - ?$
+    \[F_{\eta}(z) = P(\eta \leq z) = P(\xi_1 + \xi_2 \leq z) = \iint\limits_{x + y \leq z} f_{\xi_1}(x) f_{\xi_2}(y)\, dy\, dx = \int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{z - x} f_{\xi_1}(x) f_{\xi_2}(y)\, dy\, dx\]
+    \[f_{\eta}(z) = \frac{d}{dz} F_{\eta}(z) = \int_{-\infty}^{+\infty} f_{\xi_1}(x)f_{\xi_2}(z - x)\, dx\]
+    \subsection*{Пример}
+    $\xi_1 \sim N(0,\ 1),\ \xi_2 \sim N(0,\ 1)$\\
+    $\xi_1$ и $\xi_2$ --- независимы.\\
+    $\eta = \xi_1 + \xi_2,\ f_{\eta}(z) - ?$
+    \[f_{\eta}(z) = \int_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}\cdot \frac{1}{\sqrt{2\pi}} e^{-\frac{(z - x)^2}{2}}\, dx = \int\frac{1}{2\pi}e^{-\frac{x^2}{2} - \left( \frac{z^2}{2} - xz + \frac{x^2}{2} \right)}=\]
+    \[=\frac{e^{-\frac{z^2}{4}}}{\sqrt{2\pi}\sqrt{2}} \int\limits_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi}\sqrt{\frac{1}{2}}} e^{-x^2 + xz - \frac{z^2}{4}} = \frac{e^{-\frac{z^2}{4}}}{\sqrt{2\pi}\sqrt{2}} \underset{=1}{\underbrace{\int\limits_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi}\sqrt{\frac{1}{2}}} e^{-(x - \frac{z}{2})^2}}}\]
+    Равно 1, потому что это гауссовская плотность, тогда оставшаяся часть и будет плотностью распеределения.\\
+    Итак, $\eta \sim N(0, 2)$.
+    \subsection*{Утверждение}
+    Пусть $\xi_1,\dots,\ \xi_n$ --- независимые случайные величины, такие что $\xi_i\sim N(m_i,\ \sigma_i^2),\ i = \overline{1,\ n}$\\
+    Тогда случайная величина $\eta = \xi_1 + \dots + \xi_n \sim N(m_{\eta},\ \mathcal{D}\eta)$,\\
+    где $\displaystyle m_{\eta} = \sum_{i = 1}^{n} m_i,\ \mathcal{D}\eta = \sum_{i = 1}^{n} \sigma_i^2$
 \end{document}
