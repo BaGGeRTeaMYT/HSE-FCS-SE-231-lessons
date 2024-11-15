@@ -1,0 +1,2014 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[T2A]{fontenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathabx}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.9}
+
+
+\title{Семинары по алгебре 4 модуль.}
+\author{Андрей Тищенко}
+\date{2023/2024 гг.}
+
+\newcommand{\tg}{\operatorname{tg}}
+\newcommand{\Bold}[1]{$\textbf{#1}$}
+\newcommand{\Underl}[1]{$\underline{\text{#1}}$}
+\newcommand{\BU}[1]{$\underline{\textbf{#1}}$}
+\newcommand{\DS}{\displaystyle}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Rg}{\operatorname{Rg}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Pro}{\operatorname{\text{Пр}}}
+\newcommand{\Gr}{\operatorname{Gr}}
+
+\begin{document}
+    \maketitle
+    \[\textbf{Семинар 4 апреля}\]
+    \begin{enumerate}
+        \item[Номер 1.] $a_1 = \begin{pmatrix}
+            1 & 2 & 1
+        \end{pmatrix},\ a_2 = \begin{pmatrix}
+            1 & 1 & -1
+        \end{pmatrix},\ a_3 = \begin{pmatrix}
+            1 & 3 & 3
+        \end{pmatrix}, L_1 = \left< a_1,\ a_2,\ a_3\right>\\
+        b_1 = \begin{pmatrix}
+            2 & 3 & -1
+        \end{pmatrix},\ b_2 = \begin{pmatrix}
+            1 & 2 & 2
+        \end{pmatrix},\ b_3 = \begin{pmatrix}
+            1 & 1 & -3
+        \end{pmatrix},\ L_2 = \left< b_1,\ b_2,\ b_3\right>$\\
+        Найти размерности и какие-нибудь базисы $L_1 + L_2$ и $L_1 \cap L_2$.\\
+        $A = \begin{pmatrix}
+            1 & 2 & 1 \\
+            1 & 1 & -1\\
+            1 & 3 & 3
+        \end{pmatrix} \sim \begin{pmatrix}
+            0 & 1 & 2\\
+            1 & 1 & -1\\
+            0 & 2 & 4
+        \end{pmatrix} \sim \begin{pmatrix}
+            1 & 1 & -1\\
+            0 & 1 & 2\\
+            0 & 0 & 0
+        \end{pmatrix},\ \dim L_1 = 2\\
+        B = \begin{pmatrix}
+            2 & 3 & -1\\
+            1 & 2 & 2\\
+            1 & 1 & -3
+        \end{pmatrix} \sim \begin{pmatrix}
+            0 & 1 & 5\\
+            0 & 1 & 5\\
+            1 & 1 & -3
+        \end{pmatrix} \sim \begin{pmatrix}
+            1 & 1 & -3\\
+            0 & 1 & 5\\
+            0 & 0 & 0
+        \end{pmatrix},\ \dim L_2 = 2$\\
+        $\begin{pmatrix}
+            1 & 1 & -1\\
+            0 & 1 & 2\\
+            1 & 1 & -3\\
+            0 & 1 & 5
+        \end{pmatrix}\sim \begin{pmatrix}
+            1 & 1 & -1\\
+            0 & 1 & 2\\
+            0 & 0 & -2\\
+            0 & 0 & 3
+        \end{pmatrix} \sim \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix}\Rightarrow \dim (L_1 + L_2) = 3\Rightarrow \dim (L_1\cap L_2) = \dim L_1 + \dim L_2 - \dim (L_1 + L_2) = 1$\\
+        Так как $L_1$ базис, через него выражается любой вектор, в том числе $\vec{X} = (x_1,\ x_2,\ x_3)$\\
+        Значит $\operatorname{Rg} \begin{pmatrix}
+            x_1 & x_2 & x_3\\
+            1 & 1 & -1\\
+            0 & 1 & 2
+        \end{pmatrix} = 2\Rightarrow \begin{vmatrix}
+            x_1 & x_2 & x_3\\
+            1 & 1 & -1\\
+            0 & 1 & 2
+        \end{vmatrix} = 0\Rightarrow\\ \Rightarrow 3x_1 - 2x_2 + x_3 = 0$\\
+        Аналогично для $L_2$:\\
+        $\operatorname{Rg}\begin{pmatrix}
+            x_1 & x_2 & x_3\\
+            1 & 1 & -3\\
+            0 & 1 & 5
+        \end{pmatrix} = 2\Rightarrow \begin{vmatrix}
+            x_1 & x_2 & x_3\\
+            1 & 1 & -3\\
+            0 & 1 & 5
+        \end{vmatrix} = 8x_1 - 5x_2 + x_3 = 0$\\
+        $L_1 \cap L_2: \begin{cases}
+            3x_1 - 2x_2 + x_3 = 0\\
+            8x_1 - 5x_2 + x_3 = 0
+        \end{cases}\Rightarrow \begin{cases}
+            x_1 = 3x_2\\
+            x_2 = 5x_3
+        \end{cases}\Rightarrow \begin{pmatrix}
+            3\\
+            5\\
+            1
+        \end{pmatrix}$ - пример базиса объединения.
+        \item[Номер 2.] Доказать, что $\mathbb{R}^4$ является прямой суммой $L_1 = \left< a_1,\ a_2 \right>,\ L_2 = \left< b_1,\ b_2 \right>$ и разложить вектор $x = \begin{pmatrix}
+            2 & -2 & 3 & -3
+        \end{pmatrix}^T$ в сумму проекций на эти подпространства, где:\\
+        $a_1 = \begin{pmatrix}
+            1 & 1 & 0 & 1
+        \end{pmatrix},\ a_2 = \begin{pmatrix}
+            1 & -1 & 1 & 0
+        \end{pmatrix}\\
+        b_1 = \begin{pmatrix}
+            1 & 0 & 1 & 1
+        \end{pmatrix},\ b_2 = \begin{pmatrix}
+            0 & 1 & -1 & 1
+        \end{pmatrix}\\
+        \dim(L_1 + L_2) = \dim L_1 + \dim L_2 - \dim (L_1 \cap L_2)$\\
+        $\dim L_1 = \dim L_2 = 2$, так как есть БМ порядка 2.\\
+        $\begin{pmatrix}
+            1 & 1 & 0 & 1\\
+            1 & -1 & 1 & 0\\
+            -1 & 0 & 1 & 1\\
+            0 & 1 & -1 & 1
+        \end{pmatrix}\sim \begin{pmatrix}
+            1 & 1 & 0 & 1\\
+            0 & -2 & 1 & 1\\
+            0 & 1 & 1 & 2\\
+            0 & 1 & -1 & 1
+        \end{pmatrix}\sim \begin{pmatrix}
+            1 & 0 & 0 & 0\\
+            0 & 1 & 0 & 0\\
+            0 & 0 & 1 & 0\\
+            0 & 0 & 0 & 1
+        \end{pmatrix}$\\
+        $\dim (L_1 + L_2) = 4\Rightarrow \dim (L_1\cap L_2) = 0\Rightarrow L_1 + L_2$\\
+        $x = x_1 + x_2 = \alpha_1 a_1 + \alpha_2 a_2 + \beta_1 b_1 + \beta_2 b_2\Leftrightarrow \begin{pmatrix}
+            2\\
+            -2\\
+            3\\
+            -3
+        \end{pmatrix} = \alpha_1 \begin{pmatrix}
+            1\\
+            1\\
+            0\\
+            1
+        \end{pmatrix} + \alpha_2 \begin{pmatrix}
+            1\\
+            -1\\
+            1\\
+            0
+        \end{pmatrix} + \beta_1 \begin{pmatrix}
+            -1\\
+            0\\
+            1\\
+            1
+        \end{pmatrix} + \beta_2 \begin{pmatrix}
+            0\\
+            1\\
+            -1\\
+            1
+        \end{pmatrix}\\
+        \left ( \begin{matrix}
+            1 & 1 & -1 & 0\\
+            1 & -1 & 0 & -1\\
+            0 & 1 & 1 & -1\\
+            1 & 0 & 1 & 1
+        \end{matrix}\ \middle|\ \begin{matrix}
+            2\\
+            -2\\
+            3\\
+            -3
+        \end{matrix} \right) \sim \left ( E\ \middle|\ \begin{matrix}
+            1\\
+            1\\
+            0\\
+            -2
+        \end{matrix} \right)\\
+        x_1 = a_1 + a_2 = \begin{pmatrix}
+            2\\
+            0\\
+            1\\
+            1
+        \end{pmatrix} \in L_1\quad x_2 = \begin{pmatrix}
+            0\\
+            2\\
+            2\\
+            -2
+        \end{pmatrix} = -2 b_2\\
+        x = x_1 + x_2$ - ответ.
+        \item[Номер 3.] Доказать, что $M_n(\mathbb{R})$ есть прямая сумма подпространства всех\\
+        симметрических матриц и $L_2$ всех кососимметрических матриц\\
+        $(A^T = A)$\\
+        \item[Утверждение:] Сумма $L_1 + L_2$ прямая $\Leftrightarrow \forall x \in L_1 + L_2\ \exists!$ разложение $x = x_1 + x_2$, где $x_1 \in L_1,\ x_2 \in L_2$
+        \item[Решение:] Пусть $A = S + K$, где $S$ - симметрическая матрица, $K$ - кососимметрическая\\
+        $A^T = S^T + K^T = S - K\Rightarrow \begin{cases}
+            S = \dfrac{A + A^T}{2}\\
+            K = =\dfrac{A - A^T}{2}
+        \end{cases}$ - единственное разложение\\
+        $A = \begin{pmatrix}
+            1 & 2\\
+            3 & 4
+        \end{pmatrix} = \begin{pmatrix}
+            1 & \frac{5}{2}\\
+            \frac{5}{2} & 4
+        \end{pmatrix} + \begin{pmatrix}
+            0 & -\frac{1}{2}\\
+            \frac{1}{2} & 0
+        \end{pmatrix}$
+    \end{enumerate}
+        \[\text{Билинейные формы}\]
+    \begin{enumerate}
+        \item[Определение:] в $V\times V\longrightarrow R$ называется билинейной формой, если\\
+        $\begin{cases}
+            b(\alpha x + \beta y,\ z) = \alpha b (x,\ z) + \beta b(y,\ z)\\
+            b(x,\ \alpha y + \beta z) = \alpha b(x,\ y) + \beta b(x,\ z)
+        \end{cases}$, то есть линейность по каждому аргументу.\\
+        $b(x,\ y) = x_e^T B_e y_e$, переход к другому базису $(e\rightarrow e')$\\
+        $B' = C^T BC$\\
+        \item[Номер 4.] Я решал у доски, скиньте пж запись.
+        \item[Номер 5.] Найти $f(x,\ y)$, если $F = \begin{pmatrix}
+            1 & -1 & 1\\
+            -2 & -1 & 3\\
+            0 & 4 & 5
+        \end{pmatrix}$ - матрица билинейной формы $f$,\ $x = \begin{pmatrix}
+            1 & 0 & 3
+        \end{pmatrix}^T,\ y = \begin{pmatrix}
+            -1 & 2 & -4
+        \end{pmatrix}^T\\
+        f(x,\ y) = \begin{pmatrix}
+            1 & 0 & 3
+        \end{pmatrix}\begin{pmatrix}
+            1 & -1 & 1\\
+            -2 & -1 & 3\\
+            0 & 4 & 5
+        \end{pmatrix}\begin{pmatrix}
+            -1\\
+            2\\
+            -4
+        \end{pmatrix} = -43$
+        \item[Номер 6.] Найти матрицу билинейной формы в базисе $e'$, если\\
+        $\begin{cases}
+            e_1' = e_1 - e_2\\
+            e_2' = e_1 + e_3\\
+            e_3' = e_1 + e_2 + e_3
+        \end{cases}$\\
+        $B_e = \begin{pmatrix}
+            1 & 2 & 3\\
+            4 & 5 & 6\\
+            7 & 8 & 9
+        \end{pmatrix}$\\
+        $C = \begin{pmatrix}
+            1 & 1 & 1\\
+            -1 & 0 & 1\\
+            0 & 1 & 1
+        \end{pmatrix}$\\
+        $B_{e'} = C^T B_e C = \begin{pmatrix}
+            0 & -6 & -9\\
+            -2 & 20 & 30\\
+            -3 & 30 & 45
+        \end{pmatrix}$ - ответ.
+        \item[Номер 7.] $q(x) = x_1^2 + 2x_1 x_2 + 2x_2^2 - 6x_1 x_3 + 4x_2 x_3 - x_3^2$ - квадратичная форма\\
+        Построить ассоциированую (или полярную) симметричную билинейную форму\\
+        $A = \begin{pmatrix}
+            1 & 1 & -3\\
+            1 & 2 & 2\\
+            -3 & 2 & -1
+        \end{pmatrix} = B\Rightarrow\\
+        \Rightarrow b(x,\ y) = x_1y_1 + x_1 y_2 - 3x_1y_3 + x_2 y_1 + 2x_2 y_2 + 2x_2 y_3 - 3x_3 y_1 + 2x_3y_2 - \\ -x_3 y_3$ - ответ\\
+        $b(x,\ y) = \frac{1}{2}\big[ q(x + y) - q(x) - q(y) \big]$
+        \item[Пример:] $q(x) = x_1 x_2 + x_1 x_3\\
+        A = \begin{pmatrix}
+            0 & \frac{1}{2} & \frac{1}{2}\\
+            \frac{1}{2} & 0 & 0\\
+            \frac{1}{2} & 0 & 0
+        \end{pmatrix}\\
+        q(x) = x^T A x,\ A' = C^T A C$\\
+        \[\text{Критерий Сильвестра}\]
+        Исследовать на положительную и отрицательную определённость при различных $\lambda \in \mathbb{R}$.\\
+        $\begin{pmatrix}
+            2 & \lambda & 3\\
+            \lambda & 2 & 1\\
+            3 & 1 & 1
+        \end{pmatrix}\Rightarrow \begin{cases}
+            
+            \Delta_1 = 2 > 0\\
+            \Delta_2 = 4 - \lambda^2 = (2 - \lambda)(2 + \lambda)\\
+            \Delta_3 = \lambda^2 + 6\lambda - 16 < 0
+        \end{cases}$ Ответ: не является положительно определённой и не является отрицательно определённой.
+    \end{enumerate}
+    \[\textbf{Семинар 10 апреля}\]
+    \begin{enumerate}
+        \item[1.] Найти все значения параметра $a$, при которых квадратичная форма
+        \begin{enumerate}
+            \item[а.] Положительно определена.
+            \item[б.] Отрицательно определена. 
+        \end{enumerate}
+        $q(x,\ y,\ z) = x^2 + 4y^2 + 3z^2 + 2axy + (2 + 4a)yz\\
+        A = \begin{pmatrix}
+            1 & a & 0\\
+            a & 4 & 1 + 2a\\
+            0 & 1 + 2a & 3
+        \end{pmatrix}$
+        $\Delta_1 = 1 > 0\\
+        \Delta_2 = 4 - a^2 = (2 - a)(2 + a)\\
+        \Delta_3 = \det A = -7(a + 1)(a - \frac{11}{7})$\\
+        Положительная определённость:\\
+        $\left.\begin{matrix}
+            \Delta_1 > 0\\
+            \Delta_2 > 0\\
+            \Delta_3 > 0
+        \end{matrix}\right\}\Rightarrow a\in (-1,\ \frac{11}{7})$\\
+        Отрицательная определённость:\\
+        $\left. \begin{matrix}
+            \Delta_1 < 0\\
+            \Delta_2 > 0\\
+            \Delta_3 < 0
+        \end{matrix}\right\}\Rightarrow a\in \emptyset$
+        \item[2.] Исследовать квадратичную форму на положительную и отрицательную определённость в зависимости от параметра:\\
+        $q(x) = (\lambda - 1)x_1^2 + (2\lambda - 2)x_1 x_2 - 2\lambda x_1 x_3 + 2\lambda x_2^2 - 2\lambda x_2 x_3 + (\lambda - 2)x_3^2\\
+        A = \begin{pmatrix}
+            \lambda - 1 & \lambda - 1 & -\lambda\\
+            \lambda - 1 & 2\lambda & -\lambda\\
+            -\lambda & -\lambda & \lambda - 2
+        \end{pmatrix}\\
+        \left.\begin{matrix}
+            \Delta_1 = \lambda - 1\\
+            \Delta_2 = (\lambda - 1)(2\lambda - (\lambda - 1)) = \lambda^2 - 1\\
+            \Delta_3 = -(\lambda + 1)(\lambda - \frac{2}{3})
+        \end{matrix}\right\}\Rightarrow$ положительной определённости нет. Отрицательная при $\lambda < -1$. (Может быть неправильно посчитал).
+    \end{enumerate}
+        \[\text{Метод Лагранжа}\]
+        \begin{enumerate}
+            \item[3.] Найти нормальный вид и невырожденное линейное преобразование, приводящее к этому виду. Также опредеелить ранг и индексы инерции.
+            \[q(x) = x_1^2 + 5x^2_2 - 4x_3^2 + 2x_1x_2 - 4x_1x_3\]
+            Вынесем $x_1$:
+            \[q(x) = \underline{x_1}^2 + 5x^2_2 - 4x_3^2 + \underline{2x_1x_2} - \underline{4x_1x_3} =\]
+            \[x_1^2 + 2x_1(x_2 - 2x_3) - x_2^2 + 4x_2x_3 - 4x_3^2 + (x_2 - 2x_3)^2 + 5x_2^2 - 4x_3^2 + (x_2 - 2x_3)^2 + 5x_2^2 - 4x_3^2=\]
+            \[=(x_1 + (x_2 - 2x_3))^2 + 4x^2_2 - 8x_3^2 + 4x_2x_3 = (x_1 + (x_2 - 2x_3))^2 + (2x_2 + x_3)^2 - 9x_3^3 =\]
+            \[y_1^2 + y_2^2 + y_3^2\]
+            Ранг равен 3, $i_+ = 2,\ i_- = 1$\\
+            $\begin{cases}
+                y_1 = x_1 + x_2 - 2x_3\\
+                y_2 = 2x_2 + x_3\\
+                y_3 = 3x 
+            \end{cases}\quad C_{y\rightarrow x} \begin{pmatrix}
+                1 & 1 & -2\\
+                0 & 2 & 1\\
+                0 & 0 & 3
+            \end{pmatrix}$ - матрица перехода.
+            \item[4.] Привести квадратичную форму к нормальному виду. Найти $\Rg$, сигнатуру и матрицу перехода от старого базиса к новому.\\
+            \[q(x) = -2x_1 x_3 - 2x_2 x_3 + x_3^2\]
+            \[x^2_3 - 2x_3(x_1 + x_2) + (x_1 + x_2)^2 - (x_1 + x_2)^2\]
+            \[(x_3 - (x_1 + x_2))^2\]
+            \[X = C_{y\rightarrow x} Y\]
+            \[C_{y\rightarrow x} = \begin{pmatrix}
+                -1 & -1 & 1\\
+                1 & 1 & 0\\
+                1 & 0 & 0
+            \end{pmatrix}\Rightarrow C_{x\rightarrow x} = \frac{1}{-1}\begin{pmatrix}
+                0 & 0 & -1\\
+                0 & -1 & -1\\
+                -1 & 1 & 0
+            \end{pmatrix}^T = \begin{pmatrix}
+                0 & 0 & 1\\
+                0 & 1 & -1\\
+                1 & 1 & 0
+            \end{pmatrix}\]
+            \item[5.] $q(x) = x_1  x_2 + x_2 x_3 + x_1 x_3\\
+            \begin{cases}
+                x_1 = y_1 + y_2\\
+                x_2 = y_1 - y_2\\
+                x_3 = y_3
+            \end{cases}$
+            \[y_1^2 - y_2^2 + y_1y_3 - y_2 y_3 + y_1y_3 + y_2 y_3\]
+            \[(y_1 + y_3)^2 - y_2^2 - y_3^2\]
+            \[\begin{cases}
+                z_1 = y_1 + y_3\\
+                z_2 = y_2\\
+                z_3 = y_3
+            \end{cases}\Rightarrow z = \begin{pmatrix}
+                1 & 0 & 1\\
+                0 & 1 & 0\\
+                0 & 0 & 1
+            \end{pmatrix}\]
+            \[i_- = 2,\ i_+ = 1,\ \Rg = 3\]
+            \[\begin{cases}
+                x = C_1 y\\
+                z = C_2 y
+            \end{cases}
+            ,\ y = C_2^{-1}z \Rightarrow x = C_1 y = C_1 C_2^{-1} z = C_3 z\]
+            \[C_3 = \begin{pmatrix}
+                1 & 1 & 0\\
+                1 & -1 & 0\\
+                0 & 0 & 1
+            \end{pmatrix}\cdot \begin{pmatrix}
+                1 & 0 & 1\\
+                0 & 1 & 0\\
+                0 & 0 & 1
+            \end{pmatrix}^{-1} =\]
+            \[ =\begin{pmatrix}
+                1 & 1 & 0\\
+                1 & -1 & 0\\
+                0 & 0 & 1
+            \end{pmatrix}\cdot \begin{pmatrix}
+                1 & 0 & 0\\
+                0 & 1 & 0\\
+                -1 & 0 & 1
+            \end{pmatrix}^{T} = \begin{pmatrix}
+                1 & 1 & -1\\
+                1 & -1 & -1\\
+                0 & 0 & 1
+            \end{pmatrix}\]
+            \item[6.] Существует ли невырожденное линейное преобразование, переводящее квадратичную форму $f$ в квадратичную форму $g$? Если да, то найти бы одно.
+            \[f(x) = -2x_1 x_3 - 2x_2x_3 + x_3^2,\ g(y) = 4y_1^2 - 2y_1 y_3\]
+            $f(x) = f(z) = z_1^2 - z_2^2\\
+            \begin{cases}
+                z_1 = -x_1 - x_2 + x_3\\
+                z_2 = x_1 + x_2\\
+                z_3 = x_1
+            \end{cases},\ z = C_1 x,\quad C_1 = \begin{pmatrix}
+                -1 & -1 & 1\\
+                1 & 1 & 0\\
+                1 & 0 & 0
+            \end{pmatrix}\\
+            g(y) = 4y_1^2 - 2y_1 y_3 = \big( (2y_1)^2+ 2\cdot 2y_1 \frac{1}{2}y_3 + \frac{1}{4} y_3^2 \big) - \frac{1}{4}y^2_3 = \\
+            = (2y_1 + \frac{1}{2}y_3)^2- (\frac{1}{2}y_3)^2\\
+            \begin{cases}
+                z_1 = 2y_1 + \frac{1}{2} y_3\\
+                z_2 = \frac{1}{2} y_3\\
+                z_3 = y_2
+            \end{cases},\ z = C_2 y\Rightarrow C_2 = \begin{pmatrix}
+                2 & 0 & -\frac{1}{2}\\
+                0 & 0  &\frac 1 2\\
+                0 & 1 & 0
+            \end{pmatrix}$\\
+            надо $x = C_3 y$. Имеем $\begin{cases}
+                z = C_1 x\\
+                z = C_2 y
+            \end{cases}\Rightarrow x = C_1^{-1} z\Rightarrow\\
+            \Rightarrow (*)$ есть $x = C_1^{-1} C_2 \cdot y = \begin{pmatrix}
+                0 & 1 & 0\\
+                0 & -1 & \frac 1 2 \\
+                2 & 0 & 0
+            \end{pmatrix}y \leftarrow$ матрица перехода.
+        \end{enumerate}
+        \[\textbf{Семинар 17 апреля.}\]
+        $T_{e\rightarrow e} = \{t_{i\, j}\} = \begin{cases}
+            e'_1 = t_{1\, 1}e_1 + \dots + t_{n\, 1}e_n\\
+            \dots\\
+            e'_n = t_{1\, n}e_1 + \dots + t_{n\, n}e_n
+        \end{cases}$
+        \[\text{Симметричный Гаусс}\]
+        \begin{enumerate}
+            \item[Задача 1.] Привести $q(x)$ к нормальному виду, найти $\Rg,\ (i_+,\ i_-)$, матричный переход от старого базиса к новому.\\
+            $q(x) = -2x_1x_3 - 2x_2 x_3 + x_3^2$\\
+            1 способ. Метод Лагранжа (был на прошлом семинаре).\\
+            $q(x) = y_1^2 - y_2^2\\
+            \begin{cases}
+                y_1 = -x_1 - x_2 + x_3\\
+                y_2 = x_1 + x_2\\
+                y_3 = x_1
+            \end{cases}\Leftrightarrow y = Cx\\
+            C = \begin{pmatrix}
+                -1 & -1 & 1\\
+                1 & 1 & 0\\
+                1 & 0 & 0
+            \end{pmatrix}$\\
+            Третью строчку мы выбрали так, чтобы матрица $C$ была невырождена.\\
+            $x^f = T_{f \rightarrow e} x^e$\\
+            Немного фактов с семинара:
+            $1.\ f = e\cdot T_{e\rightarrow f}$ - для матриц\\
+            $2. \begin{cases}
+                x = e\cdot x^e\\
+                x = f\cdot x^f
+            \end{cases}$\\
+            $C_{x\rightarrow y} = C^{-1}$
+            2 способ. Симметричный Гаусс.\\
+            Матрица квадратичной формы $A = \begin{pmatrix}
+                0 & 0 & -1\\
+                0 & 0 & -1\\
+                -1 & -1 & 1
+            \end{pmatrix}$\\
+            Цель: привести $A$ к диагональному виду\\
+            $\left(\begin{matrix}
+                0 & 0 & -1\\
+                0 & 0 & -1\\
+                -1 & -1 & 1
+            \end{matrix}\ \middle|\ \begin{matrix}
+                1 & 0 & 0\\
+                0 & 1 & 0\\
+                0 & 0 & 1
+            \end{matrix} \right)\sim \left(\begin{matrix}
+                1 & -1 & -1\\
+                -1 & 0 & 0\\
+                -1 & 0 & 0
+            \end{matrix}\ \middle|\ \begin{matrix}
+                0 & 0 & 1\\
+                0 & 1 & 0\\
+                1 & 0 & 0
+            \end{matrix} \right)\sim\\
+            \sim \left(\begin{matrix}
+                1 & 0 & -1\\
+                0 & -1 & 1\\
+                -1 & -1 & 0
+            \end{matrix}\ \middle|\ \begin{matrix}
+                0 & 0 & 1\\
+                0 & 1 & 1\\
+                1 & 0 & 0
+            \end{matrix} \right)\sim \left(\begin{matrix}
+                1 & 0 & 0\\
+                0 & -1 & -1\\
+                0 & -1 & -1
+            \end{matrix}\ \middle|\ \begin{matrix}
+                0 & 0 & 1\\
+                0 & 1 & 1\\
+                1 & 0 & 1
+            \end{matrix} \right) \sim\\
+            \sim \left(\begin{matrix}
+                1 & 0 & 0\\
+                0 & -1 & 0\\
+                0 & 0 & 0
+            \end{matrix}\ \middle|\ \begin{matrix}
+                0 & 0 & 1\\
+                0 & 1 & 1\\
+                1 & -1 & 0
+            \end{matrix} \right) = q(y) = y_1^2 - y_2^2$. Правая матрица будет $C_{x\rightarrow y}$ - матрица перехода.\\
+            Важное замечание: мы можем применять операции к столбцам левой матрицы, не затрагивая правую.
+        \end{enumerate}
+        \[\text{Линейные операторы}\]
+        Фиксируем базис $e = (e_1,\dots,\ e_n)$ в $V$\\
+        $\varphi:\ V\rightarrow V\\
+        1.\ \forall x\in V$:
+        \[\big(\varphi(x)\big)^e = A_e x^e\]
+        $2.$ Пусть $T_{e\rightarrow f}$ - матрица перехода к $f$\\
+        $A_f = T^{-1} A_e T = T_{f\rightarrow e}A_e T_{e\rightarrow f}$\\
+        $3.$ $\dim \ker \varphi + \dim \operatorname{Im}\varphi = \dim V$
+        \begin{enumerate}
+            \item[Задача 2.] Найти размерности и базисы $\ker$ и $\operatorname{Im}$ линейного оператора, задаваемого матрицей $A$ в некотором базисе $\mathbb{R}^4$.\\
+            $A = \begin{pmatrix}
+                1 & 1 & 0 & 1\\
+                2 & 1 & 1 & -1\\
+                1 & 2 & -1 & 4
+            \end{pmatrix}\sim \begin{pmatrix}
+                1 & 1 & 0 & 1\\
+                0 & -1 & 1 & -3\\
+                0 & 1 & -1 & 3
+            \end{pmatrix}\sim \begin{pmatrix}
+                1 & 1 & 0 & 1\\
+                0 & -1 & 1 & -3\\
+                0 & 0 & 0 & 0
+            \end{pmatrix}\\
+            \Rg A = \dim\operatorname{Im} \varphi\\
+            \dim \ker\varphi = n - r = 2$\\
+            \item[Задача 3.] Доказать, что поворот плоскости на угол $\alpha$ - линейный оператор в $V_2\cong \mathbb{R}^2$ найти его матрицу в базисе $\{i,\ j\}$\\
+            1. $\forall \lambda \in \mathbb{R}\ \varphi(\lambda x) = \lambda \varphi(x)$\\
+            2. $\varphi(x_1 + x_2) = \varphi(x_1) + \varphi(x_2)$ поворачивается на угол $\alpha$ параллелограмм на векторах $x_1,\ x_2\Rightarrow$ их сумма (диагональ этого параллелограмма) также поворачивается на угол $\alpha$. Значит это линейный оператор.\\
+            Рассмотрим $\varphi(i) = \varphi\begin{pmatrix}
+                1\\
+                0
+            \end{pmatrix} = \cos \alpha i + \sin \alpha j\\
+            \varphi(j) = \varphi\begin{pmatrix}
+                0\\
+                1
+            \end{pmatrix} = -\sin \alpha i + \cos \alpha j\Rightarrow\\
+            \Rightarrow  A = \begin{pmatrix}
+                \cos \alpha & -\sin \alpha\\
+                \sin \alpha & \cos \alpha
+            \end{pmatrix}$ - матрица поворота
+            \item[4.] Является ли преобразование линейным оператором. Если да, то найти его матрицу.\\
+            a. $\varphi(x) = (x_2 + x_3,\ 2x_1 + x_3,\ 3x_1 - x_2 + x_3)\\
+            \begin{pmatrix}
+                \varphi(x_1)\\
+                \varphi(x_2)\\
+                \varphi(x_3)
+            \end{pmatrix} = \begin{pmatrix}
+                x_2 + x_3\\
+                2x_1 + x_3\\
+                3x_1 - x_2 + x_3
+            \end{pmatrix} = \begin{pmatrix}
+                0 & 1 & 1\\
+                2 & 0 & 1\\
+                3 & -1 & 1
+            \end{pmatrix}\begin{pmatrix}
+                x_1\\
+                x_2\\
+                x_3
+            \end{pmatrix}$\\
+            То есть $\varphi(x)^T = A\cdot x^T\Rightarrow\\
+            \Rightarrow \varphi(\alpha x + \beta y) = \alpha Ax + \beta Ay\Rightarrow $ линейный оператор.\\
+            b. $\varphi(x) = (x_1,\ x_2 + 1,\ x_3 + 2)$. Не уважает сложение векторов, значит не является линейным оператором.
+            \item[5.] Доказать, что существует единственный линейный оператор, переводящий векторы $a_1,\ a_2,\ a_3$ в векторы $b_1,\ b_2,\ b_3$. Найти его матрицу.\\
+            $a_1 = \begin{pmatrix}
+                2 & 3 & 5
+            \end{pmatrix},\quad b_1 = \begin{pmatrix}
+                1 & 1 & 1
+            \end{pmatrix}\\
+            a_2 = \begin{pmatrix}
+                0 & 1 & 2
+            \end{pmatrix},\quad b_2 = \begin{pmatrix}
+                1 & 1 & -1
+            \end{pmatrix}\\
+            a_3 = \begin{pmatrix}
+                1 & 0 & 0
+            \end{pmatrix},\quad b_3 = \begin{pmatrix}
+                2 & 1 & 2
+            \end{pmatrix}\\$
+            Утверждение: существует единственный линейный оператор в $\mathbb{R}^n$, переводящий линейно независимые векторы $a_1,\dots,\ a_n$ в любые заданные векторы $b_1,\dots,\ b_n$\\
+            $\varphi(a_1) = b_1\\
+            \dots,\ \text{дано}\\
+            \varphi(a_n) = b_n$\\
+            $\forall x\in V\quad a_1,\dots,\ a_n$ - базис $\Rightarrow\\
+            \Rightarrow x = x_1 a_1 + \dots + x_n a_n,\ \text{единственное разложение}\\
+            \varphi(x) = x_1 \underset{b_1}{\underbrace{\varphi(a_1)}} + \dots + x_n \underset{b_n}{\underbrace{\varphi(a_n)}} = \DS \sum_{i = 1}^{n} x_i b_i$\\
+            Пусть $A = (a_1,\dots,\ a_n),\ B = (b_1,\dots,\ b_n)\Rightarrow\\
+            \Rightarrow \Phi_a = BA^{-1}$, где $\Phi$ - матрица линейного оператора $\varphi$ базиса $a$\\
+            $b_1 = \varphi(a_1) = \Phi_a \cdot a_1\\
+            \dots\\
+            b_n = \varphi(a_n) = \Phi_n\cdot a_n\Rightarrow B = \Phi_a A\Rightarrow \Phi_a = B\cdot A^{-1}$
+        \end{enumerate}
+        \[\textbf{Семинар 24 апреля}\]
+        \begin{enumerate}
+            \item[\textbf{Задача 1:}]
+        \end{enumerate}
+        Показать, что умножение квадратной матрицы $2$-го порядка на данную матрицу $\begin{pmatrix}
+            a & b\\
+            c & d
+        \end{pmatrix}$ является линейным оператором и найти его матрицу в базисе
+        \[e_1 = \begin{pmatrix}
+            1 & 0\\
+            0 & 0
+        \end{pmatrix},\ e_2 = \begin{pmatrix}
+            0 & 1\\
+            0 & 0
+        \end{pmatrix},\ e_3 = \begin{pmatrix}
+            0 & 0\\
+            1 & 0
+        \end{pmatrix},\ e_4 = \begin{pmatrix}
+            0 & 0\\
+            0 & 1
+        \end{pmatrix}\]
+        $\begin{pmatrix}
+            a_1 & b_1\\
+            c_1 & d_1
+        \end{pmatrix}\cdot \begin{pmatrix}
+            a_2 & b_2\\
+            c_2 & d_2
+        \end{pmatrix} = \begin{pmatrix}
+            a_1 a_2 + b_1 c_2 & a_1 b_2 + b_1 d_2\\
+            c_1 a_2 + d_1 c_2 & c_1 b_2 + d_2 d_2
+        \end{pmatrix}\\
+        \varphi(x) = x\cdot A\\
+        \varphi(\alpha x + \beta y) = (\alpha x + \beta y)A = \alpha xA + \beta y A = \alpha \varphi(x) + \beta \varphi(y)\\
+        \varphi(e_1) = \begin{pmatrix}
+            1 & 0\\
+            0 & 0
+        \end{pmatrix}\cdot \begin{pmatrix}
+            a & b\\
+            c & d
+        \end{pmatrix} = \begin{pmatrix}
+            a & b\\
+            0 & 0
+        \end{pmatrix} = \begin{pmatrix}
+            a & 0\\
+            0 & 0
+        \end{pmatrix} + \begin{pmatrix}
+            0 & b\\
+            0 & 0
+        \end{pmatrix} = ae_1 + be_2\\
+        \varphi(e_2) = \begin{pmatrix}
+            0 & 1\\
+            0 & 0
+        \end{pmatrix} \cdot \begin{pmatrix}
+            a & b\\
+            c & d
+        \end{pmatrix} = \begin{pmatrix}
+            c & a\\
+            0 & 0
+        \end{pmatrix} = c e_1 + a e_2\\
+        \varphi(e_3) = \begin{pmatrix}
+            0 & 0\\
+            1 & 0
+        \end{pmatrix}\cdot \begin{pmatrix}
+            a & b\\
+            c & d
+        \end{pmatrix} = a e_3 + b e_4\\
+        \varphi(e_4) = \begin{pmatrix}
+            0 & 0\\
+            0 & 1
+        \end{pmatrix} \cdot \begin{pmatrix}
+            a & b\\
+            c & d
+        \end{pmatrix} = c e_3 + a e_4\\
+        \mathcal{A} = \begin{pmatrix}
+            a & c & 0 & 0\\
+            b & a & 0 & 0\\
+            0 & 0 & a & c\\
+            0 & 0 & b & a
+        \end{pmatrix}$
+        \begin{enumerate}
+            \item[\textbf{Задача 2:}]
+        \end{enumerate}
+        Показать, что дифференцирование является линейным оператором в пространстве всех многочленов $\deg \leq n\ \big(R_n[x]\big)$\\
+        Найти матрицу:
+        \begin{enumerate}
+            \item[а)] $1,\ x,\ x^2,\dots,\ x^n$
+        \end{enumerate}
+        $\varphi\big(\alpha f_n(x) + \beta g_n(x)\big) = \big(\alpha f_n(x) + \beta g_n (x)\big)' = \alpha f'_n(x) + \beta g'_n(x) =\\
+        =\alpha \varphi\big(f_n(x)\big) + \beta \varphi\big(g_n(x)\big)$\\
+        $e_1 = 1,\\
+        \varphi(1) = 0\cdot 1 + 0\cdot x + \dots + 0\cdot x^n\\
+        \varphi(x) = 1\cdot 1 + 0\cdot x + \dots 0\cdot x^n\\
+        \vdots\\
+        \varphi(x^n) = 0\cdot 1 + 0\cdot x + \dots + nx^{n - 1} + 0\cdot x^n\\
+        A = \begin{pmatrix}
+            0 & 1 & 0 & \dots & 0\\
+            0 & 0 & 2 & \dots & 0\\
+            0 & 0 & 0 & \dots & 0\\
+            \vdots & \vdots & \vdots & \ddots & \vdots\\
+            0 & 0 & 0 & \dots & 0\\
+            0 & 0 & 0 & \dots & n\\
+            0 & 0 & 0 & \dots & 0
+        \end{pmatrix}$
+        \begin{enumerate}
+            \item[б)] $1,\ x - a,\ (x - a)^2,\dots,\ (x - a)^n$
+        \end{enumerate}
+        Раскладываем в ряд Тейлора (на семинаре не решали).\newpage
+        \begin{enumerate}
+            \item[\textbf{Задача 3:}]
+        \end{enumerate}
+        В базисе $e_1 = \begin{pmatrix}
+            5\\
+            -2
+        \end{pmatrix},\ e_2 = \begin{pmatrix}
+            -2\\
+            1
+        \end{pmatrix}$.\\
+        Линейный оператор $\varphi$ имеет матрицу $A = \begin{pmatrix}
+            2 & 0\\
+            2 & 1
+        \end{pmatrix}$\\
+        В какое множество под действием $\varphi$ перейдёт прямая $l$:\\
+        $x_1 - 2x_2 = 1$?\\
+        Запишем точки, принадлежащие этой прямой:\\
+        $(1,\ 0) + \left(2,\ 1\right)k,\ \left(1 + 2k,\ k\right)\\
+        (1,\ 0) - \left(0,\ -\dfrac{1}{2}\right) = \overline{a}$\\
+        Потребуется $https://hentaihaven.net/$ матрица перехода от изначального базиса к стандартному.\\
+        $\begin{pmatrix}
+            5 & -2\\
+            -2 & 1
+        \end{pmatrix} = T_{S\rightarrow N},\ T_{N\rightarrow S} = \begin{pmatrix}
+            1 & 2\\
+            2 & 5
+        \end{pmatrix}\\
+        A_S' = T_{S\rightarrow N}A T_{N\rightarrow S} = \begin{pmatrix}
+            5 & -2\\
+            -2 & 1
+        \end{pmatrix}\cdot \begin{pmatrix}
+            2 & 0\\
+            2 & 1
+        \end{pmatrix}\cdot \begin{pmatrix}
+            1 & 2\\
+            2 & 5
+        \end{pmatrix} = \begin{pmatrix}
+            2 & 2\\
+            0 & 1
+        \end{pmatrix}\\
+        \varphi\begin{pmatrix}
+            1 + 2k\\
+            k
+        \end{pmatrix} = \begin{pmatrix}
+            2 & 2\\
+            0 & 1
+        \end{pmatrix}\cdot \begin{pmatrix}
+            1 + 2k\\
+            k
+        \end{pmatrix} = \begin{pmatrix}
+            2 + 6k\\
+            k
+        \end{pmatrix}$
+        \begin{enumerate}
+            \item[\textbf{Задача 4:}]
+        \end{enumerate}
+        Линейный оператор $\varphi$ в базисе $a_1 = (1,\ 2)^T,\ a_2 = (2,\ 3)^T$\\
+        Имеет матрицу $\begin{pmatrix}
+            3 & 5\\
+            4 & 3
+        \end{pmatrix}$\\
+        Линейный оператор $\psi$ в базисе $b_1 = (3,\ 1),\ b_2 = (4,\ 2)$\\
+        Найти матрицу линейного оператора $\varphi + \psi$ в базисе $\{b_1,\ b_2\}$\\
+        $\Phi_b = T_{b\rightarrow a} \Phi_a\cdot T_{a\rightarrow b} = \begin{pmatrix}
+            40 & 38\\
+            -\frac{71}{2} & -34
+        \end{pmatrix}\\
+        \Psi_b$ - дано
+        $\Phi_b + \Psi_b = \begin{pmatrix}
+            44 & 44\\
+            -\frac{59}{2} & -25
+        \end{pmatrix}$
+        \[\text{Алгоритм диагонализации}\]
+        \begin{enumerate}
+            \item[\textbf{Задача 1:}]
+        \end{enumerate}
+        Диагонализируем ли линейный оператор с матрицей $A = \begin{pmatrix}
+            1 & -1\\
+            1 & 1
+        \end{pmatrix}$
+        \begin{enumerate}
+            \item[а)] над $\mathbb{R}$
+            \item[б)] над $\mathbb{C}$ 
+        \end{enumerate}
+        1. Ищем характеристический многочлен:\\
+        $\chi_A(\lambda) = \begin{vmatrix}
+            1 - \lambda & -1\\
+            1 & 1 - \lambda
+        \end{vmatrix} = (1 - \lambda)^2 + 1 = \lambda^2 - 2\lambda + 2 = (\lambda - 1)^2 + 1$ значит вещественных корней нет, значит над $\mathbb{R}$ не диагонализируемая.\\
+        $\lambda_1,\ \lambda_2 = \dfrac{2 \pm 2i}{2} = \left[ \begin{gathered}
+            1 - i\\
+            1 + i
+        \end{gathered}\right.\Rightarrow $ диагонализируем над $\mathbb{C}$. Так как $n = 2 = \dim V$ различных собственных значений.\\
+        $\Lambda = \begin{pmatrix}
+            1 - i & 0\\
+            0 & 1 + i
+        \end{pmatrix}$ - диагональный вид.\\
+        2. Ищем собственные векторы.\\
+        $\lambda_1 = 1 - i\\
+        B = A - \lambda_1 E = \begin{pmatrix}
+            1 - (1 - i) & -1\\
+            1 & 1 - (1 + i)
+        \end{pmatrix} = \begin{pmatrix}
+            i & -1\\
+            1 & i
+        \end{pmatrix} \sim \begin{pmatrix}
+            1 & i\\
+            0 & 0
+        \end{pmatrix}\\
+        x_1 = -ix_2$
+        \[\begin{tabular}{c | c}
+            & $y_1$\\
+            \hline
+            $x_1$ & $-i$\\
+            $x_2$ & $1$
+        \end{tabular}\]
+        $\lambda_2 = 1 + i\\
+        B \sim \begin{pmatrix}
+            1 & -i\\
+            0 & 0
+        \end{pmatrix},\ T = (y_1,\ y_2) = \begin{pmatrix}
+            -i & i\\
+            1 & 1
+        \end{pmatrix}$
+        \[\begin{tabular}{c | c}
+            & $y_2$\\
+            \hline
+            $x_1$ & i\\
+            $x_2$ & 1 
+        \end{tabular}\]
+        $A = T\Lambda T^{-1},\ T_{A\rightarrow \Lambda} = \begin{pmatrix}
+            -i & i\\
+            1 & 1
+        \end{pmatrix}$\\
+        б) $A = \begin{pmatrix}
+            1 & -2\\
+            0 & 1
+        \end{pmatrix}$ - диагонализируем ли линейный оператор?
+        $\chi_A(\lambda) = \begin{vmatrix}
+            1 - \lambda & -2\\
+            0 & 1 - \lambda
+        \end{vmatrix} = (1 - \lambda)^2\Rightarrow \lambda_1 = 1,\ m_1 = 2$\\
+        Критерий диагонализируемости:\\
+        \begin{enumerate}
+            \item $n = \dim V$ собственных значений
+            \item $\forall \lambda_i\ m_i = s_i$ (алгебраическая кратность = геометрической)
+        \end{enumerate}
+        $\begin{pmatrix}
+            0 & -2\\
+            0 & 0
+        \end{pmatrix},\ n - r = 2 - 1 = 1 = s \neq m\Rightarrow$ недиагонализируема.
+        \[\textbf{Семинар 15 мая}\]
+        \subsubsection*{Задача 1}
+        Можно ли привести матрицу линейного оператора к диагональному виду. Если да, то найти разложение $A = T\Lambda T^{-1}$.
+        \[A = \begin{pmatrix}
+            -1 & 3 & -1\\
+            -3 & 5 & -1\\
+            -3 & 3 & 1
+        \end{pmatrix}\]
+        $T$ - матрица перехода от исходного базиса к базису из собственных векторов.\\
+        $\Lambda = T^{-1} A T$\\
+        Решал у доски, коспекта не будет.
+        \subsubsection*{Задача 2.}
+        Всего 10000 жителей. Каждый день $15\%$ здоровых заболевают, а $10\%$ больных выздоравливают (можно болеть повторно). В первый день заболело 100 человек. Как будет вести себя количество больных с ростом времени.
+        Пусть $\begin{pmatrix}
+            x - \text{здоровые}\\
+            y - \text{больные}
+        \end{pmatrix}\Rightarrow v_0\begin{pmatrix}
+            x_0\\
+            y_0
+        \end{pmatrix} = \begin{pmatrix}
+            9900\\
+            100
+        \end{pmatrix}\\
+        \varphi\begin{pmatrix}
+            x\\
+            y
+        \end{pmatrix} = \begin{pmatrix}
+            x - 0,15x + 0,1 y\\
+            y - 0,1 y + 0,15x
+        \end{pmatrix} = \begin{pmatrix}
+            0,85 x + 0,1 y\\
+            0,15 x + 0,9 y
+        \end{pmatrix} = \begin{pmatrix}
+            0,85 & 0,1\\
+            0,15 & 0,9
+        \end{pmatrix} \begin{pmatrix}
+            x\\
+            y
+        \end{pmatrix}\Rightarrow\\
+        \Rightarrow A = \begin{pmatrix}
+            \frac{17}{20} & \frac{1}{10}\\
+            \frac{3}{20} & \frac{9}{10}
+        \end{pmatrix},\ \chi_A(\lambda) = (\lambda - 1)(\lambda - \frac{3}{4})\Rightarrow \Lambda = \begin{pmatrix}
+            1 & 0\\
+            0 & \frac{3}{4}
+        \end{pmatrix}\\
+        \DS \lim_{n \to \infty}\varphi^n\begin{pmatrix}
+            x_0\\
+            y_0
+        \end{pmatrix} = \lim_{n\to \infty} A^n\begin{pmatrix}
+            x_0\\
+            y_0
+        \end{pmatrix},\ A = T\Lambda T^{-1}\\
+        A^n = (T\Lambda T^{-1})^n = T\Lambda T^{-1} T\Lambda T^{-1}\dots T\Lambda T^{-1} = T\Lambda^n T^{-1} = T\begin{pmatrix}
+            1^n & 0\\
+            0 & \left(\frac{3}{4}\right)^n
+        \end{pmatrix}T^{-1}$\\
+        $\lambda_1 = 1\\
+        B = A - E = \begin{pmatrix}
+            -\frac{3}{20} & \frac{1}{10}\\
+            \frac{3}{20} & -\frac{1}{10}
+        \end{pmatrix}\sim\begin{pmatrix}
+            1 & -\frac{2}{3}\\
+            0 & 0
+        \end{pmatrix}\Rightarrow v_1 = \begin{pmatrix}
+            2\\
+            3
+        \end{pmatrix}\\
+        \lambda_2 = \frac{3}{4}\\
+        B = A - \frac{3}{4}E = \begin{pmatrix}
+            \frac{1}{10} & \frac{1}{10}\\
+            \frac{3}{20} & \frac{3}{20}
+        \end{pmatrix} \sim \begin{pmatrix}
+            1 & 1\\
+            0 & 0
+        \end{pmatrix}\Rightarrow v_2 = \begin{pmatrix}
+            -1\\
+            1
+        \end{pmatrix}\Rightarrow\\
+        \Rightarrow T = \begin{pmatrix}
+            2 & -1\\
+            3 & 1
+        \end{pmatrix},\ T^{-1} = \frac{1}{5}\begin{pmatrix}
+            1 & 1\\
+            -3 & 2
+        \end{pmatrix}\\
+        A^* = \DS\lim_{n\to \infty} A^n = \begin{pmatrix}
+            2 & -1\\
+            3 & 1
+        \end{pmatrix} \begin{pmatrix}
+            1 & 0\\
+            0 & 0
+        \end{pmatrix}\frac{1}{5}\begin{pmatrix}
+            1 & 1\\
+            -3 & 2
+        \end{pmatrix} = \begin{pmatrix}
+            0,4 & 0,4\\
+            0,6 & 0,6
+        \end{pmatrix}\\
+        A^* \begin{pmatrix}
+            x_0\\
+            y_0
+        \end{pmatrix} = \begin{pmatrix}
+            0,4 & 0,4\\
+            0,6 & 0,6
+        \end{pmatrix} \begin{pmatrix}
+            9900\\
+            100
+        \end{pmatrix} = \begin{pmatrix}
+            4000\\
+            6000
+        \end{pmatrix}\Rightarrow$ число заболевших стабилизируется на 6000.\\
+        \Bold{Второй способ}\\
+        Найти базис из собственных векторов $\{v_1,\ v_2\} = \left\{\begin{pmatrix}
+            2\\
+            3
+        \end{pmatrix},\ \begin{pmatrix}
+            -1\\
+            1
+        \end{pmatrix}\right\}\\
+        v_0 = x_1 v_1 + x_2 v_2$ - разложим $\left(v_0 =  \begin{pmatrix}
+            x_0\\
+            y_0
+        \end{pmatrix} \right)\\
+        \DS \lim_{n\to \infty} \varphi^n = x_1 \lim_{n\to \infty} \varphi^n (v_1) + x_2 \lim_{n\to \infty} \varphi^n (v_2) = \lim_{n\to \infty} (x_1 \lambda_1^n v_1 + x_2 \lambda_2^n v_2) =$\\
+        $= \lim\limits_{n\to \infty} \left(x_1 1^n v_1 + x_2 \left(\frac{3}{4}\right)^n v_2\right) = x_1 v_1$\\
+        Найдём $x_1$:
+        \[\begin{pmatrix}
+            x_1\\
+            x_2
+        \end{pmatrix} = T^{-1} \begin{pmatrix}
+            9900\\
+            100
+        \end{pmatrix} = \frac{1}{5} \begin{pmatrix}
+            1 & 1\\
+            -3 & 2
+        \end{pmatrix}\begin{pmatrix}
+            9900\\
+            100
+        \end{pmatrix} = \begin{pmatrix}
+            2000\\
+            -5900
+        \end{pmatrix}\Rightarrow x_1 = 2000\Rightarrow\]
+        \[\Rightarrow \lim_{n\to \infty}\varphi^n (v_0) = x_1 v_1 = 2000\cdot \begin{pmatrix}
+            2\\
+            3
+        \end{pmatrix} = \begin{pmatrix}
+            4000\\
+            6000    
+        \end{pmatrix}\]
+        \subsubsection*{Задача 3.}
+        $A^{64} = \begin{pmatrix}
+            7 & -4\\
+            14 & -8
+        \end{pmatrix}^{64}\\
+        \chi_{A}(\lambda) = \begin{vmatrix}
+            7 - \lambda & -4\\
+            14 & -8 - \lambda
+        \end{vmatrix} = \lambda(\lambda  + 1)\\
+        A' = \begin{pmatrix}
+            0 & 0\\
+            0 & -1
+        \end{pmatrix}\\
+        A_0 = \begin{pmatrix}
+            7 & -4\\
+            14 & -8
+        \end{pmatrix}\sim \begin{pmatrix}
+            7 & -4\\
+            0 & 0
+        \end{pmatrix},\ v_1 = \begin{pmatrix}
+            4\\
+            7
+        \end{pmatrix}\\
+        A_{-1} = \begin{pmatrix}
+            8 & -4\\
+            14 & -7
+        \end{pmatrix} \sim \begin{pmatrix}
+            8 & -4\\
+            -2 & 1
+        \end{pmatrix}\sim \begin{pmatrix}
+            -2 & 1\\
+            0 & 0
+        \end{pmatrix},\ v_2 = \begin{pmatrix}
+            1\\
+            2
+        \end{pmatrix}\Rightarrow\\
+        \Rightarrow T = \begin{pmatrix}
+            4 & 1\\
+            7 & 2
+        \end{pmatrix}$\newpage
+        \[\text{Евклидовы пространства}\]
+        $\mathcal{E} = (V,\ g(x,\ y)),\ g$ - скалярное произведение.\\
+        Аксиомы скалярного произвдения:
+        \begin{enumerate}
+            \item[1.] Симметричность $g(x,\ y) = g(y,\ x)$
+            \item[2.] Линейность $g(\alpha x + \beta y,\ z) = \alpha g(x,\ z) + \beta g(y,\ z)$
+            \item[3.] $\forall x\in \mathcal{E}\ g(x,\ x) \geq 0\wedge g(x,\ x) = 0\Rightarrow x = 0$ 
+        \end{enumerate}
+        \[\text{Неравенство Коши-Буняковского}\]
+        $|g(x,\ y)| \leq ||x||\cdot ||y||$
+        \[\text{Неравенство треугольника}\]
+        $||x + y|| \leq ||x|| + ||y||$
+        \subsubsection*{Задача 4.}
+        $\mathcal{E} = C[a,\ b],\ \left< f,\ g\right> = \DS\int_a^b f(x) g(x)\, dx$\\
+        Проверить, что это скалярное произведение и выписать неравенство Коши-Буняковского и треугольника.\\
+        1. $\DS \int_a^b f(x) g(x)\, dx = \int_a^b g(x) f(x)\, dx$\\
+        2. $\DS \int_a^b (\alpha f_1 + \beta f_2)(x)g(x)\, dx = \alpha\int_a^b f_1 \, dx  + \beta \int_a^b f_2\, dx$
+        3. $\DS\int_a^b f^2\, dx \geq 0\wedge \int_a^b f^2\, dx = 0\Rightarrow f_1 \equiv 0$\\
+        $\left| \DS\int_a^b f\cdot g\, dx \right|^2 \leq \DS\int_a^b f^2\, dx \int_a^b g^2\,\ dx\\
+        \sqrt{\int_a^b (f + g)^2\, dx} \leq \underset{||f||}{\sqrt{\int_a^b f^2\, dx}} + \underset{||g||}{\sqrt{\int_a^b g^2\, dx}}$
+        \subsubsection*{Задача 5.}
+        Применяя процесс ортогонализации Гаусса-Шмидта построить ортонормированный базис подпространства $\mathcal{L}(a_1,\ a_2,\ a_3)$.
+        \[a_1 = \begin{pmatrix}
+            1 & 2 & 2 & -1
+        \end{pmatrix},\ a_2 = \begin{pmatrix}
+            1 & 1 & -5 & 3
+        \end{pmatrix},\ a_3 = \begin{pmatrix}
+            3 & 2 & 8 & -7
+        \end{pmatrix}\]
+        \[b_1 = a_1\]
+        \[b_2 = a_2 - c_{2,\ 1}b_1 = \begin{pmatrix}
+            1\\1\\-5\\3
+        \end{pmatrix} + \begin{pmatrix}
+            1\\2\\2\\-1
+        \end{pmatrix} = \begin{pmatrix}
+            2\\3\\-3\\2
+        \end{pmatrix},\ c_{2,\ 1} = \frac{(a_2,\ b_1)}{(b_1,\ b_1)} = -1\]
+        \[b_3 = a_3 - c_{3,\ 1}b_1 - c_{3,\ 2}b_2 = \begin{pmatrix}
+            3\\2\\8\\-7
+        \end{pmatrix} - 3\begin{pmatrix}
+            1\\2\\2\\-1
+        \end{pmatrix} + \begin{pmatrix}
+            2\\3\\-3\\2
+        \end{pmatrix} = \begin{pmatrix}
+            2\\-1\\-1\\-2
+        \end{pmatrix},\ c_{3,\ 1} = \frac{(a_3,\ b_1)}{(b_1,\ b_1)} = -1\]
+        \[c_{3,\ 2} = \frac{(a_3,\ b_2)}{(b_2,\ b_2)} = -1\]
+        Ортогональный базис:
+        \[\{b_1,\ b_2,\ b_3\} = \left\{\begin{pmatrix}
+            1\\2\\2\\-1
+        \end{pmatrix},\ \begin{pmatrix}
+            2\\3\\-3\\2
+        \end{pmatrix},\ \begin{pmatrix}
+            2\\-1\\-1\\-2
+        \end{pmatrix}\right\}\]
+        Ортонормированный базис:
+        \[\{b_1,\ b_2,\ b_3\} = \left\{\frac{1}{6}\begin{pmatrix}
+            1\\2\\2\\-1
+        \end{pmatrix},\ \frac{1}{26}\begin{pmatrix}
+            2\\3\\-3\\2
+        \end{pmatrix},\ \frac{1}{6}\begin{pmatrix}
+            2\\-1\\-1\\-2
+        \end{pmatrix}\right\}\]
+    
+\[\textbf{Семинар 22 мая}\]
+Напоминание с лекции:\\
+Ортогональное дополнение
+\[L^{\bot} = \big\{ x\in \mathcal{E} \ \big|\ \forall h\in L\ (x,\ h) = 0 \big\}\]
+\[\mathcal{E} = L\oplus L^{\bot}\Rightarrow \forall x\in \mathcal{E}\exists! h\in L\ \exists! h^{\bot} \in L^{\bot}\ x = h + h^{\bot}\]
+Факт: $\left( L^{\bot} \right)^{\bot}$
+\subsubsection*{Задача 1.}
+Проверить, что векторы образуют ортогональную систему и дополнить их до ортогонального базиса пространства.
+\[ a_1 = \begin{pmatrix}
+    1 & -2 & 2 & -3
+\end{pmatrix}^T,\ a_2 = \begin{pmatrix}
+    2 & -3 & 2 & 4
+\end{pmatrix}^T - \text{базис $L$}\]
+Тогда $L^{\bot}: = \begin{pmatrix}
+    1 & -2 & 2 & -3\\
+    2 & -3 & 2 & 4
+\end{pmatrix}\begin{pmatrix}
+    x_1\\
+    x_2\\
+    x_3\\
+    x_4
+\end{pmatrix} = 0$, то есть $L^{\bot}$ - множество решений ОСЛАУ $A^Tx = 0$, где $A = [a_1,\ a_2]$\\
+Проверим ортогональность: $(a_1,\ a_2) = 2 + 6 + 4 - 12 = 0$ ортогональны.
+$\begin{pmatrix}
+    1 & -2 & 2 & -3\\
+    2 & -3 & 2 & 4
+\end{pmatrix} \sim \begin{pmatrix}
+    1 & -2 & 2 & -3\\
+    0 & 1 & -2 & 10
+\end{pmatrix} \sim \begin{pmatrix}
+    1 & 0 & -2 & 17\\
+    0 & 1 & -2 & 10
+\end{pmatrix},\ \begin{tabular}{c|c|c}
+    & $y_1$ & $y_2$\\
+    \hline
+    $x_1$ & 2 & -17\\
+    $x_2$ & 2 & -10\\
+    $x_3$ & 1 & 0\\
+    $x_4$ & 0 & 1
+\end{tabular}$\\
+Используем метод ортогонализации Грамма-Шмидта:\\
+$b_1 = y_1 = \begin{pmatrix}
+    2\\ 2\\ 1\\ 0
+\end{pmatrix},\\ b_2 = y_2 - \dfrac{(y_2,\ b_1)}{(b_1,\ b_1)} b_1;\\
+b_2 = \begin{pmatrix}
+    -17 \\ -10 \\ 0 \\ 1
+\end{pmatrix} + \dfrac{54}{9} \begin{pmatrix}
+    2 \\ 2 \\ 1 \\ 0
+\end{pmatrix} = \begin{pmatrix}
+    -5\\
+    2\\
+    6\\
+    1
+\end{pmatrix}$\\
+Искомый базис будет выглядеть как $[a_1,\ a_2,\ b_1,\ b_2]$
+\subsubsection*{Задача 2.}
+$L: \begin{cases}
+    2x_1 + x_2 + 3x_3 - x_4 = 0\\
+    3x_1 + 2x_2 - 2x_4 = 0\\
+    3x_1 + x_2 + 9x_3 - x_4 = 0
+\end{cases}$
+Найти уравнения, задающие $L^{\bot}$\\
+$L^{\bot} = \mathcal{L} (a_1,\ a_2,\ a_3),\ \begin{cases}a_1 = \begin{pmatrix}
+    2 & 1 & 3 & -1
+\end{pmatrix}^T\\
+a_2 = \begin{pmatrix}
+    3 & 2 & 0 & -2
+\end{pmatrix}^T\\
+a_3 = \begin{pmatrix}
+    3 & 1 & 9 & -1
+\end{pmatrix}^T
+\end{cases}$\\
+1 способ:\\
+$\begin{pmatrix}
+    2 & 1 & 3 & -1\\
+    3 & 2 & 0 & -2\\
+    3 & 1 & 9 & -1
+\end{pmatrix}\sim \begin{pmatrix}
+    1 & 0 & 6 & 0\\
+    0 & 1 & -9 & -1\\
+    0 & 0 & 0 & 0
+\end{pmatrix}$ - базис $L^{\bot}$, так как решение $L^{\bot}x = 0$ есть решение $L$
+\[A^T x = 0,\ M = \begin{matrix}
+    \\ a_1' \\ a_2'
+\end{matrix} \begin{pmatrix}
+    x_1 & x_2 & x_3 & x_4\\
+    1 & 0 & 6 & 0\\
+    0 & 1 & -9 & -1
+\end{pmatrix},\ M_{123}^{123} = \begin{vmatrix}
+    x_1 & x_2 & x_3\\
+    1 & 0 & 6\\
+    0 & 1 & -9
+\end{vmatrix} = -6x_1 + 9x_2 + x_3 = 0\]
+\[M_{123}^{124} = \begin{vmatrix}
+    x_1 & x_2 & x_4\\
+    1 & 0 & 0\\
+    0 & 1 & -1
+\end{vmatrix} = x_2 + x_4 = 0\]
+2 способ.\\
+Ищем ФСР:
+\[A^T \sim \begin{matrix}
+    \begin{matrix}
+        x_1 & x_2 & x_3 & x_4
+    \end{matrix}\\
+    \begin{pmatrix}
+        1 & 0 & 6 & 0\\
+        0 & 1 & -9 & 1
+    \end{pmatrix}
+\end{matrix},\Rightarrow \begin{cases}
+    x_1 = -6x_3\\
+    x_2 = 9x_3 + x_4
+\end{cases},\ \begin{tabular}{c|c|c}
+    & $y_1$ & $y_2$\\
+    \hline
+    $x_1$ & -6 & 0\\
+    $x_2$ & 9 & 1\\
+    $x_3$ & 1 & 0\\
+    $x_4$ & 0 & 1
+\end{tabular}\]
+$Y^Tx = 0$ - искомая СЛАУ, заданная $L^{\bot}$.\\
+$\begin{pmatrix}
+    -6 & 9 & 1 & 0\\
+    0 & 1 & 0 & 1
+\end{pmatrix}\begin{pmatrix}
+    x_1 \\ x_2 \\ x_3 \\ x_4
+\end{pmatrix} = 0\Leftrightarrow \begin{cases}
+    -6x_1 + 9x_2 + x_3 = 0\\
+    x_2 + x_4 = 0
+\end{cases}$
+\Underl{Проекция на подпространство}:\\
+3 способа искать:
+\[\text{1. Дан базис }L: a_1,\dots,\ a_k,\text{ тогда } x = h + h^{\bot} = \alpha_1 a_1 + \dots + \alpha_k a_k + h^{\bot} = (*)\]
+Умножаем скалярно $(*)$ на $a_1,\dots,\ a_k$:
+\[\begin{cases}
+    \alpha_1 (a_1,\ a_1) + \alpha_2 (a_1,\ a_2) + \dots + \alpha_k (a_1,\ a_k) = (a_1,\ x)\\
+    \vdots\\
+    \alpha_1 (a_k,\ a_1) + \alpha_2 (a_k,\ a_2) + \dots + \alpha_k (a_k,\ a_k) = (a_k,\ x)
+\end{cases}\]
+Получаем $\Gamma(a_1,\dots,\ a_k)\begin{pmatrix}
+    \alpha_1\\
+    \vdots\\
+    \alpha_k
+\end{pmatrix} = A^T x$. Отсюда находим решение $\alpha_1,\dots,\ \alpha_k$, далее ищем проекцию:
+\[\Pro _L x =  A\alpha = \alpha_1 a_1 + \dots + \alpha_k a_k\]
+2. Ортогонализируем по Грамму-Шмидту: $a_1,\dots,\ a_k \to b_1,\dots,\ b_k$ - ортогональный базис $L$\\
+$\Pro _L x = \DS \sum \frac{(x,\ b_i)}{(b_i,\ b_i)} b_i$\\
+3. По формуле $\Pro_L x = A(A^T A)^{-1} A^T x$, где $A = [a_1,\dots,\ a_k]$
+\subsubsection*{Задача 3.}
+Найти отогональную проекцию $h$ и ортогональную составляющую вектора $x$ на ЛПП $L$
+\[x = \begin{pmatrix}4 & -1 & -3 & 4\end{pmatrix},\ L = \mathcal{L}(a_1,\ a_2,\ a_3)\]
+Решал у доски + хотел спать, можете скинуть запись.
+\subsubsection*{Задача 4.}
+Найти $\Pro_L x,\ x_L^{\bot}$\\
+$x = \begin{pmatrix}
+    7 & -4 & -1 & 2
+\end{pmatrix},\ L: \begin{cases}
+    2x_1 + x_2 + x_3 + 3x_4 = 0\\
+    3x_1 + 2x_2 + 2x_3 + x_4 = 0\\
+    x_1 + 2x_2 + 2x_3 - 9x_4 = 0
+\end{cases}$\\
+Рассмотрим матрицу коэффициентов системы:
+\[\begin{pmatrix}
+    2 & 1 & 1 & 3\\
+    3 & 2 & 2 & 1\\
+    1 & 2 & 2 & -9
+\end{pmatrix}\sim \begin{pmatrix}
+    1 & 2 & 2 & -9\\
+    1 & 1 & 1 & -2\\
+    2 & 1 & 1 & 3
+\end{pmatrix} \sim \begin{pmatrix}
+    3 & 3 & 3 & -6\\
+    1 & 1 & 1 & -2\\
+    2 & 1 & 1 & 3
+\end{pmatrix} \sim \begin{pmatrix}
+    0 & 0 & 0 & 0\\
+    1 & 1 & 1 & -2\\
+    1 & 0 & 0 & 5
+\end{pmatrix},\ \Rg = 2\]
+Ненулевые строки образуют базис $L^{\bot}$.\\
+$\Gamma(a_1,\ a_2) = \begin{pmatrix}
+    7 & -9\\
+    -9 & 26
+\end{pmatrix}\begin{pmatrix}
+    \alpha_1\\
+    \alpha_2
+\end{pmatrix} = \begin{pmatrix}
+    -2\\
+    17
+\end{pmatrix} \Rightarrow \begin{pmatrix}
+    \alpha_1 \\ \alpha_2
+\end{pmatrix} = \begin{pmatrix}
+    1 \\ 1
+\end{pmatrix}\\
+x_L^{\bot} = \alpha_1 a_1 + \alpha_2 a_2 = \begin{pmatrix}
+    2\\
+    1\\
+    1\\
+    3
+\end{pmatrix},\ \Pro_L x = x - x^{\bot}_L = \begin{pmatrix}
+    5\\ -5 \\ -2 \\ -1
+\end{pmatrix}$
+
+\[\textbf{Семинар 30 мая}\]
+\subsection*{1. \Underl{Расстояние до многообразия}}
+\[P = x_0 + L\]
+\subsubsection*{1 Способ.}
+    $M$ с радиус вектором $x$
+    \[\rho(M,\ P) = \rho(x,\ P) = \Vert (x - x_0)^{\bot}\Vert\]
+\subsubsection*{2 Способ.}
+\[\rho(M,\ P) = \sqrt{\frac{\Gr(a_1,\dots,\ a_k,\ x - x_0)}{\Gr(a_1,\dots,\ a_k)}}\]
+
+\subsubsection*{Задача 1.}
+Найти расстояние $\rho(x,\ P)$, где $x = (2,\ 4,\ -4,\ 2)$
+\[P:\begin{cases}
+    x_1 + 2x_2 + x_3 - x_4 = 1\\
+    x_1 + 3x_2 + x_3 - 3x_4 = 2
+\end{cases}\]
+\[\left(\begin{matrix}
+    1 & 2 & 1 & -1\\
+    1 & 3 & 1 & -3
+\end{matrix}\ \middle|\ \begin{matrix}
+    1\\
+    2
+\end{matrix}\right)\sim \left(\begin{matrix}
+    1 & 2 & 1 & -1\\
+    0 & 1 & 0 & -2
+\end{matrix}\ \middle|\ \begin{matrix}
+    1\\
+    1
+\end{matrix}\right)\sim \left(\begin{matrix}
+    1 & 0 & 1 & 3\\
+    0 & 1 & 0 & -2
+\end{matrix}\ \middle|\ \begin{matrix}
+    -1\\
+    1
+\end{matrix}\right)\Rightarrow\]
+\[\Rightarrow \begin{pmatrix}
+    -1\\
+    1\\
+    0\\
+    0
+\end{pmatrix} + c_1\begin{pmatrix}
+    -3\\
+    2\\
+    0\\
+    1
+\end{pmatrix} + c_2\begin{pmatrix}
+    -1\\
+    0\\
+    1\\
+    0
+\end{pmatrix}\]
+Воспользуемся вторым способом нахождения расстояния:
+\[ \begin{vmatrix}
+    14 & 3 & -1\\
+    3 & 2 & -7\\
+    -1 & -7 & 38
+\end{vmatrix} = 76,\ \begin{vmatrix}
+    14 & 3\\
+    3 & 2
+\end{vmatrix} = 19,\ x - x_0  = \begin{pmatrix}
+    3 & 3 & -4 & 2
+\end{pmatrix}\]
+
+\subsubsection*{Утверждение:}
+\[P_1 = x_1 + L_1,\ P_2 = x_2 + L_2\]
+\[\rho(P_1,\ P_2) = \Vert (x_1 - x_2)^{\bot}_{L_1 + L_2} \Vert\]
+
+\subsubsection*{Задача 2.}
+Найти расстояние между двумя плоскостями:
+\[x = a_1 t_1 + a_2 t_2 + x_1,\text{ и} x = a_3 t_1 + a_4 t_2 + x_2\]
+\[x_1 = \begin{pmatrix}
+    4 & 5 & 3 & 2
+\end{pmatrix},\ x_2 = \begin{pmatrix}
+    1 & -2 & 1 & -3
+\end{pmatrix}\]
+\[a_1 = \begin{pmatrix}
+    1 & 2 & 2 & 2
+\end{pmatrix},\ a_3 = \begin{pmatrix}
+    2 & 0 & 2 1
+\end{pmatrix}\]
+\[a_2 = \begin{pmatrix}
+    2 & -2 & 1 & 2
+\end{pmatrix},\ a_4 = \begin{pmatrix}
+    1 & -2 & 0 & -1
+\end{pmatrix}\]
+$\begin{matrix}
+    a_1\\
+    a_2 \\
+    a_3\\
+    a_4
+\end{matrix}\begin{pmatrix}
+    1 & 2 & 2 & 2\\
+    2 & -2 & 1 & 2\\
+    2 & 0 & 2 & 1\\
+    1 & -2 & 0 & 1
+\end{pmatrix}\sim \begin{pmatrix}
+    1 & 2 & 2 & 2\\
+    0 & -6 & -3 & -2\\
+    0 & -4 & -2 & -3\\
+    0 & -4 & -2 & -1
+\end{pmatrix}\sim \begin{matrix}
+    b_1\\
+    b_2\\
+    b_3\\
+    \ 
+\end{matrix}\begin{pmatrix}
+    1 & 0 & 1 & 0\\
+    0 & 1 & \frac{1}{2} & 0\\
+    0 & 0 & 0 & 1\\
+    0 & 0 & 0 & 0
+\end{pmatrix}\Rightarrow\\
+\Rightarrow \begin{matrix}
+    \ & \varphi_1\\
+    \begin{matrix}
+        x_1 \\ x_2 \\ x_3 \\ x_4
+    \end{matrix} & \begin{pmatrix}
+        -2\\ -1 \\ 2 \\ 0
+    \end{pmatrix}
+\end{matrix}$\\
+$(\overset{=u}{x - x_0})^{\bot} = \alpha_1 \varphi_1 = \dfrac{(x - x_0,\ \varphi_1)}{(\varphi_1,\ \varphi_1)}\varphi_1\\
+u - \Pro_L u = \alpha_1 \varphi_1\\
+u = \alpha_1 \varphi-1 + \Pro_L u\\
+(u,\ \varphi_1) = \alpha_1 (\varphi_1,\ \varphi_1)\Rightarrow \alpha_1 = \dfrac{(x - x_0,\ \varphi_1)}{(\varphi_1,\ \varphi_1)}\\
+(x - x_0,\ \varphi_1) = \Big( \begin{pmatrix}
+    3 & 7 & 2 & 5
+\end{pmatrix},\ \begin{pmatrix}
+    -2 & -1 & 2 & 0
+\end{pmatrix}\Big) = -6 -7 + 4 + 0 = -9\\
+(\varphi_1,\ \varphi_2) = 4 + 1 + 4 = 9\\
+\rho(P_1,\ P_2) = \left\Vert \begin{pmatrix}
+    2 & 1 & -2 & 0 
+\end{pmatrix}\right\Vert = \sqrt{9} = 3$
+
+\subsubsection*{Задача 3.}
+В пространстве $\mathbb{R}[x]_n$ со скалярным произведением $\DS \int_{-1}^1 f(x) g(x)\, dx$. Найти объём параллелепипеда.
+\[P = \begin{pmatrix}
+    1 & x & x^2
+\end{pmatrix}\]
+$\Gr(\overline{1},\ \overline{x},\ \overline{x}^2) = \begin{vmatrix}
+    2 & 0 & \frac{2}{3}\\
+    0 & \frac{2}{3} & 0\\
+    \frac{2}{3} & 0 & \frac{2}{5}
+\end{vmatrix} = \frac{32}{135}\Rightarrow V = \sqrt{\frac{32}{135}}$
+
+\subsubsection*{Определение:}
+$\mathcal{A}^*: \mathcal{E} \longrightarrow \mathcal{E}$ является сопряжённым к $\mathcal{A}: \mathcal{E} \longrightarrow \mathcal{E}$, если
+\[\forall x,\ y\in \mathcal{E}\quad (\mathcal{A} x,\ y) = (x,\ \mathcal{A}^* y)\]
+\subsubsection*{Свойства:}
+$\mathcal{A}^*_e = \Gamma^{-1} \mathcal{A}_e^T \Gamma$, где $\Gamma$ - матрица Грамма базиса $e$\\
+Если базис $e$ ортонормированный базис, то $\mathcal{A}^*_e = \mathcal{A}^T_e$
+\subsubsection*{Определение:}
+линейный оператор называется самосопряжённым (симметрическим), если 
+\[\mathcal{A}^* = \mathcal{A}\]
+
+\subsubsection*{Свойства:}
+\begin{enumerate}
+    \item $(\mathcal{A}^*)^* = \mathcal{A}$
+    \item $(\mathcal{A} + \mathcal{B})^* = \mathcal{A}^* + \mathcal{B}^*$
+    \item $(\mathcal{A} \mathcal{B})^* = \mathcal{B}^* \mathcal{A}^*$
+    \item $(\alpha \mathcal{A})^* = \alpha \mathcal{A}^*,\ \alpha\in \mathbb{R}$
+\end{enumerate}
+\subsubsection*{Доказательство 1.}
+\[
+\begin{cases}
+    (\mathcal{A}^* x,\ y) = \left(x,\ (\mathcal{A}^*)^* y\right)\\
+    (y,\ \mathcal{A}^* x) = (\mathcal{A} y,\ x) = (x,\ \mathcal{A} y)
+\end{cases},\ (\mathcal{A}^* x,\ y) = (y,\ \mathcal{A}^* x)\Rightarrow \forall x,\ y\ \mathcal{A} = (\mathcal{A}^*)^*
+\]
+
+\subsubsection*{Задача 4.}
+Пусть $e_1,\ e_2$ ортонормированный базис плоскости и линейный оператор $\mathcal{A}$ в базисе
+\[f_1 = e_1,\ f_2 = e_1 + e_2\]
+имеет матрицу $\begin{pmatrix}
+    1 & 2\\
+    1 & -1
+\end{pmatrix}$. Найти матрицу $\mathcal{A}^*$ в том же базисе $f_1,\ f_2$
+\[\Gamma = C^T E C,\ C_{e\to f} = \begin{pmatrix}
+    1 & 1\\
+    0 & 1
+\end{pmatrix},\ \Gamma = \begin{pmatrix}
+    1 & 0\\
+    1 & 1
+\end{pmatrix}\cdot \begin{pmatrix}
+    1 & 1\\
+    0 & 1
+\end{pmatrix} = \begin{pmatrix}
+    1 & 1\\
+    1 & 2
+\end{pmatrix}\Rightarrow\]
+\[\Rightarrow \Gamma^{-1} = \begin{pmatrix}
+    2 & -1\\
+    -1 & 1
+\end{pmatrix}\] 
+
+$\mathcal{A}^*_f = \Gamma^{-1} \mathcal{A}_f^T \Gamma = \begin{pmatrix}
+    2 & -1\\
+    -1 & 1
+\end{pmatrix}\begin{pmatrix}
+    1 & 1\\
+    2 & -1
+\end{pmatrix}\begin{pmatrix}
+    1 & 1\\
+    1 & 2
+\end{pmatrix} = \begin{pmatrix}
+    0 & 3\\
+    1 & -2
+\end{pmatrix}\begin{pmatrix}
+    1 & 1\\
+    1 & 2
+\end{pmatrix} =\\
+= \begin{pmatrix}
+    3 & 6\\
+    -1 & -3
+\end{pmatrix}$
+
+\subsubsection*{Задача 5.}
+Пусть $\mathcal{A}$ - оператор взятия проекции плоскости на ось $Ox$ параллельно бессектрисе 1 и 3 четверти. Найти $\mathcal{A}^*$\\
+Возьмём единичные векторы $\vec{i},\ \vec{j}$:\\
+Тогда $\mathcal{A}(i) = i,\ \mathcal{A}(j) = -i\Rightarrow \mathcal{A} = \begin{pmatrix}
+    1 & -1\\
+    0 & 0
+\end{pmatrix}$. В ОНБ $\{i,\ j\}$\\
+$\mathcal{A}^* = \mathcal{A}^T = \begin{pmatrix}
+    1 & 0\\
+    -1 & 0
+\end{pmatrix}\Rightarrow \mathcal{A}^*(i) = i - j,\ \mathcal{A}^*(j) = 0\\
+\mathcal{A}^*\begin{pmatrix}
+    x\\
+    y
+\end{pmatrix} = \begin{pmatrix}
+    1 & 0\\
+    -1 & 0
+\end{pmatrix}\begin{pmatrix}
+    x\\
+    y
+\end{pmatrix} = \begin{pmatrix}
+    x\\
+    -x
+\end{pmatrix}$
+
+\[\textbf{Семинар 5 июня}\]
+\subsubsection*{Задача 1.}
+    Пусть $V$ - пространство бесконечно дифференцируемых периодических функций с периодом $T = h$. Со скалярным произведением $\DS \int_0^h f(x) g(x)\, dx$. Найти линейный оператор, сопряжённый к оператору дифференцирования $\mathcal{D}$.\\
+    $\big(f(x),\ \mathcal{D}^* g(x)\big) = \big( \mathcal{D} f(x),\ g(x) \big)\Rightarrow\\
+    \Rightarrow \DS\int_0^h g(x) df(x) = \underset{=0}{\underbrace{f(x)g(x)\big|_0^h}} - \int_0^h f(x) dg(x) = -\int_0^h f(x)dg(x) \Rightarrow\\
+    \Rightarrow    (\mathcal{D} f(x),\ g(x)) = -(f(x),\ \mathcal{D}g(x)) = (f(x),\ \mathcal{D}^*g(x))\Rightarrow \mathcal{D}^* = -\mathcal{D}$
+\subsubsection*{1. Спектральное разложение:}
+    $A$ - симметрическая матрица $\Rightarrow$ существует ортогональная матрица $U$ (матрица перехода), такая что 
+    \[A = U\Lambda U^T\]
+    Если $A$ - диагонализируема, то существует базис из собственных векторов, такой что
+    \[A = C\Lambda C^{-1}\]
+    Где $C$ - матрица перехода к базису из собственных векторов.
+\subsubsection*{Алгоритм:}
+\begin{enumerate}
+    \item $\chi_A(\lambda)$, ищем все собственные значения (корни).
+    \item Ищем собственные векторы для каждого собственного значения
+    \[(A - \lambda_i E) = 0 - \text{находим ФСР}\]
+    \item Ортогонализируем, если $s \geq 2$.
+    \item Ортонормируем ортогональный базис $\Rightarrow U$
+\end{enumerate}
+
+\subsubsection*{Задача 2.}
+$A = \dfrac{1}{3}\begin{pmatrix}
+    2 & 2 & -1\\
+    2 & -1 & 2\\
+    -1 & 2 & 2
+\end{pmatrix}\Rightarrow \chi_A(\lambda) = -(\lambda - 1)^2(\lambda + 1) = 0\Rightarrow \begin{cases}
+    \lambda_1 = 1\\
+    \lambda_2 = -1
+\end{cases}$\\
+Для $\lambda_1$:\\
+$\begin{vmatrix}
+    -\frac{1}{3} & \frac{2}{3} & -\frac{1}{3}\\
+    \frac{2}{3} & -\frac{4}{3} & \frac{2}{3}\\
+    -\frac{1}{3} & \frac{2}{3} & -\frac{1}{3}
+\end{vmatrix} \sim \begin{vmatrix}
+    1 & -2 & 1\\
+    0 & 0 & 0\\
+    0 & 0 & 0
+\end{vmatrix}\Rightarrow n - r = 2\\
+\begin{pmatrix}
+    x_1\\
+    x_2\\
+    x_3
+\end{pmatrix} = x_2\begin{pmatrix}
+    2\\
+    1\\
+    0
+\end{pmatrix} + x_3 \begin{pmatrix}
+    -1\\
+    0\\
+    1
+\end{pmatrix}\Rightarrow b_1 = v_1,\ b_2 = v_2 - \dfrac{(v_2,\ b_1)}{(b_1,\ b_1)}b_1 =\\
+=\begin{pmatrix}
+    -1\\
+    0\\
+    1
+\end{pmatrix} - \dfrac{-2}{5}\begin{pmatrix}
+    2\\
+    1\\
+    0
+\end{pmatrix} =\begin{pmatrix}
+    -\frac{1}{5}\\
+    \frac{2}{5}\\
+    1
+\end{pmatrix}\sim \begin{pmatrix}
+    -1\\
+    2\\
+    5
+\end{pmatrix}$. Итак $b_1 = \begin{pmatrix}
+    2\\
+    1\\
+    0
+\end{pmatrix},\ b_2 = \begin{pmatrix}
+    -1\\
+    2\\
+    5
+\end{pmatrix}$\\
+$x_1 = 2x_2 - x_3$. Второй способ ортогонализировать ФСР:
+\[\begin{tabular}{c | c}
+    & $y_1$\\
+    \hline
+    $x_1$ & $2$\\
+    $x_2$ & $1$\\
+    $x_3$ & $0$
+\end{tabular}\]
+Ищем $y_2$ из условия: $\begin{cases}
+    x_1 = 2x_2 - x_3\\
+    (y_1,\ y_2) = 0
+\end{cases}\Leftrightarrow \begin{cases}
+    x_1 = 2x_2 - x_3\\
+    2x_1 + x_2 = 0
+\end{cases}\Leftrightarrow \begin{cases}
+    x_1 = -4x_1 - x_3\\
+    x_2 - 2x_1
+\end{cases}\Leftrightarrow \begin{cases}
+    x_3 = -5x_1\\
+    x_2 = -2x_1
+\end{cases}$\\
+3 способ. Зануляем главную переменную.
+\[\begin{tabular}{c | c c}
+    & $y_1$ & $y_2$\\
+    \hline
+    $x_1$ & $0$ & $-5$\\
+    $x_2$ & $1$ & $-2$\\
+    $x_3$ & $2$ & $1$    
+\end{tabular}\]
+Нормируем:
+\[\begin{tabular}{c | c c | c c}
+    & $y_1$ & $y_2$ & $e_1$ & $e_2$\\
+    \hline
+    $x_1$ & $2$ & $-1$ & $\frac{2}{\sqrt{5}}$ & $-\frac{1}{\sqrt{30}}$\\
+    $x_2$ & $1$ & $2$ & $\frac{1}{\sqrt{5}}$ & $\frac{2}{\sqrt{30}}$\\
+    $x_3$ & $0$ & $5$ & $0$ & $\frac{5}{\sqrt{30}}$    
+\end{tabular}\]\\
+$\Vert y_1\Vert = \sqrt{5},\ \Vert y_2 \Vert = \sqrt{30}$\\
+В ОНБ $V_1(\lambda_1)\\
+\lambda_2 = -1$. $B = A + E\sim \begin{pmatrix}
+    1 & 0 & -1\\
+    0 & 1 & 2
+\end{pmatrix}$.\\
+Продолжаем нормировать:
+\[\begin{tabular}{c | c}
+    $y_3$ & $e_3$\\
+    \hline
+    $1$ & $\frac{1}{\sqrt{6}}$\\
+    $-2$ & $-\frac{2}{\sqrt{6}}$\\
+    $1$ & $\frac{1}{\sqrt{6}}$ 
+\end{tabular}\]
+$\Vert y^3 \Vert = \sqrt{6}$.\\
+Ответ: $A = U\Lambda U^T$ - спектральное разложение, где $\Lambda = \begin{pmatrix}
+    1 & 0 & 0\\
+    0 & 1 & 0\\
+    0 & 0 & -1
+\end{pmatrix},\ U = \begin{pmatrix}
+    \frac{2}{\sqrt{5}} & -\frac{1}{\sqrt{30}} & \frac{1}{\sqrt{6}}\\
+    \frac{1}{\sqrt{5}} & \frac{2}{\sqrt{30}} & -\frac{2}{\sqrt{6}}\\
+    0 & \frac{5}{\sqrt{30}} & \frac{1}{\sqrt{6}}
+\end{pmatrix}$\\
+Приведение квадратичных форм к главным осям ( к каноническому виду ортогональным преобразованием).
+\[q(x) = x^T A x\]
+Строим спектральное разложение для $A$:
+\[A = U\Lambda U^T\Rightarrow \Lambda = U^T A U\]
+новая матрица квадратичной формы в ОНБ из собственных векторов оператора с матрицей $A$.\\
+$\overset{\sim}{q(y)} = \lambda_1 y_1^2 + \dots + \lambda_n y_n^2$ - канонический вид, $\lambda_i$ - собственное значение оператора с матрицей $A$.\\
+Замена координат:
+\[x = Uy\Leftrightarrow y = U^T x\]
+Получили новые координаты через старые.\\
+Если рассматривать ответ на предыдущую задачу, получим:
+\[\begin{matrix}
+    & \begin{matrix}
+        y_1\ \ & y_2\ \ & y_3
+    \end{matrix}\\
+    \begin{matrix}
+        x_1\\
+        x_2\\
+        x_3
+    \end{matrix} & \begin{pmatrix}
+        \frac{2}{\sqrt{5}} & -\frac{1}{\sqrt{30}} & \frac{1}{\sqrt{6}}\\
+        \frac{1}{\sqrt{5}} & \frac{2}{\sqrt{30}} & -\frac{2}{\sqrt{6}}\\
+        0 & \frac{5}{\sqrt{30}} & \frac{1}{\sqrt{6}}
+    \end{pmatrix}
+\end{matrix}\Rightarrow \begin{cases}
+    y_1 = \frac{2}{\sqrt{5}} x_1 + \frac{1}{\sqrt{5}}x_2\\
+    y_2 = \dots\\
+    y_3 = \dots
+\end{cases}\]
+
+\subsubsection*{Задача 3.}
+$q(x) = x_1^2 + 2x_1x_2 - 2x_1x_3 + x_2^2 + 2x_2x_3 + x_3^2$\\
+Привести ортогональным преобразованием к каноническому виду, выразить новые координаты через старые.\\
+Матрица квадратичной формы: $Q = \begin{pmatrix}
+    1 & 1 & -1\\
+    1 & 1 & 1\\
+    -1 & 1 & 1
+\end{pmatrix},\\
+\chi_Q(\lambda) = -(\lambda - 2)^2(\lambda + 1)\Rightarrow \begin{cases}
+    \lambda_1 = 2\\
+    \lambda_2 = -1
+\end{cases}$\\
+Для $\lambda_1 = 2$:
+\[A = Q - 2E = \begin{pmatrix}
+    -1 & 1 & -1\\
+    1 & -1 & 1\\
+    -1 & 1 & -1
+\end{pmatrix}\sim \begin{pmatrix}
+    -1 & 1 & -1
+\end{pmatrix}\Rightarrow x_1 = x_2 - x_3\]
+\[\begin{tabular}{c | c c | c c}
+    & $y_1$ & $y_2$ & $e_1$ & $e_2$\\
+    \hline
+    $x_1$ & 0 & -2  & 0 & $-\frac{2}{\sqrt{6}}$\\
+    $x_2$ & 1 & -1  & $\frac{1}{\sqrt{2}}$ & $-\frac{1}{\sqrt{6}}$\\
+    $x_3$ & 1 & 1   & $\frac{1}{\sqrt{2}}$ & $\frac{1}{\sqrt{6}}$
+\end{tabular}\]
+$\begin{pmatrix}
+    2 & 1 & -1\\
+    1 & 2 & 1\\
+    -1 & 1 & 2
+\end{pmatrix}\sim \begin{pmatrix}
+    1 & 0 & -1\\
+    0 & 1 & 1
+\end{pmatrix}\\
+\begin{cases}
+    x_1 = x_3\\
+    x_2 = -x_3
+\end{cases}\Rightarrow y_3 = (1,\ -1,\ 1)^T\Rightarrow e_3 = (\frac{1}{\sqrt{3}},\ -\frac{1}{\sqrt{3}},\ \frac{1}{\sqrt{3}})^T,\\
+q(y) = \lambda_1 y_1^2 + \lambda_2 y_2^2 + \lambda_3 y_3^2,\ Q'(y) = 2y_1^2 + 2y_2^2 - y_3^2$\\
+Выразим новые координаты через старые: $\begin{cases}
+    y_1 = \frac{1}{\sqrt{2}} x_1 + \frac{1}{\sqrt{2}} x_3\\
+    y_2 = \frac{1}{\sqrt{6}}(-2x_1 - x_2 + x_3)\\
+    y_3 = \frac{1}{\sqrt{3}}(x_1 -x_2 + x_3)
+\end{cases}$
+
+\subsubsection*{2. Сингулярное разложение (SVD)}
+Для любой прямоугольной матрицы $A \in M_{m\times n}(\mathbb{R})$.\\
+Существует разложение $A = V\Sigma U^T$.\\
+Где $U$ - ортогональная матрица $n\times n$\\
+$V$ - ортогональная матрица $m\times m$\\
+$\Sigma = \begin{pmatrix}
+    \sigma_1 & & & & & 0\\
+    & \ddots\\
+    & & \sigma_r\\
+    & & & 0\\
+    & & & & \ddots\\
+    0& & & & & 0
+\end{pmatrix}_{m\times n}$ - сингулярная матрица.
+\subsubsection*{Построить сингулярное разложение.}
+$A = \begin{pmatrix}
+    5 & 10\\
+    0 & 0\\
+    12 & 24
+\end{pmatrix}_{3 \times 2}$
+\[\text{Алгоритм SVD}\]
+\begin{enumerate}
+    \item Ищем $A^T A_{2\times 2}$ \big(или $AA^T_{3\times 3}$, если её порядок меньше $(m < n)$\big).
+    \item Ищем $\chi_{A^T A}(\lambda)$ - собственные значения $A^T A$ и сингулярные числа $\sigma_i = \sqrt{\lambda_i}$ - сортируем по невозрастанию $(\sigma_1 \geq \sigma_2 \geq\dots \geq 0)$.
+    \item Строим $\Sigma$.
+    \item Строим ОНБ из собственных векторов для $A^T A\Rightarrow$ получаем матрицу $U$ (для $A A^T$ получим $V$).
+    \item Для $A^T A$ находим матрицу $V$ по формулам (для $AA^T$)
+    \[v_i = \frac{A u_i}{\sigma_i}\quad (u_i) = \frac{A v_i}{\sigma_i},\ i = \overline{1,\ r}\]
+    \item достраиваем произвольно до ОНБ для $i = \overline{r + 1,\ m}$. 
+\end{enumerate}
+В нашем случае:
+\begin{enumerate}
+    \item $A^T A = \begin{pmatrix}
+        169 & 338\\
+        338 & 676
+    \end{pmatrix}$
+    \item $\chi_{A^T A} = \lambda(\lambda - 845)\Rightarrow$ сингулярные числа $\begin{cases}
+        \sigma_1 = \sqrt{845} = 13\sqrt{5}\\
+        \sigma_2 = 0
+    \end{cases}$
+    \item Строим $\Sigma = \begin{pmatrix}
+        13\sqrt{5} & 0\\
+        0 & 0\\
+        0 & 0
+    \end{pmatrix}$
+    \item Строим $u_1,\ u_2$ - ОНБ из собственных векторов $A^T A$.\\
+    $\lambda_1 = 845,\ B = A^T A - 845 E = \begin{pmatrix}
+        -676 & 338\\
+        338 & -169
+    \end{pmatrix} \sim \begin{pmatrix}
+        -2 & 1
+    \end{pmatrix}\Rightarrow\\ \Rightarrow y_1 = \begin{pmatrix}
+        1\\ 2
+    \end{pmatrix}\Rightarrow e_1 = \frac{1}{\sqrt{5}} \begin{pmatrix}
+        1\\ 2
+    \end{pmatrix}$\\
+    $\lambda_2 = 0\Rightarrow e_2 = \frac{1}{\sqrt{5}} \begin{pmatrix}
+        -2 \\ 1
+    \end{pmatrix}$, из условия, что $\{e_1,\ e_2\}$ - ОНБ.\\
+    Итак, $U = \frac{1}{\sqrt{5}}\begin{pmatrix}
+        1 & -2\\
+        2 & 1
+    \end{pmatrix}$
+    \item Находим матрицу $V = (v_1,\ v_2,\ v_3)$:\\
+    $v_i = \dfrac{A u_i}{\sigma_i} = \dfrac{\begin{pmatrix} 5 & 10\\ 0 & 0\\ 12 & 24 \end{pmatrix} \begin{pmatrix} 1\\ 2 \end{pmatrix} \frac{1}{\sqrt{5}} }{13\sqrt{5}} = \begin{pmatrix}
+        \frac{5}{13}\\ 0 \\ \frac{12}{13}
+    \end{pmatrix} = v_1$\\
+    Произвольно достраиваем до ОНБ. $v_2 = \begin{pmatrix}
+        -\frac{12}{13} \\ 0 \\ \frac{5}{13}
+    \end{pmatrix},\ v_3 = \begin{pmatrix}
+        0\\ 1\\ 0
+    \end{pmatrix}$
+\end{enumerate}
+Итак $A = V\Sigma U^T$, где:\\
+$\Sigma = \begin{pmatrix}
+    13\sqrt{5} & 0\\
+    0 & 0\\
+    0 & 0
+\end{pmatrix}$\\
+$U = \frac{1}{\sqrt{5}}\begin{pmatrix}
+    1 & -2\\
+    2 & 1
+\end{pmatrix}\Rightarrow U^T = \frac{1}{\sqrt{5}}\begin{pmatrix}
+    1 & 2\\
+    -2 & 1
+\end{pmatrix}$\\
+$V = \begin{pmatrix}
+    \frac{5}{13} & -\frac{12}{13} & 0\\
+    0 & 0 & 1\\
+    \frac{12}{13} & \frac{5}{13} & 0
+\end{pmatrix}$
+
+\[\textbf{Семинар 19 июня.}\]
+Вспоминаем лекцию про кривые второго порядка:\\
+$\mathcal{E}$ - эксцентриситет.
+\begin{enumerate}
+    \item Эллипс:
+\[\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1,\ \mathcal{E} = \left[ \begin{gathered}
+    \sqrt{1 - \frac{b^2}{a^2}},\ b\geq a\\
+    \sqrt{1 - \frac{a^2}{b^2}},\ b < a
+\end{gathered}\right. \in [0,\ 1)\]
+    \newpage
+    \item Гипербола:
+\[\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1\ \text{обычная}\]
+\[\frac{x^2}{a^2} - \frac{y^2}{b^2} = -1\ \text{сопряжённая}\]
+\[\mathcal{E} = \sqrt{1 + \frac{b^2}{a^2}},\ \mathcal{E} > 1\]
+    \item Парабола:
+\[y^2 = 2px,\ \mathcal{E} = 1\]
+\end{enumerate}
+\subsubsection*{Задача 1}
+Привести кривую к каноническому виду, используя ортогональные преобразования и сдвиги, определить тип кривой и эксцентриситет $\mathcal{E}$, построить эскиз.\\
+\[9x^2 - 4xy + 6y^2 + 16x - 8y - 2 = 0\]
+Матрица квадратичной формы $Q = \begin{pmatrix}
+    9 & -2\\
+    -2 & 6
+\end{pmatrix}$, применим сингулярное разложение:
+\[\chi(\lambda) = (9 -\lambda)(6 - \lambda) - 4 = \lambda^2 - 15\lambda + 50\Rightarrow \left[\begin{gathered}
+    \lambda_1 = 5\\
+    \lambda_2 = 10
+\end{gathered} \right.\Rightarrow \Lambda = \begin{pmatrix}
+    5 & 0\\
+    0 & 10
+\end{pmatrix}\]
+$\lambda_1 = 5\Rightarrow B = \begin{pmatrix}
+    4 & -2\\
+    -2 & 1
+\end{pmatrix} \sim \begin{pmatrix}
+    2 & -1\\
+    0 & 0
+\end{pmatrix}\Rightarrow e_1 = \frac{1}{\sqrt{5}}\begin{pmatrix}
+    1\\2
+\end{pmatrix},\ e_2 = \frac{1}{\sqrt{5}}\begin{pmatrix}
+    -2 \\ 1
+\end{pmatrix}$\\
+$U = \frac{1}{\sqrt{5}} \begin{pmatrix}
+    1 & -2\\
+    2 & 1
+\end{pmatrix}$ - матрица перехода (поворот на $\varphi$, где $\cos \varphi = \frac{1}{\sqrt{5}},\\ \sin\varphi = \frac{2}{\sqrt{5}}$)\\
+$x_e = U_{e\to f} x_f$, так как $U$ - ортогональная, можно записать:\\
+$x_f = U_{e\to f}^T x_e\Rightarrow \begin{cases}
+    x = \frac{x'}{\sqrt{5}} - \frac{2y'}{\sqrt{5}}\\
+    y = \frac{2x'}{\sqrt{5}} + \frac{y'}{\sqrt{5}}
+\end{cases}$\\
+$5(x')^2 + 10(y')^2 + 16\frac{1}{\sqrt{5}}(x' - 2y') - 8\frac{1}{\sqrt{5}}(2x' + y') - 2 = 0\\
+5(x')^2 + 10(y')^2 - 8\sqrt{5} y' - 2 = 0$\\
+Делаем сдвиг.\\
+$5(x')^2 + 10(y' - \frac{2}{\sqrt{5}})^2 - 10 = 0\\
+\frac{(x')^2}{2} + (y' - \frac{2}{\sqrt{5}})^2 = 1$\\
+$\begin{cases}
+    x'' = x'\\
+    y'' = y' - \frac{2}{\sqrt{5}}
+\end{cases}$, получается сдвиг на вектор $\vec{v} = (0,\ \frac{2}{\sqrt{5}})$
+\[\frac{x''^2}{2} + (y'')^2 = 1 - \text{эллипс}\]
+
+$\mathcal{E} = \sqrt{1 - \frac{1}{2}} = \frac{1}{\sqrt{2}}$
+
+\subsubsection*{Задача 2}
+\[5x^2 + 12 xy - 22 x - 12 y - 19 = 0\]
+$A = \begin{pmatrix}
+    5 & 6\\
+    6 & 0
+\end{pmatrix},\ \chi_A(\lambda) = -\lambda(5 - \lambda) - 36 = \lambda^2 - 5\lambda - 36 = (\lambda - 9)(\lambda + 4)$\\
+$\Lambda = \begin{pmatrix}
+    9 & 0\\
+    0 & -4
+\end{pmatrix}\\
+\lambda = 9\Rightarrow \begin{pmatrix}
+    4 & 6\\
+    6 & -9
+\end{pmatrix}\sim \begin{pmatrix}
+    -2 & 3\\
+    0 & 0
+\end{pmatrix},\ e_1 = \frac{1}{\sqrt{13}} \begin{pmatrix}
+    3\\ 2
+\end{pmatrix}\\
+\lambda = -4,\ e_2 = \frac{1}{\sqrt{13}}\begin{pmatrix}
+    -2\\ 3
+\end{pmatrix}\Rightarrow\\
+\Rightarrow U = \frac{1}{\sqrt{13}} \begin{pmatrix}
+    3 & -2\\
+    2 & 3
+\end{pmatrix}\Rightarrow \begin{cases}
+    x = \frac{1}{\sqrt{13}}(3x' - 2y')\\
+    y = \frac{1}{\sqrt{13}}(2x' + 3y')
+\end{cases}$. После преобразований, получаем:\\
+\[-4(x' + \frac{1}{\sqrt{13}})^2 + 9(y' - \frac{5}{\sqrt{13}})^2 = 36\]
+Перенос: $\begin{cases}
+    x'' = x' + \frac{1}{\sqrt{13}}\\y'' = y' - \frac{5}{\sqrt{13}}
+\end{cases}$:
+\[-\frac{1}{9}x''^2 + \frac{1}{4} y'' = 1\]
+Получаем сопряжённую гиперболу.\newpage
+\[\text{Переходим в 3D}\]
+\begin{enumerate}
+    \item $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ - эллиптический цилиндр.
+    \item $\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1$ - гиперболический цилиндр.
+    \item $y^2 = 2px$ - параболический цилиндр.
+    \item $\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1$ - эллипсоид.
+    \item $\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = 0$ - конус.
+    \item $\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = 1$ - однополосный гиперболоид.
+    \item $\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = -1$ - двуполосный гиперболоид.
+    \item $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 2pz$ - эллиптический параболлоид.
+    \item $\frac{x^2}{a^2} - \frac{y^2}{b^2} = 2pz$ - гиперболический параболлоид.
+\end{enumerate}
+\subsubsection*{Задача 3. a.}
+Имеем уравнение $4x^2 - z^2 - 40x - 8z + 100 = 0$. Преобразуем:\\
+$4(x - 5)^2 - (z + 4)^2 = -16\Rightarrow \begin{cases}
+    x' = x - 5\\
+    y' = y\\
+    z' = z + 4
+\end{cases}$ - сдвиг.\\
+$\frac{(x')^2}{4} - \frac{(z')^2}{16} = -1$ - гиперболический цилиндр вдоль Oy.\\
+$\mathcal{E} = \sqrt{1 = \frac{3^2}{2^2}}$
+\subsubsection*{Задача 3. b.}
+$\frac{(x - 5)^2}{4} - \frac{(y + 4)^2}{16} = -2(z - 2) $ - гиперболический параболлоид.
+\end{document}

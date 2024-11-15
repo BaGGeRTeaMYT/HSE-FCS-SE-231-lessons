@@ -1,0 +1,1474 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[T2A]{fontenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathabx}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue
+}
+
+\title{Лекции по алгебре 4 модуль.}
+\author{Андрей Тищенко}
+\date{2023/2024 гг.}
+
+\newcommand{\tg}{\operatorname{tg}}
+\newcommand{\Bold}[1]{$\textbf{#1}$}
+\newcommand{\Underl}[1]{$\underline{\text{#1}}$}
+\newcommand{\BU}[1]{$\underline{\textbf{#1}}$}
+\newcommand{\DS}{\displaystyle}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Rg}{\operatorname{Rg}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\oo}{\infty}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\norm}[1]{$\Vert#1\Vert$}
+
+\begin{document}
+    \maketitle
+    \[\textbf{Лекция 3 апреля}\]
+    \[\text{Квадратичные формы}\]
+    \begin{enumerate}
+        \item[\textbf{Определение:}]
+    \end{enumerate}
+    Многочлен второй степени от $n$ переменных, то есть выражение вида
+        \[q\overset{x\in \mathbb{R}^n}{(x_1,\dots,\ x_n)} = \sum_{i = 1}^{n} a_{i\, i}x_i^2 + 2\sum_{1\leq i < j \leq n} a_{i\, j}x_{i}x_{j}\]
+        Где $a_{i\, j}\in \mathbb{R}$, называют \Underl{квадратичной формой}.
+    \begin{enumerate}
+        \item[\textbf{Замечание:}]
+    \end{enumerate}
+        Многочлен $q(x)$ называется однородным степени $k$, если
+        \[\forall \alpha\quad q(\alpha x) = \alpha^k q(x)\]
+    \begin{enumerate}
+        \item[\textbf{Замечание:}] 
+    \end{enumerate}
+    Квадратичная форма - это отображение $q: V\longrightarrow \mathbb{R}$ (вектор в число)\\
+     \par
+    Рассмотрим $n$-мерное вектороное пространство $V$ над $\mathbb{R}$. Зафиксируем в нём базис $e_1,\dots,\ e_n$:\\
+    Тогда у любого $x\in V$ есть набор координат в этом базисе $x_1,\dots,\ x_n$.\\
+    То есть $\forall x\in V: x=x_1e_1+\dots+x_{n} e_{n}$\\
+    Пусть $x^e = \begin{pmatrix}
+        x_1\\
+        \vdots\\
+        x_n
+    \end{pmatrix}\Rightarrow q(x)$ можно представить в виде $q(x) = (x^e)^{T}A x^{e}$, где $A = (a_{i\, j})$ матрица квадратичной формы $q(x)$ в базисе $e_1,\dots,\ e_n$,\\
+    $a_{i\, j}$ - коэффициенты квадратичной формы.
+    \begin{enumerate}
+        \item[\textbf{Пример:}]
+    \end{enumerate}
+    В $\mathbb{R}^3$
+        \[q(x) = x_1^2 + 8 x_1 x_3 = x_1^2 + 4 x_1 x_3 + 4x_3 x_1 = \begin{pmatrix}
+            x_1 & x_2 & x_3
+        \end{pmatrix}\cdot \begin{pmatrix}
+            1 & 0 & 4\\
+            0 & 0 & 0\\
+            4 & 0 & 0
+        \end{pmatrix}\cdot \begin{pmatrix}
+            x_1\\
+            x_2\\
+            x_3
+        \end{pmatrix}\]
+    \begin{enumerate}
+        \item[\textbf{Замечание:}]
+    \end{enumerate}
+    Матрица квадратичной формы всегда симметрическая. То есть \[A^T = A\]
+    \begin{enumerate}
+        \item[\textbf{Замечание:}]
+    \end{enumerate}
+    По любой билинейной форме можно построить квадратичную форму, взяв $q(x) = b(x,\ x)$. Тогда $a_{i\, j} = \dfrac{b_{i\, j} + b_{j\, i}}{2}$
+    \begin{enumerate}
+        \item[\textbf{Пример:}]
+    \end{enumerate}
+    $b(x,\ y) = x_1 y_1 + e x_1 y_3 + 5 x_3 y_1\Rightarrow q(x) = b(x,\ x) = x^2_1 + 8 x_1 x_3$
+    \begin{enumerate}
+        \item[\textbf{Определение:}]
+    \end{enumerate}
+    Билинейная форма называется $\underline{\text{симметрической}}$, если \[b(x,\ y) = b(y,\ x),\ \text{например, скалярное произведение}\] Называется $\underline{\text{кососиметрической}}$, если \[b(x,\ y) = -b(y,\ x)\]
+    \begin{enumerate}
+        \item[\textbf{Пример:}]
+    \end{enumerate}
+    Кососиметрическая билинейная форма с матрицей $B = \begin{pmatrix}
+            0 & -1\\
+            1 & 0
+        \end{pmatrix}\Rightarrow\\\Rightarrow B^T = -B$
+    \begin{enumerate}
+        \item[\textbf{Замечание:}]
+    \end{enumerate}
+    По любой квадратичной форме можно построить симметрическую билинейную форму. Это называется $\underline{\text{поляризацией}}$ квадратичной формы.\[b(x,\ y) = \frac{1}{2}\big[q(x + y) - q(x) - q(y)\big]\] Полярная билинейная форма к $q(x)$ \big(имеет ту же матрицу, что и $q(x)$, $b(x,\ x) = q(x)$\big)
+    \newpage
+    \begin{enumerate}
+        \item[\textbf{Утверждение:}]
+    \end{enumerate}
+    При переходе от базиса $e$ к базису $e'$ в линейном пространстве $V$ матрица квадратичной формы меняется так:
+
+    \[A' = C^{T}\cdot A\cdot C,\text{ "Стас"}\]
+    $A'$ - матрица квадартичной формы в новом базисе  $e'$\\
+    $C$ - матрица перехода от базиса $e$ к базису $e'$
+
+    \begin{enumerate}
+        \item[\textbf{Доказательство:}]
+    \end{enumerate}
+    Связь координат вектора:\\
+    $x = Cx'$, так как $x' = C^{-1} x$ - формула изменения координат вектора при замене базиса.\\
+    Тогда $\forall x\quad q(x) = x^{T} A x = (Cx')^{T} A (C x') = (x')^T C^T A C x' = (x')^{T} A' x'$, значит $A' = C^{T}AC$ \big(Можно в качестве $x$ брать все векторы канонического базиса $(0,\dots 0,\ \underset{i}{1},\ 0,\dots,\ 0)$ и показать совпадение матричных элементов\big)
+    \begin{enumerate}
+        \item[\textbf{Определение:}]
+    \end{enumerate}
+    Если квадратичная форма в некотором базисе записана в виде $q(x) = x^{T} A x$, то есть если $A$ - матрица квадратичной формы в некотором базисе, то $\operatorname{Rg} A$ называется рангом квадратичной формы $q(x)$.
+    Почему это определение корректно? То есть почему $\operatorname{Rg} A$ не зависит от базиса.
+    \begin{enumerate}
+        \item[\textbf{Лемма:}]
+    \end{enumerate}
+    Пусть $A,\ U\in M_n(\mathbb{R}),\ \det U\neq 0$. Тогда $\operatorname{Rg} A\cdot U = \operatorname{Rg A} = \operatorname{Rg} U\cdot A$, то есть при умножении на невырожденную матрицу ранг не меняется.
+    \begin{enumerate}
+        \item[\textbf{Доказательство:}] 
+    \end{enumerate}
+    $\operatorname{Rg} A\cdot U \leq \operatorname{Rg} A$, так как столбцы матрицы $AU$ есть линейные комбинации столбцов матрицы $A$.\\
+    Ранг матрицы по теореме о ранге матрицы равен максимальному числу линейно независимых столбцов не могло вырасти, так как все столбцы $AU$ линейно выражаются через столбцы исходной матрицы.\\
+    Покажем $\operatorname{Rg} A\cdot U\geq \operatorname{Rg} A$. \[\operatorname{Rg} A = \operatorname{Rg} A(U\cdot U^{-1}) = \operatorname{Rg} (AU)U^{-1} \leq \operatorname{Rg} (AU)\]
+    \[\operatorname{Rg} U\cdot A = \operatorname{Rg} (UA)^T = \operatorname{Rg} A^T U^T = \operatorname{Rg} A^T = \operatorname{Rg} A = \operatorname{Rg} A U\]
+    \begin{enumerate}
+        \item[\textbf{Утверждение:}] (об инвариантности ранга квадратичной формы)
+    \end{enumerate}
+    Пусть $q(x)$ - квадратичная форам на линейном пространстве V.\\
+    Пусть $a = (a_1,\dots,\ a_n)$ и $b = (b_1,\dots,\ b_n)$ - базисы в $V$.\\
+    Пусть $A$ - матрица квадратичной формы в базисе $a$\\
+    Пусть $B$ - матрицы квадратичной формы в базисе $b$\\
+    Тогда $\operatorname{Rg} A = \operatorname{Rg} B$ и ранг квадратичной формы корректно определен.
+    \begin{enumerate}
+        \item[\textbf{Доказательство:}]
+    \end{enumerate}
+    Было доказано, что $B = C^T AC\Rightarrow$ по лемме, так как мы умножаем матрицу $A$ на матрицы $C^T$ слева и на $C$ справа, то $\operatorname{Rg} B = \operatorname{Rg} A$, ч.т.д.
+    \begin{enumerate}
+        \item[\textbf{Определение:}]
+    \end{enumerate}
+    квадратичную форму $q(x)$ будем назвать $\underline{\text{положительно определённой}}$, если \[\forall x \neq 0\quad q(x) > 0\]
+    $\underline{\text{отрицательно определённой}}$, если \[\forall x\neq 0\quad q(x) < 0\]
+    $\underline{\text{знакопеременной}}$, если \[\exists x,\ y\in V: q(x) < 0 < q(y)\] 
+    \begin{enumerate}
+        \item[\textbf{Пример:}]
+    \end{enumerate}
+    $q_1(x) = x_1^2 + 2x^2_2 + 5x_3^2$ на $\mathbb{R}^3$ - положительно определена\\
+    
+    $q_2(x) = x_1^2 - x_3^2$ - знакопеременна $\left(y = \begin{pmatrix}
+        1 & 0 & 0
+    \end{pmatrix},\ x =\begin{pmatrix}
+        0 & 0 & 1
+    \end{pmatrix}\Rightarrow q(x) < 0 < q(y)\right)$.\\
+    $q_3(x) = -x^2_1 - 2x_2^2 - 3x_3^2$ - отрицательно определена на $\mathbb{R}^3$,\\
+    но $q_3'(x) = -x^2_1 - 3x_3^2$ - не является отрицательно определённой, так как $q'_3\begin{pmatrix}
+        0\\
+        1\\
+        0
+    \end{pmatrix} = 0$ - это неположительно определённая квадратная форма.
+    \begin{enumerate}
+        \item[\textbf{Теорема:}] (Критерий Сильвестра положительной определённости)
+    \end{enumerate}
+    Пусть $A$ - матрица квадратичной формы $q(x)$ в некотором базисе. Тогда
+    \[q(x)\text{ положительно определена}\Leftrightarrow \begin{matrix}\text{последовательность главных угловых}\\ \text{миноров в A строго положительна} \end{matrix}\]
+    То есть $\begin{cases}
+        \Delta_1 = a_{1\, 1} > 0\\
+        \Delta_2 = \begin{vmatrix}
+            a_{1\, 1} & a_{1\, 2}\\
+            a_{2\, 1} & a_{2\, 2}
+        \end{vmatrix} > 0\\
+        \dots\\
+        \Delta_{n} = \det A > 0
+    \end{cases}$
+    \begin{enumerate}
+        \item[\textbf{Следствие:}]
+    \end{enumerate}
+    \[\text{Квадратичная форма отрицательно определена}\Leftrightarrow \begin{cases}
+        \Delta_1 < 0\\
+        \Delta_2 > 0\\
+        \dots\\
+        (-1)^n\Delta_n > 0
+    \end{cases}\]
+    То есть знаки главных угловых миноров чередуются, начиная с минуса.
+    \begin{enumerate}
+        \item[\textbf{Доказательство:}] 
+    \end{enumerate}
+    Так как $A$ - отрицательно определена $\Leftrightarrow -A$ положительно определена\\
+    $\det (-A)=  (-1)^n\det A$, ч.т.д.
+    \begin{enumerate}
+        \item[\textbf{Пример:}]
+    \end{enumerate}
+    $q(x) = -x_1^2 - x_2^2 - \dots - x_n^2$ - отрицательно определённая\\
+    $A = \begin{pmatrix}
+        -1 & 0 & \dots & 0\\
+        0 & -1 & \dots & 0\\
+        \vdots & \vdots & \ddots & \vdots\\
+        0 & 0 & \dots & -1
+    \end{pmatrix}$
+    \begin{enumerate}
+        \item[\textbf{Определение:}]
+    \end{enumerate}
+    Квадратичную форму $q(x) = \alpha_1 x_1^2 + \dots + \alpha_n x_n^2$, где $\alpha_i\in\mathbb{R},\ i = \overline{1,\ n}$, то есть в квадратичной форме нет попарных произведений вида $Cx_ix_j$, называют квадратичной формой каноничесмкого вида.\\
+    Если $\alpha_i\in \{-1,\ 0,\ 1\}$, то канонический вид называют нормальным.
+    \begin{enumerate}
+        \item[\textbf{Замечание:}]
+    \end{enumerate}
+    Матрица квадратичной формы в каноническом виде является диагональной.
+    \[\textbf{Лекция 10 апреля}\]
+    $x\in V\quad q(x) = \alpha_1 x_1^2 +\dots+\alpha_nx_n^2\ (\alpha_i\in \mathbb{R},\ i = \overline{1,\ n})$ - канонический вид.\\
+    Если все коэффициенты $\alpha_i$ являются элементами множества $\{-1,\ 0,\ 1\}$, то это называется нормальным видом.
+    \begin{enumerate}
+        \item[Утверждение.] Любую квадратичную форму можно привести к каноническому и к нормальному виду. 
+    \end{enumerate}
+    \[\underline{\text{Методы приведения}}\]
+    \begin{enumerate}
+        \item Метод Лагранжа.\\
+        Главная идея состоит в последовательном выделении полных квадратов. При этом на каждом шаге под квадрат $\underline{\text{полностью уходит одна переменная}}$ (невыполнение этого условия является частой ошибкой при решении задач). Получается, что не более чем за $n$ шагов алгоритм даст канонический вид.\\
+        Если на некотором этапе переменных в квадрате не осталось, но есть выражение вида $c\cdot x_i\cdot x_j\ (i\neq j)$, то делают замену переменных:
+        \[\begin{cases}
+            x_i = x_i' - x_j'\\
+            x_j = x_i' + x_j'
+        \end{cases}\Rightarrow cx_ix_j =c\left((x_i')^2 - (x_j')^2\right)\]
+        Получили новые квадраты, продолжаем выполнение метода (то есть выделяем полный квадрат при необходимости).
+        \[\alpha_ix_i^2 + 2x_i\underset{\text{нет }x_i}{\underbrace{(\beta_1x_1 + \dots + \beta_nx_n)}} = \alpha_i \left( x_i^2 + 2x_i\frac{\beta_i x_1+\dots + \beta_n x_n}{\alpha_i} + \left(\frac{\beta_1 x_1 + \dots + \beta_n x_n}{\alpha_i} \right)^2 \right) -\]
+        \[- \frac{\beta_1 x_1 + \dots + \beta_n x_n}{\alpha_i}= \alpha_i\underset{\text{заменяем на }y_i}{\underbrace{\left( x_i + \frac{\beta_1 x_1 + \dots + \beta_n x_n}{\alpha_i} \right)}} - \underset{\text{уже без }x_i}{\underbrace{\frac{\left( \beta_1 x_1 +\dots + \beta_n x_n \right)^2}{\alpha_i}}}\]
+        То есть $x_i$ полностью ушла под квадрат.
+        \item Метод Якоби. (может быть пройдём на семинаре)
+        \item Симметичный Гаусс. (может быть пройдём на семинаре)
+        \item Метод приведения к главным осям (только для канонического). (может быть пройдём на семинаре)
+    \end{enumerate}
+    \begin{enumerate}
+        \item[Теорема.] $\underline{\text{Закон инерции квадратичной формы}}$
+    \end{enumerate}
+    Для любых двух канонических видов одной квадратичной формы.
+    $q(x) = \lambda_1 x_1^2 + \dots + \lambda_k x_k^2,\ \lambda_i \neq 0,\ i = \overline{1,\ k}\\
+    q(y) = \mu_1 y_1^2 + \dots + \mu_m y_m^2,\ \mu_j \neq 0,\ j = \overline{1,\ m}$\\
+    где $x,\ y\in V$\\
+    То есть это запись одной и той же квадратичной формы в разных базисах.
+    \begin{enumerate}
+        \item $k = m = \Rg A \leftarrow$ равно рангу квадратичной формы. При этом $k = m$ может быть меньше размерности $V$, то есть $k = m\leq n = \dim V$
+        \item Количество положительных $\lambda_i$ совпадает с количество положительных $\mu_j$. 
+        Это называется положительный индекс инерции квадратичной формы.
+        \item[Обозначение:] $i_+$
+        \item Количество отрицательных $\lambda_i$ совпадает с количеством отрицательрных $\mu_i$ и называется $\underline{\text{отрицательным индексом инерции}}$.
+        \item[Обозначение:] $i_-$
+        \item[Определение:] \Underl{Сигнатурой} квадратичной формы называют два числа $(i_+,\ i_-)$.
+        \item[Замечание:] Если у двух квадратичных форм совпадают сигнатуры, то существует невырожденная линейное преобразование ($=$замена координат, $=$замена базиса),  которое одну квадратичную форму переводит в другую.\\
+        Сначала обе в нормальный вид, он совпадает, так как одинаковое количество $+1$ и $-1$, и для одной преобразование в обратную сторону.
+        \item[Замечание:] Если у двух квадратичных форм разные сигнатуры $(i_+,\ i_-)$, то одну нельзя перевести в другую невырожденным линейным преобразованием. То есть квадратичные формы разные.
+        \item[Замечание:] $\Rg A = i_+ + i_-$. Иногда вводят величину $S = i_+ - i_-$. Знание $\Rg A$ и $S$ эквивалентно знанию $i_+$ и $i_-$, и поэтому число $S$ иногда называют сигнатурой. 
+    \end{enumerate}
+    \[\text{Линейные отображения и линейные операторы}\]
+    Пусть $V_1$ и $V_2$ - два линейных пространства над полем $F$
+    \begin{enumerate}
+        \item[Определение:] Отображение $\varphi: V_1\longrightarrow V_2$ называется \Underl{линейным}, если
+        \begin{enumerate}
+            \item[1.] $\forall x,\ y\in V_1,\ \varphi(x + y) = \varphi(x) + \varphi(y)$
+            \item[2.] $\forall x\in V_1,\ \forall \alpha \in F\ \varphi(\alpha x) = \alpha \varphi(x)$
+            \item[Замечание:] эти два условия равносильны $\varphi(\alpha x + \beta y) = \alpha \varphi(x) + \beta\varphi(y)$ 
+        \end{enumerate}
+        \item[Замечание:] Линейное отображение это гомоморфизм линейных пространств, и есть обозначение $\varphi\in \Hom(V_1,\ V_2)$
+        \item[Определение:] Если $V_1 = V_2 = V$ (пространства совпадают), то линейное отображение $\varphi$ называется \Underl{линейным оператором} (л. о.) 
+    \end{enumerate}
+    Пусть $e_1,\dots,\ e_n$ - базис в $V_1$, $\dim V_1 = n$\\
+    $f_1,\dots,\ f_m$ - базис в $V_2$, $\dim V_2 = m$\\
+    Рассмотрим векторы $\varphi(e_1),\dots,\ \varphi(e_n)\in V_2$ (образы базисных векторов первого пространства под действием $\varphi$), и разложим их по базису второго пространства $f_1,\dots,\ f_m:$
+    \[\begin{cases}
+        \varphi(e_1) = a_{1\, 1}f_1 + a_{2\, 1}f_2 + \dots + a_{m\, 1} f_m\\
+        \vdots\\
+        \varphi(e_n) = a_{1\, n}f_1 + a_{2\, n}f_2 + \dots + a_{m\, n} f_m
+    \end{cases}\]
+    \begin{enumerate}
+        \item[Определение:] \Underl{Матрица линейного отображения} в паре базисов $(e_1,\dots,\ e_n)$ и $(f_1,\dots,\ f_m)$ это матрица:
+        \[[\varphi]_{e\, f} = A_{e\, f} = \left.\underset{\dim V_1}{\underbrace{\begin{pmatrix}
+            a_{1\, 1} & \dots & a_{1\, n}\\
+            a_{2\, 1} & \dots & a_{2\, n}\\
+            \vdots & \ddots & \vdots\\
+            a_{m\, 1} & \dots & a_{m\, n}
+        \end{pmatrix}_{m\times n}}}\right\} \dim V_2\]
+        По столбцам стоят координаты образов векторов первого базиса при разложении по второму базису.
+        \item[Определение:] Пусть $\varphi: V_1\longrightarrow V$ - линейный оператор и $e_1,\dots,\ e_n$ - базис.\\
+        Пусть $\begin{cases}
+            \varphi(e_1) = a_{1\, 1}e_1 + a_{2\, 1}e_2 + \dots + a_{n\, 1} e_n\\
+            \vdots\\
+            \varphi(e_n) = a_{1\, n} e_1 + a_{2\, n} e_2 + \dots + a_{n\, n} e_n 
+        \end{cases}$\\
+        То есть образы базисных векторов под дейсвтием $\varphi$ разложим по тому же базису.\\
+        Тогда:
+        \[A_e = \begin{pmatrix}
+            a_{1\, 1} & \dots & a_{1\, n}\\
+            a_{2\, 1} & \dots & a_{2\, n}\\
+            \vdots & \ddots & \vdots\\
+            a_{n\, 1} & \dots & a_{n\, n}
+        \end{pmatrix}\]
+        Называется \Underl{матрицей линейного оператора}
+        \item[Пример:] $\varphi(x) = \operatorname{\text{Пр}}_L x$, где $L = \mathcal{L}(\overline{i})$ в $V_3$, где $\overline{i}$ - ось абсцисс.\\
+        Рассмотрим стандартный базис $\{\overline{i},\ \overline{j},\ \overline{k}\}$ в $V_3$.
+        \[\begin{cases}
+            \varphi(i) = i = 1\cdot i + 0\cdot j + 0\cdot k\\
+            \varphi(j) = 0\\
+            \varphi(k) = 0
+        \end{cases}\Rightarrow A_{\{i,\ j,\ k\}} = \begin{pmatrix}
+            1 & 0  & 0\\
+            0 & 0 & 0\\
+            0 & 0 & 0
+        \end{pmatrix}\]
+        \item[Теорема:] (о том, что действие линейного оператора полностью определяется его матрицей)\\
+        Пусть $\varphi$ - линейный оператор в пространстве $V$\\
+        $e = (e_1,\dots,\ e_n)$ - базис в $V,\ x\in V$ - вектор.\\
+        $x^e = \begin{pmatrix}
+            x_1\\
+            \vdots\\
+            x_n
+        \end{pmatrix}$ - столбец координат вектора $x$ в базисе $e$, то есть $x = x_1 e_1 + \dots + x_n e_n$\\
+        Пусть $A_e$ - матрица линейного оператора $\varphi$ в базисе $e$, тогда:
+        \[\big(\varphi(x)\big)^e = A_e \cdot x^e,\ (\text{матричное произведение})\]
+        \item[Доказательство:] $\varphi(x) = \varphi(x_1 e_1 + \dots + x_1 e_1) \overset{\text{по линейности}}{=} x_1 \varphi(e_1) + \dots + x_n \varphi(e_n) \overset{\text{определение}}{=}\\
+        \overset{\text{матрицы л.о.}}{=} x_1(a_{1\, 1} e_1 + a_{2\, 1} e_2 + \dots + a_{n\, 1} e_n) + \dots + x_1(a_{1\, n} e_1 + a_{2\, 1} e_2 + \dots + a_{n\, n} e_n) = (a_{1\, 1} x_1 + a_{1\, 2}x_2 + \dots + a_{1\, n}x_n)e_1 + \dots + (a_{n\, 1}x_1 + a_{n\, 2}x_2 + \dots + a_{n\, n}x_n)e_n$ - получили разложение $\varphi(x)$ по базису $e$\\
+        $\Rightarrow \big(\varphi(x)\big)^e = \begin{pmatrix}
+            a_{1\, 1}x_1 + a_{1\, 2}x_2 + \dots a_{1\, n} x_n\\
+            \vdots \quad \vdots \quad \vdots\\
+            a_{n\, 1} x_1 + a_{n\, 2} x_2 + \dots + a_{n\, n} x_n
+        \end{pmatrix}$\\
+        Но это результат умножения $A_e$ на $\begin{pmatrix}
+            x_1\\
+            \vdots\\
+            x_n
+        \end{pmatrix} = x^e$, то есть $\big( \varphi(x) \big)^e = A_e\cdot x^e$, ч.т.д.
+        \item[Замечание:] Для линейных отображений аналогично
+        \[\big(\varphi(x)\big)^f = A_{e\, f} x^e\]
+        \item[Замечание:] При фиксированном базисе есть биекция между линейными операторами (линейными отображениями) и матрицами $n\times n,\ (m\times n)$.
+    \end{enumerate}
+        \[\textbf{Лекция 17 апреля.}\]
+        \[\text{Линейные операторы}\]
+        (Напоминание) Пусть $\varphi: V\longrightarrow V$ - линейный оператор в пространстве $V$, фиксируем базис $e = \{e_1,\dots,\ e_n\}$ в $V$.\\
+        Тогда $\exists!$ матрица линейного оператора $A_e$ в базисе $e$, что
+        \[\forall x\in V\ \big(\varphi(x)\big)^e_{n\times 1} = \underset{n\times n}{A_e}\cdot x^e_{n\times 1}\]
+        Для линейного отображения $\phi: V_1\longrightarrow V_2$ в фиксированной паре базисов $e,\ f$
+        \[\big( \phi(x) \big)^f_{m\times 1} = \underset{m\times n}{A_{e\, f}}\cdot x^e_{n\times 1}\]
+        \begin{enumerate}
+            \item[Утверждение:]Пусть $A$ - матрица линейного оператора $\varphi$ в базисе $e$.\\
+            $A'$ - матрица линейного оператора $\varphi$ в базисе $e'$\\
+            Пусть $T$ - матрица перехода в $V$ от базисе $e$ к базису $e'$.\\
+            Тогда $A' = T^{-1}\cdot A\cdot T$
+            \item[Доказательство:] По доказанному: 
+            \begin{equation}
+                y = A\cdot x,\ y = \big(\varphi(x)\big)^e
+            \end{equation}
+            \begin{equation}
+                y' = A'\cdot x',\ y' = \big( \varphi(x) \big)^{e'}
+            \end{equation}
+            $y = T\cdot y'$ (так как $y' = T^{-1}y$) и $x = Tx'$ - формула зименения координат вектора при замене базиса.\\
+            Подставляем в $(1)$: $T\cdot y' = A\cdot T\cdot x'$, но $T$ - невырожденная матрица (так как она является матрицей перехода), домножим слева на $T^{-1}\Rightarrow\\
+            \Rightarrow y' = \underset{A'}{\underbrace{T^{-1}\cdot A\cdot T}}\cdot x'$, сравним с $(2)\Rightarrow A' = T^{-1}\cdot A\cdot T$, так как матрица линейного оператора в заданном базисе единственная.
+            \item[Утверждение:] Пусть $\varphi$ - линейное отображение линейного пространства $V_1б\ (\dim V_1 = n)$ в линейное пространство $V_2,\ (\dim V_2 = m)$.\\
+            Пусть $A_{\varepsilon_1\, \varepsilon_2}$ - матрица линейного отображения в паре базисов $\varepsilon_1$ в пространстве $V_1$ и $\varepsilon_2$ в пространстве $V_2$.\\
+            Тогда, если $T_1$ - Это матрица перехода в $V_1$ от базиса $\varepsilon_1$ к базису $\varepsilon_1'$.\\
+            $T_2$ - матрица перехода в $V_2$ от $\varepsilon_2$ к $\varepsilon_2'$.\\
+            Тогда имеет место следующее равенство:
+            \[\underset{m\times n}{A_{\varepsilon_1'\, \varepsilon_2'}} = \underset{m\times m}{T_2^{-1}}\cdot \underset{m\times n}{A_{\varepsilon_1 \varepsilon_2}}\cdot \underset{n\times n}{T_1}\]
+            \item[Доказательство:] Пусть $y$ - образ $x$ под действием $\varphi$ \big(то есть $y = \varphi(x)$\big), тогда:\\
+            $(1)\quad y^{\varepsilon_2} = A_{\varepsilon_1\, \varepsilon_2} \cdot x^{\varepsilon_1}\leftarrow$ в старом базисе\\
+            $(2)\quad y_{\varepsilon_2'} = A_{\varepsilon_1' \varepsilon_2'}\cdot x^{\varepsilon_1'}\leftarrow$ в новом базисе\\
+            $\begin{matrix}
+                x^{\varepsilon_1} = T_1\cdot x^{\varepsilon_1'}\\
+                y^{\varepsilon_2} = T_2\cdot y^{\varepsilon_2'}
+            \end{matrix}\leftarrow$ формула изменения координат вектора\\
+            Подставим в $(1)$, получим:\\
+            $T_2 y^{\varepsilon_2'} = A_{\varepsilon_1\, \varepsilon_2}T_1 x^{\varepsilon_1'}$. Домножим на $T_2^{-1}$ слева, так как $T_2$ - невырожденная$\Rightarrow\\
+            \Rightarrow y^{\varepsilon_2'} = \underset{A_{\varepsilon_1'\, A_{\varepsilon_2'}}}{\underbrace{T_2^{-1} A_{\varepsilon_1\, \varepsilon_2} T_1}} x^{\varepsilon_1'}$, сравнивая с $(2)\Rightarrow\\
+            \Rightarrow A_{\varepsilon_1'\, \varepsilon_2'} = T_2^{-1}\cdot A_{\varepsilon_1\, \varepsilon_2} T_1$
+            \item[Определение:] Квадратные матрицы $A$ и $B$ называются \Underl{подобными}, если существует невырожденная матрица $C$:
+            \[B = C^{-1}AC\quad (\det C\neq 0)\] 
+            \item[Замечание:] Матрицы линейных операторов в разных базисах подобны между собой.
+            \item[Утверждение:] Определители подобных матриц равны.
+            \item[Доказательство:] Пусть $A$ и $B$ подобны, то есть $B = C^{-1}AC\Rightarrow$
+        \end{enumerate}
+            \[\det B = \det \left(C^{-1} A C\right) = \det C^{-1}\det A\det C = \frac{\det C}{\det C}\det A = \det A\]
+        \begin{enumerate}
+            \item[Замечание:] Это означает, что $\det A$ - определитель матрицы линейного оператора не зависит от выбора базиса, то есть является инвариантом замены координат (и $\Rg A$ - тоже инвариант)
+            \item[Определение:] \Underl{Ядром} линейного отображения $\varphi: V_1\longrightarrow V_2$ назыается множество:
+            \[\ker \varphi = \left\{x\in V_1 \big|\ \varphi(x) = 0\right\} = \varphi^{-1}(0)\subseteq V_1\]
+            \Underl{Образом} линейного отображения $\varphi$ называется множество
+            \[\operatorname{Im} \varphi = \left\{ x \in V_2\ \big|\ \exists y\in V_1:\ \varphi(y) = x \right\} = \varphi(V_1)\subseteq V_2\]
+            \item[Замечание:] $\ker \varphi$ и $\operatorname{Im}\varphi$ являются линейными подпространствами в $V_1$ и $V_2$ соответственно (проверить замкнутость по оперицаям).
+            \item[Утверждение:] Пусть $\varphi: V_1\longrightarrow V_2$ - линейное отображение.\\
+            Тогда $\dim \ker \varphi + \dim \operatorname{Im}\varphi = n = \dim V_1$  
+            \item[Доказательство:] Зафиксируем базис $e = \{e_1,\dots,\ e_n\}$ в $V_1$\\
+            $\forall x\in V_1$ можно представить в виде $x = x_1 e_1 + \dots + x_n e_n\\
+            \varphi(x) = x_1 \varphi(e_1) + \dots + x_n \varphi(e_n)$, но $\varphi(e_1),\dots,\ \varphi(e_n)$ - столбцы матрицы линейного отображения (если фиксировать базис и в $V_2$).\\
+            $\operatorname{Im} \varphi = \mathcal{L}\big(\varphi(e_1),\dots,\ \varphi(e_2)\big)$ (линейная оболочка). $\Rightarrow\\
+            \Rightarrow \dim \operatorname{Im}\varphi = \Rg A$ - ранг матрицы линейного отображения.\\
+            Ядро $\varphi$ описывается однородной СЛАУ $Ax = 0$, размерность пространства её решений (то есть число векторов ФСР) равна $k = n - \Rg A$, где\\
+            $k$ - размерность ядра,\\
+            $n$ - размерность образа.\\
+            Итак, $\dim \ker \varphi + \dim \operatorname{Im} \varphi = n$, где $n = \dim V_1$.
+            \item[Замечание:] Если $\varphi:\ V\longrightarrow V$ - линейный оператор (то есть $\ker \varphi,\ \operatorname{Im}\varphi \subseteq V$), то вообще говоря,\\
+            $V \neq \ker \varphi + \operatorname{Im}\varphi$, хотя и $\dim \ker \varphi + \dim \operatorname{Im}\varphi = \dim V$
+            \item[Пример:] Рассмотрим линейное пространство $\mb{R}_n[x]$ - пространство многочленов от $x,\ \deg f \leq n$ с вещественными коэффициентами и оператор $\mathcal{D}: f\mapsto f'\leftarrow$ производная, $\mathcal{D}:\ \mb{R}_n[x]\rightarrow \mb{R}_n[x]$\\
+            $\dim \mb{R}_n[x] = n + 1$, так как $\mb{R}_n[x] = \mathcal{L}\{1,\ x,\ x^2,\dots,\ x^n\}$\\
+            $\operatorname{Im} \mathcal{D} = \mb{R}_{n - 1}[x],\ \dim \operatorname{Im}\mathcal{D} = n\\
+            \ker \mathcal{D} = \mathcal{L}(1)$ - константы, $\dim\ker \mathcal{D} = 1$,\\
+            но $\ker \mathcal{D} \subseteq \operatorname{Im}\mathcal{D}$, но\\
+            $\dim \ker \mathcal{D} + \dim \operatorname{Im}\mathcal{D} = n + 1 = \dim \mb{R}_n[x]$
+        \end{enumerate}
+        \[\text{Действия с линейными операторами и их матрицами}\]
+        Пусть $A$ и $B$ - линейные операторы на линейном пространстве $V$ над полем $F$, тогда
+        \begin{enumerate}
+            \item[Определение:] $\left( A + B \right)(x) = A(x) + B(x)\\
+            \left(\lambda A\right)(x) = \lambda A(x)$ - умножение на число $\lambda \in F$\\
+            $\left(A\cdot B\right)(x) = A\big(B(x)\big)$ - умножение линейного оператора (композиция)
+            \item[Замечание:] $A + B,\ \lambda\cdot A,\ A\cdot B$ - снова линейные операторы (провека по определению)
+            \item[Утверждение:] Пусть фиксирован базис $e = \{e_1,\dots,\ e_n\}$. Тогда:
+        \end{enumerate}
+            \[\begin{cases}
+                (1)\ \big(A + B\big)_e = A_e + B_e\\
+                (2)\ \big(\lambda A\big)_e = \lambda A_e\\
+                (3)\ \left( A\cdot B\right)_e = A_e\cdot B_e
+            \end{cases}\]
+        \begin{enumerate}
+            \item[Доказательство (3):] $\Big(\big(A\cdot B\big)(x)\Big)^e = A_e\cdot \big(B(x)\big)^e = A_e \cdot B_e x^e = (AB)_e x^e\Rightarrow\\
+            \Rightarrow (AB)_e = A_e B_e$, так как матрица линейных операторов в фиксированном базисе единственна. 
+        \end{enumerate}
+        \[\text{Собственные векторы и собственные числа}\]
+        \begin{enumerate}
+            \item[Определение:] Число $\lambda$ называется \Underl{собственным числом} (или \Underl{собственным значением}, то есть \Underl{с. з.}) линейного оператора
+            $\varphi: V\longrightarrow V,\ \text{где $V$ - линейное простраснтво}$, если $\exists$ вектор $x\in V,\ x\neq 0$, такой что $\varphi(x) = \lambda\cdot x$. При этом $x$ называется \Underl{собственным вектором} (\Underl{с. в.}), отвечающим собственному значению $\lambda$.
+            \item[Замечание:] Если $x$ - собственный вектор, отвечающих собственному значению $\lambda$, то $\forall \alpha \in F,\ \alpha \neq 0$, $\alpha x$ - тоже собственный вектор, отвечающий собственному значению $\lambda$
+            $\varphi(\alpha x) = \alpha \varphi(x) = \alpha \lambda x = \lambda (\alpha x)\Rightarrow \alpha x$ - собственный вектор.
+            \item[Замечание:] Дригими словами, собственный вектор - ненулевой вектор, остающийся коллинеарным (либо равным 0) самому себе под действием линейного оператора $\varphi$
+            \item[Пример 1:] Пусть $\operatorname{\text{Пр}}_{Ox}: V_2\longrightarrow V_1$ $(V_2 \cong \mb{R}^2)$ - линейный оператор проекции на $Ox$ в плоскости $V_2$. Все векторы $\in Ox$, отличные от $0$ - собственные векторы.\\
+            Например, $\vec{i} = (1,\ 0)$\\
+            $\varphi(\vec{i}) = i$ - собтсвенный вектор, отвечающий собственному значению $\lambda_1 = 1\\
+            \varphi(\vec{j}) = 0\Rightarrow j$ - собственный вектор, отвечающий собственному значению $\lambda_2 = 0 $\\
+            В базисе $\{i,\ j\}$ - базис из собственных векторов. Матрица линейного оператора $A = \begin{pmatrix}
+                1 & 0\\
+                0 & 0
+            \end{pmatrix}$ - диагональная матрица.\\
+            $V_2 = Ox \oplus Oy$\\
+            Бывает, что нет собственных значений и собственных векторов для линейного оператора 
+        \end{enumerate}\newpage
+        \[\textbf{Лекция 24 апреля}\]
+        \begin{enumerate}
+            \item[\textbf{Задача:}]
+        \end{enumerate}
+        Есть $10000$ человек.\\
+        Каждый день $15\%$ здоровых заболевают и $10\%$ больных выздоравливают (можно болеть повторно).\\
+        В первый день заболело $100$ человек.\\
+        $A$ - линейный оператор ежедневной динамики.\\
+        $\DS\lim_{n\rightarrow \oo} = A^n(x_0),\ x_0 = \begin{pmatrix}
+            9900\\
+            100
+        \end{pmatrix}$\\
+        $A^n-?$
+        \begin{enumerate}
+            \item[\textbf{Определение:}]
+        \end{enumerate}
+        Для произвольной квадратной матрицы $A$ определитель
+        \[\chi_A (\lambda) = \det(A-\lambda E) \]
+        Называется \Underl{характеристическим многочленом} матрицы $A$, а уравнение $\chi_A(\lambda)$ - многочлен степени $n$
+        \begin{enumerate}
+            \item[\textbf{Пример:}]
+        \end{enumerate}
+        $A = \begin{pmatrix}
+            1 & 1\\
+            1 & 1
+        \end{pmatrix},\ \chi_A(\lambda) = \det\left(\begin{pmatrix}
+            1 & 1\\
+            1 & 1
+        \end{pmatrix} - \begin{pmatrix}
+            \lambda & 0\\
+            0 & \lambda
+        \end{pmatrix} \right) = \begin{vmatrix}
+            1 - \lambda & 1\\
+            1 & 1 - \lambda
+        \end{vmatrix} = \lambda^2 - 2\lambda = \lambda(\lambda - 2)$
+        \begin{enumerate}
+            \item[\textbf{Утверждение:}]
+        \end{enumerate}
+        Характеристические уравнения подобных матриц совпадают.
+        \begin{enumerate}
+            \item[\textbf{Доказательство:}]
+        \end{enumerate}
+        $A$ и $A'$ подобны, если существует $T,\ \det T \neq 0:\ A' = A' = T^{-1}AT$
+        \[\chi_{A'}(\lambda) = \det(A' - \lambda' E)=\det(T^{-1}AT - \lambda T^{-1}ET)=\det\big(T^{-1}(A-\lambda E)T\big)=\]
+        \[=\det T^{-1}\det(A - \lambda E)\det T = \det(A - \lambda E) = \chi_A\]
+        \newpage
+        \begin{enumerate}
+            \item[\textbf{Следствие:}]
+        \end{enumerate}
+        Характеристические многочлены для матриц линейных операторов в разных базисах совпадают (сами матрицы могут различаться).\par
+        То есть корректно говорить о характеристическом многочлене для линейного оператора (то есть он инвариантен при замене базиса).
+        \begin{enumerate}
+            \item[\textbf{Определение:}]
+        \end{enumerate}
+        Множество всех собственных значений линейного оператора называют \Underl{спектром} линейного оператора.
+        \begin{enumerate}
+            \item[\textbf{Теорема:}]
+        \end{enumerate}
+        $\lambda$ - собственное значение линейного оператора $\Leftrightarrow \lambda$ - корень характеристического уравнения линейного оператора (над алгебраически замкнутым полем (например $\mathbb{C}$) или в случае, когда корни характеристического уравнения лежат в том же поле, над которым рассматривается линейный оператор).
+        \begin{enumerate}
+            \item[\textbf{Доказательство:}]
+        \end{enumerate}
+        \begin{enumerate}
+            \item[Необходимость]:
+            \begin{enumerate}
+                \item[Дано:] $\lambda$ - собственное значение линейного оператора $A$
+                \item[Доказать:] $\lambda$ - корень $\chi_A(\lambda) = 0$ 
+            \end{enumerate}
+        \end{enumerate}
+        По определению $\exists x\neq 0\ A(x) = \lambda\cdot x$, то есть $A(x) = \lambda \cdot I(x)$, где $I(x)$ - тождественный линейный оператор.\par
+        \begin{equation*}
+            (A - \lambda I)(x) = 0\quad (*)
+        \end{equation*}
+        Запишем равенство $(*)$ в некотором базисе $e$:
+        \[(A_e - \lambda E)\cdot x^e = 0\]
+        Это однородное СЛАУ с ненулевым решением, то есть по критерию существования ненулевых решений $\det(A_e - \lambda E) = 0$, а это и есть\\
+        $\chi_A(\lambda) = 0$\newpage
+        \begin{enumerate}
+            \item[Достаточность]:
+            \begin{enumerate}
+                \item[Дано:] $\lambda$ - корень $\chi_A(\lambda) = 0$ 
+                \item[Доказать:] $\lambda$ - собственное значение линейного оператора $A$
+            \end{enumerate}
+        \end{enumerate}
+        Если $\lambda$ - корень, то в заданном базисе $e$ выполнено равенство
+        \[\det(A_e - \lambda E) = 0\]
+        То есть однородное СЛАУ $(A_e - \lambda E)x^e = 0$ имеет ненулевое решение (по тому же критерию) и соответственно выполняется $(*)$
+        \[(A - \lambda I)(x) = 0 \Leftrightarrow A(x) = \lambda x\quad (x\neq 0)\]
+        То есть $x$ - собственный вектор, отвечающий собственному значению $\lambda$, ч.т.д.
+        \begin{enumerate}
+            \item[\textbf{Пример:}]
+        \end{enumerate}
+         $\chi_A = (\lambda) = \lambda(\lambda - 2)\Rightarrow \left[ \begin{gathered}
+            \lambda_1 = 0\\
+            \lambda_2 = 2
+         \end{gathered} \right.$ - спектр линейного оператора $A$
+         \begin{enumerate}
+            \item[\textbf{Определение:}]
+         \end{enumerate}
+         \Underl{Алгебраической кратностью} собственного значения $\lambda$ называется его кратность как корня характеристического уравнения.
+         \begin{enumerate}
+            \item[\textbf{Обозначение:}]
+         \end{enumerate}
+         $m_i$ - алгебраическая кратность собственного значения $\lambda_i$
+         \begin{enumerate}
+            \item[\textbf{Пример:}]
+         \end{enumerate}
+         \[\chi_A(\lambda) = (\lambda - 5)^3(\lambda - 2)^2\]
+         Тогда будет верно:
+         \[\begin{cases}
+            \lambda_1 = 5\leftarrow m_1 = 3\\
+            \lambda_2 = 2\leftarrow m_2 = 2
+         \end{cases}\]
+         \begin{enumerate}
+            \item[\textbf{Определение:}]
+         \end{enumerate}
+         Пусть $A: V\rightarrow V$ - линейный оператор $\lambda$ - собственное значение линейного оператора $A$. Тогда множество
+         \[V_{\lambda} = \{x\in V\ |\ Ax = \lambda x\}\]
+         называется \Underl{собственным подпространством} отвечающим собственному значению $\lambda$.\newpage
+         \begin{enumerate}
+            \item[\textbf{Замечание:}]
+         \end{enumerate}
+         $V_{\lambda}$ является линейным подпространством в $V$ (состоящим из собственных векторов, отвечающих собственным значениям $\lambda$, и нулевого вектора).
+         \begin{enumerate}
+            \item[\textbf{Доказательство:}]
+         \end{enumerate}
+         \[Ax = \lambda x\Leftrightarrow (A - \lambda E)\cdot x = 0\]
+         То есть $V_{\lambda} = \ker (A - \lambda I)$ линейный оператор с матрицей $(A - \lambda E)$\par
+         $\ker B$ любого линейного оператора $B$ является подпространством в $V$ (проверить замкнутость).
+         \begin{enumerate}
+            \item[\textbf{Определение:}]
+         \end{enumerate}
+         Размерность собственного подпространства $V_{\lambda}$ называется \Underl{геометрической кратностью} собственного значения $\lambda$
+         \begin{enumerate}
+            \item[\textbf{Обозначение:}]
+         \end{enumerate}
+         $s_i$ - геометрическая кратность собственного значения $\lambda$
+         \begin{enumerate}
+            \item[\textbf{Замечание:}]
+         \end{enumerate}
+         Геометрическая кратность собственного значения $\lambda$ всегда $\geq 1$ $(s_i \geq 1)$.
+         \begin{enumerate}
+            \item[\textbf{Теорема:}] без доказательства
+         \end{enumerate}
+         Геометрическая кратность собственного значения $\lambda$ всегда $\leq$ его алгебраической кратности $(s_i \leq m_i)$
+         \begin{enumerate}
+            \item[\textbf{Определение:}]
+         \end{enumerate}
+         \Underl{Следом матрицы} $A\in M_n(F)$ называется сумма е диагональных элементов
+         \[\operatorname{tr}A = \DS \sum_{i = 1}^{n}a_{i\, i}\]
+         \begin{enumerate}
+            \item[\textbf{Утверждение:}]
+         \end{enumerate}
+         $\forall A,\ B\in M_n(F)\quad \tr(AB) = \tr(BA)$
+         \begin{enumerate}
+            \item[\textbf{Утверждение:}]
+         \end{enumerate}
+         Пусть $A$ - линейный оператор в базисе $e$. Тогда $\tr A_e$ не зависит от выбора базиса.
+         \begin{enumerate}
+            \item[\textbf{Доказательство:}]
+         \end{enumerate}
+         $A_{e'} = T^{-1}A_e T$, где $A_{e'}$ - матрица линейного оператора $A$ в базисе $e'$. Тогда $\tr A_{e'} =\tr\big((T^{-1}A_e)T\big) = \tr\big(T(T^{-1}A_e)\big) = \tr A_e$.\newpage
+         \begin{enumerate}
+            \item[\textbf{Итого:}]
+         \end{enumerate}
+         $\Rg A,\ \det A,\ \tr A,\ \chi_A(\lambda)$ - инварианты линейного оператора при замене базиса.
+         \begin{enumerate}
+            \item[\textbf{Замечание:}]
+         \end{enumerate}
+         $A\in M_n(\mb{R}),\ \chi_A(\lambda) = \det(A - \lambda E) = (-1)^n \lambda^n \neq (-1)^{n - 1}\tr A \lambda^{n - 1} + \dots\\
+         \dots + \det A$
+         \[\underline{\text{Критерий диагональности линейного оператора}}\]
+         \begin{enumerate}
+            \item[\textbf{Утверждение:}]
+         \end{enumerate}
+         Пусть $\lambda_1,\dots,\ \lambda_k$ - собственные значения линейного оператора и пусть $\lambda_i \neq \lambda_j$ при $i\neq j$.\\
+         Пусть $v_1,\dots,\ v_k$ - соответствующие собственные векторы\\
+         Тогда $v_1,\dots,\ v_k$ - линейно независимы.\\
+         То есть собственные векторы, отвечающие различным собственным значениям являются линейно независимыми.
+         \begin{enumerate}
+            \item[\textbf{Доказательство:}]
+         \end{enumerate}
+         Применим принцип математической индукции.\\
+         При $k = 1$ - утверждение верно, так как собственный вектор по определению $\neq 0$ и соответсвенно образует линейно независимую систему.\\
+         Пусть утверждение верно при $k = m$.\\
+         Добавим ещё $1$ собтвенный вектор $v_{m + 1}$, отвечающий собственному значению $\lambda_{m + 1}$. Докажем, что система собственных векторов $v_1,\dots,\ v_{m + 1}$ останется линейно независимой.\\
+         Рассмотрим равенство:\\
+         \[1.\ \alpha_1 v_1 + \dots \alpha_m v_m + \alpha_{m +  1}v_{m + 1}= 0\]
+         Применим к $1.$ линейный оператор $A$, тогда по линейности:\\
+         \[\alpha_1 A(v_1) + \dots + \alpha_m A(v_m) + \alpha_{m + 1} A(v_{m + 1}) = 0\]
+         Вспомним, что $v_i$ - собственный вектор для собственного значения $\lambda_i$
+         \[2.\ \alpha_1 \lambda_1 v_1 + \dots + \alpha_m \lambda_m v_m + \alpha_{m + 1} \lambda_{m + 1} v_{m + 1}\]
+         Умножим $1.$ на $\lambda_{m + 1}$ и вычтем из $2.$
+         \[\alpha_1(\lambda_1 - \lambda_{m + 1})v_1 + \dots + \alpha_m(\lambda_m - \lambda_{m + 1})v_m = 0\]
+         По предположению индукции $v_1,\dots,\ v_m$ - линейно независимы:
+         \[\begin{cases}
+            \alpha_1(\lambda_1 - \lambda_{m + 1}) = 0\\
+            \dots\\
+            \alpha_m(\lambda_m - \lambda_{m + 1}) = 0
+         \end{cases}\Leftrightarrow \begin{cases}
+            \alpha_1 = 0\\
+            \dots\\
+            \alpha_m = 0
+         \end{cases}\]
+         Теперь $1.$ можно записать в виде:
+         \[0 + \alpha_{m + 1}v_{m + 1} = 0\]
+         Но $v_{m + 1} \neq 0$ (собственный вектор), значит $\alpha_{m + 1} = 0\Rightarrow$ по определению система $v_1,\dots,\ v_{m + 1}$ является линейно независимой.
+         \begin{enumerate}
+            \item[\textbf{Утверждение:}] Критерий диагональности матрицы линейного оператора $A$
+         \end{enumerate} 
+         Матрица линейного оператора $A$ является диагональной в данном базисе $\Leftrightarrow$ все векторы этого базиса являются собственными векторами для линейного оператора $A$.
+         \begin{enumerate}
+            \item[\textbf{Доказательство:}]
+         \end{enumerate}
+         \begin{enumerate}
+            \item[Необходимость]:
+            \begin{enumerate}
+                \item[Дано:] $A_e$ - диагональная матрица
+                \item[Доказать:] $e$ состоит из собственных векторов по $A$ 
+            \end{enumerate}
+         \end{enumerate}
+         По определению матрицы линейного оператора в $j$-м столбце стоят координаты вектора $A(e_j)$ в базисе $e_1,\dots,\ e_n$\\
+         Если $A_e$ - диагональна, то $j$-й столбей имеет вид $(0,\dots,\ 0,\ \lambda_j,\ 0,\dots,\ 0)\Rightarrow\\
+         \Rightarrow A(e_j) = 0 + \dots + 0 + \lambda_j e_j + 0 + \dots + 0$, то есть $A(e_j) = \lambda_j e_j,\ e_j \neq 0\Rightarrow$ по определению $e_j$ - собственный вектор, отвечающий собственному значению $\lambda_j$ (на диагонали матрицы $A_e$ - собственное значение).
+         \newpage
+         \begin{enumerate}
+            \item[Достаточность]:
+            \begin{enumerate}
+                \item[Дано:] $e$ состоит из собственных векторов по $A$ 
+                \item[Доказать:] $A_e$ - диагональная матрица
+            \end{enumerate}
+         \end{enumerate}
+         $A(e_j) = \lambda_j e_j,\\ \forall j = \overline{1,\ n}\Rightarrow $ по определению матрицы линейного оператора, все элементы кроме диагональных равны нулю в каждом столбце (на диагонали собственные значения $\lambda_i$), ч.т.д.
+         \begin{enumerate}
+            \item[\textbf{Определение:}]
+         \end{enumerate}
+         Линейный оператор, для которого в линейном пространстве $V$ существует базис из собственных векторов, называется \Underl{диагонализируемым}.
+         \begin{enumerate}
+            \item[\textbf{Теорема:}] Критерий диагонализируемости линейного оператора.
+         \end{enumerate}
+         (Без доказательства) Линейный оператор диагонализируем $\Leftrightarrow\\
+         \Leftrightarrow$ для любых его собственных значений $\lambda_i$ алгебраическая кратность равна геометрической кратности $(m_i = s_i)$
+         \begin{enumerate}
+            \item[\textbf{Теорема:}]
+         \end{enumerate}
+         Если характеристическое уравнение линейного оператора, действующего в пространстве $V$, где $\dim V = n$ имеет ровно $n$ попарно различных корней, то оператор диагонилизируеем (корни лежат в поле, над которым рассматривается линейное пространство $V$)
+         \begin{enumerate}
+            \item[\textbf{Доказательство:}]
+         \end{enumerate}
+         Если собственное значение $\lambda_i\in F$, то ему можно сопоставить хотя бы один собственный вектор $v_i$. Система $v_1,\dots,\ v_n$ - линейно независимы, так как по условию $\lambda_i \neq \lambda_j$, при $i \neq j$ (доказали ранее), их число равно $\dim V\Rightarrow$ они образуют базис в $V$ из собственных векторов $\Rightarrow$ линейный оператор диагонализируем\newpage
+
+\[\textbf{Лекция 15 мая}\]
+
+    \[\text{Евклидовы пространства}\]
+    В этом разделе всякое поле будет полем вещественных чисел:
+    \[\forall F\ \text{F - поле} \Rightarrow F = \mathbb{R}\]
+    \subsubsection*{Определение:}
+    Евклидово пространство $\mathcal{E}$ - это пара $(V,\ g(x,\ y))$, где\\
+    $V$ - линейное пространство,\\
+    $g(x,\ y)$ - скалярное произведение, то есть симметрическая, положительно определённая билинейная форма.\\
+    То есть для $g: V\times V\to \mb{R}$ выполняются свойства (аксиомы скалярного произведения):
+    \begin{enumerate}
+        \item[1.] $\forall x,\ y\in\mathcal{E}\ g(x,\ y) = g(y,\ x)$ - \Underl{симметричность}
+        \item[2.] $\forall x,\ y,\ z\in \mathcal{E}\ \forall \alpha,\ \beta\in \mb{R}$
+        \[g(\alpha x + \beta y, z) = \alpha g(x,\ z) + \beta g(y,\ z),\text{ \Underl{линейность}}\]
+        \item[3.] $\forall x,\in \mathcal{E}\ g(x,\ x)\geq 0 \wedge g(x,\ x) = 0\Leftrightarrow x = 0$ нулевой вектор 
+    \end{enumerate}
+    \subsubsection*{Пример:}
+    \begin{enumerate}
+        \item[1.] $\mathcal{E} = \Big(V_3,\ g(x,\ y) = |x|\cdot |y| \cos \widehat{(x,\ y)}\Big)$ - евклидово пространство
+        \item[2.] $V = C[a,\ b]$ - функции, непрерывные на отрезке $[a,\ b]$
+        \[g\big(f_1(x),\ f_2(x)\big) = \int_a^b f_1(x) f_2(x)\, dx - \text{скалярное произведение}\Rightarrow\]
+        \[\Rightarrow \mathcal{E} = \Big(C[a,\ b],\ g(x,\ y)\Big) - \text{евклидово пространство}\]
+    \end{enumerate}
+    \subsubsection*{Определение:}
+    Пусть $\mathcal{E}$ - евклидово пространство. Тогда величина $||v|| = \sqrt{g(v,\ v)}$ (может обозначаться как $|v|$) называется \Underl{нормой (длиной)} вектора $v$.
+    \subsubsection*{Определение:}
+    $\forall v_1,\ v_2\in \mathcal{E},\ v_1,\ v_2 \neq 0$:
+    \[\cos \varphi = \frac{g(v_1,\ v_2)}{||v_1||\cdot ||v_2||} = \frac{g(v_1,\ v_2)}{\sqrt{g(v_1,\ v_1)} \sqrt{g(v_2,\ v_2)}}\]
+    Где $\varphi$ - угол между $v_1,\ v_2$.\\
+    Это определение угла между векторами (берём $\varphi\in [0,\ \pi]$)
+    \subsubsection*{Определение:}
+    $\forall x,\ y\in \mathcal{E}$:
+    \[\rho(x,\ y) = ||x - y|| - \text{расстояние между векторами $x,\ y$}\]
+    \subsubsection*{Утверждение (Неравенство Коши-Буняковского)}
+    $\forall x,\ y\in \mathcal{E}$:
+    \[|g(x,\ y)| \leq ||x||\cdot ||y||\]
+    \subsubsection*{Доказательство:}
+    $\forall \lambda \in \mb{R}$:
+    \[0 \leq g(\lambda x - y,\ \lambda x - y) = \lambda g(x,\ \lambda x - y) - g(y,\ \lambda x - y) =\]
+    \[= \lambda^2 g(x,\ x) - \lambda g(x,\ y) - \lambda g(y,\ x) + g(y,\ y) = ||x||^2 \lambda^2 - 2g(x,\ y)\lambda + ||y||^2\]
+    Квадратное уравнение относительно $\lambda$, которое $\geq 0\ \forall \lambda\in \mathbb{R}\Rightarrow\\
+    \Rightarrow D \leq 0,\ D = 4\big(g(x,\ y)\big)^2 - 4||x||^2\cdot||y||^2\leq 0\Rightarrow |g(x,\ y)|\leq ||x||\cdot ||y||$, ч.т.д.
+    \subsubsection*{Утверждение (неравенство треугольника):}
+    $\forall x,\ y\in\mathcal{E}$:
+    \[||x + y|| \leq ||x|| + ||y||\]
+    \subsubsection*{Доказательство:}
+    $||x + y||^2 = g(x + y,\ x + y) = ||x||^2 + 2g(x,\ y) + ||y||^2 \leq ||x||^2 + 2||x||\cdot ||y|| + ||y||^2 =\\
+    =\big(||x + y||\big)^2$. Тут было применено неравенство Коши-Буняковского. Так как норма вектора всегда $\geq 0$, То
+    \[||x + y|| \leq ||x||  + ||y||\]
+    \subsubsection*{Определение:}
+    Два вектора $x,\ y\in \mathcal{E}$ называются \Underl{ортогональными}, если $g(x,\ y) = 0$.
+    \subsubsection*{Определение:}
+    Система векторов $a_1,\dots,\ a_k$ называется:
+    \begin{enumerate}
+        \item[a.] \Underl{Ортогональной}, если $g(a_i,\ a_j) = 0,\ \forall i,\ j = \overline{1,\ k},\ i\neq j$
+        \item[b.] \Underl{Ортонормированной}, если она ортогональна и\\
+        $g(a_i,\ a_i) = 1,\ \forall i = \overline{1,\ k}$ 
+    \end{enumerate}
+    \subsubsection*{Лемма 1.}
+    Пусть $a_1,\dots,\ a_k$ - ортогональная система векторов, и $a_i\neq 0,\ i = \overline{1,\ k}$. Тогда эта система линейно независима.
+    \subsubsection*{Доказательство:}
+    Приравняем к нулю линейную комбинацию
+    \[\alpha_1 a_1 + \dots + \alpha_k a_k = 0\]
+    Домножим скларяно на $a_i$ для каждого $i = \overline{1,\ k}$
+    \[(\alpha_1 a_1 + \dots + \alpha_k a_k,\ a_i) = (0,\ a_i) = 0\]
+    \[\alpha_1 (a_1,\ a_i) + \dots + \alpha_i (a_i,\ a_i) + \dots + \alpha_k(a_k,\ a_i) = 0\Rightarrow\]
+    $\Rightarrow \alpha_i(a_i,\ a_i) = 0$, но $a_i\neq 0\Rightarrow \alpha_i = 0\Rightarrow$ по определению система $a_1,\dots,\ a_k$ линейно независима.
+    \subsubsection*{Замечание:}
+    Если $\dim \mathcal{E} = n$ и $k = n$, то $a_1,\dots,\ a_n,\ (a_i\neq 0,\ \forall i)$ образует ортогональный базис. Если рассмотреть $e_i = \frac{a_i}{||a_i||},\ i = \overline{1,\ n}$ (то есть \Underl{нормировать}), то получим ортонормированный базис.
+    \subsubsection*{Лемма 2.}
+    Пусть $x = x_1 e_1 + \dots + x_n e_n$, то есть $x_i$ - коэффициенты вектора $x$ в ортонормированном базисе. $e_1,\dots,\ e_n$, тогда $x_i = (x_1,\ e_i),\ \forall i = \overline{1,\ n}$\\
+    Если базис не является ортонормированным, но ортогонален, то $x_i = \frac{(x,\ e_i)}{(e_i,\ e_i)},\ i = \overline{1,\ n}$
+    \subsubsection*{Доказательство:}
+    $ = x_1 e_1 + \dots + x_n e_n\leftarrow$ умножим скалярно на $e_i$, $e = \overline{1,\ n}$
+    \[(x,\ e_i) = x_1\cdot g(e_1,\ e_i) + \dots + x_i\cdot g(e_i,\ e_i) + \dots + x_n\cdot g(e_n,\ e_i) = x_i\cdot g(e_i,\ e_i) = x_i\]
+    \subsubsection*{Замечание:}
+    Пусть $a_1,\dots,\ a_n$ - базис в $\mathcal{E}$. Тогда $g(x,\ y) = x^T\Gamma Y$, где $x,\ Y$ - столбцы координат векторов $x,\ y$ в базисе $a_1,\dots,\ a_n$,
+    \[\Gamma = \begin{pmatrix}
+        g(a_1,\ a_1) & \dots & g(a_1,\ a_n)\\
+        \vdots & \ddots & \vdots\\
+        g(a_1,\ a_n) & \dots & a(a_n,\ a_n)
+    \end{pmatrix}\]
+    \Underl{Матрица Грамма} (она же матрица билинейной формы).
+    \[\text{Свойства Грамма}\]
+    \begin{enumerate}
+        \item[1.] $\Gamma$ - симметрическая, то есть $\Gamma^T = \Gamma$ (из симметричности скалярного произведения). Более того $\forall x\neq 0\ \underset{=g(x,\ x)}{x^T\Gamma x} > 0$ (из положительной определённости)
+        \item[2.] Матрицы  Грамма двух базисов $e,\ e'$ связаны соотношением
+        \[\Gamma' = U^T \Gamma U\]
+        Где $U$ - матрица перехода $e\to e'$ (так как это верно для всмех билинейных форм).
+        \item[3.] $\det \Gamma = \operatorname{Gr} (a_1,\dots, a_n) > 0$ если $a_1,\dots,\ a_n$ - базис ($\det \Gamma$ называется \Underl{граммианом} и обозначается $\operatorname{Gr}$)
+    \end{enumerate}
+    \subsubsection*{Доказательство пункта 3.}
+    По свойству $2$ $\det \Gamma' = \det (U^T \Gamma U) = \det U^T \det \Gamma \det U = (\det U)^2\det \Gamma$\\
+    Перейдём к ортонормированному базису (далее докажем, что это всегда возможно). В ортонормированном базисе
+    \[\Gamma' = E,\ \det\Gamma' = \det E = 1\Rightarrow \det\Gamma = \frac{1}{(\det U)^2} > 0\]
+    \subsubsection*{Утверждение (Метод ортогонализации Грамма-Шмидта):}
+    Если $\mathcal{E}$ - евклидово пространство, то в нём существует ортонормированный базис.
+    \subsubsection*{Доказательство:}
+    Предъявим алгоритм, который по произвольному базису $a_1,\dots,\ a_n$ строит ортогональный $b_1,\dots b_n$ (из него можно получить ортонормированный $e_i = \frac{b_i}{||b_i||}$).
+    \begin{enumerate}
+        \item[1.] Так как $a_1\neq 0$ (вектор базиса), можно взять $b_1 = a_1$.
+        \item[2.] Будем считать $b_2$ в виде:
+        \[b_2 = a_2 - \alpha b_1,\ \alpha\in \mb{R}\]
+        Ищем $\alpha$ из условия $(b_1,\ b_2) = 0$. То есть:
+        \[(a_2 - \alpha b_1,\ b_1) = 0\Rightarrow (a_2,\ b_1) - \alpha(b_1,\ b_1) = 0\Rightarrow\]
+        Так как $(b_1,\ b_1)\neq 0$ может на него поделить
+        \[\Rightarrow \alpha = \frac{(a_2,\ b_1)}{(b_1,\ b_1)}\]
+        То есть $\alpha$ - проекция вектора $a_2$ на $a_1$, $b_2 = a_2 - \dfrac{(a_2,\ b_1)}{(b_1,\ b_1)}b_1$\\
+        Векторы $b_1,\ b_2$ линейно выражаются через $a_1,\ a_2\Rightarrow$ они принадлежат $\mathcal{E}$ (это может быть подпространство). При этом $a_1,\ a_2$ могут быть выражены через $b_1,\ b_2\Rightarrow b_1,\ b_2$ - линейно независимы.
+        \item[3.] Пусть $b_1,\dots,\ b_k,\ k\geq 2$, уже построены. Будем искать $b_{k + 1}$ в виде:
+        \[b_{k + 1} = a_{k + 1} - c_{k + 1,\ 1}b_1 - c_{k + 1,\ 2} b_2 - \dots - c_{k + 1,\ k} b_k\]
+        Коэффициент $c_{k + 1,\ i},\ i = \overline{1,\ k}$, найдём из условия ортогональности с $b_i$, домножим выражение скалярно на $b_i$.
+        \[0 = (b_{k + 1},\ b_i) = (a_{k + 1},\ b_i) - 0 - \dots - c_{k + 1,\ i}(b_i,\ b_i) - \dots - 0\Rightarrow\]
+        \[\Rightarrow c_{k + 1,\ i} = \frac{(a_{k + 1},\ b_i)}{(b_i,\ b_i)}\Rightarrow b_{k + 1} = a_{k + 1} - \sum_{i = 1}^{k} \frac{a_{k + 1},\ b_i}{(b_i,\ b_i)}b_i\]
+        Продолжаем так делать, пока не получим ортогональную линейно независимую систему векторов $b_1,\dots,\ b_n$, где $n = \dim \mathcal{E}\Rightarrow$ ортонормальный базис.
+    \end{enumerate}
+    \subsubsection*{Утверждение (четвёртое свойство матрицы Грамма):}
+    Определитель матрицы Грамма не меняется в процессе ортогонализации Грамма-Шмидта.
+    \[\operatorname{Gr}(a_1,\dots,\ a_n) = \det \Gamma = \det \Gamma' = \operatorname{Gr}(b_1,\dots,\ b_n) = ||b_1||^2\cdot\dots\cdot ||b_n||^2\]
+    Так как матрица Грамма ортогонального базиса является диагональной.
+    \subsubsection*{Доказательство:}
+    Рассмотрим матрицу перехода от $a$ к $b$:
+    \[U_{a\to b} = \begin{pmatrix}
+        1 & \dots & * &\dots & *\\
+        \vdots & \ddots & \dots & * & \vdots\\
+        0 & \dots & 1 & \dots & *\\
+        \vdots & 0 & \dots & \ddots & \vdots\\
+        0 & \dots & 0 & \dots & 1
+    \end{pmatrix}\]
+    Получилась верхнетреугольная матрица, определитель которой равен $1$. И участвуют только векторы $b_{i}$ с $i\leq k$, которые выражаются через $a_j$, где $a_j \leq a_i\\
+    \Rightarrow \det U_{a\to b} = 1\Rightarrow$
+    \[\Rightarrow \operatorname{Gr} (b_1,\dots,\ b_n) = \det \Gamma' = (\det U)^2 \det \Gamma = 1\det \Gamma = \operatorname{Gr}(a_1,\dots,\ a_n)\]
+
+\[\textbf{Лекция 22 мая}\]
+\[\text{Свойства матрицы Грамма}\]
+    \begin{enumerate}
+        \item[1.] $F$ - симметрическаяи положительно определённая.
+        \item[2.] $\Gamma' = U^T\Gamma U$
+        \item[3.] Если $a_1,\dots,\ a_n$ - базис, то
+        \[\det \Gamma(a_1,\dots,\ a_n) = \operatorname{Gr}(a_1,\dots,\ a_n) > 0\]
+        \item[4.] Метод ортогонализации Грамма-Шмидта не меняет $\det \Gamma$
+        \[\operatorname{Gr}(a_1,\dots,\ a_n) = \operatorname{Gr}(b_1,\dots,\ b_n) = ||b_1||^2\dots ||b_n||^2\]  
+    \end{enumerate}
+    \subsubsection*{Утверждение (5 свойство матрицы Грамма).}
+    Пусть $a_1,\dots,\ a_n$ - некоторые векторы (необязательно базис). Тогда:
+    \[\underset{\text{л.н.з.}}{a_1,\dots,\ a_k}\Leftrightarrow \operatorname{Gr}(a_1,\dots,\ a_k) = \det \Gamma \neq 0\]
+    \subsubsection*{Доказательство:}
+    Составим линейную комбинацию $a_1,\dots,\ a_k$ и приравняем к нулю:
+    \[\alpha_1 a_1 + \dots + \alpha_k a_k = 0\quad\quad (1)\]
+    Умножим $(1)$ скалярно последовательно на $a_1,\dots,\ a_k$
+    \[\begin{cases}
+        \alpha_1 (a_1,\ a_1) + \alpha_2 (a_1,\ a_2) + \dots + \alpha_k(a_1,\ a_k) = 0\\
+        \vdots\\
+        \alpha_1(a_k,\ a_1) + \alpha_2 (a_k,\ a_2) + \dots + \alpha_k (a_k,\ a_k) = 0
+    \end{cases}\]
+    Это СЛАУ относительно неизвестных $\alpha_1,\dots,\ \alpha_k$ вида
+    \[\Gamma(a_1,\dots,\ a_k)\alpha = 0,\text{ где }\alpha = \begin{pmatrix}
+        \alpha_1\\
+        \vdots\\
+        \alpha_k
+    \end{pmatrix}\]
+    Однородная СЛАУ с квадратной матрицей $\Rightarrow$ по критерию существования ненулевого решения, существуют нетривиальные коэффициенты $\alpha$, такие что:
+    \[\alpha_1,\dots \alpha_k \Leftrightarrow \det \Gamma(a_1,\dots,\ a_k) = 0\]
+    то есть векторы $a_1,\dots a_k$ линейно независимы из $(1)$.
+    \subsubsection*{Замечание:}
+    В $V_3$ если $a_1,\ a_2,\ a_3$ - линейно независимые столбцы координат в некотором ортонормированном базисе, тогда
+    \[\Gamma (a_1,\ a_2,\ a_3) = A^T E A^T = A^T A,\text{ где } A = [a_1,\ a_2,\ a_3],\ \text{матрица по столбцам}\]
+    Равенство верно, так как матрица $A$ является матрицей перехода от ортонормированного базиса к базису $a$ (а в ОНБ $\Gamma = E$).\\
+    Получается $\operatorname{Gr}(a_1,\ a_2,\ a_3) = \left(\det A\right)^2$.\\
+    При этом $\det A = \left<a_1,\ a_2,\ a_3 \right> = V(a_1,\ a_2,\ a_3)$ - ориентированный объём параллелипипеда, построенного на векторах $a_1,\ a_2,\ a_3$.\\
+    То есть $|V(a_1,\ a_2,\ a_3)| = \sqrt{\operatorname{Gr}(a_1,\ a_2,\ a_3)}$
+    \subsubsection*{Замечание:}
+    В $n$-мерном случае положим
+    \[V(a_1,\dots,\ a_n) = \sqrt{\operatorname{Gr}(a_1,\dots,\ a_n)}\]
+    Объём $n$-мерного параллелипипеда, построенного на векторах $a_1,\dots,\ a_n$.
+    \[\underline{\text{Ортогональные дополнения}}\]
+    \subsubsection*{Определение:}
+    Пусть $H$ - подпространство в евклидовом пространстве $\mathcal{E}$, тогда множество:
+    \[H^{\bot} = \big\{ x\in \mathcal{E} \big|\forall h\in H\ (x,\ h) = 0 \big\}\]
+    называется \Underl{ортогональным дополнением} к пространству $H$.
+    \subsubsection*{Утверждение:}
+    $H^{\bot}$ является линейным подпространством в $\mathcal{E}$ и $\mathcal{E} = H\oplus H^{\bot}$\\
+    \Underl{Следствие:}\\
+    $\dim \mathcal{E} = \dim H + \dim H^{\bot}$
+    \subsubsection*{Доказательство:}
+    Проверим замкнутость операции сложения:
+    \[\forall h\in H\ \forall x_1,\ x_2\in H^{\bot}\ (x_1 + x_2,\ h) = (x_1,\ h) + (x_2,\ h) = 0 + 0 = 0\Rightarrow x_1 + x_2 \in H^{\bot}\]
+    Умножения на скаляр:
+    \[\forall h\in H,\ \forall x\in H^{\bot},\ \forall \alpha \in \mathbb{R}\ (\alpha x,\ h) = \alpha(x,\ h) = \alpha0 = 0\]
+    То есть $H^{\bot}$ - подпространство в $\mathcal{E}\Rightarrow\\
+    \Rightarrow$ можно рассмотреть сумму подпространств $H + H^{\bot}$\\
+    Докажем, что сумма $H+ H^{\bot}$ прямая.\\
+    \[\forall x\in H\cap H^{\bot}\ (x,\ x) = 0\Leftrightarrow x=0\Rightarrow H\cap H^{\bot} = \{0\}\Rightarrow \text{сумма прямая}\]
+    Покажем, что $H\oplus H^{\bot} = \mathcal{E}$\\
+    Пусть $f_1,\dots,\ f_m$ - ортонормированный базис в $H$ (существует по теореме о методе Грамма-Шмидта)ю\\
+    Дополним его до базиса в $\cal{E}$ векторами $f_{m + 1},\dots,\ f_n$\\
+    Применим процесс ортогонализации Грамма-Шмидта, получим векторы \[\underset{\text{уже ОНБ}}{\underbrace{f_1,\dots,\ f_m}},\ e_{m + 1},\dots,\ e_n\]
+    Тогда $e_{m + 1},\dots,\ e_n$ по построению ортогональны каждому вектору $f_1,\dots,\ f_m$, то есть ортогональны всему $H$, так как $H = \mathcal{L}(f_1,\dots,\ f_m)\leftarrow$ линейная оболочка, тогда $e_{m + 1},\dots,\ e_n\in H^{\bot}$ по определению.\\
+    То есть $\forall x\in \mathcal{E}$:
+    \[x = \underset{h\in H}{\underbrace{x_1 h_1 +\dots x_m h_m}} + \underset{h^{\bot}\in H^{\bot}}{\underbrace{x_{m + 1} e_{m + 1} + \dots + e_n}}\]
+    То есть все $x\in \mathcal{E}$ представимы в виде $x = h + h^{\bot}$, где $h\in H$, $h^{\bot}\in H^{\bot}$, что и означает, что $\mathcal{E} = H\oplus H^{\bot}$
+    \subsubsection*{Определение:}
+    Пусть $x = h + h^{\bot}$, где $h\in H,\ h^{\bot} \in H^{\bot}$, тогда - \Underl{ортогональная проекция} на $H$, а $h^{\bot}$ - \Underl{ортогональная составляющая} $x$ относительно $H$
+    \subsubsection*{Обозначение:}
+    $h = \operatorname{\text{Пр}}_H x$
+    \subsubsection*{Замечание:}
+    $\forall x\in \mathcal{E}\ \forall H\ \exists! h,\ h^{\bot}\ x = h + h^{\bot}$, так как $\mathcal{E} = H\oplus H^{\bot}$
+    \subsubsection*{Утверждение:}
+    $\left( H^{\bot}\right)^{\bot} = H$
+    \subsubsection*{Доказательство:}
+    $\forall h^{\bot}\in H^{\bot}\ \forall \in H\ x,\ h^{\bot}$ ортогональны$\Rightarrow H\subseteq \left(H^{\bot}\right)^{\bot}$\\
+    По предыдущему утверждению $\mathcal{E} = H\oplus H^{\bot}$ и $\mathcal{E} = H^{\bot}\oplus \left(H^{\bot}\right)^{\bot}\Rightarrow\\
+    \Rightarrow$ размерности $H$ и $\left( H^{\bot} \right)^{\bot}$ одинаковы $\Rightarrow H = \left( H^{\bot} \right)^{\bot}$
+    \subsubsection*{Утверждение:}
+    Пусть $H = \mathcal{L}(a_1,\dots,\ a_k)$ и $a_1,\dots,\ a_k$ - линейно незивисимы (то есть базис в $H$), тогда $\forall x\in \mathcal{E}$:
+    \[\operatorname{\text{Пр}}_H x = \underset{n\times k}{A}\cdot \underset{k\times k}{\left(A^T\cdot A\right)}^{-1} \cdot \underset{k\times n}{A^T}\cdot \underset{n\times 1}{x}\]
+    где $A = [a_1,\dots,\ a_k]$ - матрица $n\times k$, составленная из столбцов $a_1,\dots,\ a_k$, (координаты в некотором ортонормированном базисе).
+    \subsubsection*{Замечание:}
+    $h^{\bot} = x - h =  (E - A(A^T\cdot A)^{-1}\cdot A^T)x$
+    \subsubsection*{Доказательство:}
+    По утверждению, доказанному выше:
+    \[\forall x\in \mathcal{E}\ x = h + h^{\bot},\ h\in H,\ h^{\bot}\in H^{\bot}\]
+    При этом $a_1,\dots,\ a_k$ - базис в $H\Rightarrow x = \alpha_1 a_1 + \dots + \alpha_k a_k + h^{\bot}\qquad (2)$\\
+    То есть если мы знаем коэффициенты $\alpha_1,\dots,\ \alpha_k$, то мы знаем\\
+    $h = \operatorname{\text{Пр}}_H x = \alpha_1 a_1 + \dots + \alpha_k a_k$\\
+    Равенство $(2)$ последовательно скалярно умножим на $a_1,\dots,\ a_k$
+    \[\begin{cases}
+        \alpha_1 (a_1,\ a_1) + \alpha_2 (a_1,\ a_2) + \dots + \alpha_k (a_1,\ a_k) = (a_1,\ x)\\
+        \vdots\\
+        \alpha_2 (a_k,\ a_1) + \alpha_2 (a_k,\ a_2) + \dots + \alpha_k (a_k,\ a_k) = (a_k,\ x) 
+    \end{cases}\quad (3)\]
+    В $i$-м уравнении слагаемые $(a_i,\ h^{\bot}) = 0$, так как $h^{\bot}\in H^{\bot}$. Перепишем $(3)$ в матричном виде (все координаты векторов даны в ортонормированном базисе).
+    \[(3)\Leftrightarrow A^T\cdot A\cdot \alpha = A^T x,\ \alpha = \begin{pmatrix}
+        \alpha_1\\
+        \vdots\\
+        \alpha_k
+    \end{pmatrix},\ x = \begin{pmatrix}
+        x_1\\
+        \vdots\\
+        x_n
+    \end{pmatrix},\ A = [a_1,\dots,\ a_k]\]
+    То есть $\Gamma(a_1,\dots,\ a_k) = A^T A$, поскольку $(a_i,\ a_j) = a_i^TEa_j = a_i^T a_j$. $E$ - матрица Грамма в ортонормированном базисе.\\
+    Таким образом $\Gamma(a_1,\dots,\ a_k) = A^T A$ невырождена по свойству 5 матрицы Грамма (векторы $a_1,\dots,\ a_k$ линейно независимы), значит существует $\Gamma^{-1} = (A^T A)^{-1}$.\\
+    Тогда $(3)\Rightarrow \alpha = (A^{T}A)^{-1}A^{T} x$\\
+    $\operatorname{\text{Пр}}_H x = \alpha_1 a_1 + \dots + \alpha_k a_k = [a_1,\dots,\ a_k] = A\alpha = A(A^T A)^{-1}A^T x$.
+    \subsubsection*{Определение:}
+    Множество решений неоднородной СЛАУ $Ax = b$ называется \Underl{линейным} \Underl{алгебраическим многообразием}
+    \subsubsection*{Замечание:}
+    По теореме о структуре общего решения неоднородной СЛАУ: общее решение НСЛАУ (то есть произвольный элемент многообразия) равен частному решению НСЛАУ + общее решение ОСЛАУ. Это означает, что линейное многообразие $P = x_0 + L$, где $x_0\in P$ (частное решение НСЛАУ $Ax = b$), а $L$ - множетсво решений ОСЛАУ $Ax = 0$, то есть подпространство, являющееся линейной оболочкой ФСР ОСЛАУ.\\
+    Таким образом $L$ всегда содержит $\{0\}$ (начало координат), а $x_0\in P$ - вектор сдвига. Любое линейное многообразие можно получить (параллельным) сдвигом некоторого подпространства $L$ на вектор $x_0\in P$
+    \subsubsection*{Определение:}
+    Расстоянием от точки $M$, заданной радиус-вектором $x$ до линейного многообразия $P$ называется
+    \[\rho(M,\ P) = \inf_{u\in P} \rho(x,\ u) = \inf_{u\in P} ||x - u|| \]
+    Заметим, что в конечномерном евклидовом пространстве $\inf$ всегда достигается (это $\min$), то есть
+    \[\rho(M,\ P) = \rho (x,\ P) = \min_{u\in P} ||x - u||\]
+    \subsubsection*{Замечание:}
+    $\rho(x,\ P) =$ длине ортогональной составляющей вектора $x - x_0$ относительно пространства $L$, где $P = x_0 + L$, то есть
+    \[\rho(x,\ P) = ||(x - x_0)^{\bot}||\]
+    \subsubsection*{Доказательство:}
+    \[\forall u \in P\ x - u = x - (x_0 + \underset{\in L}{l}) = \operatorname{\text{Пр}}_L (x - x_0 - l) + (x - x_0 - l)^{\bot}\]
+    Где $l\in L\Rightarrow l^{\bot} = 0\Rightarrow x - u = \underset{\in L}{\underbrace{\operatorname{\text{Пр}}_L(x - x_0) - l}} + \underset{\in L^{\bot}}{\underbrace{(x - x_0)}}^{\bot}$. Проекцию можем уменьшать, варьируя $L$. Тогда из геометрии получим:
+    \[\forall u\in P\ ||(x - x_0)^{\bot}|| \leq ||(x - u)||,\text{ (катет не больше гипотенузы)}\]
+    При $l = \operatorname{\text{Пр}}_L (x - x_0)$, то есть $u = x_0 + \operatorname{\text{Пр}}_L (x - x_0)$ достигается равенство$\Rightarrow$
+    \[\rho(x,\ P) = \min_{u\in P} ||x - u|| = || (x - x_0)^{\bot}||\]
+
+\[\textbf{Лекция 29 мая}\]
+
+    \subsubsection*{Утверждение:}
+    Расстояние $\rho (M,\ P)$ между точкой $M$ с радиус вектором $X$ и линейным многообразием $P = x_0 + L$, где $L = \mathcal{L}(a_1,\dots,\ a_k)$ и $a_1,\dots,\ a_k$ - линейно независимые (то есть базис $\mathcal{L}$), вычисляется по формуле:
+    \[\rho(M,\ P) = \sqrt{\frac{\Gr(a_1,\dots,\ a_k,\ x - x_0)}{\Gr(a_1,\dots,\ a_k)}}\]
+    1 способ: $\rho (M,\ P) = \left\Vert (x - x_0)^{\bot}_L \right\Vert$
+    \subsubsection*{Доказательство:}
+    Применим к $a_1,\dots,\ a_k,\ x - x_0$ процесс ортогонализации Грамма-Шмидта.
+    \[\underset{\text{базис $L$}}{\underbrace{a_1,\dots,\ a_k}},\ x - x_0\longmapsto \underset{\text{базис $L$}}{\underbrace{b_1,\dots,\ b_k}},\ (x - x_0)^{\bot}\]
+    $(x - x_0)^{\bot}$, так как он ортогонален $L = h(b_1,\dots,\ b_k)$ и при ортогонализации мы вычитаем из $x - x_0$ его проекцию на $L$
+
+    По свойству 4 матрицы Грамма определитель не меняется в процессе ортогонализации, тогда:
+    \[\Gr(a_1,\dots,\ a_k,\ x - x_0) = \Gr(b_1,\dots,\ b_k,\ (x - x_0)^{\bot}) = \underset{\Gr(a_1,\dots,\ a_k)}{\underbrace{\Vert b_1\Vert^2\dots \Vert b_k \Vert ^2}} \cdot \Vert (x - x_0)^{\bot}\Vert^2\]
+    И так как $\rho(M,\ P) = \Vert (x - x_0)^{\bot}\Vert$, то
+    \[\rho(M,\ P)^2 = \frac{\Gr(a_1,\dots,\ a_k,\ x - x_0)}{\Gr(a_1,\dots,\ a_k)},\ \text{ч.т.д.}\]
+
+    \[\text{Линейные операторы в евклидовых пространствах}\]
+    \subsubsection*{Определение:}
+    Линейный оператор $\mathcal{A}^*: \mathcal{E}\longrightarrow \mathcal{E}$ называется \Underl{сопряжённым} к линейному оператору $\mathcal{A}: \mathcal{E} \longrightarrow \mathcal{E}$, если:
+    \[\forall x,\ y\in\mathcal{E}\ (\mathcal{A} x,\ y) = (x,\ \mathcal{A}^* y)\]
+
+    \subsubsection*{Определение:}
+    Линейный оператор $\mathcal{A}: \mathcal{E} \longrightarrow \mathcal{E}$ называется \Underl{самосопряжённым}, если:
+    \[\forall x,\ y\in\mathcal{E}\ (\mathcal{A}x,\ y) = (x,\ \mathcal{A}y)\Rightarrow \mathcal{A} = \mathcal{A}^*\]
+
+    \subsubsection*{Лемма:}
+    Пусть $M,\ N \in M_n(\mb{R})$, тогда:
+    \[\forall x,\ y\in \mb{R}^n\ x^T My = x^T N y\Rightarrow M = N\]
+    \subsubsection*{Доказательство:}
+    $x,\ y$ - любые, возьмём элементы канонического базиса: $e_i \begin{pmatrix}
+        {0}_1\\ {0}_2\\ \vdots\\ {1}_i\\ \vdots\\ {0}_n
+    \end{pmatrix},\dots,\ e_j =\begin{pmatrix}
+        {0}_1\\ {0}_2\\ \vdots\\ {1}_j\\ \vdots\\ {0}_n
+    \end{pmatrix}\Rightarrow\\
+    \Rightarrow e_i M e_j = [M]_{i\, j} = [N]_{i\, j} = e_i N e_j\Rightarrow \forall i,\ j = \overline{1,\ n}\ M = N$, ч.т.д.
+    \subsubsection*{Теорема (о существовании сопряжённого):}
+    Пусть $\mathcal{A}: \mathcal{E} \longrightarrow \mathcal{E}$. Тогда существует единственный сопряжённйы линейный оператор $\mathcal{A}^*: \mathcal{E} \longrightarrow \mathcal{E}$, причём его матрица в любом базисе $e$ имеет вид:
+    \[(\mathcal{A}^*)_e = \Gamma^{-1} (\mathcal{A}_e)^T \Gamma\]
+    \subsubsection*{Замечание:}
+    Если базис $e$ - ортонормированный, то $\mathcal{A}_e^* = \mathcal{A}_e^T$
+    \subsubsection*{Доказательство:}
+    Запишем равенство $(1):\ (\mathcal{A} x,\ y) = (x,\ \mathcal{A}^* y)$ в базисе $e$.\\
+    Пусть $x^e,\ y^e$ - столбцы координат векторов $x,\ y$ в базисе $e$
+    \[(\mathcal{A} x)^e = \mathcal{A}_e x^e,\hspace{1cm} (x,\ y) = (x^e)^T \Gamma y^e\]
+    Тогда в матричной записи равенство $(1)$ имеет вид:
+    \[\left( (\mathcal{A} x)^e \right)^T \Gamma y^e = (x^e)^T \Gamma \left(\mathcal{A}^* y\right)^e\Leftrightarrow\]
+    \[\Leftrightarrow (x^e)^T \underset{M}{\underbrace{\mathcal{A}_e^T \Gamma}} y^e = (x^e)^T \underset{N}{\underbrace{\Gamma \mathcal{A}^*_e}} y^e\Rightarrow\]
+    $\Rightarrow$ так как верно для всех $x,\ y$, то по лемме $M = N$, то есть $\Gamma \mathcal{A}^*_e = \mathcal{A}_e^T = \Gamma\Rightarrow$ так как $e$ базис, то по свойству 5 матрицы Грамма, существует $\Gamma^{-1}$, то есть:
+    \[\mathcal{A}_e^* = \Gamma^{-1} \mathcal{A}_e^T \mathcal{A}\]
+    То есть в любом базисе сопряжённый линейный оператор задаётся матрицей $\mathcal{A}^*_e$ и действие линейного оператора полностью определяется его матрицей $\Rightarrow$ существует единственный сопряжённый линейный оператор.
+    \subsubsection*{Следствие (критерий самосопряжённости):}
+    Линейный оператор самосопряжён $\Leftrightarrow$ матрица линейного оператора $\mathcal{A}$ в ортонормированном базисе симметрическая.
+    \subsubsection*{Доказательство:}
+    $\mathcal{A}^* = \mathcal{A}$. В ортонормированном базисе $e$ выглядит так:
+    \[\mathcal{A}_e^* = A_e^T\wedge \forall \text{ базиса}\ \mathcal{A}_e^* = \mathcal{A}_e\Leftrightarrow \text{в ОНБ} \mathcal{A}_e = \mathcal{A}_e^T \] 
+    \subsubsection*{Теорема:}
+    Все корни характеристического многочлена самосопряжённого линейного оператора является вещественными числами.
+    \subsubsection*{Доказательство:}
+    Пусть $\lambda_i\in \mb{C}$ - корень характеристичекого уравнения $\chi_{\mathcal{A}}(\lambda) = 0$ и $\mathcal{A}$ - самосопряжённый линейный оператор, значит в некотором ортонормированном базисе $\det(\mathcal{A} - \lambda_i E) = 0\Rightarrow$ СЛАУ $(\mathcal{A} - \lambda_i E) x = 0\ (2)$ имеет ненулевое решение (это координаты собственного вектора, соответствующего собственному значению $\lambda_i$)\\
+    Пусть $x = \begin{pmatrix}
+        x_1 \\ x_2\\ \vdots\\ x_n
+    \end{pmatrix}\neq 0$ - решение. Вообще говоря $\forall k = \overline{1,\ n}\ x_k \in \mathbb{C}$.\\
+    Рассмотрим $\overline{x} = \begin{pmatrix}
+        \overline{x}_1 \\ \overline{x}_2\\ \vdots\\ \overline{x}_n
+    \end{pmatrix}\neq 0$ (комплексные сопряжённые чисел).\\
+    Умножим $(2)$ слева на $(\overline{x})^T:\ (\overline{x})^T(A - \lambda_i E)x = 0 \Leftrightarrow \overline{x}^T A x - \lambda_i \overline{x}^T x = 0$, где $\overline{x}^T x = \overline{x}_1 x_1 + \dots + \overline{x}_n x_n = \underset{\in \mb{R}}{\underbrace{|x_1|^2 + \dots + |x_n|^2}} > 0$.\\
+    Тогда $\lambda_i = \dfrac{\overline{x}^T A x}{\overline{x}^T x}$ - отношение Рэлея (Rayleigh).\\
+    Покажем, что $\omega = \overline{x}^T A x$ - вещественное число, то есть $\overline{\omega} = \omega$:
+    \[\omega = \omega^T,\text{ (так как это число)}\Rightarrow \]
+    \[\Rightarrow \omega = (\overline{x}^T A x)^T = x^T A^T (\overline{x}^T)^T = x^T A \overline{x}\] Так как $A = A^T$ в ортонормированном базисе. $\overline{A} = A$, так как $A\in M_n(\mb{R})$\\
+    Но $\overline{\omega} = \overline{(\overline{x}^T A x)} = \overline{\left(\overline{x}^T\right)}\overline{A} \overline{x} = x^T A \cdot \overline{x}\Rightarrow \overline{\omega} = \omega\Rightarrow$ собственное значение $\lambda_i$ - тоже является вещественным, ч.т.д.
+    \subsubsection*{Теорема (без доказательства):}
+    Пусть $\lambda_i$ - собственное значение самосопряжённого линейного оператора $\mathcal{A}$. Тогда алгебраическая кратность $\lambda_i$ всегда равна геометрической кратности $\lambda_i$ $\big(m(\lambda_i) = s(\lambda_i) \big)$
+    \subsubsection*{Следствие:}
+    Самосопряжённый линейный оператор всегда является диагонилизируемым.
+    \subsubsection*{Утверждение:}
+    Собственные векторы самосопряжённого линейного оператора, отвечающие \Underl{различным} собственным значениям, являются ортогональными.
+    \subsubsection*{Доказательство:}
+    Пусть $\lambda_1,\ \lambda_2$ такие собственные значения, что:
+    \[\begin{cases}
+        \lambda_1 \neq \lambda_2\\
+        \exists x_1 \neq 0: \mathcal{A}x_1 = \lambda_1 x_1\\
+        \exists x_2 \neq 0: \mathcal{A}x_2 = \lambda_2 x_2
+    \end{cases}\]
+    $(\mathcal{A}x_1,\ x_2) = (\lambda_1 x_1,\ x_2) = \lambda_1(x_1,\ x_2)$. Из самосопряжённости получим:
+    \[(\mathcal{A}x_1,\ x_2) = (x_1,\ \mathcal{A}x_2) = (x_1,\ \lambda_2 x_2) = \lambda_2 (x_1,\ x_2)\]
+    То есть $\underset{\neq 0}{\underbrace{(\lambda_1 - \lambda_2)}}(x_1,\ x_2) = 0\Rightarrow (x_1,\ x_2) = 0$, то есть $x_1,\ x_2$ - ортогональны.
+    \subsubsection*{Теорема (без доказательства):}
+    Для всех самосопряжённым линейных операторов $\mathcal{A}$ существует ортонормированный базисиз собственных векторов, его матрица $\mathcal{A}_e$ в этом базисе диагональна, на диагонали стоят собственные значения, повторяющиейся столько раз, какова их кратность.
+    \subsubsection*{Теорема (частный случай):}
+    Если собственные значения $\lambda_1,\dots,\ \lambda_k$ - самосопряжённого линейного оператора $\mathcal{A}: \mathcal{E} \longrightarrow \mathcal{E},\ \dim \mathcal{E} = n$, попарно различны ($i \neq j \Rightarrow \lambda_i \neq \lambda_j$), то в $\mathcal{E}$ сущетсвует ортонормированный базис (из собственных векторов), в котором матрица линейного оператора $\mathcal{A}$ имеет диагональный вид.
+    \subsubsection*{Доказательство:}
+    Если собственные значения $\lambda_i,\dots,\ \lambda_k$ - попарно различны, то, выбрав для каждого $\lambda_i$ соответсвующий ему собственный вектор $b_i$, мы получим $n$ ненулевых векторов, они будут линейно независимы по доказанному ранее и, так как $\mathcal{A}$ - самосопряжённый линейный оператор, то система $b_1,\dots,\ b_n$ будет ортогональна $\Rightarrow$ ортогональный базис. Нормируя его, получим ортонормированный базис из собственных векторов $e_i = \dfrac{b_i}{\Vert b_i \Vert}$, в нём матрица линейного оператора диагональна.
+    \[\text{Ортогональные матрицы и ортогональные линейные операторы}\]
+    \subsubsection*{Определение:}
+    \Underl{Квадратную} матрицу $U = M_n(\mb{R})$ называют \Underl{ортогональной}, если
+    \[U^T\cdot U = E\]
+    \subsubsection*{Пример:}
+    $A_{\varphi} = \begin{pmatrix}
+        \cos \varphi & -\sin \varphi\\
+        \sin \varphi & \cos \varphi
+    \end{pmatrix}$ - матрица поворота
+    \[\text{Свойства ортогональных матриц}\]
+    \subsubsection*{1. $|\det U| = 1$}
+    $\det(U^T\cdot U) = \det E = 1\Rightarrow (\det U)^2 = 1\Rightarrow |\det U| = 1$
+    \subsubsection*{Замечание:}
+    Ортогональная матрица всегда невырождена.
+    \subsubsection*{2. $U^{-1} = U^T$}
+    По замечанию $U^{-1}$ всегда существует, равенство $U^T U = E$ умножим справа на $U^{-1}$:
+    \[(U^T U)\cdot U^{-1} = E U^{-1}\]
+    \[U^T(U\cdot U^{-1}) = U^{-1}\Rightarrow U^T = U^{-1}\]
+    \subsubsection*{3. $\textbf{$U^T \text{ тоже ортогональная матрица}$}$}
+    $(U^T)^T U^T = U\cdot U^{-1} = E$
+    \subsubsection*{4. Произведение ортогональный матриц одинакового размера - ортогональная матрица}
+    \subsubsection*{Доказательсто:}
+    $(U_1 U_2)^T (U_1 U_2) = U_2^T \underset{E}{\underbrace{U_1^T U_1}} U_2 = \underset{E}{\underbrace{U_2^T U_2}} = E$
+    \subsubsection*{Замечание:}
+    Все ортогональные матрицы $n\times n$ над $\mb{R}$ с операцией умножения матриц образуют группу $O_n(\mb{R})$
+    \subsubsection*{Определение:}
+    Линейный оператор $\mathcal{A}: \mathcal{E} \longrightarrow \mathcal{E}$ называется \Underl{ортогональным}, если
+    \[\forall x,\ y\in \mathcal{E}\ (\mathcal{A} x,\ \mathcal{A} y) = (x,\ y)\]
+    То есть говорят, что $\mathcal{A}$ "сохраняет склаярное произведение".
+    \subsubsection*{Замечание:}
+    Ортогональный оператор сохраняет норму вектора и угол между векторами.
+    \subsubsection*{Доказательство:}
+    $\Vert \mathcal{A} x\Vert^2 = (\mathcal{A} x,\ \mathcal{A} x) = (x,\ x) = \Vert x \Vert ^2\\
+    \cos (\widehat{\mathcal{A} x,\ \mathcal{A} y}) = \dfrac{(\mathcal{A} x,\ \mathcal{A} y)}{\Vert \mathcal{A} x\Vert \cdot \Vert \mathcal{A} y \Vert} = \dfrac{(x,\ y)}{\Vert x\Vert\cdot \Vert y \Vert} = \cos (\widehat{x,\ y})$
+    \subsubsection*{Теорема (критерий ортогональности линейного оператора с помощью матрицы):}
+    $\mathcal{A}$ - ортогональный линейный оператор $\Leftrightarrow$ его матрица в ортонормированном базисе ортогональна.
+    \subsubsection*{Доказательство:}
+    \subsubsection*{\Underl{Необходимость}}
+    Дано: $\mathcal{A}_e$ - ортогональный линейный оператор.\\
+    Доказать: $\mathcal{A}_e$ - ортогональная матрица в ортонормированном базисе $e$.
+    \[(\mathcal{A} x,\ \mathcal{A} y) = (x,\ y)\Rightarrow (\mathcal{A}_e x)^T \Gamma (\mathcal{A}_e y) = x^T E y\Leftrightarrow\]
+    $E$ - матрица грамма в ортонормированном базисе
+    \[\Leftrightarrow \forall x,\ y\in \mathcal{E}\ x^T \underset{M}{\underbrace{\mathcal{A}_e^T \mathcal{A}_e}}y = x^T E y\]
+    Тогда по лемме $\mathcal{A}_e^T \mathcal{A}_e = E$, то есть по определению $A_e$ - ортогональная матрица.
+    \subsubsection*{\Underl{Достаточность}}
+    Дано: $\mathcal{A}_e$ - ортогональная матрица в ортонормированном базисе\\
+    Доказать: $\mathcal{A}$ - ортогональный линейный оператор.
+    \[\mathcal{A}_e^T \mathcal{A}_e = E\Rightarrow \forall x,\ y\in \mathcal{E}\ x^T (A_e^T A_e)y = x^T E y\Leftrightarrow\]
+    \[\Leftrightarrow (A_e x)^T \Gamma (A_e y) = x^T E y\]
+    А это матричная запись скалярного произдведения в ортонормированном базисе. То есть
+    \[\forall x,\ y\in \mathcal{E}\ (\mathcal{A} x,\ \mathcal{A} y) = (x,\ y)\Rightarrow\]
+    $\Rightarrow \mathcal{A}$ ортогональный линейный оператор, ч.т.д.
+    \subsubsection*{Теорема (критерий ортогональности линейного оператора):}
+    Пусть линейный оператор $\mathcal{A}: \mathcal{E}\longrightarrow \mathcal{E}$, тогда:\\
+    $\mathcal{A}$ - ортогональный линейный оператор $\Leftrightarrow \mathcal{A}$ переводит любой ортонормированный базис $e_1,\dots,\ e_n$ в ортонормированный $\mathcal{A} e_1,\dots,\ \mathcal{A} e_n$ 
+
+\[\textbf{Лекция 5 июня}\]
+
+    ОНБ = ортонормированный базис.
+    \subsubsection*{Теорема ($2^{\text{ой}}$ Критерий ортогональности линейного оператора)}
+    Пусть линейный оператор $\mathcal{A}:\ \mathcal{E} \longrightarrow \mathcal{E}$, тогда $\mathcal{A}$ - ортогональный линейный оператор $\Leftrightarrow$ $\mathcal{A}$ переводит ОНБ $e_1,\dots,\ e_n$ в ОНБ $\mathcal{A}e_1,\dots,\ \mathcal{A}e_n$.
+    
+    \subsubsection*{Доказательство}
+    \subsubsection*{Необходимость:}
+    $(\mathcal{A}e_1,\ \mathcal{A}e_j) = (e_i,\ e_j) = \begin{cases}
+        1,\ i = j\\
+        0,\ i\neq j
+    \end{cases} = \delta^i_j$
+    \subsubsection*{Достаточность:}
+    Дано: $e_1,\dots,\ e_n$ - ОНБ, $\mathcal{A}e_1,\dots,\ \mathcal{A}e_n$ - тоже ОНБ\\
+    Доказать: $\mathcal{A}$ - ортогональный линейный оператор.\\
+    $\forall x\in \mathcal{E}\ x\longmapsto (x_1,\dots,\ x_n)^T$ - координаты в базисе $e$, то есть $x = x_1 e_1 + \dots + x_n e_n$.\\
+    Тогда $\mathcal{A} x = \mathcal{A}(x_1 e_1 + \dots + x_n e_n) = x_1 \mathcal{A} e_1 + \dots + x_n \mathcal{A} e_n$, то есть
+    \[\mathcal{A} x \longmapsto (x_1,\dots,\ x_n)^T - \text{координаты вектора в базисе $\mathcal{A} e$}\]
+    $\forall x,\ y\in \mathcal{E}$
+    \[(\mathcal{A} x,\ \mathcal{A} y) = \underset{=x_e^T}{\underbrace{(\mathcal{A} x)^T_{\mathcal{A} e}}} \underset{=E}{\underbrace{\Gamma_{\mathcal{A} e}}} \underset{=y_e}{\underbrace{(\mathcal{A} y)_{\mathcal{A} e}}} = x^T_e y_e = x_1 y_1 +\dots + x_n y_n\]
+    \[(x,\ y) = x^T_e \underset{=E}{\underbrace{\Gamma_e}} y_e = x_e^T y_e = x_1 y_1 +\dots + x_n y_n\]
+    Значит $\mathcal{A}$ - ортогональный линейный оператор.
+
+    \subsubsection*{Утверждение:}
+    Матрица перехода от одного ОНБ к другому ОНБ в евклидовом пространстве всегда ортогональна.
+
+    \subsubsection*{Доказательство:}
+    Пусть $U$ - матрица перехода от ОНБ $e = (e_1,\dots,\ e_n)$ к ОНБ $b = (b_1,\dots,\ b_n)$\\
+    тогда
+    \[\Gamma_e = U^T \Gamma_e U = U^T U = E\Rightarrow U - \text{ортогональная матрица по определению}\]
+    \[\text{5 разложений матриц}\]
+    \subsubsection*{1 разложение.}
+    \subsubsection*{Теорема (о каноническом виде ортогонального оператора)}
+    Для любого ортогонального линейного оператора существует ОНБ, в котором его матрица имеет блочно-диагональный вид.
+    
+    \[A = \begin{pmatrix}
+        A_{\varphi_1} & \dots & 0 & \dots  &\dots &\dots &\dots &\dots & 0\\
+        \vdots & \ddots & \vdots & \ddots   &\ddots &\ddots &\ddots &\ddots &\vdots\\
+        0 & \dots &  A_{\varphi_n} & \ddots & \ddots&\ddots &\ddots &\ddots &\vdots\\
+        \vdots & \ddots & \ddots & 1        &\dots & 0 &\ddots &\ddots &\vdots\\
+        \vdots & \ddots & \ddots & \vdots    &\ddots &\vdots &\ddots &\ddots &\vdots\\
+        \vdots & \ddots & \ddots & 0    &\dots & 1 &\ddots &\ddots &\vdots\\
+        \vdots & \ddots & \ddots & \ddots    &\ddots &\ddots &-1 &\dots & 0\\
+        \vdots & \ddots & \ddots & \ddots    &\ddots &\ddots &\vdots &\ddots &\vdots\\
+        0 & \dots & \dots & \dots&\dots &\dots & 0 &\dots &-1\\
+    \end{pmatrix}\]
+
+    $A_{\varphi_i}$ - матрица (блок) $2\times 2$ вида $A_{\varphi_i} = \begin{pmatrix}
+        \cos \varphi_i & -\sin \varphi_i\\
+        \sin \varphi_i & \cos \varphi_i
+    \end{pmatrix}$\\
+    То есть существует ОНБ, в котором ортогональный линейный оператор является либо набором вращений, либо набором вращений и отражений. (без доказательства)
+    \subsubsection*{Теорема Эйлера}
+    Любое ортогональное преобразование в $\mb{R}^3$ обладает ОНБ, в котором его матрица имеет вид
+    \[A = \left(\begin{tabular} {c c | c}
+        $\cos \varphi$ & $\sin\varphi$ & 0\\
+        $\sin \varphi$ & $\cos \varphi$ & 0\\
+        \hline
+        0 & 0 & $\pm 1$
+    \end{tabular}\right)_{3\times 3}\]
+    То есть любое ортогональне преобразование в $\mathbb{R}^3$ является или поворотом на некоторый угол $\varphi$ (вокруг заданной оси - прямой, проходящей через 0) либо композицией такого поворота и отражения (относительно заданной плоскости)
+
+    \subsubsection*{2 разложение:}
+    \subsubsection*{Теорема (о спектральном разложении)}
+    Для любой симметрической матрицы $A$ существует такая ортогональная матрица $U_1$, что $A = U\Lambda U^T$, где 
+    \[\Lambda  \begin{pmatrix}
+        \lambda_1 &\dots & 0\\
+        \vdots& \ddots & \vdots\\
+        0 & \dots& \lambda_n
+    \end{pmatrix}\]
+    С собственными значениями оператора с матрицей $A$ на диагонали, повторяющимися соответственно их кратности.\\
+    То есть любая симметрическа яматрица ортогональными преобразованиями приводится к диагональному виду.
+
+    \subsubsection*{Доказательство:}
+    Рассмотрим матрицу $A$ как матрицу самосопряжённую линейному оператору в ОНБ $e = \{e_1,\dots,\ e_n\}$\\
+    Для самосопряжённого линейного оператора существует ОНБ (из собственных векторов) $f = (f_1,\dots,\ f_n)$,  котором его матрица диагональна
+    \[\Lambda = C_{e\to f}^{-1} A_e C_{e\to f}\]
+    где $C_{e\to f}$ - матрица перехода от ОНБ $e$ к ОНБ $f\Rightarrow$ она ортогональна\\
+    То есть $C_{e\to f}^{-1} = C^T_{e\to f}$ возьмём $U = C_{e\to f}$, тогда $\Lambda = U^T A U\Rightarrow A = U\Lambda U^T$
+    
+    \subsubsection*{3 разложение:}
+    \subsubsection*{Теорема (о сингулярном разложении)}
+    (Может встречаться как $SVD = \text{singular value decomposition}$).\\
+    Для любой (прямоугольной) матрицы $A\in M_{m\times n}{(\mb{R})}$ имеет место разложение $A_{m\times n} = V_{m\times m} \Sigma_{m\times n}U^T_{n\times n}$, где 
+    $U\in O_n(\mb{R}),\ V\in O_m (\mb{R})$\\
+    $\Sigma$ - диагональна с неотрицательный числами $\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_{r} \geq \sigma_{r + 1} = \dots = \sigma_{\min(m\times n)} = 0$\\
+    на главной диагонали (они называются сингулярными числами и расположены по невозрастанию).\\
+    То есть $\Sigma = \begin{pmatrix}
+        \sigma_1 &        &          &      &       & 0\\
+                 & \ddots &          &      &       &\\
+                 &        & \sigma_r &      &       &\\
+                 &        &          & 0    &       &\\
+                 &        &          &      &\ddots &\\
+        0        &        &          &      &       & 0
+    \end{pmatrix}_{m\times n}$ - того же ранга, что и $A$\\
+    
+    \subsubsection*{Доказательство:}
+    Рассмотрим матрицу $A^T A_{n\times n}$\\
+    Это матрица линейного оператора $A^* A$ в некотором ОНБ. Он самосопряжён, так как матрица $A^T A$  является симметрической:
+    \[(A^T A)^T = A^T(A^T)^T = A^T A\]
+    При этом все его собственные значения $\lambda_i$ неотрицательны, так как если $A^* Au = \lambda u$, то $\lambda(u,\ u) = (u,\ \lambda u) = (u,\ A^* A u) = (Au,\ Au) = \Vert Au \Vert^2 \geq 0\Rightarrow\\
+    \Rightarrow \lambda \geq 0$\\
+    Тогда эти собственные значения $\lambda_i$ можно записать в виде $\sigma_i^2$, то есть $\sigma_i = \sqrt{\lambda_i}$, где $i = \overline{1,\ \min(m,\ n)}$.\\
+    Числа $\sigma_i$ принято называть сингулярными числами и сортировать по невозрастанию
+    \[\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_{r} \geq \sigma_{r + 1} = \dots = \sigma_{\min(m\times n)} = 0\]
+    Где $r = \Rg \Sigma = \Rg A^T A$. Покажем, что $r = \Rg A$. Заметим, что $A^T A = \Gamma(a_1,\dots,\ a_n)$\\
+    Зафиксируем базисный минор в матрице $A$. В матрице $\Gamma (a_1,\dots,\ a_n)$ базисный минор будет в тех же столбцах (и строках) по свойству 5 матрицы Грамма. Тогда $\Rg A = \Rg\Gamma(a_1,\dots,\ a_n) = \Rg A^T A = \Rg A A^T$\\
+    Пусть $U_1,\dots,\ U_n$ - ОНБ из собственных векторов $A^T A$, то есть
+    \[A^T A u_i = \begin{cases}
+        \sigma^2_i u_i,\ 1 \leq i \leq r\\
+        0,\ r + 1 \leq i \leq n
+    \end{cases}\]
+    Положим $v_i = \dfrac{A u_i}{\sigma_i}$, $i \leq i \leq r$\\
+    Тогда $(v_i,\ v_j) = \dfrac{(Au_i)^T}{\sigma_i}E \dfrac{Au_j}{\sigma_j} = \dfrac{u_i^T(A^T A u_j)}{\sigma_i \sigma_j} = \dfrac{u_i^T \sigma_j^2 u_j}{\sigma_i \sigma_j} = \dfrac{\sigma_j}{\sigma_i}u_i^T u_j =\\
+    = \dfrac{\sigma_j}{\sigma_i} (u_i,\ u_j) = \begin{cases}
+        0,\ i\neq j\\
+        1,\ i = j
+    \end{cases} = \delta_i^j$, где $1 \leq i,\ j \leq r$, где $r = \Rg A\leq \min (m,\ n)$\\
+    Дополним систему $v_1,\dots,\ v_r$ векторами $v_{r + 1},\dots,\ v_{m}$ до ОНБ в $\mb{R}^m$ произвольным образом. Заметим, что при $j = \overline{r + 1,\ n}$, $Au_j = 0$, так как $A^T A u_j = 0\Rightarrow\\
+    \Rightarrow (A^* A u_j,\ u_j) = (0,\ u_j) = 0$ Также это равно $(A u_j,\ A u_j) = \Vert A u_j \Vert^2 = 0\\
+    \Leftrightarrow A u_j = 0$ при $j = \overline{r + 1,\ n}$\\
+    $A_{m\times n}[u_1,\dots,\ u_n]_{n\times n} = [\sigma_1 v_1,\dots,\ \sigma_r v_r,\ 0,\dots,\ 0] =\\
+    = \underset{=V}{\underbrace{[v_1,\dots,\ v_n]}}_{m\times m} \left[ \begin{matrix}
+        \sigma_1 &        &          &   &        & 0\\
+                 & \ddots &          &   &        &\\
+                 &        &\sigma_r  &   &        &\\
+                 &        &          & 0 &        &\\
+                 &        &          &   & \ddots &\\
+        0         &        &          &   &        & 0
+    \end{matrix}\right]$\\
+    векторы $v_{r + 1},\dots,\ v_m$ не влияют на разложение, умножаясь на $0$ на даигонали.\\
+    А матрицы $U,\ V$ являются ортогональными, так как столбцы $U$ - ОНБ из собственных векторов в $A^T A\Rightarrow$ $U,\ V$ - матрицы перехода от ОНБ к ОНБ, то есть по утверждению ортогональной матрицы
+    \[AU = U\Sigma \big| \cdot U^T\text{ справа}\]
+    Получаем $A = V\Sigma U^T$ - сингулярное разложение
+    
+    \subsubsection*{4 разложение:}
+    \subsubsection*{Утвержедние (о полярном разложении)}
+    Любой линейный оператор в евклидовом пространстве представляется в виде композиции самосопряжённых линейных операторов с неотрицательными собственными значениями и ортогонального линейного оператора.\\
+    То есть для любой квадратной матрицы $A$ существует разложение
+    \[A = S\cdot O\]
+    Где $S$ - симметрическая матрица (неотрицательно определённая), $O$ - ортогональная матрица. (это матрицы соответствующих линейных операторов в ОНБ).
+
+    \subsubsection*{Замечание:}
+    Это аналог формулы для комплексных чисел $z = re^{i\varphi} = r(\cos \varphi + i\sin \varphi)$
+    \subsubsection*{Доказательство:}
+    Возьмём сингулярное разложение матрицы $A$
+    \[A_{n\times n} = V_{n\times n} \Sigma_{n\times n} U^T_{n\times n}\]
+    Где $U,\ V$ - ортогональные, $\Sigma$ - диагональная матрица с неотрицательными числами на диагонали.
+    \[A = V\Sigma U^T = \underset{=S}{\underbrace{(V \Sigma V^T)}}\underset{=O}{\underbrace{(VU^T)}} = S\cdot O\]
+    Где $O$ - ортогональная матрца, как произведение двух ортогональных матриц\\
+    $S$ - симметрическая $(S^T = (V\Sigma V^T))^T = (V^T)^T \Sigma^T V^T = V\Sigma V^T$\\
+    и у неё неотрицательные собственные значения - сингулярные числа, так как $\Sigma$ - её диагональный вид в спектральном разложении
+    \subsubsection*{Замечание:}
+    Можно и в обратном порядке представить (в виде композиции ортогонального линейного оператора и самосопряжённого линейного оператора):
+    \[A = V\Sigma U^T = (VU^T)\cdot (U\Sigma U^T) = \hat{O}\hat{S}\]
+
+\[\textbf{Лекция 10 июня.}\]
+    Вспомним пройденные разложения:
+    \begin{enumerate}
+        \item Спектральное разложение: $A = U\Lambda U^T$, где $A$ - симметрическая, $U$ - ортогональная, $\Lambda$ - диагональная.
+        \item Канонический вид ортогонального оператора в ОНБ
+        \item $SVD$ (сингулярное) для любых матриц: $A_{m\times n} = V \Sigma U^T$, $V,\ U$ - ортогональная.
+        \item Полярное $A = SO$ (или $A = O'S'$), A - квадратная матрица
+    \end{enumerate}
+    \subsubsection*{5 разложение:}
+    \subsubsection*{Утверждение (о QR разложении):}
+    Пусть $A \in M_{n}(\mb{R}),\ \det A \neq 0$ - квадратная невырожденная матрица.\\
+    Тогда существуют матрицы $Q,\ R$: $A = QR$, $Q$ - ортогональная, $R$ - верхнетреугольная с положительными элементами на главной диагонали. $(R = Q^T A)$
+
+    \subsubsection*{Доказательство:}
+    Пусть $A_1,\dots,\ A_n$ - столбцы матрицы $A$, они линейно независимы по условию (так как матрица невырождена).\par
+    Применим к ним процесс ортогонализации Грамма-Шмидта. Получим:
+    \[A_1,\dots,\ A_n \longmapsto B_1,\dots,\ B_n - \text{ортогональный базис}\]
+    Нормируем его: $Q_i = \frac{B_i}{\Vert B_i \Vert},\ i = \overline{1,\ n},\ Q_1,\dots,\ Q_n$ образуют ОНБ в $\mb{R}^n$.\par
+    Тогда исходный $k$ столбец $A_k \in \mathcal{L}(Q_1,\dots,\ Q_k),\ k = \overline{1,\ n}$ (по формулам Грамма Шмидта).\par
+    Тогда $A_k = r_{1\, k} Q_1 + \dots + r_{k\, k}Q_k$, где $r_{k,\ k} = \Vert B_k \Vert > 0$ (так как $B_k = Q_k \Vert B_k \Vert$, а коэффициент при $B_k$ в процессе ортогонализации стал равен 1).\par
+    В матричном виде: $A = QR$, где $Q = [Q_1,\dots,\ Q_n]$ - ортогональная матрица, так как матрица перехода от ОНБ к ОНБ.\par
+    Тогда $R = \left[ \begin{matrix}
+        r_{1\, 1} &       & *\\
+            &\ddots &  \\
+        0   &       & r_{n\, n}
+    \end{matrix} \right]$, где $*$ - какие-то элементы, $\forall k\ r_{k\, k} = \Vert B_k \Vert$ на диагонали.
+    \newpage
+    \[\text{Приведение квадратичных форм к главным осям}\]
+    
+    \subsubsection*{Теорема:}
+    Любую квадратичную форму можно с помощью ортогонального преобразования привести к каноническому виду $q(x) = \lambda_1 x_1^2 + \dots + \lambda_n x_n^2$, где $\lambda_i$ - собственное значение линейного оператора с той же матрицей, что и квадратичная форма, в некотором ОНБ. 
+    \subsubsection*{Доказательство:}
+    Пусть дана квадратичная форма $q(x) = x^T A x$ в некотором ОНБ.\\
+    Рассмотрим линейный оператор $\mathcal{A}$ с той же матрицей в том же ОНБ.\\
+    $\mathcal{A}$ - самосопряжённый линейный оператор, так как $A$ - симметрическая матрица. Применим теорему о спектральном разложении:
+    \[A = U \Lambda U^T\]
+    Где $A$ - ортогональная матрица, $\Lambda$ - диагональная матрица. Заметим, что если взять $U$ в качестве матрицы перехода к новому базису (ОНБ из собственных векторов оператора $\mathcal{A}$), то матрица квадратичной формы будет в новом базисе $U^T A U$, то есть $\Lambda$ (и для оператора $\mathcal{A}$ $\Lambda = U^{-1} A U = U^T A U$, (так как $U$ - ортогональная) - матрица в новом базисе).\\
+    То есть в новом базисе матрицы квадратичной формы и линейного оператора снова совпадают и обе равны диагональной матрице $\Lambda$ (с собственными значениями оператора $A$ на диагонали). Замечание: у квадратичных форм собственных значений не бывает, поэтому на диагонали находятся именно собственные значения оператора.
+
+    \subsubsection*{Замечание:}
+    То есть квадратичную форму можно привести к каноническому виду, не меняя длин и углов (ортогональное преобразование их не меняет). В $\mb{R}^3$ достаточно поворота плоскости.
+    \newpage
+    \[\textbf{Алгебра над полем}\]
+    
+    \subsubsection*{Определение:}
+    Пусть $A$ - векторное пространство над некоторым полем $F$, снабжённое дополнительной операцией умножения векторов $*: A\times A \longrightarrow A$\par
+    $A$ называется \Underl{алгеброй над полем} F, если выполняются условия:
+    \begin{enumerate}
+        \item $\forall x,\ y,\ z\in A$ $\begin{cases}
+            (x + y)*z = x*z + y*z\\
+            x*(y + z) = x*y + x*z
+        \end{cases}$
+        \item $\forall \alpha, \beta \in F$ $(\alpha x) x * (\beta y) = (\alpha \cdot \beta)(x * y)$
+    \end{enumerate}
+
+    \subsubsection*{Определение:}
+    Алгебра называется \Underl{ассоциативной}, если операция умножения векторов ассоциативна. И \Underl{алгеброй с единицей}, если есть нейтральный элемент по умножению.
+    \subsubsection*{Пример:}
+    1. $\mb{C}$ является двумерной алгеброй над $\mb{R},\ \dim_{\mb{R}} \mb{C} = 2$\\
+    2. $F[x]$ - многочлены над полем $F$ (базис $1,\ x,\ x^2,\dots$) с операцией умножения многочленов, $\dim_{F} F[x] = \infty$ (счётно).\\
+    3. $M_n (F)$ - алгебра квадратных матриц над $F$ с дополнительной операцией умножения матриц, $\dim M_n (F) = n^2$.\\
+    4. \Underl{Кватернионы над $\mb{R}$}
+    \[H = \{ x_1 1 + x_2 i + x_3 j + x_4 k\ \big|\ x_i \in \mb{R} \}\]
+    $\dim_{\mb{R}} H = 4$
+
+    \[\text{Коники и квадрики}\]
+    \[\text{(то есть кривые и поверхности второго порядка)}\]
+    Некоторая часть коспекта в \href{https://www.overleaf.com/learn/latex/Hyperlinks}{\text{презентации}} (тут пока что левая ссылка, когда появится, поменяю [если не поменял, напишите]).\\
+    
+    \subsubsection*{Эллипс:}
+    Вывод канонического уравнения эллипса:
+    \[|F_1M| + |F_2 M| = const\]
+    Побозначим $const = 2a$.\\
+    Пусть координаты фокусов соответственно $(c,\ 0),\ (-c,\ 0)$. Тогда
+    \begin{align*}
+        \sqrt{(x + c)^2 + y^2} &= 2a - \sqrt{(x - c)^2 + y^2}\\
+        (x + c)^2 + y^2 &= 4a^2 - 4a\sqrt{(x - c)^2 + y^2} + (x - c)^2 + y^2\\
+        a\sqrt{(x - c)^2 + y^2} &= a^2 - xc\\
+        (a^2 - c^2)x^2 + a^2 y^2 &= a^2( a^2 - c^2)
+    \end{align*}
+    Знаем, что $a^2 - c^2 = b^2\Rightarrow$ поделив на $a^2 b^2$ получим каноническое уравнение эллипса:
+    \[\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1\]
+    Для него можно сказать
+    \begin{enumerate}
+        \item $|x| \leq a,\ |y| \leq b$.
+        \item $Ox,\ Oy$ - оси симметрии $\Rightarrow y = \sqrt{1 - \frac{x^2}{a^2}}$ для $x \geq 0$.
+    \end{enumerate}
+    Положим $a \geq b$, тогда:
+    $a$ - большая полуось, а $b$ - малая полуось.\\
+    $c^2 = a^2 - b^2 \Rightarrow \mathcal{E} = \frac{c}{a} = \sqrt{1 - \frac{b^2}{a^2}}$ - эксцентриситет.\\
+    $\mathcal{E} \in [0,\ 1)$ - мера "сплюснутости" эллипса. $d_1,\ d_2$ - прямые, задающиеся соответсвенно уравнениями $x = \frac{a}{\mathcal{E}},\ x = -\frac{a}{\mathcal{E}}$, называются директриссами.\\
+    Директрисса обладает свойством $\dfrac{MF_1}{\rho(M,\ d)} = \mathcal{E}$.
+    \subsubsection*{Гиперболы:}
+    $\big| |MF_1| - |MF_2| \big| = const$ - определение.\\
+    Задаётся уравнением $\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1$, где:\\
+    $a$ - действительная полуось\\
+    $b$ - мнимая полуось.\\
+    $|x| \geq a\Rightarrow$ полоса $|x| < a$ не содержит точек гиперболы.\\
+    $y = \sqrt{\frac{x^2}{a^2} - 1}$. При $x\to \oo$ появляются асимптоты: $y = \pm \frac{b}{a}x$\\
+    $c^2 = a^2 + b^2,\ 2c$ - фокальное расстояние.\\
+    Директриссы $d_1,\ d_2\ x = \pm \frac{a}{\mathcal{E}}$. Где $\mathcal{E} = \frac{c}{a} = \sqrt{1 + \frac{b^2}{a^2}}$ - эксцентриситет гиперболы, $\mathcal{E}\in (1,\ \oo)$. Смотри \Underl{сопряжённая гипербола} в презентации.
+
+    \subsubsection*{Парабола:}
+    $\dfrac{|MF|}{\rho(M,\ d)} = 1 = \mathcal{E}$ - эксцентриситет параболы.\\
+    $y^2 = 2px$ - каноническое уравнение параболы.
+
+\[\textbf{Лекция 19 июня.}\]
+
+    Половина этой лекции также находится в \href{https://idk_what_to_put_in_here}{презентации}.
+\[\underline{\text{Сопряжённые (двойственные) пространства}}\]
+    Отображение $f: V\longrightarrow F$ (из линейного пространства в поле, над которым оно задано). Называется \Underl{линейной формой (функционалом)}, если выполняются условия:
+\begin{enumerate}
+    \item $\forall x,\ y\in V \hspace{0.5cm} f(x + y) = f(x) + f(y)$
+    \item $\forall \alpha \in F\ \forall x\in V\hspace{0.5cm} f(\alpha x) = \alpha f(x)$
+\end{enumerate}
+\subsubsection*{Замечание:}
+    Это частный случай линейного отображения при $V_2 = F$.\\
+    Пусть в $V$ фиксирован базис $e = (e_1,\dots,\ e_n)$.\\
+    Тогда матрицей линейного отображения $f$ будет матрица $1\times n$:
+\[ [f]_e = \big( f(e_1),\dots,\ f(e_n) \big)_{1\times n}\]
+    Тогда действие $f$ в базисе $e$ можно записать как:
+\[f(x) = [f]_e x_e = \begin{pmatrix}
+    f(e_1) & \dots & f(e_n)
+\end{pmatrix}\begin{pmatrix}
+    x_1\\
+    \vdots\\
+    x_n
+\end{pmatrix} = x_1 f(e_1) + \dots + x_n f(e_n) =\]
+\[=f(x_1 e_1 + \dots + x_n e_n) = f(x)\]
+\[\text{Что происходит при замене базиса?}\]
+\subsubsection*{Утверждение:}
+    Пусть $a,\ b$ - 2 базиса в $V$, тогда:
+\[[f]_b\ = [f]_a T_{a\to b}\]
+$[f]_b$ - строка в новом базисе.\par
+    Иногда выражение транспонируют, тогда
+\[[f]_b^T = T^T_{a\to b} [f]^T_a\]
+\subsubsection*{Доказательство:}
+    $f(x) = [f]_a x_a = [f]_b x_b$, тогда верно:
+\[x_b = T_{a\to b}^{-1} x_a \Leftrightarrow x_a = T_{a\to b} x_b\Rightarrow [f]_b x_b = [f]_a T_{a\to b}\cdot x_b\Rightarrow [f]_b = [f]_a T_{a\to b}\]
+\subsubsection*{Определение:}
+    Пространством, сопряжённым к линейному пространству $V$ называется множество всех линейных форм на пространстве $V$, со следующими операциями:
+\begin{enumerate}
+    \item $\forall x\in V\hspace{0.5cm} (f_1 + f_2)(x) = f_1(x) + f_2(x)$
+    \item $\forall x\in V\ \forall \alpha \in F\hspace{0.5cm} (\alpha f)(x) = \alpha\cdot f(x)$
+\end{enumerate}
+\subsubsection*{Обозначение:}
+\[V^* = \Hom{V,\ F}\]
+    $\Hom$ - гомоморфизмы.
+\subsubsection*{Замечание:}
+    Так как координаты линейных форм записывают в строки и преборазуют с помощью $T_{a\to b}$ (а не $T_{a\to b}^{-1}$):\\
+    $[f]_b = [f]_a\cdot T_{a\to b}$ (хотя $x_b = T_{a\to b}^{-1} x_b$), их называют \Underl{ковекторами}, а "обычные" векторы - \Underl{контрвекторами}.
+\subsubsection*{Замечание:}
+    Когда ковекторы и векторы преобразуются одинаково? Когда матрица перехода $U_{a\to b}$ является ортогональной (то есть удовлетворяет условию $U_{a\to b}^T = U_{a\to b}^{-1}$), в частности, если это матрица перехода от ОНБ к ОНБ.
+\subsubsection*{Определение:}
+    Базис $e = (e_1,\dots,\ e_n)$ в $V$ и базис $f = (f^1,\dots,\ f^n)$ (здесь $e_i$ обозначает соответственный вектор столбец, а $f^i$ - вектор строку) в сопряжённом пространстве $V^*$ называются \Underl{взаимными}, если:
+\[f^i(e_j) = \delta_j^i = \left[\begin{matrix}
+    1,\ i = j\\
+    0,\ i\neq j
+\end{matrix} \right.\]
+\subsubsection*{Утверждение:}
+    Пусть $\dim V = n < \oo$. Тогда для любого базиса в $V$ существует единственный взаимный базис  в $V^*$ и наоборот.
+\subsubsection*{Доказательство:}
+    Пусть $e = (e_1,\dots,\ e_n)$ - некоторый базис в $V$, пусть $S$ - некоторый стандартный (канонический) базис в $V$. Запишем матрицу перехода $T_{S\to e} = \begin{pmatrix}
+        [e_1]_S & \dots & [e_n]_S
+    \end{pmatrix}$ - матрица из столбцов координат в базисе $S$.\\
+    Для произвольного базиса $f = \begin{pmatrix}
+        f^1 & \dots & f^n
+    \end{pmatrix}$. В $V^*$ тоже составим матрицу $F =\begin{pmatrix}
+        [f^1]_s\\
+        \vdots\\
+        [f^n]_s
+    \end{pmatrix}$.\\
+    Тогда условие взаимности базисов $e,\ f$ запишется в виде:
+\[ F_{f\to e}\cdot T_{S\to e}\Rightarrow F = T^{-1}\]
+    Обратная всегда существует, так как это матрица перехода, обратная матрица единственна, значит взаимный базис тоже единственный.
+\subsubsection*{Пример:}
+    $V = \mb{R}^2,\ e_1 = \begin{pmatrix}
+        1\\-1
+    \end{pmatrix} = [e_1]_s,\ e_2 = \begin{pmatrix}
+        0\\ 1
+    \end{pmatrix} = [e_2]_s \Rightarrow$ матрица перехода:
+\[T_{s\to e} = \begin{pmatrix}
+    1 & 0\\
+    -1 & 1
+\end{pmatrix}\Rightarrow F\cdot T = E\Rightarrow F = T^{-1} = \begin{pmatrix}
+    1 & 0\\
+    1 & 1
+\end{pmatrix}\]
+    $[f^1]_s = \begin{pmatrix}
+        1 & 0
+    \end{pmatrix},\ [f^2]_s = \begin{pmatrix}
+        1 & 1
+    \end{pmatrix}\Rightarrow f^1(x) = x_1,\ f^2(x) = x_1 + x_2$
+\subsubsection*{Утверждение:}
+    Любое евклидово пространство $\mathcal{E}$ изоморфно своему сопряжённому пространству, то есть $\mathcal{E} \cong \mathcal{E}$.
+\subsubsection*{Доказательство:}
+    Построим этот изоморфизм:
+\[a\in \mathcal{E} \overset{\varphi}{\longmapsto} f_a(x) = (a,\ x)\in \mathcal{E}^*\]
+    Покажем, что $\varphi$ - гомоморфизм линейных пространств:\\
+    $\varphi(a_1 + a_2) = (a_1 + a_2,\ x) = (a_1,\ x) + (a_2,\ x) = \varphi(a_1) + \varphi(a_2)$\\
+    $\varphi(\lambda a) = (\lambda a,\ x) = \lambda (a,\ x) = \lambda \varphi (a)\Rightarrow$ гомоморфизм.\\
+    Оно сюръективно, так как любая линейная функция вида $a_1x_1 + \dots a_n x_n$ может быть записана в некотором ОНБ, как $(a,\ x)$, где $a = (a_1,\dots,\ a_n)$ является прообраз. Оно инъективно по свойству скалярного произведения, значит это изоморфизм.
+\end{document}
