@@ -8,6 +8,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{nicefrac}
+\usepackage{tikz}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -552,4 +553,129 @@ void bfs(int vertex) {
     }
 }
     \end{lstlisting}
+    \newpage
+    \begin{center}
+        Семинар 15 ноября 
+    \end{center}
+    Напишем СНМ (DSU), работающее за $O(n\log n)$:
+    \begin{lstlisting}
+struct dsu {
+    int n;
+    std::vector<int> parent, size;
+    dsu(int n): n(n) {
+        parent.resize(n);
+        iota(parent.begin(), parent.end(), 0); // fills vector incrementing values
+        // from the beginning every node is its own parent
+        size.assign(n, 1);
+    }
+};
+
+int col(int a) { // color
+    if (a == parent[a]) {
+        return a; // color is index of root node
+    }
+    return col(parent[a]);
+}
+
+void unite(int a, int b) {
+    a = col(a);
+    b = col(b);
+    if (a == b) {
+        return;
+    }
+    if (size[a] < size[b]) {
+        std::swap(a, b);
+    }
+    parent[b] = a;
+    size[a] += size[b];
+}
+    \end{lstlisting}
+    Высота каждого дерева размера $k$ будет $O(\log k)$, так как каждая дочерняя вершина когда-то подвешивалась к корню, то есть её размер был меньше, значит каждый ребёнок увеличивает не более чем в $\frac{k}{2}$ раз.\newpage
+    Напишем СНМ (DSU), работающее за $O(\alpha(n)\cdot n)$. Отличие только в return statement функции col (переподвешиваем все вершины на пути к корню):
+    \begin{lstlisting}
+struct dsu {
+    int n;
+    std::vector<int> parent, size;
+    dsu(int n): n(n) {
+        parent.resize(n);
+        iota(parent.begin(), parent.end(), 0); // fills vector incrementing values
+        // from the beginning every node is its own parent
+        size.assign(n, 1);
+    }
+};
+
+int col(int a) { // color
+    if (a == parent[a]) {
+        return a; // color is index of root node
+    }
+    return parent[a] = col(parent[a]);
+}
+
+void unite(int a, int b) {
+    a = col(a);
+    b = col(b);
+    if (a == b) {
+        return;
+    }
+    if (size[a] < size[b]) {
+        std::swap(a, b);
+    }
+    parent[b] = a;
+    size[a] += size[b];
+}
+    \end{lstlisting}
+    \newpage
+    Добавим функцию отката к $O(n\log n)$ реализации СНМ. В результате выполнения unite(a, b) могут поменяться: a, b, size[a], size[b], parent[a], parent[b]. В нашей реализации parent[a] и size[b] не меняются, при этом size[a] можно восстановить, используя size[b], parent[b] был просто b, так как подвешиваются корни, a --- не меняется. Итого, доостаточно знать только b.
+    \begin{lstlisting}
+struct dsu {
+    ...
+    std::vector<int> b_save;
+};
+int col(int a) { // color
+    if (a == parent[a]) {
+        return a; // color is index of root node
+    }
+    return col(parent[a]);
+}
+void unite(int a, int b) {
+    a = col(a);
+    b = col(b);
+    if (a == b) {
+        b_save.push_back(-1);
+        return;
+    }
+    if (size[a] < size[b]) {
+        std::swap(a, b);
+    }
+    parent[b] = a;
+    b_save.push_back(b);
+    size[a] += size[b];
+}
+void rollback() {
+    int b = b_save.back();
+    b_save.pop_back();
+    if (b == -1) {
+        return;
+    }
+    int a = parent[b];
+    parent[b] = b;
+    size[a] -= size[b];
+}
+    \end{lstlisting}
+    \newpage
+    Нарисовать график из галереи (если тут нет графика, пишите).\\
+    $\displaystyle sum[v] = \sum_{col = 1}^{N} dist(v,\ col)$\\
+    Храним map<int, int> M[N], где M[col] = dist(v, col)\\
+    Квадратичное решение:\\
+    У некоторой вершины несколько детей, у каждого \\
+    Улучшение до $O\left(\displaystyle\sum_v sz[v]\right) = O(n^2)$ (так как у нас несбалансированное дерево)\\
+    Можно менять местами вершины разных размеров, таким образом приливаем меньшие части дерева к большим.\\
+    То есть swap(M[v], M[w]). При этом нужно как-то обновить расстояния от w до её детей (так как на путь добавилась ещё одна вершина v). Для этого добавим массив add[v].\\
+    Будет комбинация операций:
+    \begin{lstlisting}
+        swap(M[v], M[w]);
+        add[v] = add[w] + 1;
+        sum[v] = sum[w] + M[v].size;
+    \end{lstlisting}
+    Теперь выполняем за $O(n\log n \cdot \text{опер.})$, где опер. --- операция в 
 \end{document}
