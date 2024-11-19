@@ -131,7 +131,7 @@ language=C++,
     Пусть $T(n)$ --- время, используемое для сортировки массива длины $n$.\\
     Зная принцип работы этой сортировки можно сказать, что
     \[T(n) = 2\cdot T\left(\frac{n}{2}\right) + O(n)\]
-    \underline{Сформулируем \textbf{Мастер теорему}}\label{sec:MasterTh}
+    \section{Мастер теорема}\label{sec:MasterTh}
     \[T(n) = \begin{cases}
         aT\left(\frac{n}{b}\right) + O(n^c),\ a\in \mathbb{N},\ b\in \mathbb{R},\ b>1,\ c\in \mathbb{R},\ c\geq 0\\
         O(1),\ n\leq n_0
@@ -142,7 +142,6 @@ language=C++,
         \item $c = \log_b a:\ T(n) = O(n^c\log n)$
         \item $c < \log_b a:\ T(n) = O(n^{\log_b a})$
     \end{enumerate}
-    % \includegraphics{AaDS_Tree.png}
     На $i$-ом слое: $a^i\left(\frac{n}{b^i}\right)^c$\\
     Листья (слой $\log_b n$): $a^{\log_b n}$ задач, сложность каждой равна 1\\
     $T(n) \leq \displaystyle \sum_{i = 0}^{\log_b n} O \left(a^i\left( \frac{n}{b^i} \right)^c\right) = O\left( \sum_{i = 0}^{\log_b n} a^i \left( \frac{n}{b^i} \right)^c \right) = O\left( n^c \sum_{i = 0}^{\log_b n} \left( \frac{a}{b^c}  \right)^i \right)$\\
@@ -150,6 +149,12 @@ language=C++,
     $q < 1\Leftrightarrow a < b^c\Leftrightarrow c > \log_b a,\ \displaystyle O\left(n^c \sum_{i = 0}^{\log_n b} q^i\right) = O\left(n^c \frac{1}{1 - q}\right) = O\left(n^c\right)$\\
     $q = 1\Leftrightarrow O(n^c \log_b n)$\\
     $q > 1$:\\
+    \subsection*{Обобщение}
+    Cлучай $\begin{cases} 
+        \log_b a = c\\
+        T(n) = aT(\frac{n}{b}) + O(n^c\log^k n)
+    \end{cases}$
+    \[T(n) = O(n^c\log^{k + 1} n)\]\\
     Докажем \textit{лемму}:
     \[\forall q > 1:\ 1 + q + \cdots + q^n = O(q^n)\]
     $\frac{q^{n + 1} - 1}{q - 1} < \frac{q^{n + 1}}{q - 1} = \frac{q}{q - 1}q^n = O(q^n)$\\
@@ -843,4 +848,141 @@ for (int i = 0; i < n; i++) {
         \item[-] rollback()
     \end{itemize}
     \textbf{Не делаем сжатие}
+    \begin{center}
+        Лекция 19 ноября
+    \end{center}
+    \subsection[short]{Остовы}
+    Пусть $G = (V,\ E)$ --- связный, взвешенный и неориентированный граф.\\
+    Взвешенный значит есть некая функция $w: E\longrightarrow \mathbb{R}$.\\
+    \subsubsection*{Первый способ хранения}
+    \begin{lstlisting}
+        std::vector<std::vector<int>> g, w;
+    \end{lstlisting}
+    Здесь g[v] --- список соседей вершины v.\\
+    w[v] --- синхронный список весов ребёр.
+    \subsubsection*{Второй способ хранения}
+    \begin{lstlisting}
+std::vector<std::vector<std::pair<int, int>>> g;
+    \end{lstlisting}
+    Здесь g[i][j] --- пара <вес, вершина>.
+    \subsubsection*{Третий способ хранения}
+    \begin{lstlisting}
+std::vector<std::pair<int, std::pair<int, int>>> g;
+    \end{lstlisting}
+    Здесь хранятся пары <вес <начало ребра, конец ребра>>
+    \subsubsection{Остовное дерево}
+    \underline{Остовным деревом} связного неориентированного графа $G = (V,\ E)$ называется связный ациклический подграф $G' = (V,\ E')$, где $E'\subseteq E$.
+    \subsubsection{Минимальное остовное дерево (MST)}
+    MST = Minimal Span Tree. \underline{Минимальным остовным деревом} связного неориентированного взвешенного графа $G = (V,\ E)$ называется остовное дерево с минимальной суммой весов рёбер.
+    \subsubsection*{Важные термины}
+    Назовём $G_b = (V,\ E_b)$ \underline{безопасным подграфом} $G = (V,\ E)$, если выполняется:
+    \[\exists MST\ G' = (V,\ E')\text{ графа } G: G_b\subseteq G'\]
+    \underline{Безопасным ребром} $e$ безопасного подграфа $G_b$ назовём ребро, удовлетворяющее условию:
+    \[G_b \cup e \text{ --- тоже безопасный подграф}\]
+    \underline{Разрез} --- разделение множества вершин $V$ на два непересекающихся подмножества $V_1,\ V_2$.\\
+    Обозначать можно двумя способами:
+    \[V=  V_1 \bigsqcup V_2\]
+    \[<V_1,\ V_2> - \text{разрез}\]
+    Ребро $e = (a,\ b)$ \underline{пересекает разрез}, если:
+    \[\left[ \begin{aligned}
+        &a\in V_1 \wedge b\in V_2\\
+        &a\in V_2 \wedge b\in V_1
+    \end{aligned} \right.\]
+    То есть концы этого ребра лежат в разных подмножествах.\\
+    Граф $G$ \underline{совместим} с разрезом $V = V_1\bigsqcup V_2$, если:
+    \[\forall e\in E\quad \text{e не пересекает разрез}\]
+    \subsubsection{Лемма о безопасном ребре}
+    $G_b = (V,\ E_{b})$ -- безопасный подграф $G = (V,\ E)$.\\
+    Разрез $V = V_1\bigsqcup V_2$, совместимый с $G_b$.\\
+    Пусть E$_{\text{cross}}$ --- все рёбра из E, пересекающие разрез.\\
+    Пусть e --- ребро {минимального веса} в E$_{\text{cross}}$, тогда e --- безопасное ребро для $G_b$.
+    \subsubsection*{Доказательство:}
+    Пусть e = $(a,\ b)$
+    \[\begin{tikzpicture}[every circle node/.style={draw}]
+        \draw[red] (1.3, 1) -- (1.3, -3) node[anchor=north, black]{\text{разрез}};
+        \draw (2, 0) node(0)[circle]{0};
+        \draw (3, 0.5) node(1)[circle]{1};
+        \draw[green] (0) -- (1);
+        \draw (3, -0.5) node(2)[circle]{2};
+        \draw[green] (0) -- (2);
+        \draw (2, -1) node(b)[circle]{b};
+        \draw (2) -- (b);
+        \draw (3, -1.5) node(3)[circle]{3};
+        \draw[green] (b) -- (3);
+        \draw (0, 0) node(4)[circle]{4};
+        \draw (0) -- node[anchor=south]{$e'$} (4);
+        \draw (-1, -0.5) node(5)[circle]{5};
+        \draw (4) -- (5);
+        \draw (0, -1) node(a)[circle]{a};
+        \draw[green] (5) -- (a);
+        \draw (-1, -1.5) node(6)[circle]{6};
+        \draw[green] (a) -- (6);
+        \draw[blue] (a) -- node[anchor=south]{e} (b);
+        \draw (2, -2.25) node[circle](7){7};
+        \draw (a) -- (7);
+        \draw[blue] (6) -- (7);
+        \draw (3, -3) node(8)[circle]{8};
+        \draw[green] (7) -- (8);
+        \draw node[below of = 6, circle](9){9};
+        \draw (7) -- (9);
+        \draw[blue] (8) -- (9);
+        \draw[blue] (3) -- (8);
+        \draw[blue] (4.north east) to[bend left] (1.north west);
+    \end{tikzpicture}\]
+    Зелёные рёбра лежат в $G_b$.\\
+    Чёрные дополняют зелёные до MST.\\
+    Синие -- оставшиеся рёбра.
+    T --- MST, которое дополняет $G_b,\ e',\ w(e)\leq w(e')$\\
+    $T' = T\cup \{e\}\setminus{e'}$ --- это MST, ч.т.д.
+    \subsubsection{Алгоритм Кр(а/у)скала (1956)}
+    \begin{enumerate}
+        \item Сортируем все рёбра по весу.
+        \item Идём в порядке сортировки и берём ребро $e$ в остов  $\Leftrightarrow$ e --- соединяет разные компоненты связности (СНМ)
+    \end{enumerate}
+    \subsubsection*{Асимптотика}
+    $O(n\log n + m + \alpha(n)\cdot n)$, то есть сумма асимптотик сортировки и СНМ.
+    \subsubsection{Алгоритм Борувки (1926)}
+    Начинаем с n множествами.\\
+    Стадии: для каждого множества находим минимальное ребро, у которого ровно один конец в этом множестве,  все этим рёбра добавляем в СНМ.\\
+    Рассматриваем вместо весов рёбер пару <вес, номер ребра>.
+    \[\begin{tikzpicture}[every circle node/.style={draw}]
+        \draw (0, 0) node[circle](0){0};
+        \draw node[circle, below left of=0](1){1};
+        \draw node[circle, below right of=0](2){2};
+        \draw node[circle, below of=1](3){3};
+        \draw node[circle, below of=2](4){4};
+        \draw node[circle, below left of=4](5){5};
+        \draw node[circle, right of=2](6){6};
+        \draw node[circle, right of=4](7){7};
+        \draw node[circle, right of=7](8){8};
+        \draw node[circle, below of=8](9){9};
+        \draw (0.west) -- (1.north);
+        \draw (0.south) -- (1.east);
+        \draw[blue] (1.south west) -- (3.north west);
+        \draw[blue] (1.south east) -- (3.north east);
+        \draw[red] (3.north east) -- (2.west);
+        \draw (3.south east) -- (5.north west);
+        \draw (3.south) -- (5.west);
+        \draw[dashed, red] (5.north east) -- (4.south west);
+        \draw (4.north west) -- (2.south west);
+        \draw (4.north east) -- (2.south east);
+        \draw[dashed] (4) -- (7);
+        \draw[blue] (2) -- (6);
+        \draw (6) -- (7);
+        \draw (6.south east) -- (8.north west);
+        \draw (6.east) -- (8.north);
+        \draw (7) -- (9);
+    \end{tikzpicture}\]
+    Двойные рёбра --- значит минимумы соединённых вершин совпали.\\
+    Пунктирные --- отвергнутые алгоритмом СНМ, так как давали цикл.
+    Стадия 0: $n$ --- множеств. Чёрные рёбра.\\
+    Стадия 1: $\leq \frac{n}{2}$ множеств. Синие рёбра.\\
+    Стадия 2: $\leq \frac{n}{4}$ множеств. Красные рёбра.\\
+    Стадия $\log n$: $\leq 1$ множества.
+    \subsubsection*{Доказательство}
+    \[\begin{tikzpicture}[every circle node/.style={draw}]
+        \draw node[rectangle, draw]{Если тут нет графика, пишите};
+    \end{tikzpicture}\]
+    $V_1$ = компонента связности $a$, $V_2 = V\setminus{V_1}$\\
+    $e_1,\ e_k \rightarrow $sort, $w(e_1)\leq \dots \leq w(e_k)$.
 \end{document} 
