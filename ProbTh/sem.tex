@@ -1,5 +1,7 @@
 \documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
 \usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{mathabx}
@@ -7,11 +9,21 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{color}
+\usepackage[margin=0.25in]{geometry}
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
 \usepackage{nicefrac}
+\graphicspath{../Images}
 \usepackage{tikz}
+\usepackage{cancel}
+\usepackage{fontspec}
 
-\title{Теория вероятности 1 модуль.}
-\author{Андрей Тищенко БПИ231 @AndrewTGk}
+\setmainfont{Times New Roman}
+
+\newcommand{\cov}{\operatorname{cov}}
+
+\title{Теория вероятностей.}
+\author{Андрей Тищенко \href{https://t.me/AndrewTGk}{@AndrewTGk}}
 \date{2024/2025}
 
 \begin{document}
@@ -657,4 +669,52 @@
         2 & 0.31 & 0.375 & 0.026\\
         3 & 0.04 & 0.116 & 0.014
     \end{tabular}$
+    \begin{center}
+        Семинар 15 ноября
+    \end{center}
+    \subsection*{Задача 7 стр 132}
+    Запишем условие в виде таблицы:
+    \[\begin{tabular}{c|c|c|c}
+        B$\setminus$ A & 1 & 0 & sum\\
+        \hline
+        1 & $\frac{25}{1000}$ & $\frac{2}{100}$ & $\frac{45}{1000}$\\
+        \hline
+        0 & $\frac{5}{1000}$ & $\frac{95}{100}$ & $\frac{955}{1000}$\\
+        \hline
+        sum & $\frac{3}{100}$ & $\frac{97}{100}$ & 1
+    \end{tabular}\]
+    Посчитаем вероятность произведения:
+    \[\begin{tabular}{c|c|c}
+        AB & 1  &0\\
+        \hline
+        p & $\frac{25}{1000}$ & $\frac{975}{1000}$
+    \end{tabular}\]
+    $\cov(A, B) = E(AB) - EA\cdot EB = \frac{25}{1000} - \frac{3}{100}\cdot\frac{45}{1000} =  \frac{2365}{10000}$
+    \subsection*{Задача 1} я решал, перепишу с фотографии.
+    \subsection*{Задача 2}
+    Дано $f(x,\ y) = \begin{cases}
+        \frac{1}{4}\sin x \sin y,\ \text{если } 0\leq x,\ y \leq \pi\\
+        0, \text{ иначе}
+    \end{cases}$\\
+    $\xi = (\xi_1,\ \xi_2),\ P(\xi\in \mathcal{D})$
+    \[f_{\xi_1}(x) = \int\limits_0^{\pi} \frac{1}{4}\sin x \sin y\, dy = \left.\frac{1}{4}\sin x (-\cos y)\right|_0^{\pi} = \frac{1}{2}\sin x,\ x\in [0,\ \pi]\]
+    \[f_{\xi_2}(y) = \int\limits_0^{\pi} \frac{1}{4}\sin x \sin y\, dx = \left.\frac{1}{4}\sin y (-\cos x)\right|_0^{\pi} = \frac{1}{2}\sin y,\ y\in [0,\ \pi]\]
+    Заметим, что $f_{\xi}(x,\ y) = f_{\xi_1}(x) f_{\xi_2}(y)$, значит $\xi_1,\ \xi_2$ независимы $\Rightarrow\\
+    \Rightarrow\cov(\xi_1,\ \xi_2) = 0$\\
+    \[\displaystyle P(\xi \in \mathcal{D}) = \int\limits_{0}^{\frac{\pi}{4}}\int\limits_{\frac{\pi}{6}}^{\frac{\pi}{3}} \frac{1}{4}\sin x \sin y\, dy \, dx = \int_0^{\frac{\pi}{4}} \frac{1}{4}\sin x(-\frac{1}{2} + \frac{\sqrt{3}}{2})\, dx =\\
+    = \int\limits_0^{\frac{\pi}{4}} \frac{\sqrt{3} - 1}{8} \sin x \, dx = \frac{\sqrt{3} - 1}{8}\left(-\frac{\sqrt{2}}{2} + 1\right) = \frac{\sqrt{3} - 1}{8} - \frac{\sqrt{2}(\sqrt{3} - 1)}{16}\]
+    Посчитаем вектор матожидания:\\
+    \[E\xi_1 = E\xi_2 = \int\limits_0^{\pi} \frac{x}{2}\sin x\, dx = \int\limits_0^{\pi}\frac{x}{2}\, d\cos x = \left.-\frac{x\cos x}{2}\right|_0^{\pi} - \int\limits_0^{\pi} -\frac{\cos x}{2}\, dx =\]
+    \[= \frac{\pi}{2} + \left.\frac{\sin x}{2}\right|_0^{\pi} = \frac{\pi}{2}\]
+    Получается $E\xi = (\frac{\pi}{2},\ \frac{\pi}{2})$.\\
+    $K_{\xi} = \begin{pmatrix}
+        ? & 0\\
+        0 & ?
+    \end{pmatrix}$. Найдём дисперсии:
+    \[E\xi_1^2 = E\xi_2^2 = \int\limits_0^{\pi} \frac{x^2}{2} \sin x\, dx = \left.-\frac{x^2\cos x}{2}\right|_0^{\pi} + \int\limits_0^{\pi}x\cos x\, dx = \frac{\pi^2}{2} - \int\limits_0^{\pi} \sin x \, dx = \frac{\pi^2}{2} - 2\]
+    $\mathcal{D}\xi_1 = \mathcal{D}\xi_2 = \frac{\pi^2}{2} - 2 - \frac{\pi^2}{4} = \frac{\pi^2}{4} - 2$\\
+    Итак, $K_{\xi} = \begin{pmatrix}
+        \frac{\pi^2}{4} - 2 & 0\\
+        0 & \frac{\pi^2}{4} - 2
+    \end{pmatrix}$
 \end{document}
