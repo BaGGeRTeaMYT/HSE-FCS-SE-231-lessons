@@ -906,13 +906,14 @@
         \end{enumerate}
     \end{enumerate}
     \subsection*{Пример}
-    Пусть $\xi \sim R(-a, a)$, $\eta = \xi^2$. Посчитаем коэффициент корелляции:
+    Пусть $\xi \sim R(-a, a)$, $\eta = \xi^2$. Посчитаем коэффициент корреляции:
     \[\operatorname{cov}(\xi,\ \eta) = E\xi \eta - \underset{=0}{\underbrace{E\xi}} E\eta = E\xi^3 = \int\limits_{-a}^{a} x^3 \frac{1}{2a}\, dx = 0\Rightarrow \rho_{\xi\, \eta} = 0\]
-    Итого, величины зависимы, но не коррелированы (так как корелляция показывает линейную зависимость, а $\eta$ зависит от $\xi$ квадратично).
+    Итого, величины зависимы, но не коррелированы (так как корреляция показывает линейную зависимость, а $\eta$ зависит от $\xi$ квадратично).
     \subsection*{Определение}
     \underline{Ковариационной матрицей} вектора $\xi = \{\xi_1,\dots,\ \xi_n\}$ называется матрица $K_{\xi} = \begin{pmatrix}
         k_{i\, j}
-    \end{pmatrix}$, где $k_{i\, j} = \operatorname{cov}(\xi_i,\ \xi_j),\ i,\ j = \overline{1,\ n}$
+    \end{pmatrix}$,\\
+    где $k_{i\, j} = \operatorname{cov}(\xi_i,\ \xi_j),\ i,\ j = \overline{1,\ n}$
     \begin{center}
         Свойства $K_{\xi}$
     \end{center}
@@ -950,4 +951,111 @@
     Пусть $\xi_1,\dots,\ \xi_n$ --- независимые случайные величины, такие что $\xi_i\sim N(m_i,\ \sigma_i^2),\ i = \overline{1,\ n}$\\
     Тогда случайная величина $\eta = \xi_1 + \dots + \xi_n \sim N(m_{\eta},\ \mathcal{D}\eta)$,\\
     где $\displaystyle m_{\eta} = \sum_{i = 1}^{n} m_i,\ \mathcal{D}\eta = \sum_{i = 1}^{n} \sigma_i^2$
+    \begin{center}
+        Лекция 22 ноября.
+    \end{center}
+    \section*{Условное распределение}
+    $(\xi,\ \eta)$ --- дискретный случайный вектор.
+    \[\begin{tabular}{c|c}
+        $\xi \setminus \eta$ & $y_1\dots y_k$\\
+        \hline
+        $x_1$                & $p_{1\, 1}\dots p_{1\, k}$\\
+        $\vdots$             & \\
+        $x_m$                & $p_{m\, 1}\dots p_{m\, k}$
+    \end{tabular}\]
+    Тогда по формуле условной вероятности:
+    \[p(\xi = x_i\ \big|\ \eta = y_j) = \frac{p(\xi = x_i,\ \eta = y_j)}{(\eta = y_j)} = \frac{p_{i\, j}}{p_{\bullet\, j}}\]
+    \subsection*{Определение}
+    Набор вероятностей $\forall i = \overline{1,\ m}\quad \frac{p_{i\, j}}{p_{\bullet\, j}}$ называется \underline{условным распределением} случайной величины $\xi$ при условии $\{\eta = y_j\}$.
+    \subsection*{Определение}
+    \underline{Условной функцией распределения} случайной величины $\xi$ при условии $\{\eta = y_j\}$ таком, что $P(\eta = y_j) > 0$, называется:
+    \[F_{\xi}(x\ \big|\ y_j) = P(\xi \leq x\ \big|\ \eta = y_j) = \sum_{x_i \leq x} \frac{p_{i\, j}}{p_{\bullet\, j}}\]
+    \subsection*{Определение}
+    \underline{Условным математическим ожиданием} случайной величины $\xi$:\\
+    При условии $\{\eta = y_j\}$ называется:
+    \[E(\xi\ \big|\ \eta = y_j) = \sum_{i = 1}^{m} x_i\cdot p(\xi = x_i\ \big|\ \eta = y_j) = \sum_{i = 1}^{m} x_i \frac{p_{i\, j}}{p_{\bullet\, j}}\]
+    При условии $\{\eta\}$:
+    \[E(\xi\ \big|\ \eta) = g(\eta)\]
+    То есть это некоторая функция от случайного аргумента (значит она является случайной величиной). Распишем таблицу значений:
+    \[\begin{tabular}{c|c|c|c}
+        $E(\xi\ \big|\ \eta)$ & $E(\xi\ \big|\ \eta = y_1)$ & $\dots$ & $E(\xi\ \big|\ \eta = y_k)$\\
+        \hline
+        $p$                   & $p_{\bullet\, 1}$           & $\dots$ & $p_{\bullet\, k}$
+    \end{tabular}\]
+    Рассмотрим $E\big(g(\eta)\big)$, заодно докажем формулу \underline{полного математического ожидания}:
+    \[E\big(E(\xi\ \big|\ \eta)\big) = E\xi\]
+    \subsubsection*{Доказательство}
+    \[E\big(E(\xi\ \big|\ \eta)\big) = \sum_{j = 1}^{n} E(\xi\ \big|\ \eta = y_j) p_{\bullet\, j} = \sum_{j = 1}^{k}\sum_{i = 1}^{m} x_i\cdot \frac{p_{i\, j}}{p_{\bullet\, j}} p_{\bullet\, j} = \sum_{i = 1}^{m} x_i \sum_{j = 1}^{k} p_{i\, j} = \sum_{i = 1}^{m} x_i p_{i\, \bullet} = E\xi\]
+    \begin{center}
+        Для непрерывных случайных величин:
+    \end{center}
+    \subsection*{Определение}
+    Пусть $f(x,\ y)$ и $f_{\eta}(y)$ --- непрерывны в точке $y_0$ и $f_{\eta}(y_0) > 0$. Тогда условной функцией распределения случайной величины $\xi$ при условии $\{\eta = y_0\}$ называется функция:
+    \[F_{\xi}(x\ \big|\ y_0) = \lim_{\Delta y\to +0} P(\xi \leq x\ \big|\ y_0 < \eta \leq y_0 + \Delta y)\]
+    Корректность определения:
+    \[F_{\xi}(x\ \big|\ y_0) = \lim_{\Delta y\to +0} P(\xi \leq x\ \big|\ y_0 < \eta \leq y_0 + \Delta y) = \lim_{\Delta y\to +0} \frac{P(\xi \leq x,\ y_0 < \eta \leq y_0 + \Delta y)}{P(y_0 < \eta \leq y_0 + \Delta y)} =\]
+    \[= \lim_{\Delta y \to +0}\dfrac{\displaystyle \int\limits_{-\infty}^{x}\int\limits_{y_0}^{y_0 + \Delta y} f(t,\ s)\, ds\, dt}{\displaystyle\int\limits_{y_0}^{y_0 + \Delta y} f_{\eta}(s)\, ds} = \left< \begin{aligned}
+        & \text{По теореме о}\\
+        & \text{среднем значении}
+    \end{aligned} \right> = \lim_{\Delta y\to +0} \dfrac{\displaystyle \Delta y\int\limits_{-\infty}^{x} f(t,\ \tilde{s})\, dt}{\Delta y f_{\eta}\left(\tilde{\tilde{s}}\right)} =\]
+    \[= \frac{\displaystyle\int\limits_{\infty}^{x}f(t,\ y_0)}{f_{\eta}(y_0)}\]
+    \subsection*{Определение}
+    Пусть $f(x,\ y),\ f_{\eta}(y)$ --- непрерывны в точке $y_0$ и $f_{\eta}(y_0) > 0$. Функция $f_{\xi}(x\ |\ y_0)$ называется \underline{условной}\\ \underline{плотностью случайной величины $\xi$ при условии} $\eta = y$, если:
+    \[F_{\xi}(x\ \big|\ y_0) = \int\limits_{-\infty}^{x} f_{\xi}(t\ \big|\ y)\, dt\]
+    \subsubsection*{Замечание}
+    В точке дифференцируемости $F_{\xi}(x\ \big|\ y_0)$:
+    \[f_{\xi}(x\ \big|\ y_0) = \frac{\delta F_{\xi}(x\ \big|\ y_0)}{\delta x}\Rightarrow f_{\xi}(x\ \big|\ y_0) = \frac{\delta}{\delta x}\cdot\frac{\displaystyle\int\limits_{-\infty}^{x}f(t,\ y_0)\, dt}{f_{\eta}(y_0)} = \frac{f(x,\ y_0)}{f_{\eta}(y_0)}\]
+    \subsection*{Критерий независимости непрервных случайных величин}
+    \[\forall x\in \mathbb{R}\ \forall y\quad (f_{\eta}(y) > 0) \Rightarrow f_{\xi}(x\ \big|\ y) = \frac{f(x,\ y)}{f_{\eta}(y)}\]
+    Если $\xi$ и $\eta$ независимы, тогда: 
+    \[f(x,\ y) = f_{\xi}(x)f_{\eta}(y)\Rightarrow \forall x\in \mathbb{R}\quad  f_{\xi}(x\ \big|\ y) = f_{\xi}(x)\]
+    \subsubsection*{Пример}
+    Пусть случайный вектор $(\xi,\ \eta)$ распределён равномерно в круге радиуса $R$ с центор в начале координат:
+    \[f(x,\ y) = \begin{cases}
+        \begin{aligned}
+            &\frac{1}{\pi R^2},\ & x^2 + y^2 \leq R^2\\
+            &0,\ & x^2 + y^2 > R^2
+        \end{aligned}
+    \end{cases}\]
+    \[f_{\eta}(y) = \int\limits_{-\sqrt{R^2 - y^2}}^{\sqrt{R^2 - y^2}} \frac{dx}{\pi R^2} = \begin{cases}
+        \begin{aligned}
+            &\frac{2\sqrt{R^2 - y^2}}{\pi R^2},\ & |y| < R\\
+            &0,\ & |y| > R
+        \end{aligned}
+    \end{cases}\]
+    Теперь мы можем посчитать условную вероятность:
+    \[\forall y\quad |y| < R\Rightarrow f_{\xi}(x\ \big|\ y) = \frac{f(x,\ y)}{f_{\eta}(y)} = \begin{cases}
+        \begin{aligned}
+            &\frac{1}{\pi R^2}\cdot \frac{\pi R^2}{2\sqrt{R^2 - y^2}},\ \text{при } -\sqrt{R^2 - y^2} \leq x \leq \sqrt{R^2 - y^2}\\
+            &0,\ \text{иначе}
+        \end{aligned}
+    \end{cases} =\]
+    \[= \begin{cases}
+        \begin{aligned}
+            &\frac{1}{2\sqrt{R^2 - y^2}},\ \text{при } -\sqrt{R^2 - y^2} \leq x \leq \sqrt{R^2 - y^2}\\
+            &0,\ \text{иначе}
+        \end{aligned}
+    \end{cases}\]
+    Поскольку $y$ фиксированый, получаем равномерное распределение:
+    \[\begin{tikzpicture}
+        \draw[->] (-3, 0) -- (3, 0) node[anchor=north]{$x$};
+        \draw[->] (0, -2) -- (0, 2) node[anchor=south]{$f(x\ \big|\ y)$};
+        \draw (-1.5, 1) -- (1.5, 1);
+        \draw (-1.5, 0.05) -- (-1.5, -0.05) node[anchor=north]{$-\sqrt{R^2 - y^2}$};
+        \draw (1.5, 0.05) -- (1.5, -0.05) node[anchor=north]{$\sqrt{R^2 - y^2}$};
+        \draw[dashed] (-1.5, 0) -- (-1.5, 1);
+        \draw[dashed] (1.5, 0) -- (1.5, 1);
+    \end{tikzpicture}\]
+    Стоит заметить, что $E(\xi\ \big|\ \eta = y) = 0$, так как плотность распределения симметрична.
+    \begin{center}
+        Свойства $E(\xi\ \big|\ \eta)$
+    \end{center}
+    \begin{enumerate}
+        \item $E(c\ \big|\ \eta) = c$
+        \item $E(c\xi\ \big|\ \eta) = cE(\xi\ \big|\ \eta)$
+        \item $E\big(\varphi(\xi)\cdot \psi(\eta)\ \big|\ \eta\big) = \psi(\eta)E(\varphi(\xi)\ \big|\ \eta)$, так как $\eta$ фиксирована и $\varphi(\eta)$ является константой.
+        \item $\xi$ и $\eta$ --- независимы $\Rightarrow E(\xi\ \big|\ \eta) = E\xi$
+        \item $\displaystyle E\big(E(\xi\ \big|\ \eta)\big) = \int\limits_{-\infty}^{+\infty}\left(\int\limits_{-\infty}^{+\infty} x\cdot f(x\ \big|\ y)\, dx\right)\, f_{\eta}(y)\, dy =\\
+        =  \int\limits_{-\infty}^{+\infty}\left(\int\limits_{-\infty}^{+\infty} x\cdot \frac{f(x,\ y)}{f_{\eta}{y}} f_{\eta}(y)\, dx\right)\, dy = \int\limits_{-\infty}^{+\infty} x f_{\xi}(x)\, dx = E\xi$ 
+    \end{enumerate}
 \end{document}
