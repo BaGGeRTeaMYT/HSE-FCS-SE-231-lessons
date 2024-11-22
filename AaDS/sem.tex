@@ -688,4 +688,104 @@ void rollback() {
         sum[v] = sum[w] + M[v].size;
     \end{lstlisting}
     Теперь выполняем за $O(n\log n \cdot \text{опер.})$, где опер. --- операция в 
-\end{document}
+    \begin{center}
+        Семинар 22 ноября.
+    \end{center}
+    \subsection*{Задача}
+    Как понять, что ребро лежит в минимальном остове?\\
+    Построим какой-то минимальный остов. Если наше ребро вошло, то оно очевидно входит. Если нет, то рассмотрим цикл, который оно образует с рёбрами минимального остова. Если вес какого-то ребра из цикла равен весу нашего ребра, значит мы можем его поместить в минимальный остов.
+    \subsection*{Задача}
+    \[\begin{tikzpicture}[every circle node/.style={draw}]
+        \draw (0, 0) node[circle](0){0};
+        \draw (1.7, 0) node[circle](1){1};
+        \draw (3.2, -0.8) node[circle](2){2};
+        \draw (3.7, -1.8) node[circle](3){3};
+        \draw (3.1, -2.8) node[circle](4){4};
+        \draw (2, -3.6) node[circle](5){5};
+        \draw (0.8, -4.3) node[circle](6){6};
+        \draw (-0.4, -3.6) node[circle](7){7};
+        \draw (-1.2, -1.8) node[circle](8){8};
+        \draw[blue] (0) -- node[anchor=south]{2} (1);
+        \draw[blue] (1) -- node[anchor=west](cross){2} (4);
+        \draw (1) -- node[anchor=east]{1} (5);
+        \draw (4) -- node[anchor=north]{1} (5);
+        \draw[blue] (5) -- node[anchor=south]{2} (7);
+        \draw (0) -- node[anchor=west]{1} (7);
+        \draw (0) -- node[anchor=east]{1} (8);
+        \draw[dashed] (7) -- node[anchor=east]{1} (8);
+    \end{tikzpicture}\]
+    Берём вершины $0,\ 1,\ 4,\ 5,\ 7,\ 8$. Ребро между $1$ и $4$ брать в минимильный остов не будем.
+    \newpage
+    \subsection*{Задача}
+    Дан граф:
+    \[\begin{tikzpicture}[every circle node/.style={draw}]
+        \draw (0, 0) node[circle](1){1};
+        \draw (2, 0) node[circle](2){2};
+        \draw (2, -2) node[circle](3){3};
+        \draw (0, -2) node[circle](4){4};
+        \draw (1) -- node[anchor=south]{5} (2);
+        \draw (1) -- node[anchor=east]{1} (4);
+        \draw (1) -- node[anchor=south]{2} (3);
+        \draw (3) -- node[anchor=north]{3} (4);
+        \draw (3) -- node[anchor=west]{6} (2);
+        \draw[dashed] (4) -- node[anchor=north]{4} (2);
+        
+    \end{tikzpicture}\]
+    Ребро 2 соединяет вершины $1,\ 3$. Ребро 4 соединяет $2,\ 4$.\\
+    Веса рёбер:
+    \[\begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        Ребро & 1 & 2 & 3 & 4 & 5 & 6\\
+        \hline
+        Вес & 7 & 7 & 7 & 9 & 9 & 10\\
+        \hline
+    \end{tabular}\]
+    Докажем утверждение:\\
+    Любая из перестановок рёбер:\\
+    $1,\ 2,\ 3,\ 5,\ 4,\ 6$\\
+    $1,\ 2,\ 3,\ 4,\ 5,\ 6$\\
+    $\left.\begin{aligned}
+        & 1,\ 3,\ 2\\
+        & 2,\ 1,\ 3\\
+        & 2,\ 3,\ 1\\
+        & 3,\ 1,\ 2\\
+        & 3,\ 2,\ 1
+    \end{aligned}\right\} \times 2$\\
+    Даст нам все возможные минимальные остовы для этого графа хотя бы один раз.\\
+    Рассматриваем классы эквивалентности по весу ребра. В каждом классе любая перестановка даёт валидный минимальный остов, ч.т.д.
+    \newpage
+    \subsection*{Задача}
+    Можно ли из одного остова получить другой операциями (удаление ребра, добавление нового ребра).\\
+    Рассмотрим граф: 
+    \[\begin{tikzpicture}[every circle node/.style={circle, draw}]
+        \draw (0, 0) node[circle](0){};
+        \draw (0.2, -1) node[circle](1){};
+        \draw (1.2, -0.6) node[circle](2){};
+        \draw (0) -- (1);
+        \draw (1) -- (2);
+        \draw (0, -2) node[circle](3){};
+        \draw (1) -- (3);
+        \draw (-1, -2.2) node[circle](4){};
+        \draw (3) -- node[anchor=south]{w} (4);
+        \draw (-1.4, -3.2) node[circle](5){};
+        \draw (4) -- (5);
+        \draw (-0.7, -4.2) node[circle](6){};
+        \draw (5) -- (6);
+        \draw (0.5, -3.7) node[circle](7){};
+        \draw[red] (6) -- node[anchor=south]{w} (7); 
+        \draw (0.7, -2.8) node[circle](8){};
+        \draw (7) -- (8);
+        \draw (3) -- (8);
+        \draw node[above of=4][circle](9){};
+        \draw (4) -- (9);
+        \draw node[left of=5][circle](10){};
+        \draw (5) -- (10);
+        \draw node[below left of=6][circle](11){};
+        \draw (6) -- (11);
+        \draw node[below right of=6][circle](12){};
+        \draw (6) -- (12);
+    \end{tikzpicture}\]
+    Пусть у нас есть список отсортированных по весу рёбер. Рассмотрим компоненты связности с рёбрами одинакового веса, в таком случае веса в этой задаче можно не рассматривать.\\
+    Возьмём два произольных минимальных остова, склеим их общие вершины.\\
+    Получаем ситуацию с рёбрами без весов и без общих рёбер. Возьмём какой-то лист из первого остова, отсоединим его и соединим ребром из второго остова. Повторяем алгоритм (удаляем общие рёбра), теперь нам нужно соединить остовы размером на 1 меньше. По индукции легко доказать.
+    \end{document}
