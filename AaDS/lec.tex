@@ -6,6 +6,7 @@
 \usepackage{amsmath}
 \usepackage{mathabx}
 \usepackage{graphicx}
+\usepackage{animate}
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{color}
@@ -989,4 +990,210 @@ std::vector<std::pair<int, std::pair<int, int>>> g;
     \end{tikzpicture}\]
     $V_1$ = компонента связности $a$, $V_2 = V\setminus{V_1}$\\
     $e_1,\ e_k \rightarrow $sort, $w(e_1)\leq \dots \leq w(e_k)$.
+    \subsection{Алгоритм Прима (1957)}
+    На самом деле алгоритм был опубликован в 1930 году малоизвестным математиком.\\
+    Алгоритм ищет минимальный остов в графе.\\
+    \[\begin{animateinline}[autoplay, loop]{1}
+        % Шаг 1: Начальный граф
+        \begin{tikzpicture}
+            \node[circle, draw, minimum size=1cm] (A) at (0, 0) {A};
+            \node[circle, draw, minimum size=1cm] (B) at (2, 0) {B};
+            \node[circle, draw, minimum size=1cm] (C) at (4, 0) {C};
+            \node[circle, draw, minimum size=1cm] (D) at (1, -2) {D};
+            \node[circle, draw, minimum size=1cm] (E) at (3, -2) {E};
+    
+            \draw (A) -- (B) node[midway, above] {2};
+            \draw (A) -- (D) node[midway, left] {3};
+            \draw (B) -- (D) node[midway, right] {1};
+            \draw (B) -- (C) node[midway, above] {4};
+            \draw (B) -- (E) node[midway, right] {5};
+            \draw (C) -- (E) node[midway, right] {6};
+            \draw (D) -- (E) node[midway, below] {7};
+        \end{tikzpicture}
+    
+        % Шаг 2: Добавление первого ребра
+        \newframe
+        \begin{tikzpicture}
+            \node[circle, draw, minimum size=1cm] (A) at (0, 0) {A};
+            \node[circle, draw, minimum size=1cm] (B) at (2, 0) {B};
+            \node[circle, draw, minimum size=1cm] (C) at (4, 0) {C};
+            \node[circle, draw, minimum size=1cm] (D) at (1, -2) {D};
+            \node[circle, draw, minimum size=1cm] (E) at (3, -2) {E};
+    
+            \draw[red, thick] (A) -- (B) node[midway, above] {2};
+            \draw (A) -- (D) node[midway, left] {3};
+            \draw (B) -- (D) node[midway, right] {1};
+            \draw (B) -- (C) node[midway, above] {4};
+            \draw (B) -- (E) node[midway, right] {5};
+            \draw (C) -- (E) node[midway, right] {6};
+            \draw (D) -- (E) node[midway, below] {7};
+        \end{tikzpicture}
+    
+        % Шаг 3: Добавление второго ребра
+        \newframe
+        \begin{tikzpicture}
+            \node[circle, draw, minimum size=1cm] (A) at (0, 0) {A};
+            \node[circle, draw, minimum size=1cm] (B) at (2, 0) {B};
+            \node[circle, draw, minimum size=1cm] (C) at (4, 0) {C};
+            \node[circle, draw, minimum size=1cm] (D) at (1, -2) {D};
+            \node[circle, draw, minimum size=1cm] (E) at (3, -2) {E};
+    
+            \draw[red, thick] (A) -- (B) node[midway, above] {2};
+            \draw[red, thick] (B) -- (D) node[midway, right] {1};
+            \draw (A) -- (D) node[midway, left] {3};
+            \draw (B) -- (C) node[midway, above] {4};
+            \draw (B) -- (E) node[midway, right] {5};
+            \draw (C) -- (E) node[midway, right] {6};
+            \draw (D) -- (E) node[midway, below] {7};
+        \end{tikzpicture}
+    
+        % Шаг 4: Добавление третьего ребра
+        \newframe
+        \begin{tikzpicture}
+            \node[circle, draw, minimum size=1cm] (A) at (0, 0) {A};
+            \node[circle, draw, minimum size=1cm] (B) at (2, 0) {B};
+            \node[circle, draw, minimum size=1cm] (C) at (4, 0) {C};
+            \node[circle, draw, minimum size=1cm] (D) at (1, -2) {D};
+            \node[circle, draw, minimum size=1cm] (E) at (3, -2) {E};
+    
+            \draw[red, thick] (A) -- (B) node[midway, above] {2};
+            \draw[red, thick] (B) -- (D) node[midway, right] {1};
+            \draw[red, thick] (B) -- (E) node[midway, right] {5};
+            \draw (A) -- (D) node[midway, left] {3};
+            \draw (B) -- (C) node[midway, above] {4};
+            \draw (C) -- (E) node[midway, right] {6};
+            \draw (D) -- (E) node[midway, below] {7};
+        \end{tikzpicture}
+    
+        % Шаг 5: Добавление четвертого ребра
+        \newframe
+        \begin{tikzpicture}
+            \node[circle, draw, minimum size=1cm] (A) at (0, 0) {A};
+            \node[circle, draw, minimum size=1cm] (B) at (2, 0) {B};
+            \node[circle, draw, minimum size=1cm] (C) at (4, 0) {C};
+            \node[circle, draw, minimum size=1cm] (D) at (1, -2) {D};
+            \node[circle, draw, minimum size=1cm] (E) at (3, -2) {E};
+    
+            \draw[red, thick] (A) -- (B) node[midway, above] {2};
+            \draw[red, thick] (B) -- (D) node[midway, right] {1};
+            \draw[red, thick] (B) -- (E) node[midway, right] {5};
+            \draw[red, thick] (C) -- (E) node[midway, right] {6};
+            \draw (A) -- (D) node[midway, left] {3};
+            \draw (B) -- (C) node[midway, above] {4};
+            \draw (D) -- (E) node[midway, below] {7};
+        \end{tikzpicture}
+    \end{animateinline}\]
+    P.S. граф анимированный, однако может не проигрываться в браузере или других базовых средствах просмотра. Рекомендую использовать Adobe Acrobat Reader, в нём анимации проигрываются нормально.\\
+    Далее w --- вершина, только что попавшая в множество обработанных вершин. v --- элемент из множества вершин, имеющих ребро в w, но не лежащих в множестве обработанных.
+    Асимптотика работы: $O(n\cdot T(\text{get\_min}) + m\cdot T(\text{recalc}))$ в общем виде.\\
+    Формула recalc: d[v] = min(d[v], len(w, v));
+    \[\begin{tabular}{|c|c|}
+        \hline
+        Реализация & Асимптотика\\
+        \hline
+        В лоб & $O(n\cdot n + m) = O(n^2)$\\
+        \hline
+        set или heap & $O(n\log n + m\log n) = O(m\log n)$\\
+        \hline
+        sqrt decomposition & $O(n\sqrt{c} + m\cdot 1)$\\
+        \hline
+        Фибоначчиева куча & $O(n\log n + m\cdot 1)$\\
+        \hline
+    \end{tabular}\]
+    Если использовать set для хранения пар \{d[v], v\}, где d[v] --- вес минимального ребра из v в множество построенных вершин, то можно добиться асимптотики.\\
+    \href{https://www.geeksforgeeks.org/fibonacci-heap-set-1-introduction/?ysclid=m3yj3nij1l804480741}{Фибоначчиева куча} --- структура данных, придуманная специально для алгоритмов Прима и Дейкстры.\\
+    \textit{Замечание:} корневая декомпозиция работает только для целых неотрицательных весов, не более некоторого $C$.
+    \subsection{Алгоритм Дейкстры (1959)}
+    \[\begin{tikzpicture}
+        % Определение вершин
+        \node[circle, draw, minimum size=1cm] (A) at (0, 0) {0};
+        \node[circle, draw, minimum size=1cm] (B) at (2, 0) {$\infty$};
+        \node[circle, draw, minimum size=1cm] (C) at (4, 0) {$\infty$};
+        \node[circle, draw, minimum size=1cm] (D) at (1, -2) {$\infty$};
+        \node[circle, draw, minimum size=1cm] (E) at (3, -2) {$\infty$};
+    
+        % Определение ребер и их весов
+        \draw (A) -- (B) node[midway, above] {1};
+        \draw (A) -- (D) node[midway, left] {4};
+        \draw (B) -- (D) node[midway, right] {2};
+        \draw (B) -- (C) node[midway, above] {5};
+        \draw (B) -- (E) node[midway, right] {1};
+        \draw (C) -- (E) node[midway, right] {3};
+        \draw (D) -- (E) node[midway, below] {2};
+    
+        % Иллюстрация шагов алгоритма Дейкстры
+        \begin{scope}[shift={(6,0)}]
+            \node[circle, draw, minimum size=1cm] (A1) at (0, 0) {0};
+            \node[circle, draw, minimum size=1cm] (B1) at (2, 0) {1};
+            \node[circle, draw, minimum size=1cm] (C1) at (4, 0) {$\infty$};
+            \node[circle, draw, minimum size=1cm] (D1) at (1, -2) {4};
+            \node[circle, draw, minimum size=1cm] (E1) at (3, -2) {$\infty$};
+    
+            \draw[red, thick] (A1) -- (B1) node[midway, above] {1};
+            \draw (A1) -- (D1) node[midway, left] {4};
+            \draw (B1) -- (D1) node[midway, right] {2};
+            \draw (B1) -- (C1) node[midway, above] {5};
+            \draw (B1) -- (E1) node[midway, right] {1};
+            \draw (C1) -- (E1) node[midway, right] {3};
+            \draw (D1) -- (E1) node[midway, below] {2};
+        \end{scope}
+    
+        \begin{scope}[shift={(12,0)}]
+            \node[circle, draw, minimum size=1cm] (A2) at (0, 0) {0};
+            \node[circle, draw, minimum size=1cm] (B2) at (2, 0) {1};
+            \node[circle, draw, minimum size=1cm] (C2) at (4, 0) {$\infty$};
+            \node[circle, draw, minimum size=1cm] (D2) at (1, -2) {3};
+            \node[circle, draw, minimum size=1cm] (E2) at (3, -2) {2};
+    
+            \draw[red, thick] (A2) -- (B2) node[midway, above] {1};
+            \draw[red, thick] (B2) -- (D2) node[midway, right] {2};
+            \draw (A2) -- (D2) node[midway, left] {4};
+            \draw (B2) -- (C2) node[midway, above] {5};
+            \draw (B2) -- (E2) node[midway, right] {1};
+            \draw (C2) -- (E2) node[midway, right] {3};
+            \draw (D2) -- (E2) node[midway, below] {2};
+        \end{scope}
+    
+        \begin{scope}[shift={(0,-4)}]
+            \node[circle, draw, minimum size=1cm] (A3) at (0, 0) {0};
+            \node[circle, draw, minimum size=1cm] (B3) at (2, 0) {1};
+            \node[circle, draw, minimum size=1cm] (C3) at (4, 0) {$\infty$};
+            \node[circle, draw, minimum size=1cm] (D3) at (1, -2) {3};
+            \node[circle, draw, minimum size=1cm] (E3) at (3, -2) {2};
+    
+            \draw[red, thick] (A3) -- (B3) node[midway, above] {1};
+            \draw[red, thick] (B3) -- (D3) node[midway, right] {2};
+            \draw[red, thick] (B3) -- (E3) node[midway, right] {1};
+            \draw (A3) -- (D3) node[midway, left] {4};
+            \draw (B3) -- (C3) node[midway, above] {5};
+            \draw (C3) -- (E3) node[midway, right] {3};
+            \draw (D3) -- (E3) node[midway, below] {2};
+        \end{scope}
+    
+        \begin{scope}[shift={(6,-4)}]
+            \node[circle, draw, minimum size=1cm] (A4) at (0, 0) {0};
+            \node[circle, draw, minimum size=1cm] (B4) at (2, 0) {1};
+            \node[circle, draw, minimum size=1cm] (C4) at (4, 0) {4};
+            \node[circle, draw, minimum size=1cm] (D4) at (1, -2) {3};
+            \node[circle, draw, minimum size=1cm] (E4) at (3, -2) {2};
+    
+            \draw[red, thick] (A4) -- (B4) node[midway, above] {1};
+            \draw[red, thick] (B4) -- (D4) node[midway, right] {2};
+            \draw[red, thick] (B4) -- (E4) node[midway, right] {1};
+            \draw[red, thick] (D4) -- (E4) node[midway, below] {2};
+            \draw (A4) -- (D4) node[midway, left] {4};
+            \draw (B4) -- (C4) node[midway, above] {5};
+            \draw (C4) -- (E4) node[midway, right] {3};
+        \end{scope}
+    \end{tikzpicture}\]
+    \begin{lstlisting}
+d.assign(n, +infty);
+d[s] = 0;
+    \end{lstlisting}
+    \subsubsection*{Лемма}
+    Вершина v, у которой d[v] минимально среди всех вершин до которых расстояние не посчитано, 
+    может быть причислена к множеству вершин, до которых расстояние посчитано.\\
+    Формула recalc: d[v] = min (d[v], d[w] + len(v, w)).\\
+    Асимптотики аналогичны алгоритму Прима.\\
+    \textit{Замечание:} если менять recalc, можно получать алгоритмы, решающие другие задачи.зз
 \end{document} 
