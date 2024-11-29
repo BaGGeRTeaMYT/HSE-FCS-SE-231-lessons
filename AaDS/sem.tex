@@ -788,4 +788,115 @@ void rollback() {
     Пусть у нас есть список отсортированных по весу рёбер. Рассмотрим компоненты связности с рёбрами одинакового веса, в таком случае веса в этой задаче можно не рассматривать.\\
     Возьмём два произольных минимальных остова, склеим их общие вершины.\\
     Получаем ситуацию с рёбрами без весов и без общих рёбер. Возьмём какой-то лист из первого остова, отсоединим его и соединим ребром из второго остова. Повторяем алгоритм (удаляем общие рёбра), теперь нам нужно соединить остовы размером на 1 меньше. По индукции легко доказать.
-    \end{document}
+    \newpage
+    \begin{center}
+        Семинар 29 ноября.
+    \end{center}
+    Алгоритм Прима за $O(n^2)$:
+    \begin{lstlisting}
+int d[N] = INT_MAX, used[N] = 0; // N - amount of vertices
+std::vector<std::vector<pair<int, int>>> g;
+
+int main() {
+    int s; // start vertex
+    sum = 0;
+    d[s] = 0;
+    for (int i = 0; i < n; i++) {
+        int v = -1;
+        for (int j = 0; j < n; j++) {
+            if ((v == -1 || d[j] < d[v]) && !used[j]) {
+                v = j;
+            }
+        }
+        sum += d[v];
+        used[v] = true;
+        for (auto [vertex, weight] : g[v]) {
+            if (!used[vertex] && d[vertex] > weight) {
+                d[vertex] = weight;
+            }
+        }
+    }
+}
+    \end{lstlisting}
+    Превратим это в алгоритм Дейкстры за $O(n^2)$:
+    \begin{lstlisting}
+int d[N] = INT_MAX, used[N] = 0; // N - amount of vertices
+std::vector<std::vector<pair<int, int>>> g;
+    
+int main() {
+    int s; // start vertex
+    d[s] = 0;
+    for (int i = 0; i < n; i++) {
+        int v = -1;
+        for (int j = 0; j < n; j++) {
+            if ((v == -1 || d[j] < d[v]) && !used[j]) {
+                v = j;
+            }
+        }
+        used[v] = true;
+        for (auto [vertex, weight] : g[v]) {
+            if (!used[vertex] && d[vertex] > weight + d[v]) {
+                d[vertex] = weight + d[v];
+            }
+        }
+    }
+}
+    \end{lstlisting}
+    \newpage
+    Напишем Дейкстру за $O(m\log n)$
+\begin{lstlisting}
+int d[N] = INT_MAX, used[N] = false; // N - amount of vertices
+std::set<std::pair<int, int>> g;
+        
+int main() {
+    int s; // start vertex
+    g.insert({d[s], s});
+    for (int i = 0; i < n; i++) {
+        int v = -1;
+        for (int j = 0; j < n; j++) {
+            if (v == -1 || d[j] < d[v]) {
+                v = q.begin().second;
+                q.erase(q.begin());
+            }
+        }
+        used[v] = true;
+        for (auto [u, w] : g[v]) {
+            if (d[u] > w + d[v]) {
+                q.erase({d[u], u});
+                d[u] = w + d[v];
+                q.insert({d[u], u});
+            }
+        }
+    }
+}
+    \end{lstlisting}
+    Прим за $O(m\log n)$
+    \begin{lstlisting}
+int d[N] = INT_MAX; // N - amount of vertices
+std::set<std::pair<int, int>> g;
+                
+int main() {
+    int s; // start vertex
+    int sum = 0;
+    g.insert({d[s], s});
+    for (int i = 0; i < n; i++) {
+        int v = -1;
+        for (int j = 0; j < n; j++) {
+            if ((v == -1 || d[j] < d[v]) && d[j] != -1) {
+                v = q.begin().second;
+                q.erase(q.begin());
+            }
+        }
+        sum += d[v];
+        d[v] = -1;
+        for (auto [u, w] : g[v]) {
+            if (d[u] > w) {
+                q.erase({d[u], u});
+                d[u] = w;
+                q.insert({d[u], u});
+            }
+        }
+    }
+}
+    \end{lstlisting}
+\end{document}
