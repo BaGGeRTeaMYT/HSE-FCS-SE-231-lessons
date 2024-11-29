@@ -769,4 +769,54 @@
     P(\eta = 2\ |\ \xi = 1) = \frac{0.035}{0.119} \approx 0.294
     P(\eta = 3\ |\ \xi = 1) = \frac{0.001}{0.119} \approx 0.009\\
     E(\eta\ |\ \xi = 1) = 1\cdot 0.697 + 2\cdot 0.294 + 3\cdot 0.009 = 1.312$
+    \begin{center}
+        Семинар 29 ноября.
+    \end{center}
+
+    Вспоминаем неравенство Чебышёва:
+    $E|\xi|^r < \infty\Rightarrow \forall \varepsilon > 0\quad P(|\xi| > \varepsilon) \leq \frac{E|\xi|^r}{\varepsilon^r}$\\
+    \subsection*{Задача}
+    Найди вероятность того, что в некоторой области скорость ветра превысит 80 км/ч, если:\\
+    a) $E\xi = 16 \frac{\text{км}}{\text{ч}}$\\
+    б) $E\xi = 16\frac{\text{км}}{\text{ч}},\ \sigma = 4 \frac{\text{км}}{\text{ч}}$\\
+    В пункте а: $P(\xi > 80) \leq \frac{E\xi}{80} = \frac{16}{80} = 0.2$\\
+    В пункте б: можем воспользоваться $\sigma$ для нахождения матожидания квадрата:
+    \[E\xi^2 = \mathcal{D}\xi + (E\xi)^2 = 16 + 256 = 272 < \infty\]
+    $P(\xi > 80) \leq \frac{E\xi^2}{80^2} = \frac{272}{80^2} = 0.0425$
+    \subsection*{Задача}
+    Пусть $\xi$ = \{Количество доживших до 50 лет среди 1000 новорождённых\}\\
+    $\xi \sim Bi(1000,\ 0.87)$. Можем оценить $P(|\underset{\eta}{\underbrace{\frac{\xi}{1000} - 0.87}}| > 0.04) \leq \frac{\mathcal{D}\frac{\xi}{n}}{0,04^2}$\\
+    Из свойств биномиального распределения: $E\xi = np,\ E\frac{\xi}{n} = p,\ \mathcal{D}\xi = npq,\ \mathcal{D}\frac{\xi}{n} = \frac{pq}{n}$\\
+    Тогда $P(|\eta| > 0,04) \leq 0,07\Rightarrow P(|\eta| < 0,04) \geq 1 - 0,07 = 0,93$.
+    \subsection*{Задача}
+    \[f(x,\ y) = \begin{cases}
+        axy,\ 0 < y < 1, y < x < y + 1\\
+        0,\ \text{иначе}
+    \end{cases}\]
+    \[\begin{tikzpicture}
+        \draw[->] (-2, 0) -- (2, 0) node[anchor=west]{x};
+        \draw[->] (0, -2) -- (0, 2) node[anchor=south]{y};
+        \draw (0, 0) -- (1, 1) node[anchor=south]{x = y};
+        \draw (1, 0) -- (2, 1);
+        \draw[dashed] (1, 1) -- (2, 1);
+    \end{tikzpicture}\]
+    $\displaystyle \int_0^1\int_y^{y + 1} f(x,\ y)\, dx\, dy = \int_0^1 \int_y^{y + 1} axy\, dx\, dy = \int_0^1\int_y^{y + 1} a\left.\frac{x^2}{2} y\, \right|_y^{y + 1} dy = \int_0^1 ay^2 + \frac{ay}{2}\, dy = \frac{a}{3} + \frac{a}{4} = 1\Rightarrow a = \frac{12}{7}$\\
+    $f_{\xi_1}(x) = \begin{cases}
+        \displaystyle\int_0^x \frac{12}{7} xy\, dy = \frac{6x^3}{7}, 0 < x < 1\\
+        \displaystyle\int_{x - 1}^{1} \frac{12}{7} xy\, dy = \frac{6y^2}{7} x |_{x - 1}^{1} = \frac{6x^2}{7}(2 - x),\ 1 < x < 2\\
+        0,\ \text{иначе}
+    \end{cases}$\\
+    $f_{\xi_2}(y) = \begin{cases}
+        \displaystyle\int_y^{y + 1} \frac{12}{7}xy\, dx = \frac{6y}{7}(2y + 1),\ 0 < y < 1\\
+        0,\ \text{иначе}
+    \end{cases}$\\
+    $f_{\xi_1}(x\ |\ y) = \begin{cases}
+        \frac{\frac{12}{7}xy}{\frac{6}{7} y(2y + 1)} = \frac{2x}{2y + 1},\ y < x < y + 1\\
+        \text{0},\ \text{иначе}
+    \end{cases}$\\
+    $f_{\xi_2}(y\ |\ x) = \begin{cases}
+        \frac{\frac{12}{7}xy}{\frac{6}{7}x^3}=\frac{2y}{x^2} 0 < x < 1,\ 0 < y < 1\\
+        \frac{\frac{12}{7}xy}{\frac{6}{7}x^2(2 - x)} = \frac{2y}{x(2 - x)} 1 < x < 2,\ 0 < y < 1\\
+    \end{cases}$\\
+    $\displaystyle E(\xi_2\ |\ \xi_1 = 1) = \int_{-\infty}^{+\infty} x f_{\xi_1}(x\ |\ y)\, dx = \int_1^2 \frac{x}\cdot \frac{2x}{3}\, dx = \left.\frac{2x^3}{9}\right|_1^2 = \frac{14}{9}$
 \end{document}
