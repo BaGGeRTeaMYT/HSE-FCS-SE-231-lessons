@@ -1058,4 +1058,103 @@
         \item $\displaystyle E\big(E(\xi\ \big|\ \eta)\big) = \int\limits_{-\infty}^{+\infty}\left(\int\limits_{-\infty}^{+\infty} x\cdot f(x\ \big|\ y)\, dx\right)\, f_{\eta}(y)\, dy =\\
         =  \int\limits_{-\infty}^{+\infty}\left(\int\limits_{-\infty}^{+\infty} x\cdot \frac{f(x,\ y)}{f_{\eta}{y}} f_{\eta}(y)\, dx\right)\, dy = \int\limits_{-\infty}^{+\infty} x f_{\xi}(x)\, dx = E\xi$ 
     \end{enumerate}
+    \begin{center}
+        Лекция 29 ноября.
+    \end{center}
+    \subsection*{Определение}
+    Условной дисперсией дискретной случайной величины $\xi$ при условии $\{\eta = y_j\}$ называют величину:
+    \[\mathcal{D}(\xi\ |\ \eta = y_j) = \sum \left(x_i - E(\xi\ |\ \eta = y_j)\right)^2 \frac{p_{i\, j}}{i_{\bullet\, j}}\]
+    Условным математическим ожиданием непрерывной случайной величины $\xi$ называется:
+    \[E(\xi\ |\ \eta = y) = \int_{-\infty}^{+\infty} x\cdot f_{\xi}(x\ |\ y)\, dx\]
+    Условной дисперсией непрерывной случайной величины $\xi$ называется:
+    \[\mathcal{D}(\xi\ |\ \eta = y) = \int_{-\infty}^{+\infty} \big(x - E(\xi\ |\ \eta = y)\big)^2 f_{\xi}(x\ |\ y)\, dx\]
+    \subsection*{Проверка нормировки}
+    Пусть $\xi_1,\ \xi_2$ независимы и имеют нормальное распределение на интервале $(0,\ 1)$. То есть $\xi_1,\ \xi_2\sim N(0,\ 1)$. Тогда $\xi = (\xi_1,\ \xi_2)$ называется Гауссовским вектором.
+    \[f_{\xi_1}(x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}\]
+    \[f_{\xi}(x,\ y) = f_{\xi_1}(x)f_{\xi_2}(y) = \frac{1}{2\pi} e^{-\frac{x^2 + y^2}{2}}\]
+    \[\int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty} f_{\xi}(x,\ y)\, dx\, dy = \int\limits_{-\infty}^{+\infty} f_{\xi_1}(x)\, dx \int\limits_{-\infty}^{+\infty} f_{\xi_2}(y)\, dy\]
+    \[\int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty} f(x,\ y)\, dx\, dy = \int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty} \frac{1}{2\pi} e^{-\frac{x^2 + y^2}{2}}\, dx\, dy = \left< \begin{aligned}
+        & x = r\cos \varphi\\
+        & y = r\sin \varphi\\
+        &|J| = r 
+    \end{aligned} \right> = \int\limits_{0}^{+2\pi}\int\limits_{0}^{+\infty} \frac{r}{2\pi} e^{-\frac{r^2}{2}}\, dr\, d\varphi = \]
+    \[= \int\limits_{0}^{+\infty} re^{-\frac{r^2}{2}}\, dt = \int\limits_{0}^{+\infty} -e^{-\frac{r^2}{2}}\, d\frac{r^2}{2} = \left.-e^{-\frac{r^2}{2}}\right|^{+\infty}_0 = 1\]
+    \subsection*{Определение}
+    Случайный вектор $\xi = (\xi_1,\dots,\ \xi_n)$ имеет нормальное (гауссовское) распределение $\xi \sim N(m,\ K)$, если плотность распределения имеет вид:
+    \[f(x) = \frac{1}{\sqrt{(2\pi)^n \det K}} e^{-\frac{1}{2}\left((x - m)^T K^{-1}(x - m)\right)}\]
+    \subsection*{Замечание}
+    Здесь $K$ --- ковариационная матрица.
+    \[x = (x_1,\dots,\ x_n),\ m = (m_1,\dots,\ m_n),\ K = \begin{pmatrix}
+        k_{i\, j}
+    \end{pmatrix},\ k_{i\, j} = \operatorname{cov}(\xi_i,\ \xi_j)\]
+    \[f(x_1,\dots,\ x_n) = \frac{\sqrt{\det C}}{\sqrt{(2\pi)^n}} e^{-\frac{1}{2}\left( \sum_i\sum_j c_{i\, j} (x_i - m_i)(x_j - m_j) \right)}\]
+    $C = K^{-1}$
+    \begin{center}
+        Свойства многомерного гауссовского распределения.
+    \end{center}
+    \begin{enumerate}
+        \item $E\xi = m,\quad K_{\xi} = K$
+        \item Любой подвектор гауссовского вектора имеет гауссовское распределение.
+        \item Пусть $\displaystyle\eta = \sum_{i = 1}^{n} \alpha_i \xi_i$ и все $a_i = 0$, тогда случайная величина $\eta$ имеет гауссовское распределение. 
+        \item Пусть $\eta = A\xi + B$, где $A$ --- матрица размера $k\times n$, а $B$ --- вектор, размера $k$, тогда:
+        \[\eta \sim N(Am_\xi + B,\ AK_{\xi} A^T)\]
+        \item Пусть компоненты $\xi_1,\dots,\ \xi_n$ вектора $\xi$ попарно некоррелированы, тогда $\xi_1,\dots,\ \xi_n$ независимы.
+        \textit{Доказательство:}\\
+        Пусть $\displaystyle\rho_{\xi_i,\ \xi_j} = 0$ при $i \neq j\Rightarrow \operatorname{cov}(\xi_i,\ \xi_j) = 0\Rightarrow K = \begin{pmatrix}
+            \sigma^2_1 &\dots &  0\\
+            \vdots & \ddots & \vdots\\
+            0 & \dots & \sigma_n^2
+        \end{pmatrix} \Rightarrow C = K^{-1} = \begin{pmatrix}
+            \frac{1}{\sigma^2_1} &\dots &  0\\
+            \vdots & \ddots & \vdots\\
+            0 & \dots & \frac{1}{\sigma_n^2}
+        \end{pmatrix}\Rightarrow\\
+        \Rightarrow  f(x_1,\dots,\ x_n) = \frac{1}{\sqrt{(2\pi)^n}\sigma_1\cdot\dots \sigma_n}e^{-\frac{1}{2}\sum_{i} c_{i\, i}(x_i - m_i)^2} = \prod\limits_{i = 1}^{n} \underset{f_{\xi_i}(x_i)}{\underbrace{\frac{1}{\sqrt{2\pi}\sigma_i}e^{-\frac{(x_i - m_i)^2}{2\sigma_i^2}}}} = \prod\limits_{i = 1}^{n} f_{\xi_i}(x_i)\Rightarrow$ величины $\xi_1,\dots,\ \xi_n$ независимы.
+    \end{enumerate}
+    \subsection*{Теорема о нормальной корреляции}
+    Пусть $\xi = (\xi_1,\dots,\ \xi_n)\sim N(m,\ K)$
+    \[\mathcal{L}\big( \underset{\eta_1}{\underbrace{(\xi_1,\dots,\ \xi_l)}}\ |\ \underset{\eta_2}{\underbrace{(\xi_{l + 1},\dots,\ \xi_{n})}} = x \big)\sim N(E(\eta_1\ |\ \eta_2 = x),\ K_{\eta_1 | \eta_2 = x})\]
+    \[m = (\underset{E\eta_1}{\underbrace{m_1,\dots,\ m_l}}\ |\ \underset{E\eta_2}{\underbrace{m_{l + 1},\dots,\ m_n}}),\ K_{\xi} = \begin{pmatrix}
+        K_{1\, 1} & K_{1\, 2}\\
+        K_{2\, 1} & K_{2\, 2}
+    \end{pmatrix}\]
+    \[E(\eta_1\ |\ \eta_2 = x) = E\eta_1 + K_{1\, 2}K^{-1}_{2\, 2}(x - E\eta_2)\]
+    \[K_{\eta_1\ |\ \eta_2 = x} = K_{1\, 1} = K_{1\, 2}K_{2\, 2}^{-1} K_{1\, 2}^{T}\]
+    Пусть $n = 2,\ \xi = (\xi_1,\dots,\ \xi_2),\ K_{\xi} = \begin{pmatrix}
+        \mathcal{D}\xi_1 & \operatorname{cov}(\xi_1,\ \xi_2)\\
+        \operatorname{cov}(\xi_2,\ \xi_1) & \mathcal{D}\xi_2
+    \end{pmatrix}$
+    \[E(\xi_1\ |\ \xi_2 = x) = E\xi_1 + \frac{\operatorname{cov}(\xi_1,\ \xi_2)}{\mathcal{D}\xi_2}(x - E\xi_2)\]
+    \[\mathcal{D}(\xi_1\ |\ \xi_2 = x) = \mathcal{D}\xi_1 - \frac{\big(\operatorname{cov}(\xi_1,\ \xi_2)\big)^2}{\mathcal{D}\xi_2}(x - E\xi_2)\]
+    \subsection*{Пример}
+    $(\xi_A,\ \xi_B) \sim N(m,\ K),\ m = \begin{pmatrix}
+        10\\
+        12
+    \end{pmatrix},\ K = \begin{pmatrix}
+        4 & 3,6\\
+        3,6 & 9
+    \end{pmatrix}$
+    \begin{enumerate}
+        \item $P(\xi_A > \xi_B)$ --- ?
+        \item $\xi_B = 14:\ E(\xi_A\ |\ \xi_B = 14),\ \mathcal{D}(\xi_A\ |\ \xi_B = 14)$ --- ?. 
+    \end{enumerate}
+    Решим первый пункт: $P(\xi_A > \xi_B) = P(\xi_A - \xi_B > 0),\ \xi_A - \xi_B \sim N(-2,\ (2,4)^2)\\
+    \mathcal{\xi_A - \xi_B} = \mathcal{D}\xi_A + \mathcal{D}\xi_B + 2\operatorname{cov}(\xi_A - \xi_B) = 4 + 9 - 2\cdot3,6 = 5,8 \approx (2,4)^2$\\
+    Тогда можем посчитать $P(\xi_A - \xi_B > 0) = \Phi_0(+\infty) - \Phi_0(\frac{0 + 2}{2,4}) = 0,5 - \Phi_0(\frac{1}{1,2}) \approx 0,5 - 0,297 = 0,203$\\
+    Решим второй пункт: $E(\xi_A\ |\ \xi_B = 14) = 10 + \frac{3,6}{9}(14 - 12) = 10 + \frac{7,2}{9} = 10,8$\\
+    $\mathcal{D}(\xi_A\ |\ \xi_B = 14) = 4 - \frac{3,6^2}{9} = 2,56$
+    \subsection*{Виды сходимости случайных последовательностей}
+    Обычное определение сходимости последовательности:
+    \[x_n \xrightarrow[n\to \infty]{} x \Leftrightarrow \forall \varepsilon > 0\quad \exists N\quad \forall n \geq N\quad |x_n - x| < \varepsilon\]
+    Здесь не подходит, так как оно работает для детерменированных последовательностей, поэтому нужно вводить новые определения:
+    \subsection*{Определение}
+    Последовательность случайных величин $\xi_1,\dots,\ \xi_n,\dots$, определённых на одном вероятностном пространстве $\Omega$, называется случайной последовательностью $\{\xi_n\}$
+    \subsection*{Определение}
+    Случайная последовательность $\xi_n$ сходится по вероятности к случайной величине $\xi$ $(\xi_n \xrightarrow{p}\xi)$, если 
+    \[\forall \varepsilon > 0\quad \begin{cases}
+        P(|\xi_n - \xi| > \varepsilon)\xrightarrow[n\to \infty]{} 0\\
+        P(|\xi_n - \xi| < \varepsilon)\xrightarrow[n\to \infty]{} 1\\
+    \end{cases}\]
+    Доказать, что $\xi_n \xrightarrow{p} 0$:
+    \[P(|\xi_n - 0| < \varepsilon) = 2\int_0^{\varepsilon} \frac{1}{n\pi(x^2 + \frac{1}{n^2})}\, dx = \frac{2}{\pi}\operatorname{arctg} x\cdot n |_0^{\varepsilon} = \frac{2}{\pi} \operatorname{arctg} \varepsilon \cdot n \xrightarrow[n\to \infty]{} 1\]
 \end{document}
