@@ -17,6 +17,7 @@
 \graphicspath{../Images}
 \usepackage{tikz}
 \usepackage{cancel}
+\usetikzlibrary{arrows.meta}
 \usepackage{fontspec}
 
 \setmainfont{Times New Roman}
@@ -1191,9 +1192,247 @@ d.assign(n, +infty);
 d[s] = 0;
     \end{lstlisting}
     \subsubsection*{Лемма}
-    Вершина v, у которой d[v] минимально среди всех вершин до которых расстояние не посчитано, 
+    Вершина v, у которой d[v] минимально среди всех вершин до которых расстояние не посчитано,
     может быть причислена к множеству вершин, до которых расстояние посчитано.\\
     Формула recalc: d[v] = min (d[v], d[w] + len(v, w)).\\
     Асимптотики аналогичны алгоритму Прима.\\
-    \textit{Замечание:} если менять recalc, можно получать алгоритмы, решающие другие задачи.зз
-\end{document} 
+    \textit{Замечание:} если менять recalc, можно получать алгоритмы, решающие другие задачи.
+    \subsection{Алгоритм Флойда (1962)}
+    Пусть есть взвешенный граф $G(n,\ m)$.\\
+    Пусть d[i][j] --- кратчайшее растояние от i до j (изначально это вес ребра между ними или $+\infty$, если этого ребра нет). Для работы алгоритма определим d[i][i] = 0 (хотя на самом деле петли там нет).\\
+    Назовём начальное состояние \textit{Фазой 0}.
+    \subsubsection*{Определение}
+    \textit{Фаза k} --- посчитаны кратчайшие пути, которые посещают промежуточные вершины из множества\\
+    \{0,\dots, $k - 1$\}
+    \subsubsection*{Переход: $k\to k + 1$}
+    \[\begin{tikzpicture}[every circle node/.style={draw}]
+        \draw (-2, 0) node[circle](0){i};
+        \draw (0, 0) node[circle](1){k};
+        \draw (2, 0) node[circle](2){j};
+        \draw[->, thick] (0) -- (1);
+        \draw[->, thick] (1) -- (2);
+    \end{tikzpicture}\]
+    Введём d'[i][j] = min(d[i][j], d[i][k] + d[k][j]).
+    \subsubsection*{Замечание}
+    Можно делать пересчёт на месте (in-place), то есть вычилсять в d: d[i][j] = min(d[i][j], d[i][k] + d[k][j]).
+    \subsubsection*{Асимптотика}
+    $O(n^3)$, константа равна единице, пишется тремя циклами for.
+    \subsubsection*{Восстановление путей}
+    p[i][j] --- рекурсивно вызываем пути i $\to$ k и k $\to$ j.
+    \subsubsection*{Отрицательные циклы}
+    Если из вершины i можно дойти до отрицательного цикла, а из этого цикла можно дойти в j, то будем считать d[i][j] неопределённым. То есть:
+    \[\begin{tikzpicture}[every circle node/.style={draw}]
+        \draw (-2, 0) node[circle](0){i};
+        \draw (0, 0) node[circle](1){t};
+        \draw (2, 0) node[circle](2){j};
+        \draw[->, thick] (0) -- (1);
+        \draw[->, thick] (1) -- (2);
+    \end{tikzpicture}\]
+    Где d[t][t]$\,< 0$, значит d[i][j] не может быть корректно определено.\\
+    Также нужна защита от $\infty - 1,\ \infty - 2,\dots,\ $.
+    \subsection{Алгоритм Форда-Беллмана (1958)}
+    Дан ориентированный взвешенный граф $G(n,\ m)$, s --- стартовая вершина.\\
+    Стартовое состояние: $\forall v \neq s:\ \begin{cases}
+        d[v] = +\infty\\
+        d[s] = 0
+    \end{cases} $.\\
+    $(n - 1)$ фаза: для всех рёбер \{i, j, len\} выполняем релаксации: d[j] = min(d[j], d[i] + len).\\
+    Алгоритм может завершиться раньше $n - 1$ фазы (для этого нужно отслеживать изменения, если после очередной релаксации ничего не поменялось, алгоритм можно завершить).\\
+    После k-ой фазы обработаны все пути из $\leq\,$ k рёбер.
+    \subsubsection*{Асимптотика}
+    $O(n\cdot m)$
+    \subsubsection*{Отрицательные циклы}
+    Аналогично предыдущему алгоритму, если на пути между s и j есть циклы отрицательного веса, то расстояние между ними неопределено.\\
+    Алгоритм позволяет находить циклы отрицательного веса. Для этого нужно сделать фазу n:\\
+    Нашли вершину $x$, у которой d[x] уменьшилось.
+    \[\begin{tikzpicture}[node distance=2cm, every circle node/.style={circle, draw, minimum size=1cm}, every edge/.style={draw, -{Stealth}}]
+
+        % Vertices
+        \node [circle](s) at (0,0) {$s$};
+        \node [circle, red](a) at (2,2) {};
+        \node [circle](b) at (4,2) {};
+        \node [circle](c) at (3,0) {};
+        \node [circle](x) at (6,0) {$x$};
+        \node [circle](a1) at (2,-1.5) {};
+        \node [circle](b1) at (4,-1.5) {};
+        \node [circle](c1) at (3,-3.5) {};
+    
+        % Edges
+        \path (s) edge node[above left] {1} (a);
+        \path (a) edge node[above] {1} (b);
+        \path (b) edge node[right] {-3} (c);
+        \path (c) edge node[below] {1} (a);
+        \path (c) edge node[above] {1} (x);
+        \path (a1) edge node[left] {1} (s);
+        \path (a1) edge node[above] {1} (b1);
+        \path (b1) edge node[right] {-3} (c1);
+        \path (c1) edge node[below] {1} (a1);
+        \path (b1) edge node[above] {1} (x);
+    \end{tikzpicture}\]
+    \[\begin{animateinline}[autoplay,loop]{1}
+        % Frame 1: Initial state
+        \begin{tikzpicture}[node distance=2cm, every circle node/.style={circle, draw, minimum size=1cm}, every edge/.style={draw, -{Stealth}}]
+            % Vertices
+            \node [circle](s) at (0,0) {$s$};
+            \node [circle](a) at (2,2) {};
+            \node [circle](b) at (4,2) {};
+            \node [circle](c) at (3,0) {};
+            \node [circle](x) at (6,0) {$x$};
+    
+            % Edges
+            \path (s) edge node[above left] {1} (a);
+            \path (a) edge node[above] {1} (b);
+            \path (b) edge node[right] {-3} (c);
+            \path (c) edge node[below] {1} (a);
+            \path (c) edge node[above] {1} (x);
+    
+            % Initial distances
+            \node at (0,-1) {0};
+            \node at (2,1) {$\infty$};
+            \node at (4,1) {$\infty$};
+            \node at (3,-1) {$\infty$};
+            \node at (6,-1) {$\infty$};
+        \end{tikzpicture}
+    
+        % Frame 2: First iteration
+        \newframe
+        \begin{tikzpicture}[node distance=2cm, every circle node/.style={circle, draw, minimum size=1cm}, every edge/.style={draw, -{Stealth}}]
+            % Vertices
+            \node [circle](s) at (0,0) {$s$};
+            \node [circle](a) at (2,2) {};
+            \node [circle](b) at (4,2) {};
+            \node [circle](c) at (3,0) {};
+            \node [circle](x) at (6,0) {$x$};
+    
+            % Edges
+            \path (s) edge[red, thick] node[above left] {1} (a);
+            \path (a) edge node[above] {1} (b);
+            \path (b) edge node[right] {-3} (c);
+            \path (c) edge node[below] {1} (a);
+            \path (c) edge node[above] {1} (x);
+    
+            % Updated distances
+            \node at (0,-1) {0};
+            \node at (2,1) {1};
+            \node at (4,1) {$\infty$};
+            \node at (3,-1) {$\infty$};
+            \node at (6,-1) {$\infty$};
+        \end{tikzpicture}
+    
+        % Frame 3: Second iteration
+        \newframe
+        \begin{tikzpicture}[node distance=2cm, every circle node/.style={circle, draw, minimum size=1cm}, every edge/.style={draw, -{Stealth}}]
+            % Vertices
+            \node [circle](s) at (0,0) {$s$};
+            \node [circle](a) at (2,2) {};
+            \node [circle](b) at (4,2) {};
+            \node [circle](c) at (3,0) {};
+            \node [circle](x) at (6,0) {$x$};
+    
+            % Edges
+            \path (s) edge node[above left] {1} (a);
+            \path (a) edge[red, thick] node[above] {1} (b);
+            \path (b) edge node[right] {-3} (c);
+            \path (c) edge node[below] {1} (a);
+            \path (c) edge node[above] {1} (x);
+    
+            % Updated distances
+            \node at (0,-1) {0};
+            \node at (2,1) {1};
+            \node at (4,1) {2};
+            \node at (3,-1) {$\infty$};
+            \node at (6,-1) {$\infty$};
+        \end{tikzpicture}
+    
+        % Frame 4: Third iteration
+        \newframe
+        \begin{tikzpicture}[node distance=2cm, every circle node/.style={circle, draw, minimum size=1cm}, every edge/.style={draw, -{Stealth}}]
+            % Vertices
+            \node [circle](s) at (0,0) {$s$};
+            \node [circle](a) at (2,2) {};
+            \node [circle](b) at (4,2) {};
+            \node [circle](c) at (3,0) {};
+            \node [circle](x) at (6,0) {$x$};
+    
+            % Edges
+            \path (s) edge node[above left] {1} (a);
+            \path (a) edge node[above] {1} (b);
+            \path (b) edge[red, thick] node[right] {-3} (c);
+            \path (c) edge node[below] {1} (a);
+            \path (c) edge node[above] {1} (x);
+    
+            % Updated distances
+            \node at (0,-1) {0};
+            \node at (2,1) {1};
+            \node at (4,1) {2};
+            \node at (3,-1) {-1};
+            \node at (6,-1) {$\infty$};
+        \end{tikzpicture}
+    
+        % Frame 5: Fourth iteration
+        \newframe
+        \begin{tikzpicture}[node distance=2cm, every circle node/.style={circle, draw, minimum size=1cm}, every edge/.style={draw, -{Stealth}}]
+            % Vertices
+            \node [circle](s) at (0,0) {$s$};
+            \node [circle](a) at (2,2) {};
+            \node [circle](b) at (4,2) {};
+            \node [circle](c) at (3,0) {};
+            \node [circle](x) at (6,0) {$x$};
+    
+            % Edges
+            \path (s) edge node[above left] {1} (a);
+            \path (a) edge node[above] {1} (b);
+            \path (b) edge node[right] {-3} (c);
+            \path (c) edge[red, thick] node[below] {1} (a);
+            \path (c) edge node[above] {1} (x);
+    
+            % Updated distances
+            \node at (0,-1) {0};
+            \node at (2,1) {0};
+            \node at (4,1) {2};
+            \node at (3,-1) {-1};
+            \node at (6,-1) {$\infty$};
+        \end{tikzpicture}
+    
+        % Frame 6: Fifth iteration
+        \newframe
+        \begin{tikzpicture}[node distance=2cm, every circle node/.style={circle, draw, minimum size=1cm}, every edge/.style={draw, -{Stealth}}]
+            % Vertices
+            \node [circle](s) at (0,0) {$s$};
+            \node [circle](a) at (2,2) {};
+            \node [circle](b) at (4,2) {};
+            \node [circle](c) at (3,0) {};
+            \node [circle](x) at (6,0) {$x$};
+    
+            % Edges
+            \path (s) edge node[above left] {1} (a);
+            \path (a) edge node[above] {1} (b);
+            \path (b) edge node[right] {-3} (c);
+            \path (c) edge node[below] {1} (a);
+            \path (c) edge[red, thick] node[above] {1} (x);
+    
+            % Updated distances
+            \node at (0,-1) {0};
+            \node at (2,1) {0};
+            \node at (4,1) {2};
+            \node at (3,-1) {-1};
+            \node at (6,-1) {0};
+        \end{tikzpicture}
+    \end{animateinline}\]
+    В красной вершине на пятой итерации уменьшится d[v].
+    Нижний цикл недостижим из вершины s.\\
+    Чтобы найти все циклы (даже недостижимые из s), нужно на старте сделать d[v] = 0 для всех v (по сути это запуск Форда-Беллмана из всех вершин). 
+    \subsubsection*{Восстановление путей}
+    При релаксации записываем p[j] = i, если d[i] + len оказалось меньше. Через while раскручиваем массив p.
+    \subsection{Алгоритм Левита (1971)}
+    $M_0$ --- множество вершин, расстояние до которых посчитано, но это не точно.\\
+    $M_1$ --- множество вершин в процессе вычисления. Будем использовать deque.\\
+    $M_2$ --- расстояние неизвестно.\\
+    Достаём из u головы deque:
+    \[\forall w\text{ - сосед u}: \text{делаем релаксации:} \left[ \begin{aligned}
+        &w\in M_2: w\text{ добавить в хвост deque},\ w\in M_1\\
+        &w\in M_1:\text{ ничего не делаем}\\
+        &w\in M_0: w\text{ добавить в голову deque},\ w\in M_1
+    \end{aligned} \right.\]
+    Если в графе есть цикл отрицательного веса, то алгоритм будет работать бесконечно.
+\end{document}
