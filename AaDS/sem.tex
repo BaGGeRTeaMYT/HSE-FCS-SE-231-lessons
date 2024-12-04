@@ -899,4 +899,108 @@ int main() {
     }
 }
     \end{lstlisting}
+    \newpage
+    \begin{center}
+        Семинар 4 декабря.
+    \end{center}
+    \subsection*{Алгоритм Флойда}
+    Работает с матрицей смежности.
+    \begin{lstlisting}
+for (int k = 0; k < n; k++) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            // check for negative weight cycles
+            if (d[i][j] != inf && d[k][j] != inf) {
+                d[i][j] = std::min(d[i][j], d[i][k] + d[k][j]);
+            }
+        }
+    }
+}
+    \end{lstlisting}
+    Пусть cor[i][j] = true, если расстояние от i до j может быть определено корректно (на пути нет циклов отрицательного веса). Для добавления этого ммассива нужно будет написать следующее:
+    \begin{lstlisting}
+std::vector<std::vector<bool>> cor(i, std::vector<bool>(j, true));
+for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+        for (int t = 0; t < n; t++) {
+            if (d[i][t] < inf && d[t][j] < inf && d[t][t] < 0) {
+                cor[i][j] = false;
+            }
+        }
+    }
+}
+    \end{lstlisting}\newpage
+    \subsection*{Алгоритм Форда-Беллмана}
+    Работает со списком рёбер.
+    \begin{lstlisting}
+struct Edge {
+    int from;
+    int to;
+    int weight;
+    Edge() {}
+};
+
+std::vector<Edge> graph;
+// fill it somehow
+for (int phase_count; phase_count < n - 1; phase_count++) {
+    for (const auto& edge : graph) {
+        if (d[edge.to] == inf) {
+            continue;
+        }
+        d[edge.to] = std::min(d[edge.to], d[edge.from] + edge.weight);
+    }
+}
+
+// adding a flag to check if we can end cycle earlier
+for (int phase_count; phase_count < n - 1; phase_count++) {
+    bool flag = false;
+    for (const auto& edge : graph) {
+        if (d[edge.from] != inf && d[edge.to] > d[edge.from] + edge.weight) {
+            flag = true;
+        }
+    }
+}
+    \end{lstlisting}
+    \begin{lstlisting}
+for (int ph = 0; ph < n - 1; ph++) {
+    a) d[ph + 1] = d[ph];
+    b) d[ph + 1].assign(n, inf);
+    for (const auto& edge: graph) {
+        if (d[ph][edge.from] == inf) {
+            continue;
+        }
+        d[ph + 1][edge.to] = std::min(d[ph + 1][edge.to], d[ph][e.from] + edge.weight);
+    }
+}
+    \end{lstlisting}
+    Теперь в d[k][v] хранится вес кратчайшего пути от s до v, состоящего из:\\
+    Со строчкой a): не более чем k рёбер.\\
+    Со строчкой b): ровно из k рёбер.
+    \newpage\subsection*{Алгоритм Левита}
+    Работает со списком смежности.
+    \begin{lstlisting}
+std::vector<int> id(n, 0); // all vertices in M0 from the beginning
+std::vector<int> d(n, inf);
+d[s] = 0;
+std::deque<int> q;
+q.push_back(s);
+while (!q.empty()) {
+    int v = q.front();
+    q.pop_front();
+    for (auto& [w, len] : g[v]) {
+        // w stands for second vertex
+        // len stands for weight of v -- w edge 
+        if (d[w] <= d[v] + len) {
+            continue;
+        }
+        if (id[w] == 0) {
+            q.push_back(w);
+        }
+        if (id[w] == 2) {
+            q.push_front(w);
+        }
+        id[vertex] = 1;
+    }
+}
+    \end{lstlisting}
 \end{document}
