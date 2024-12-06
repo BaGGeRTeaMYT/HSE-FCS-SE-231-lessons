@@ -1,0 +1,62 @@
+\babel@toc {russian}{}\relax 
+\contentsline {section}{\numberline {1}Структуры данных}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Линейные структуры данных}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Список}{1}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Стек}{1}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Очередь}{2}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Устройство вектора}{2}{subsection.1.5}%
+\contentsline {section}{\numberline {2}Метод потенциалов анализа сложности}{2}{section.2}%
+\contentsline {section}{\numberline {3}Символы Ландау}{2}{section.3}%
+\contentsline {section}{\numberline {4}Мастер теорема}{3}{section.4}%
+\contentsline {section}{\numberline {5}Алгоритмы быстрого умножения}{4}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Алгортим Карацуба}{4}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Алгоритм Штрассена}{5}{subsection.5.2}%
+\contentsline {subsubsection}{Улучшения}{5}{section*.11}%
+\contentsline {subsubsection}{Гипотеза Штрассена}{5}{section*.13}%
+\contentsline {subsection}{\numberline {5.3}Быстрые преобразования Фурье}{5}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Вероятностные алгоритмы}{5}{section.6}%
+\contentsline {subsection}{Алгоритм Фреймвальдса}{6}{section*.15}%
+\contentsline {subsection}{Лемма Шварца-Зиппеля}{6}{section*.17}%
+\contentsline {subsection}{Быстрая сортировка}{7}{section*.18}%
+\contentsline {subsection}{SkipList}{7}{section*.19}%
+\contentsline {subsection}{Алгоритм имитации отжига}{8}{section*.25}%
+\contentsline {section}{\numberline {7}Численное интегрирование}{8}{section.7}%
+\contentsline {subsection}{Метод Монте-Карло}{8}{section*.27}%
+\contentsline {subsection}{Метод прямоугольников}{8}{section*.28}%
+\contentsline {subsection}{Метод трапеций}{8}{section*.29}%
+\contentsline {subsection}{Формула Симпсона}{8}{section*.30}%
+\contentsline {section}{\numberline {8}Декартово дерево}{9}{section.8}%
+\contentsline {subsection}{\numberline {8.1}История декартовых деревьев}{9}{subsection.8.1}%
+\contentsline {subsubsection}{\numberline {8.1.1}Vuillemin (1980) Cartesian Tree}{9}{subsubsection.8.1.1}%
+\contentsline {subsubsection}{\numberline {8.1.2}Seidel, Aragon (1996) treap (tree + heap)}{10}{subsubsection.8.1.2}%
+\contentsline {subsection}{\numberline {8.2}Теорема 1}{10}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Следствие}{10}{subsection.8.3}%
+\contentsline {subsubsection}{\numberline {8.3.1}Лемма}{10}{subsubsection.8.3.1}%
+\contentsline {subsubsection}{\numberline {8.3.2}Следствие}{10}{subsubsection.8.3.2}%
+\contentsline {subsubsection}{\numberline {8.3.3}Теорема 2}{10}{subsubsection.8.3.3}%
+\contentsline {section}{\numberline {9}Zip tree}{11}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Утверждение}{11}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Лемма}{11}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Теорема 1}{11}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Лемма 1}{12}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.5}Лемма 2}{12}{subsection.9.5}%
+\contentsline {subsection}{\numberline {9.6}Теорема 2}{12}{subsection.9.6}%
+\contentsline {subsection}{\numberline {9.7}Теорема 3}{12}{subsection.9.7}%
+\contentsline {section}{\numberline {10}Графы}{12}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Определение}{12}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Способы хранения}{13}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}BFS}{13}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}DFS}{13}{subsection.10.4}%
+\contentsline {subsection}{\numberline {10.5}Приливания}{15}{subsection.10.5}%
+\contentsline {subsection}{\numberline {10.6}СНМ (DSU)}{15}{subsection.10.6}%
+\contentsline {subsection}{\numberline {10.7}short}{17}{subsection.10.7}%
+\contentsline {subsubsection}{\numberline {10.7.1}Остовное дерево}{17}{subsubsection.10.7.1}%
+\contentsline {subsubsection}{\numberline {10.7.2}Минимальное остовное дерево (MST)}{17}{subsubsection.10.7.2}%
+\contentsline {subsubsection}{\numberline {10.7.3}Лемма о безопасном ребре}{18}{subsubsection.10.7.3}%
+\contentsline {subsubsection}{\numberline {10.7.4}Алгоритм Кр(а/у)скала (1956)}{18}{subsubsection.10.7.4}%
+\contentsline {subsubsection}{\numberline {10.7.5}Алгоритм Борувки (1926)}{19}{subsubsection.10.7.5}%
+\contentsline {subsection}{\numberline {10.8}Алгоритм Прима (1957)}{19}{subsection.10.8}%
+\contentsline {subsection}{\numberline {10.9}Алгоритм Дейкстры (1959)}{20}{subsection.10.9}%
+\contentsline {subsection}{\numberline {10.10}Алгоритм Флойда (1962)}{20}{subsection.10.10}%
+\contentsline {subsection}{\numberline {10.11}Алгоритм Форда-Беллмана (1958)}{21}{subsection.10.11}%
+\contentsline {subsection}{\numberline {10.12}Алгоритм Левита (1971)}{22}{subsection.10.12}%

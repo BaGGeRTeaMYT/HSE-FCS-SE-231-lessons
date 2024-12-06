@@ -10,4 +10,6 @@ algebra/*.aux
 */*.aux
 */*.tex
 */*.out
+*/hw*
+*.ps1
 .vscode
