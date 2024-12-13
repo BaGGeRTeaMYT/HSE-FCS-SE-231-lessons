@@ -16,8 +16,8 @@
 \graphicspath{../Images}
 \usepackage{tikz}
 \usepackage{cancel}
-\usepackage{fontspec}
 
+\usepackage{fontspec}
 \setmainfont{Times New Roman}
 
 \title{Теория вероятностей.}
@@ -606,7 +606,7 @@
     \begin{center}
         \bf Лекция 1 ноября
     \end{center}
-    \subsection*{Неравенства Чебникова}
+    \subsection*{Неравенства Чебышёва}
     Пусть $E|\xi|^r < \infty$. Тогда:
     \[\forall \varepsilon > 0\quad P(|\xi| \geq \varepsilon) \leq \frac{E|\xi|^r}{\varepsilon^r}\]
     \subsection*{Доказательство}
@@ -1261,4 +1261,65 @@
     \subsection*{Неравенство  Берри-Эссеена}
     \[\sup\limits_x \left| P\left( \frac{\xi_n - np}{\sqrt{npq}} \leq x\right) - \Phi(x)\right| \leq \frac{p^2 + q^2}{\sqrt{npq}}\]
     Заметим, что апроксимация распределением Пуассона с погрешностью $np^2$ может быть лучше. Если $np^2$ большое, то Берри-Эссеен даёт маленькую погрешность и наоборот.
+    \begin{center}
+        Лекция 13 декабря
+    \end{center}
+    \subsection*{Неравенство Берри-Эссеена общего вида}
+    Пусть $\xi_1,\dots,\ \xi_n$ независимы, одинаково распределены и $\forall i\quad \mathcal{D}\xi_i < \infty$, $\eta_n = \dfrac{\sum_{i = 1}^{n} \xi_i - E\sum_{i = 1}^{n} \xi_i}{\sqrt{\mathcal{D}\sum_{i=1}^{n}\xi_n}}$:
+    \[\sup_x \left| F_{\eta_n} (x) - \Phi(x) \right| \leq \frac{c\cdot E|\xi_1 - m_1|^3}{\sqrt{n}\sigma^3}\]
+    $c$ --- некая константа, находящаяся в полуинтервале $\frac{1}{\sqrt{2\pi}} \leq c < 0.478$ (данный промежуток регулярно уменьшают).\\
+    То есть сходимость к Гауссовскому распределению достаточно быстрая.
+    \subsection*{История из ан(н)алов ЦПТ}
+    Кого-то приняли на работу за знание ЦПТ и попросили передать привет преподавателю (интересные истории от лектора, надо было ходить). Немного спойлеров про математическую статистику.
+    \section*{Закон больших чисел (ЗБЧ)}
+    \subsection*{Определение}
+    Говорят, что случайная последовательность $\xi_1,\dots,\ \xi_n$ удовлетворяет закону больших чисел (или к ней применим ЗБЧ), если
+    \[\frac{1}{n}\sum_{i=1}^{n} \xi_i - \frac{1}{n}\sum_{i = 1}^{n} E\xi_i \xrightarrow[n\to\infty]{p} 0\]
+    \subsection*{Теорема Чебышёва}
+    Пусть случайные величины $\xi_1,\dots,\ \xi_n$ некоррелированы и $\mathcal{D}\xi_1,\dots,\ \mathcal{D}\xi_n$ ограничены в совокупности (то есть $\exists C: \forall k\ \mathcal{D}\xi_k \leq C$). Тогда к последовательности $\xi_1,\dots,\ \xi_n$ применим закон больших чисел.
+    \subsubsection*{Доказательство}
+    Применим неравенство Чебышёва:
+    \[\forall \varepsilon > 0\quad P\left(\left| \frac{1}{n}\sum_{i = 1}^{n} \xi_i - \frac{1}{n} \sum_{i = 1}^{n} E\xi_i \right| > \varepsilon\right) \leq \frac{\mathcal{D}\left( \left| \frac{1}{n}\sum_{i = 1}^{n} \xi_i\right| \right)}{\varepsilon^2} = \frac{1}{n^2}\cdot \frac{\mathcal{D}(\sum_{i = 1}^{n} \xi_i)}{\varepsilon^2}\]
+    Так как величины некоррелированы, дисперсия их суммы равна сумме дисперсий:
+    \[\frac{1}{n^2}\cdot \frac{\mathcal{D}(\sum_{i = 1}^{n} \xi_i)}{\varepsilon^2} = \frac{1}{n^2}\cdot \frac{\sum_{i = 1}^{n}\mathcal{D}( \xi_i)}{\varepsilon^2}\]
+    Так как дисперсии ограничены в совокупности, можно сказать:
+    \[\frac{1}{n^2}\cdot \frac{\sum_{i = 1}^{n}\mathcal{D}( \xi_i)}{\varepsilon^2} \leq \frac{1}{n^2}\cdot \frac{\sum_{i = 1}^{n}C}{\varepsilon^2} \leq \frac{c}{n^2\varepsilon^2}\]
+    Итого:
+    \[\forall \varepsilon > 0\quad P\left(\left| \frac{1}{n}\sum_{i = 1}^{n} \xi_i - \frac{1}{n} \sum_{i = 1}^{n} E\xi_i \right| > \varepsilon\right) \leq \frac{c}{n^2\varepsilon^2}\xrightarrow[n\to \infty]{} 0\]
+    \subsection*{Теорема}
+    Путь $\xi_1,\dots,\ \xi_n$ --- одинаково распределены и $\forall i: \mathcal{D}\xi_i < \infty$. Тогда $\xi_1,\dots,\ \xi_n$ удовлетворяет ЗБЧ.
+    \subsubsection*{Доказательство}
+    \[\forall \varepsilon > 0\quad P\left(\left| \frac{1}{n}\sum_{i = 1}^{n}\xi_i - \frac{1}{n} \sum_{i = 1}^{n} E\xi_i \right| > \varepsilon\right) \leq \frac{\mathcal{D}\left( \frac{1}{n} \sum_{i = 1}^{n}\xi_i \right)}{\varepsilon^2} = \frac{n\sigma^2}{n^2 \varepsilon^2} = \frac{\sigma^2}{n\varepsilon^2} \xrightarrow[n\to\infty]{} 0\]
+    \subsubsection*{Доказательство частотного определения вероятности}
+    Пусть $\xi_n$ --- количество успехов в испытаниях Бернулли с вероятностью успеха в одном опыте $p$.\\
+    Тогда случайная величина $\hat{p} = \frac{\xi_n}{n}$ --- частота успеха.\\
+    Тогда $\eta_i \sim Bi(1,\ p)$, где $\eta_i$ --- один опыт в системе.\\
+    $\xi_n = \eta_1 + \dots + \eta_n$\\
+    $\hat{p} = \frac{1}{n} \sum_{i = 1}^{n} \eta_i\Rightarrow E\hat{p} = E\left( \frac{1}{n} \sum_{i = 1}^{n} \eta_i \right) = p$\\
+    $\mathcal{D}\eta_i = pq < \infty$\\
+    Тогда по закону больших чисел:
+    \[\hat{p} = \frac{1}{n} \xi_n \xrightarrow[n\to \infty]{p} p\]
+    \section*{Усиленный закон больших чисел (УЗБЧ)}
+    \subsection*{Определение}
+    Говорят, что случайная последовательность $\xi_1,\dots,\ \xi_n$ удовлетворяет усиленному закону больших чисел (или к ней применим УЗБЧ), если
+    \[\frac{1}{n}\sum_{i=1}^{n} \xi_i - \frac{1}{n}\sum_{i = 1}^{n} E\xi_i \xrightarrow[n\to\infty]{\text{п. н.}} 0\]
+    \subsection*{Теорема Колмогорова}
+    Какой же он крутой, это просто невероятно.\\
+    Пусть случайная величина $\xi_1,\dots,\ \xi_n,\dots$ независимы, одинаково распределены и $\forall i: E\xi_i < \infty$. Тогда последовательность $\xi_1,\dots,\ \xi_n,\dots$ удовлетворяет УЗБЧ:
+    \[\frac{1}{n}\sum_{i = 1}^{n} \xi_i \xrightarrow[n\to \infty]{\text{п. н.}} m\]
+    $m$ --- матожидание в распределения.\\
+    Теорема непростая (Колмогоров сигма, гений и чемпион теорвера), поэтому доказательства не будет.
+    \subsection*{Метод Монте-Карло}
+    Для подсчёта $\displaystyle\int\limits_0^1 g(x)\, dx$ статистическим методом Монте-Карло введём последовательность независимых величин $\xi_1,\dots,\ \xi_n \sim R(0,\ 1)$. По УЗБЧ:
+    \[\frac{1}{n} \sum_{i = 1}^{n} g(\xi_i) \xrightarrow[n\to \infty]{\text{п. н.}} Eg(\xi_1) = \int\limits_0^1 g(x)\cdot \underset{=1}{\underbrace{f_{\xi}(x)}}\, dx\]
+    В общем случае нужно посчитать $\displaystyle \int\limits_a^b g(x)\, dx = I$:
+    \[\hat{I} = \frac{b - a}{n} \sum_{i = 1}^{n} g(\xi_i) \xrightarrow[n\to \infty]{\text{п. н.}} Eg(\xi_1) = \int\limits_a^b g(x)\cdot \underset{=\frac{1}{b - a}}{\underbrace{f_{\xi}(x)}}\, dx = \int\limits_a^b \frac{g(x)}{b - a}\, dx\]
+    Оценим $P(|\hat{I} - I| < \delta) = p$. По ЦПТ:
+    \[\frac{\frac{1}{n} \sum_{i = 1}^{n} g(\xi_n) - I}{\sqrt{\mathcal{D} \big(\frac{1}{n} \sum_{i  =1}^{n} g(\xi_i)\big)}} \xrightarrow[n\to \infty]{d} U(0,\ 1)\]
+    Тогда:
+    \[P(|\hat{I} - I| < \delta) = 2\Phi_0\left( \frac{\delta}{\sqrt{\mathcal{D}\big( \frac{1}{n} \sum_{i =1}^{n} g(\xi_i) \big)}} \right) = p\]
+    Посчитаем дисперсию в знаменателе:
+    \[\mathcal{D}\big( \frac{1}{n} \sum_{i =1}^{n} g(\xi_i) \big) = \frac{n}{n^2} \mathcal{D}\big(g(\xi_i)\big) = \frac{\mathcal{D}g(\xi_i)}{n}\]
+    \[p = 2\Phi_0\left(\frac{\delta \sqrt{n}}{\sqrt{\mathcal{D} g(\xi_i)}}\right)\]
+    Где $\mathcal{D}g(\xi_i) = E(g(\xi_i))^2 - (Eg(\xi_i))^2$. Можно оценить это сверху. 
 \end{document}
