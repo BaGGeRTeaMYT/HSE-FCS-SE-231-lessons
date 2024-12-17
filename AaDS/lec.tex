@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage{animate}
 \usepackage{hyperref}
+\usepackage{tocloft}
 \usepackage{listings}
 \usepackage{color}
 \usepackage[margin=0.25in]{geometry}
@@ -17,9 +18,9 @@
 \graphicspath{../Images}
 \usepackage{tikz}
 \usepackage{cancel}
-\usetikzlibrary{arrows.meta}
-\usepackage{fontspec}
+\usetikzlibrary{arrows.meta, positioning, fit}
 
+\usepackage{fontspec}
 \setmainfont{Times New Roman}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -46,7 +47,6 @@ language=C++,
 \title{Алгоритмы и структуры данных.}
 \author{Андрей Тищенко \href{https://t.me/AndrewTGk}{@AndrewTGk}}
 \date{2024/2025}
-\renewcommand*\contentsname{Контент}
   
 \begin{document}
   \maketitle
@@ -150,7 +150,7 @@ language=C++,
     \end{enumerate}
     На $i$-ом слое: $a^i\left(\frac{n}{b^i}\right)^c$\\
     Листья (слой $\log_b n$): $a^{\log_b n}$ задач, сложность каждой равна 1\\
-    $T(n) \leq \displaystyle \sum_{i = 0}^{\log_b n} O \left(a^i\left( \frac{n}{b^i} \right)^c\right) = O\left( \sum_{i = 0}^{\log_b n} a^i \left( \frac{n}{b^i} \right)^c \right) = O\left( n^c \sum_{i = 0}^{\log_b n} \left( \frac{a}{b^c}  \right)^i \right)$\\
+    $T(n) \leq \displaystyle \sum_{i = 0}^{\log_b n} O \left(a^i{\left( \frac{n}{b^i} \right)}^c\right) = O\left( \sum_{i = 0}^{\log_b n} a^i \left( \frac{n}{b^i} \right)^c \right) = O\left( n^c \sum_{i = 0}^{\log_b n} {\left( \frac{a}{b^c}  \right)}^{i} \right)$\\
     Положим $q = \frac{a}{b^c}$, тогда:\\
     $q < 1\Leftrightarrow a < b^c\Leftrightarrow c > \log_b a,\ \displaystyle O\left(n^c \sum_{i = 0}^{\log_n b} q^i\right) = O\left(n^c \frac{1}{1 - q}\right) = O\left(n^c\right)$\\
     $q = 1\Leftrightarrow O(n^c \log_b n)$\\
@@ -1435,4 +1435,174 @@ d[s] = 0;
         &w\in M_0: w\text{ добавить в голову deque},\ w\in M_1
     \end{aligned} \right.\]
     Если в графе есть цикл отрицательного веса, то алгоритм будет работать бесконечно.
+    \subsection{Топологическая сортировка (TopSort)}
+    Результатом алгоритма является массив, в котором хранятся номера вершин в таком порядке, что рёбра идут от меньших индексов этого массива к большим.\\
+    Дан ориентированный граф $G(n,\ m)$.
+    \[\begin{tikzpicture}[node distance=2cm, every circle node/.style={circle, draw, minimum size=1cm}]
+
+        % Nodes
+        \node (A) [circle] {A};
+        \node (B) [circle, right of=A] {B};
+        \node (C) [circle, below of=A] {C};
+        \node (D) [circle, below of=B] {D};
+        \node (E) [circle, below of=C] {E};
+        \node (F) [circle, below of=D] {F};
+    
+        % Edges
+        \draw[-{Latex}] (A) -- (C);
+        \draw[-{Latex}] (A) -- (D);
+        \draw[-{Latex}] (B) -- (D);
+        \draw[-{Latex}] (C) -- (E);
+        \draw[-{Latex}] (D) -- (F);
+        \draw[-{Latex}] (E) -- (F);
+    
+        % Topological Sort Order
+        \node [right=1cm of B, align=left] {
+            Порядок после TopSort: \\
+            A, B, C, D, E, F
+        };
+    
+    \end{tikzpicture}\]
+    Реализация: запускаем dfs из каждой непосещённой вершины.\\
+    Пример работы с лекции (начинаем dfs из красной вершины):
+    \[\begin{tikzpicture}[node distance=2cm, every circle node/.style={circle, draw, minimum size=1cm}]
+        \node (1) [circle, red] {$\color{black}1$, $\color{green} 10$};
+        \node (2) [circle, below left of = 1] {$\color{black}2$, $\color{green} 7$};
+        \node (3) [circle, below right of = 1] {$\color{black}8$, $\color{green} 9$};
+        \node (4) [circle, below left of = 2] {$\color{black}3$, $\color{green} 4$};
+        \node (5) [circle, below right of = 2] {$\color{black}5$, $\color{green} 6$};
+        
+        \draw[-{Latex}] (1) -- (2);
+        \draw[-{Latex}] (1) -- (3);
+        \draw[-{Latex}] (2) -- (4);
+        \draw[-{Latex}] (2) -- (5);
+    \end{tikzpicture}\]
+    Каждой вершине сопоставим два числа <индекс на входе, $\color{green}\text{индекс на выходе}$>. Начинаем с индексом 1, далее при входе/выходе прибавляем 1.\\
+    Если сохранять вершины в массив в порядке уменьшения $\color{green}\text{индекса при выходе}$, то получится TopSort (искомый порядок вершин).\\
+    Заметим, что это верно вне зависимости от того, в какой вершине мы начали dfs:
+    \[\begin{tikzpicture}[node distance=2cm, every circle node/.style={circle, draw, minimum size=1cm}]
+        \node (1) [circle] {$\color{black}7$, $\color{green} 10$};
+        \node (2) [circle, red, below left of = 1] {$\color{black}1$, $\color{green} 6$};
+        \node (3) [circle, below right of = 1] {$\color{black}8$, $\color{green} 9$};
+        \node (4) [circle, below left of = 2] {$\color{black}2$, $\color{green} 3$};
+        \node (5) [circle, below right of = 2] {$\color{black}4$, $\color{green} 5$};
+        
+        \draw[-{Latex}] (1) -- (2);
+        \draw[-{Latex}] (1) -- (3);
+        \draw[-{Latex}] (2) -- (4);
+        \draw[-{Latex}] (2) -- (5);
+    \end{tikzpicture}\]
+    \subsection{Компоненты сильной связности (КСС)}
+    Компонента сильной связности --- это максимальное по включению подмножество вершин ориентированного графа, в котором для любых двух пар вершин существует путь между ними.
+    \[\begin{tikzpicture}[every circle node/.style={draw}]
+        \begin{scope}[shift={(-5, 0)}]
+            \draw (6, -3.5) node(1)[circle, green]{1};
+            \draw (4, -3) node(2)[circle, green]{2};
+            \draw (3, 0.5) node(3)[circle, green]{3};
+            \draw (4.5, 0.5) node(4)[circle, green]{4};
+            \draw (3.75, -0.8) node(5)[circle, green]{5};
+            \draw (7, -1.8) node(6)[circle, green]{6};
+            % \draw (2, -3.3) node(7)[circle, green]{};
+            % \draw (2, -4.8) node(8)[circle, green]{};
+            % \draw (1, -4.1) node(9)[circle, green]{};
+            % \draw (3, -4.1) node(10)[circle, green]{};
+
+            \draw[->, thick, green] (2.north) to[bend left] (1.north west);
+            \draw[->, thick, green] (1.south) to[bend left] (2.south east);
+
+            \draw[->, thick, green] (3.east) to[bend left] (4.west);
+            \draw[->, thick, green] (4.south) to[bend left] (5.east);
+            \draw[->, thick, green] (5.west) to[bend left] (3.south);
+
+            % \draw[->, thick, green] (7.south) to (8.north);
+            % \draw[->, thick, green] (8.west) to[bend left] (9.south);
+            % \draw[->, thick, green] (9.north) to[bend left] (7.west);
+            % \draw[->, thick, green] (10.north) to[bend right] (7.east);
+            % \draw[->, thick, green] (8.east) to[bend right] (10.south);
+
+            \draw[-{LaTeX}, thick, red] (4.east) to[bend left] (6);
+            % \draw[->, thick, red] (9) to[bend left] (2);
+            % \draw[->, thick, red] (7) to[bend left] (1);
+            % \draw[->, thick, red] (7) to[bend right] (5);
+            \draw[-{LaTeX}, thick, red] (3) to[bend right] (2);
+            \draw[-{LaTeX}, thick, red] (4) to[bend left] (1);
+            \draw[-{LaTeX}, thick, red] (1) to[bend right] (6);
+            
+        \end{scope}
+        \begin{scope}[shift = {(4, 0)}, local bounding box=scope2]
+            % \draw (0, 0) node(1)[circle, green]{};
+            \draw (1, -2) node(2)[circle, green]{};
+            \draw (0, 0.2) node(3)[circle, green]{};
+            \draw (2, -1) node(4)[circle, green]{};
+            % \draw[red, thick, ->] (2) to[bend left] (1);
+            % \draw[red, thick, ->] (1) to[bend left] (3);
+            \draw[red, thick, -{LaTeX}] (2) to[bend left] (3);
+            \draw[red, thick, -{LaTeX}] (3) to[bend left] (4);
+            \draw[red, thick, -{LaTeX}] (2) to[bend right] (4);
+        \end{scope}
+        \node[draw, fit=(scope2), inner sep=0.5cm] {};
+    \end{tikzpicture}\]
+    Зелёные --- компоненты сильной связности, их можно сжать в одну вершину (как показано рисунке в рамке).
+    \subsection{Алгоритм Kasaraju}
+    Альтернативное название --- два DFS'а.\\
+    Для реализации алгоритма нам понадобятся ориантированный граф $G(n,\ m)$ и его reverse: $G_{rev}(n,\ m)$ (то есть разворачиваем все рёбра).\\
+    dfs1: топологическая сортировка для G\\
+    dfs2: запускаем из непосещённых вершин в порядке TopSort на графе $G_{rev}$ и красим вершины в цвет $color$, после чего инкрементируем $color$.
+    \subsection{2-SAT}
+    Известно, что SAT$\Rightarrow$ 3-SAT --- NP-полная.\\
+    2-SAT решается за $O(n + m)$. $n$ --- количеств опеременных, $m$ --- количество скобочек.\\
+    $(a\, ||\, b)\, \&\&\, (a\, ||\, c)\, \&\&\, (\overline{c}\, ||\, d)\, \&\&\, (d\, ||\, d)$\\
+    Идея решения --- свести задачу к графовой. Сделаем следующие преобразования:
+    \[(a\, ||\, b) \Leftrightarrow \begin{cases}
+        \overline{a} \Rightarrow b\\
+        \overline{b} \Rightarrow a
+    \end{cases},\quad (\overline{c}\, ||\, d) \Leftrightarrow \begin{cases}
+        c\Rightarrow d\\
+        \overline{d}\Rightarrow \overline{c}
+    \end{cases}\]
+    Для каждой переменной создаём две вершины, обозначающую саму вершину и её отрицание.
+    \[\begin{tikzpicture}[node distance=2cm, every circle node/.style={circle, draw, minimum size=1cm}]
+        \node (A) [circle] {A, 0};
+        \node (B) [circle, below of = A] {B, 2};
+        \node (C) [circle, below of = B] {C, 4};
+        \node (D) [circle, below of = C] {D, 6};
+        \node (nA) [circle, right of = A] {$\overline{A}$, 1};
+        \node (nB) [circle, right of = B] {$\overline{B}$, 3};
+        \node (nC) [circle, right of = C] {$\overline{C}$, 5};
+        \node (nD) [circle, right of = D] {$\overline{D}$, 7};
+
+        \draw[-{Latex}] (nA) -- (B);
+        \draw[-{Latex}] (nB) -- (A);
+        \draw[-{Latex}] (C) -- (D);
+        \draw[-{Latex}] (nD) -- (nC);
+        \draw[-{Latex}] (nA) -- (C);
+        \draw[-{Latex}] (nD) -- (D);
+        \draw[-{Latex}] (nC) -- (A);
+    \end{tikzpicture}\]
+    У каждой вершины есть номер, если $x$ --- номер какой-то переменной, то $(x\ \hat{}\ 1)$ --- её отрицание.\\
+    Теперь нужно проанализировать транзитивные связи, например:
+    \[\begin{tikzpicture}[node distance=2cm, every circle node/.style={circle, draw, minimum size=1cm}]
+        \node (X) [circle] {X};
+        \node (A) [circle, right of = X] {A};
+        \node (B) [circle, right of = A] {B};
+        \node (C) [circle, right of = B] {C};
+        \node (nX) [circle, right of = C] {$\overline{X}$};
+        
+        \draw[-{Latex}] (X) -- (A);
+        \draw[-{Latex}] (A) -- (B);
+        \draw[-{Latex}] (B) -- (C);
+        \draw[-{Latex}] (C) -- (nX);
+    \end{tikzpicture}\]
+    Если для какой-то переменной $x$ выполнилось:\\
+    $x\Rightarrow \overline{x}$, тогда $x = false$.\\
+    Аналогично $\overline{x}\Rightarrow x$, тогда $x = true$.\\
+    \subsubsection*{Алгоритм}
+    1. Далаем переводы вида $(a\, ||\, b) \Leftrightarrow \begin{cases}
+        \overline{a} \Rightarrow b\\
+        \overline{b} \Rightarrow a
+    \end{cases}$.\\
+    2. Строим графы $G,\ G_{rev}$.\\
+    3. Ищем компоненты сильной связности.\\
+    4. Если $\exists x:\quad col[x] == col[x\ \hat{}\ 1]\Rightarrow$ Нет решений (так как они в одной КСС)\\
+    5. $x = (col[x] > col[x \hat{} 1])$
 \end{document}
