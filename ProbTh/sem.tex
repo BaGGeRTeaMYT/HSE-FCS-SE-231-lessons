@@ -16,8 +16,8 @@
 \graphicspath{../Images}
 \usepackage{tikz}
 \usepackage{cancel}
-\usepackage{fontspec}
 
+\usepackage{fontspec}
 \setmainfont{Times New Roman}
 
 \newcommand{\cov}{\operatorname{cov}}
@@ -858,4 +858,18 @@
     $\xi_n \sim Bi(1\,000;\ 0,87)$. Нас интересует $P \left( \left| \frac{\xi_n}{n} - 0,87 \right| < 0,04 \right)\\
     E\left( \frac{\xi_n}{n} \right) = p = 0,87,\ \mathcal{D}\left( \frac{\xi_n}{n} \right) = \frac{npq}{n^2} = \frac{pq}{n} = \frac{8,7\cdot 1,3}{1000} = 11,31$\\
     Тогда можно посчитать $P \left( \left| \frac{\xi_n}{n} - 0,87 \right| < 0,04 \right) = 2\Phi_0\left( \frac{0,04}{\sqrt{11,31}} \right) = 2\Phi_0\left( \frac{0,04}{0,1063} \right) = 2\Phi_0\left( \frac{400}{1063} \right) \approx 2\Phi_0(0,38)$
+    \begin{center}
+        Семинар 13 декабря
+    \end{center}
+    Посчитаем $\displaystyle\int\limits_0^1 x^2\, dx$. Пусть $\xi_1,\dots,\ \xi_n \sim R(0,\ 1)$
+    \[\frac{1}{n} \sum_{i = 1}^{n} \xi_i^2 \xrightarrow[n\to \infty]{\text{п. н.}} E\xi^2 = \int\limits_0^1 x^2\, dx = I\]
+    $P\left( \left| \frac{1}{n} \sum_{i = 1}^{n} \xi_i^2 - I \right| < \delta \right) = 0,95$, где $\delta = 0,01$.\\
+    По ЦПТ:
+    \[\frac{\frac{1}{n}\sum_{i = 1}^{n} \xi_i^2 - I}{\sqrt{\mathcal{D}\big( \frac{1}{n} \sum_{i = 1}^{n} \xi_i^2 \big)}} \xrightarrow[]{d} U\sim N(0,\ 1)\]
+    Тогда $P\left( \left| \frac{1}{n} \sum_{i = 1}^{n} \xi_i^2 - I \right| < \delta \right) = 2\Phi_0\left( \frac{\delta \sqrt{n}}{\sqrt{\mathcal{D}\xi^2_1}} \right)$\\
+    Величина простая, поэтому можем в явном виде посчитать дисперсию:
+    \[\mathcal{D}\xi^2_1 = E\xi_1^4 - (E\xi_1^2)^2 = \int\limits_0^1 x^4\, dx - \left( \int\limits_0^1 x^2 \, dx \right)^2 = \frac{1}{5} - \frac{1}{9} = \frac{4}{45}\]
+    Получаем следующее:
+    \[2\Phi_0 \left( \frac{\delta\sqrt{n} 3\sqrt{5}}{2} \right) = 2\Phi_0\left(\frac{0.03\sqrt{5}}{2}\sqrt{n}\right) = 0.95\Rightarrow n\approx 3400\]
+
 \end{document}
