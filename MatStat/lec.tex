@@ -1,0 +1,121 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathabx}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[margin=0.25in]{geometry}
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+\usepackage{nicefrac}
+\graphicspath{../Images}
+\usepackage{tikz}
+\usepackage{cancel}
+
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+
+\title{Математическая статистика.}
+\author{Андрей Тищенко \href{https://t.me/AndrewTGk}{@AndrewTGk}}
+\date{2024/2025}
+
+\begin{document}
+\maketitle
+\begin{center}
+    Лекция 10 января
+\end{center}
+\section*{Преамбула}
+\textit{Статистика}. Мнения о появлении этого слова:
+\begin{enumerate}
+    \item Статистиками в Германии назывались люди, собирающие данные о населении и передающие их государству.
+    \item В определённый день в Венеции народ выстраивался для выплаты налогов (строго фиксированных, в зависимости от рода действий). Государство собирало данные обо всём населении. Это происходило до появления статистиков в Германии, поэтому мы будем считать, что статистика пошла из Венеции.
+\end{enumerate}
+\textit{Задача статистики} --- по результатам наблюдений построить вероятностную модель наблюдаемой случайной величины.
+\section*{Основные определения}
+\subsection*{Определение}
+\underline{Однородной выборкой объёма $n$} называется случайный вектор $X = (X_1,\dots,\ X_n)$, компоненты которого являются независимыми и одинаково распределёнными. Элементы вектора $X$ называются \underline{элементами}\\\underline{выборки}. 
+\subsection*{Определение}
+Если элементы выборки имеют распределение $F_{\xi}(x)$, то говорят, что выборка соответствует распределению $F_{\xi}(x)$ или порождена случайной величиной $\xi$ с распределением $F_{\xi}(x)$. 
+\subsection*{Определение}
+Детерминированный вектор $x = (x_1,\dots,\ x_n)$, компоненты которого $x_i$ являются реализациями соответствующих случайных величин $X_i\ (i = \overline{1,\ n})$, называется \underline{реализацией выборки}.
+\subsection*{Уточнение}
+Если $X$ --- однородная выборка объёма $n$, то его реализацией будет вектор $x$, каждый элемент $x_i$ которого является значением соответствующей ему случайной величины (элемента выборки) $X_i$. 
+\subsection*{Определение}
+\underline{Выборочным пространством} называется множество всех возможных реализаций выборки\\
+$X = (X_1,\dots,\ X_n)$.\\
+\subsection*{Пример}
+У вектора $X = (X_1,\dots,\ X_{10})$ каждый элемент $X_i$ которой порождён случайной величиной $\xi\sim U(0,\ 1)$, выборочным пространством является $\mathbb{R}^{10}$ (так как $X_i$ может принять любое значение на $\mathbb{R}$)
+\subsection*{Определение}
+Пусть реализация выборки упорядочена по возрастанию:
+\[x_{(1)} \leq x_{(2)} \leq \dots \leq x_{(n)}\]
+Где $x_{(i)}$ --- $i$-ый по возрастанию элемент.\\
+Обозначим $X_{(k)}$ случайную величину, реализация которой при каждой реализации $x$ выборки $X$ принимает значение $x_{(k)}$. Тогда последовательность $X_{(1)},\dots,\ X_{(n)}$ называется \underline{вариационным рядом выборки}.
+\subsection*{Определение}
+Случайная величина $X_{(k)}$ называется \underline{$k$-ой порядковой статистикой выборки}.
+\subsection*{Определение}
+Случайные величины $X_{(1)},\ X_{(n)}$ называются \underline{эстремальными порядковыми статистиками}.
+\subsection*{Определение}
+Порядковая статистика $X_{(\lceil n\cdot p \rceil)}$ называется \underline{выборочной квантилью уровня $p$}, где $p\in [0,\ 1]$
+\subsection*{Определение}
+Пусть каждый элемент выборки $X$ объёма n имеет распределение $F_{\xi}(x)$. \underline{Эмпирической функцией}\\ \underline{распределения} такой выборки называется
+\[\hat{F}_n(x) = \frac{1}{n} \sum_{k = 1}^{n} I(X_k\leq x)\]
+$I$ --- индикаторная функция. $I = \begin{cases}
+    1,\ \text{если аргумент верен}\\
+    0,\ \text{иначе}
+\end{cases}$\\
+Пусть $x_1,\dots,\ x_n$ --- реализация выборки $X_1,\dots,\ X_n$\\
+\[\begin{tikzpicture}[scale=2, >=latex]
+    \draw[->, >=latex] (0, -1) -- (0, 1) node(0)[anchor = east]{$\hat{F}_n(x)$};
+    \draw (-2, -0.05) node(1)[anchor=north]{$x_1$} -- (-2, 0.05);
+    \draw (-1, -0.05) node(2)[anchor=north]{$x_2$}-- (-1, 0.05);
+    \draw (0.07, -0.05) node(3)[anchor=north east]{$x_3$}-- (0.07, -0.05);
+    \draw (1, -0.05) node(4)[anchor=north]{$x_4$}-- (1, 0.05);
+    \draw (2, -0.05) node(5)[anchor=north]{$x_5$}-- (2, 0.05);
+    \draw[->] (-3, 0) -- (-2, 0);
+    \draw[->] (-2, 0.2) -- (-1, 0.2);
+    \draw[dashed] (-2, 0) -- (-2, 0.2);
+    \draw[->] (-1, 0.45) -- (0, 0.45);
+    \draw[dashed] (-1, 0) -- (-1, 0.45);
+    \draw[->] (0, 0.6) -- (1, 0.6);
+    \draw[dashed] (1, 0) -- (1, 0.85);
+    \draw[->] (1, 0.85) -- (2, 0.85);
+    \draw[dashed] (2, 0) -- (2, 1);
+    \draw[->] (2, 1) -- (3, 1);
+    \draw[->] (-3, 0) -- (3, 0) node(2)[anchor = south]{$x$};
+\end{tikzpicture}\]
+\begin{center}
+    Свойства $\hat{F}_n(x)$
+\end{center}
+\begin{enumerate}
+    \item $\displaystyle\forall x\in\mathbb{R}\quad E\hat{F}_n(x) = E\left(\frac{1}{n} \sum_{k = 1}^{n} I(X_k \leq x)\right) = \frac{1}{n} \sum_{k = 1}^{n} EI(X_k \leq x) = P(X_1 \leq x) = F_{\xi}(x)$
+    \item По усиленному закону больших чисел (УЗБЧ)
+    \[\forall x\in \mathbb{R}\quad \hat{F}_n(x) = \frac{1}{n} \sum_{k = 1}^{n} I(X_k \leq x) \xrightarrow[n\to\infty]{\text{п. н.}} EI(X_k \leq x) = F_{\xi}(x)\]
+\end{enumerate}
+\subsection*{Гистограмма}
+Разбить $\mathbb{R}$ на $(m + 2)$ непересекающихся интервала. Рассматриваются $x_{(1)},\dots,\ x_{(n)}$
+\[\begin{tikzpicture}[scale=2, >=latex]
+    \draw[->] (-2, 0) -- (2, 0) node(2)[anchor = south]{$x$};
+    \draw (-1.5, -0.1) node[anchor=north](4){$x_{(1)}$} -- (-1.5, 0.1) node(3){};
+    \draw (1.5, -0.1) node[anchor=north](6){$x_{(n)}$} -- (1.5, 0.1) node(5){};
+    \draw[<->] (-1.5, -0.08) -- node[anchor=north](10){$r$} (1.5, -0.08);
+    \draw (0.75, -0.05) -- (0.75, 0.05) node(6){};
+    \draw[<->] (-0.75, 0.08) -- node[anchor=south](11){$\Delta$} (0, 0.08);
+    \draw (0, -0.05) -- (0, 0.05) node(8){};
+    \draw (-0.75, -0.05) -- (-0.75, 0.05) node(9){};
+    \;
+    \draw (-1.5, 0) rectangle (-0.75, 0.5);
+    \draw[->] (0.375, 0) -- node(0)[anchor = west]{$h_i$} (0.375, 0.75);
+    \draw (-0.75, 0) rectangle (-0.0, 0.8);
+    \draw (-0.0, 0) rectangle (0.75, 0.75);
+    \draw (0.75, 0) rectangle (1.5, 0.2);
+\end{tikzpicture}\]
+Размах выборки $r = x_{(n)} - x_{(1)}$\\
+$\Delta = \frac{r}{m}$ --- ширина интервала.\\
+$h_k = \frac{\nu_k}{\Delta},\ k = \overline{1,\ k}$, где $\nu_k$ --- количество попаданий на интервал.
+\end{document}
