@@ -20,6 +20,9 @@
 \usepackage{fontspec}
 \setmainfont{Times New Roman}
 
+\newcommand{\sion}{\sum_{i = 1}^{n}}
+\newcommand{\dev}{\mathcal{D}}
+\newcommand{\cov}{\operatorname{cov}}
 
 \title{Математическая статистика.}
 \author{Андрей Тищенко \href{https://t.me/AndrewTGk}{@AndrewTGk}}
@@ -41,20 +44,19 @@
 \subsection*{Определение}
 \underline{Однородной выборкой объёма $n$} называется случайный вектор $X = (X_1,\dots,\ X_n)$, компоненты которого являются независимыми и одинаково распределёнными. Элементы вектора $X$ называются \underline{элементами}\\\underline{выборки}. 
 \subsection*{Определение}
-Если элементы выборки имеют распределение $F_{\xi}(x)$, то говорят, что выборка соответствует распределению $F_{\xi}(x)$ или порождена случайной величиной $\xi$ с распределением $F_{\xi}(x)$. 
+Если элементы выборки имеют распределение $F_{\xi}(x)$, то говорят, что выборка \underline{соответствует распределению} $F_{\xi}(x)$ или \underline{порождена случайной величиной} $\xi$ с распределением $F_{\xi}(x)$. 
 \subsection*{Определение}
 Детерминированный вектор $x = (x_1,\dots,\ x_n)$, компоненты которого $x_i$ являются реализациями соответствующих случайных величин $X_i\ (i = \overline{1,\ n})$, называется \underline{реализацией выборки}.
 \subsection*{Уточнение}
 Если $X$ --- однородная выборка объёма $n$, то его реализацией будет вектор $x$, каждый элемент $x_i$ которого является значением соответствующей ему случайной величины (элемента выборки) $X_i$. 
 \subsection*{Определение}
 \underline{Выборочным пространством} называется множество всех возможных реализаций выборки\\
-$X = (X_1,\dots,\ X_n)$.\\
+\[X = (X_1,\dots,\ X_n)\]
 \subsection*{Пример}
 У вектора $X = (X_1,\dots,\ X_{10})$ каждый элемент $X_i$ которой порождён случайной величиной $\xi\sim U(0,\ 1)$, выборочным пространством является $\mathbb{R}^{10}$ (так как $X_i$ может принять любое значение на $\mathbb{R}$)
 \subsection*{Определение}
-Пусть реализация выборки упорядочена по возрастанию:
+Обозначим $x_{(i)}$ --- $i$-ый по возрастанию элемент, тогда будет справедливо:
 \[x_{(1)} \leq x_{(2)} \leq \dots \leq x_{(n)}\]
-Где $x_{(i)}$ --- $i$-ый по возрастанию элемент.\\
 Обозначим $X_{(k)}$ случайную величину, реализация которой при каждой реализации $x$ выборки $X$ принимает значение $x_{(k)}$. Тогда последовательность $X_{(1)},\dots,\ X_{(n)}$ называется \underline{вариационным рядом выборки}.
 \subsection*{Определение}
 Случайная величина $X_{(k)}$ называется \underline{$k$-ой порядковой статистикой выборки}.
@@ -98,24 +100,128 @@ $I$ --- индикаторная функция. $I = \begin{cases}
     \[\forall x\in \mathbb{R}\quad \hat{F}_n(x) = \frac{1}{n} \sum_{k = 1}^{n} I(X_k \leq x) \xrightarrow[n\to\infty]{\text{п. н.}} EI(X_k \leq x) = F_{\xi}(x)\]
 \end{enumerate}
 \subsection*{Гистограмма}
-Разбить $\mathbb{R}$ на $(m + 2)$ непересекающихся интервала. Рассматриваются $x_{(1)},\dots,\ x_{(n)}$
-\[\begin{tikzpicture}[scale=2, >=latex]
+Разбить $\mathbb{R}$ на $(m + 2)$ непересекающихся интервала. Рассматриваются $x_{(1)},\dots,\ x_{(m)}$
+\[\begin{tabular}{|c|c|c|}
+    \hline
+    Название & Обозначение & Формула\\
+    \hline
+    $\begin{aligned}&\text{Количество}\\&\text{интервалов}\end{aligned}$ & $m$ & ---\\
+    \hline
+    $\begin{aligned}&\text{Размах}\\&\text{выборки}\end{aligned}$ & $r$ & $r = x_{(m)} - x_{(1)}$\\
+    \hline
+    $\begin{aligned}&\text{Ширина}\\&\text{интервала}\end{aligned}$ & $\Delta$ & $\Delta = \frac{r}{m}$\\
+    \hline
+    $\begin{aligned}&\text{Количество}\\&\text{попаданий на}\\&\text{$i$-ый интервал}\end{aligned}$ & $\nu_i$ & ---\\
+    \hline
+    $\begin{aligned}&\text{Частота}\\&\text{попаданий на}\\&\text{$i$-ый интервал}\end{aligned}$ & $h_i$ & $h_i = \frac{\nu_i}{\Delta}$\\
+    \hline
+\end{tabular}\quad
+\begin{tikzpicture}[scale=2, >=latex]
     \draw[->] (-2, 0) -- (2, 0) node(2)[anchor = south]{$x$};
     \draw (-1.5, -0.1) node[anchor=north](4){$x_{(1)}$} -- (-1.5, 0.1) node(3){};
-    \draw (1.5, -0.1) node[anchor=north](6){$x_{(n)}$} -- (1.5, 0.1) node(5){};
+    \draw (1.5, -0.1) node[anchor=north](6){$x_{(m)}$} -- (1.5, 0.1) node(5){};
     \draw[<->] (-1.5, -0.08) -- node[anchor=north](10){$r$} (1.5, -0.08);
     \draw (0.75, -0.05) -- (0.75, 0.05) node(6){};
     \draw[<->] (-0.75, 0.08) -- node[anchor=south](11){$\Delta$} (0, 0.08);
     \draw (0, -0.05) -- (0, 0.05) node(8){};
     \draw (-0.75, -0.05) -- (-0.75, 0.05) node(9){};
-    \;
     \draw (-1.5, 0) rectangle (-0.75, 0.5);
     \draw[->] (0.375, 0) -- node(0)[anchor = west]{$h_i$} (0.375, 0.75);
     \draw (-0.75, 0) rectangle (-0.0, 0.8);
     \draw (-0.0, 0) rectangle (0.75, 0.75);
     \draw (0.75, 0) rectangle (1.5, 0.2);
 \end{tikzpicture}\]
-Размах выборки $r = x_{(n)} - x_{(1)}$\\
-$\Delta = \frac{r}{m}$ --- ширина интервала.\\
-$h_k = \frac{\nu_k}{\Delta},\ k = \overline{1,\ k}$, где $\nu_k$ --- количество попаданий на интервал.
+\begin{center}
+    Лекция 17 января
+\end{center}
+\subsection*{Определение}
+Пусть $X_1,\dots,\ X_n \sim F(x,\ \theta)$. \underline{$k$-ым начальным выборочным моментом} называется \[\hat{\mu}_k = \frac{1}{n} \sum_{i = 1}^{n} x_i^k,\ k \in \mathbb{N}\]
+\underline{Выборочным средним} называется:
+\[\hat{\mu}_1 = \overline{x} = \frac{1}{n} \sum_{i = 1}^{n} x_i\]
+\subsection*{Определение}
+\underline{$k$-ым центральным выборочным моментом} называется 
+\[\hat{\nu}_k = \frac{1}{n} \sum_{i = 1}^{n} (x_i - \overline{x})^k,\ k = 2,\ 3,\dots\]
+\[\hat{\nu}_2 = S^2 = \frac{1}{n} \sum_{i = 1}^{n} (x_i - \overline{x})^2 \text{ называется выборочной дисперсией}\]
+Пусть $(x_1,\ y_1),\dots,\ (x_n,\ y_n)$ соответствует распределению $F(x,\ y,\ \theta)$
+\subsection*{Определение}
+\underline{Выборочной ковариацией} называется
+\[\hat{K}_{xy} = \frac{1}{n}\sum_{i = 1}^{n} (x_i - \overline{x}) (y_i - \overline{y})\]
+\subsection*{Определение}
+\underline{Выборочным коэффициентом корреляции} называется 
+\[\hat{\rho}_{xy} = \frac{\hat{K}_{xy}}{\sqrt{S_x^2 S_y^2}}\]
+\begin{center}
+    Свойства выборочных моментов
+\end{center}
+\begin{enumerate}
+    \item $E\hat{\mu}_k = E\left( \frac{1}{n} \sum_{i = 1}^{n} X_i^k \right) = \frac{1}{n} \sum_{i = 1}^{n} E X_i^k = EX_1^k = \mu_k$
+    \item $E\overline{X} = m_x$
+    \item $\mathcal{D} \hat{\mu}_k = \mathcal{D} \left( \frac{1}{n} \sum_{i = 1}^{n} x_i^k \right) = \frac{1}{n^2} \sum_{i = 1}^{n} \mathcal{D} X_i^k = \frac{1}{n} \mathcal{D} X_i^k = \frac{1}{n} \left( EX_1^{2k} - (EX_1^{K})^2 \right) = \frac{1}{n}(\mu_{2k} - \mu_k^2)$
+    \item $\mathcal{D}\overline{x} = \frac{\sigma^2_{x_1}}{n}$
+    \item По УЗБЧ
+    \[\hat{\mu}_k = \frac{1}{n} \sum_{i = 1}^{n} x_i^k \xrightarrow[n\to \infty]{\text{п. н.}} E\hat{\mu}_k = \mu_k\]
+    \[\hat{\nu}_k \xrightarrow[n\to \infty]{\text{п. н.}} \nu_k\]
+    \item По ЦПТ
+    \[\frac{\hat{\mu}_k - \mu_k}{\sqrt{\frac{\mu_{2k} - \mu_k^2}{n} }}\xrightarrow[d]{n\to\infty}U,\ U\sim N(0,\ 1)\]
+    \[\frac{\sqrt{n}(\overline{x} - m_{x_1})}{\sigma} \xrightarrow[n\to\infty]{d} U\]
+    \item $ES^2 = E\left( \frac{1}{n} \sum_{i = 1}^{n}(x_i - \overline{x})^2 \right) = \frac{n - 1}{n} \sigma^2$
+    \item $E \hat{K}_{xy} = \frac{n - 1}{n} \cov(x,\ y)$
+\end{enumerate}
+\subsection*{Определение}
+Оценкой $\hat{\theta}$ параметра $\theta$, называется функция:
+\[\hat{\theta} = T(x_1,\dots,\ x_n),\ \text{не зависящая от $\theta$}\]
+Например, отвратительная оценка среднего роста людей в аудитории.
+\[\hat{m} = \frac{2x_2 + 5x_5 + 10x_{10}}{3}\]
+\subsection*{Определение}
+Оценка $\hat{\theta}$ называется \underline{несмещённой}, если $E\hat{\theta} = \theta$ для любых возможных значений этого параметра.
+\subsection*{Определение}
+Оценка $\hat{\theta}(x_1,\dots,\ x_n)$ называется \underline{асимптотически несмещённой оценкой} $\theta$, если
+\[\lim_{n\to\infty} E\hat{\theta}(x_1,\dots,\ x_n) = \theta\]
+\[\lim_{n\to\infty} ES^2 = \lim_{n\to\infty} \frac{n - 1}{n}\sigma^2 = \sigma^2\]
+\subsection*{Определение}
+\underline{Несмещённой выборочной} (или исправленной) \underline{выборочной дисперсией} называется
+\[\tilde{S}^2 = \frac{1}{n - 1} \sum_{i = 1}^{n} (x_i - \overline{x})^2\]
+Оценки
+\[\begin{aligned}
+    \hat{m}_1 &= \frac{x_1 + x_2 + x_3}{3}\\
+    \hat{m}_2 &= \frac{\sum_{i = 1}^{10} x_i}{10}\\
+    \hat{m}_3 &= \overline{x} = \frac{\sion x_i}{n}\\  
+\end{aligned}\]
+Являются несмещёнными.
+\subsection*{Определение}
+Оценка $\hat{\theta}(x_1,\dots,\ x_n)$ называется:\\
+\underline{Состоятельной оценкой} $\theta$, если
+\[\hat{\theta} (x_1,\dots,\ x_n) \xrightarrow[n\to\infty]{p} \theta\]
+\underline{Сильно состоятельной оценкой}, если
+\[\hat{\theta} (x_1,\dots,\ x_n) \xrightarrow[n\to\infty]{\text{п. н.}} \theta\]
+\subsection*{Определение}
+Пусть $\hat{\theta}$ --- несмещённая оценка параметра $\theta$. Если $\dev\hat{\theta} \leq \dev \theta^*$, где $\theta^*$ --- любая несмещённая оценка параметра $\theta$. Тогда $\hat{\theta}$ называется \underline{эффективной оценкой параметра} $\theta$.
+\begin{center}
+    $R$-эффективные оценки
+\end{center}
+Рассматриваем выборку $X_1,\dots,\ X_n \sim f(x,\ \theta),\ \theta\in \Theta \subseteq \mathbb{R}^1$. Назовём модель $(S,\ f(x,\ \theta))$ регулярной, если она удовлетворяет следующим условиям:
+\begin{enumerate}
+    \item $\forall x\in S\quad \text{функция } f(x,\ \theta) = f(x_1,\dots,\ x_n,\ \theta) > 0$ и дифференцируема по $\theta$.
+    \item $\displaystyle\frac{\delta}{\delta \theta} \int\limits_S f(x,\ \theta)\, dx = \int\limits_S \frac{\delta}{\delta \theta} f(x,\ \theta)\, dx = \frac{\delta}{\delta \theta} \int\limits_S T(x)f(x,\ \theta)\, dx = \int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx$
+\end{enumerate}
+Пусть $\hat{\theta} = T(x) = T(x_1,\dots,\ x_n)$ --- несмещённая оценка параметра $\theta$:
+\[\int\limits_S \frac{\delta}{\delta \theta} f(x,\ \theta)\, dx = 0,\ \text{так как не зависит от $\theta$}\]
+\[\int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx = \frac{\delta}{\delta \theta}\theta = 1\]
+\subsection*{Определение}
+\underline{Информацией Фишера} о параметре $\theta$, содержащейся в выборке $X_1,\dots,\ X_n$ называется величина
+\[I_n(\theta) = E\left( \frac{\delta \ln f(X,\ \theta)}{\delta \theta} \right)^2 = \int\limits_S\left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \right) f(x,\ \theta)\, dx\]
+\subsection*{Неравенство Рао-Крамера}
+Если $S,\ f(x,\ \theta)$ --- регулярная модель и $\hat{\theta}$ --- несмещённая оценка $\theta$, то 
+\[\dev \hat{\theta} \geq \frac{1}{I_n(\theta)}\]
+Докажем это неравенство.
+\subsubsection*{Неравенство Коши-Буняковского}
+\[\left( \int \varphi_1(x)\varphi_2(x)\, dx \right)^2 \leq \int \varphi_1^2(x)\, dx\int \varphi_2^2(x)\, dx\]
+Пользуясь этим:
+\[\int\limits_S \frac{\delta}{\delta \theta} f(x,\ \theta)\, dx = \int\limits_S \frac{\delta f(x,\ \theta)}{\delta \theta} \frac{f(x,\ \theta)}{f(x,\ \theta)}\, dx = \int\limits_S \frac{\delta \ln f(x,\ \theta)}{\delta x} f(x,\ \theta)\, dx = 0\]
+\[\int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx = \int\limits_S T(x) \frac{\delta}{\delta \theta} f(x,\ \theta) \frac{f(x,\ \theta)}{f(x,\ \theta)}\, dx = \int\limits_S T(x) \frac{\delta \ln f(x,\ \theta)}{\delta x} f(x,\ \theta)\, dx = 1\]
+Применяя неравенство Коши-Бунякоского:
+\[1 = \int \big( T(x) - \theta \big) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx \leq \underset{=\dev\hat{\theta}}{\underbrace{\int\limits_S \big( T(x) - \theta \big)^2 f(x,\ \theta)\, dx}} \underset{I_n(\theta)}{\underbrace{\int\limits_S\left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \right)^2 f(x,\ \theta)}}\]
+Получили
+\[1 \leq \dev \theta I_n(\theta)\Rightarrow \dev \theta \geq \frac{1}{I_n(\theta)}\]
+\subsection*{Определение}
+Оценка $\hat{\theta}$ называется $R$-эффективной, если $E\hat{\theta} = \theta$ и $\dev \hat{\theta} = \frac{1}{I_n(\theta)}$
 \end{document}
