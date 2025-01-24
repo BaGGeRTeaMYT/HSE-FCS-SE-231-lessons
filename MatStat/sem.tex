@@ -1,0 +1,115 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathabx}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[margin=0.25in]{geometry}
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+\usepackage{nicefrac}
+\graphicspath{../Images}
+\usepackage{tikz}
+\usepackage{cancel}
+
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+\title{Математическая статистика.}
+\author{Андрей Тищенко \href{https://t.me/AndrewTGk}{@AndrewTGk}}
+\date{2024/2025}
+
+\newcommand{\dev}{\mathcal{D}}
+\newcommand{\cov}{\operatorname{cov}}
+
+\begin{document}
+\maketitle
+\begin{center}
+    Семинар 10 января
+\end{center}
+\subsection*{Задача 1}
+$x_1,\dots,\ x_n\sim F_{\xi}(x)$, найти функцию распределения для $X_{(n)},\ X_{(1)}$\\
+$F_{X_{(n)}}(x) = P(X_{(n)} \leq x) = P(X_{(1)} \leq x,\dots,\ X_{(n)} \leq x) = P(X_1 \leq x,\dots,\ X_n \leq x) =\\
+=P(X_1\leq x) \dots P(X_n \leq x) =(F_{\xi}(x))^{n}$\\
+$F_{X_{(1)}}(x) = P(X_{(1)} \leq x) = 1 - P(X_{(1)} > x) = 1 - P(X_{(1)} > x,\dots,\ X_{(n)} > x) =\\
+= 1 - P(X_1 > x,\dots,\ X_n > x) = 1 - P(X_1 > x)\dots P(X_n > x) = 1 - \big(1 - F_{\xi}(x)\big)^n$
+\subsection*{Задача 2}
+$x_1,\dots,\ x_n \sim R(0,\ 1)$. Найти $EX_{(n)},\ EX_{(1)}$.\\
+$F_{X_{(n)}}(x) = \big( F_{\xi}(x) \big)^n$\\
+$f_{X_{(n)}}(x) = \big( F_{X_{(n)}}(x) \big)' = n\big(F_{\xi}(x)\big)^{n - 1}\cdot f_{\xi}(x)$\\
+$F_{\xi}(x) = \begin{cases}
+    0,\ x < 0\\
+    x,\ x\in [0,\ 1]\\
+    1,\ x > 1
+\end{cases}$\\
+Подставим в предыдущее уравнение:
+\[f_{X_{(n)}} = \begin{cases}
+    0,\ x < 0\\
+    nx^{n - 1},\ x\in [0,\ 1]\\
+    0,\ x > 1
+\end{cases}\]
+$EX_{(n)} = \displaystyle\int\limits_{-\infty}^{+\infty} xf_{X_{(n)}}(x)\, dx = \int\limits_0^1 xnx^{n - 1}\, dx = n\int\limits_0^1 x^n\, dx = \frac{n}{n + 1}$\\
+Посчитаем для $X_{(1)}$:\\
+$F_{X_{(1)}}(x) = 1 - (1 - F_{\xi}(x))^n\\
+f_{X_{(1)}}(x) = \big(F_{X_{(1)}}(x)\big)' = n(1 - F_{\xi}(x))^{n - 1} \big(F_{\xi}(x)\big)' = n(1 - F_{\xi}(x))^{n - 1} f_{\xi}(x) = \begin{cases}
+    0,\ x < 0\\
+    n(1 - x)^{n - 1},\ 0 \leq x \leq 1\\
+    0,\ x > 1
+\end{cases}$\\
+$EX_{(1)} = \displaystyle \int\limits_0^1 xn(1 - x)^{n - 1}\, dx = n\int\limits_0^1 x(1 - x)^{n - 1}\, dx = \left< \begin{matrix}
+    t = 1 - x\\
+    x = 1 - t
+\end{matrix}\right> = -n\int\limits_1^0 (1 - t)t^{n - 1}\, dt = n\int\limits_0^1(1 - t)t^{n - 1}\, dt =\\
+= n\int\limits_0^1 t^{n - 1}\, dt - n\int\limits_0^1 t^{n}\, dt = 1 - \frac{n}{n + 1}$
+\subsection*{Задача 3}
+$\overline{x} = \frac{1}{n}\sum_{i = 1}^{n} x_i$\\
+$E\overline{x} = E\left( \frac{1}{n} \sum_{i = 1}^{n} x_i \right) = \frac{1}{n} \sum_{i = 1}^{n} E(x_i) = Ex_i\\
+\mathcal{D}(\overline{x}) = \mathcal{D}\left( \frac{1}{n} \sum_{i = 1}^{n} x_i \right) = \frac{1}{n^2} \sum_{i = 1}^{n} \mathcal{D}x_i = \frac{\mathcal{D}x_i}{n}$\\
+Посчитаем выборочную дисперсию:
+\[S^2 = \frac{1}{n} \sum_{i = 1}^{n}(x_i - \overline{x})^2\]
+$ES^2 = E\left( \frac{1}{n} \sum_{i = 1}^{n} (x_i - \overline{x})^2 \right) = \frac{1}{n}\sum_{i = 1}^{n} E(x_i - \overline{x})^2 = \mathcal{D}(x_1 - \overline{x}) = \mathcal{D}(x_1) + \mathcal{D}(\overline{x}) - 2\cov(x_1,\ \overline{x}) = \frac{(n + 1)\dev(x_1)}{n} -\\- 2\cov(x_1,\ \overline{x})\\
+\cov (x_1,\ \overline{x}) = \cov(x_1,\ \frac{1}{n} \sum_{i = 1}^{n} x_i) = \frac{1}{n}\cov (x_1,\ \sum_{i = 1}^{n} x_i) = \frac{1}{n} \cov (x_1,\ x_1) = \frac{\dev(x_1)}{n}$\\
+Тогда 
+\[ES^2 = \frac{(n + 1)\dev(x_1)}{n} - \frac{2\dev(x_1)}{n} = \dev(x_1)\left(1 - \frac{1}{n}\right)\]
+Несмещённая выборачная дисперсия (её математическое ожидание равняется дисперсии $x_1$):
+\[\tilde{S}^2 = \frac{1}{n - 1} \sum_{i = 1}^{n} (x_i - \overline{x})^2\]
+
+Посчитаем дисперсию $S^2$:
+\[\dev\left( x_1 - \frac{1}{n} \sum_{i = 1}^{n} x_i \right) = \dev\left( \frac{(n - 1)x_1}{n} \right) + \dev\left( \frac{1}{n} \sum_{i = 2}^n x_i \right) = \frac{(n - 1)^2}{n^2}\dev(x_1) + \frac{n - 1}{n^2}\dev(x_1) =\]
+\[= \dev(x_1)\left( \frac{(n - 1)(n - 1 + 1)}{n^2}\right) = \dev (x_1) \frac{n - 1}{n}\]
+\begin{center}
+    Семинар 17 января.
+\end{center}
+$T(x_1, x_2, \dots, x_n) = \sqrt{\frac{\pi}{2}}\frac{1}{n}\sum \limits_{i=1}^n |x_i - m|$, $x_i \sim N(m, \theta^2)$
+
+$\displaystyle E T(x_1, x_2, \dots, x_n) = \sqrt{\frac{\pi}{2}}\frac{1}{n}\sum \limits_{i=1}^n E |x_i - m| = \sqrt{\frac{\pi}{2}}\ E |x_1 - m| = \sqrt{\frac{\pi}{2}}\ \int \limits_{-\infty}^{+\infty} {|x - m| \frac{1}{\sqrt{2\pi}\theta} e^{-\frac{(x-m)^2}{2\theta^2}} dx}$ 
+
+Заменим $\frac{x-m}{\theta}$ на $y$ 
+
+$\displaystyle\frac{\theta}{2}\int \limits_{-\infty}^{+\infty}|y|\cdot e^{\frac{-y^2}{2}} dy  = \theta \int \limits_{0}^{+\infty} y\cdot e^{\frac{-y^2}{2}} dy = \theta (1-0) = \theta$
+
+
+\[\frac{1}{n}\sum \limits_{i=1}^{n} \sqrt{\frac{\pi}{2}} \ |x_i-m| \xrightarrow[n\to+\infty]{\text{п.\ н.}}  E\sqrt{\frac{\pi}{2}} \ |x_i-m|\]
+
+\subsection*{Задача}
+$X = (X_1,\dots,\ X_n),\ X_i\sim R(0,\ \theta)$\\
+$\hat{\theta} = X_{(n)},$ доказать $ \lim\limits_{n\to\infty} EX_{(n)} = \theta\\
+F_{X_{(n)}} (x) = (F_{X_i}(x))^n = \left(\frac{x}{\theta}\right)^n\\
+f_{X_{(n)}} (x) = \frac{d F_{X_{(n)}}}{dx} = \frac{nx^{n - 1}}{\theta}\\
+\displaystyle E X_{(n)} = \int \limits _0^{\theta} \frac{n x^n}{\theta^n}\, dx = \left.\frac{n x^{n + 1}}{(n + 1)\theta^n} \right|_0^{\theta} = \frac{n}{n + 1}\theta \xrightarrow[n\to\infty]{} \theta$. То есть смещённая, но асимптотически несмещённая.\\
+Докажем состоятельность, хотим:
+\[\forall \varepsilon > 0\quad P(|\hat{\theta} - \theta| < \varepsilon) \xrightarrow[n\to\infty]{} 1\]
+\[P(-\varepsilon < X_{(n)} - \theta < \varepsilon) = F_{X_(n)} (\varepsilon + \theta) - F_{X_{(n)}}(\theta - \varepsilon) = 1 - \left( \frac{\theta - \varepsilon}{\theta} \right)^n \xrightarrow[n\to\infty]{} 1\]
+\subsection*{Задача}
+$I_n(\theta) = E\left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \right)^2,\ I_n(\theta) = nI_1(\theta),\ x_1,\dots,\ x_n\sim N(\theta,\ \sigma^2)$.\\
+$f(x,\ \theta) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x - \theta)^2}{2\sigma^2}}$\\
+$\ln f(x,\ \theta) = \ln \left( \frac{1}{\sqrt{2\pi}\sigma }e^{-\frac{(x - \theta)^2}{2\sigma^2}} \right) = -\frac{(x - \theta)^2}{2\sigma^2} + \ln \frac{1}{\sqrt{2\pi}\sigma}\\
+\frac{\delta\ln f(x,\ \theta)}{\delta\theta} = -\frac{2(x - \theta)}{2\sigma^2}\cdot (-1) = \frac{x - \theta}{\sigma^2}\\
+E\left( \frac{x - \theta}{\sigma^2} \right)^2 = \frac{1}{\sigma^4} E(x - \theta)^2 = \frac{1}{\sigma^4} \sigma^2 = \frac{1}{\sigma^2} = I_1(\theta)\\
+\dev \hat{\theta} \geq \frac{1}{nI_1(\theta)} = \frac{\sigma^2}{n} =\mathcal{D}\overline{x}$
+\end{document}
