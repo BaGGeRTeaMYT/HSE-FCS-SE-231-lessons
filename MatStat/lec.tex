@@ -20,7 +20,7 @@
 \usepackage{fontspec}
 \setmainfont{Times New Roman}
 
-\newcommand{\sion}{\sum_{i = 1}^{n}}
+\newcommand{\sion}{\sum\limits_{i = 1}^{n}}
 \newcommand{\dev}{\mathcal{D}}
 \newcommand{\cov}{\operatorname{cov}}
 
@@ -198,7 +198,7 @@ $I$ --- индикаторная функция. $I = \begin{cases}
 \begin{center}
     $R$-эффективные оценки
 \end{center}
-Рассматриваем выборку $X_1,\dots,\ X_n \sim f(x,\ \theta),\ \theta\in \Theta \subseteq \mathbb{R}^1$. Назовём модель $(S,\ f(x,\ \theta))$ регулярной, если она удовлетворяет следующим условиям:
+Рассматриваем выборку $X_1,\ldots,\ X_n \sim f(x,\ \theta),\ \theta\in \Theta \subseteq \mathbb{R}^1$. Назовём модель $(S,\ f(x,\ \theta))$ \underline{регулярной}, если она удовлетворяет следующим условиям:
 \begin{enumerate}
     \item $\forall x\in S\quad \text{функция } f(x,\ \theta) = f(x_1,\dots,\ x_n,\ \theta) > 0$ и дифференцируема по $\theta$.
     \item $\displaystyle\frac{\delta}{\delta \theta} \int\limits_S f(x,\ \theta)\, dx = \int\limits_S \frac{\delta}{\delta \theta} f(x,\ \theta)\, dx = \frac{\delta}{\delta \theta} \int\limits_S T(x)f(x,\ \theta)\, dx = \int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx$
@@ -208,20 +208,115 @@ $I$ --- индикаторная функция. $I = \begin{cases}
 \[\int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx = \frac{\delta}{\delta \theta}\theta = 1\]
 \subsection*{Определение}
 \underline{Информацией Фишера} о параметре $\theta$, содержащейся в выборке $X_1,\dots,\ X_n$ называется величина
-\[I_n(\theta) = E\left( \frac{\delta \ln f(X,\ \theta)}{\delta \theta} \right)^2 = \int\limits_S\left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \right) f(x,\ \theta)\, dx\]
+\[I_n(\theta) = E\left( \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} \right)^2 = \int\limits_S\left( \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} \right)^2 f(x,\ \theta)\, dx\]
 \subsection*{Неравенство Рао-Крамера}
 Если $S,\ f(x,\ \theta)$ --- регулярная модель и $\hat{\theta}$ --- несмещённая оценка $\theta$, то 
-\[\dev \hat{\theta} \geq \frac{1}{I_n(\theta)}\]
+\[\dev (\hat{\theta}) \geq \frac{1}{I_n(\theta)}\]
 Докажем это неравенство.
 \subsubsection*{Неравенство Коши-Буняковского}
 \[\left( \int \varphi_1(x)\varphi_2(x)\, dx \right)^2 \leq \int \varphi_1^2(x)\, dx\int \varphi_2^2(x)\, dx\]
 Пользуясь этим:
-\[\int\limits_S \frac{\delta}{\delta \theta} f(x,\ \theta)\, dx = \int\limits_S \frac{\delta f(x,\ \theta)}{\delta \theta} \frac{f(x,\ \theta)}{f(x,\ \theta)}\, dx = \int\limits_S \frac{\delta \ln f(x,\ \theta)}{\delta x} f(x,\ \theta)\, dx = 0\]
-\[\int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx = \int\limits_S T(x) \frac{\delta}{\delta \theta} f(x,\ \theta) \frac{f(x,\ \theta)}{f(x,\ \theta)}\, dx = \int\limits_S T(x) \frac{\delta \ln f(x,\ \theta)}{\delta x} f(x,\ \theta)\, dx = 1\]
+\[\int\limits_S \frac{\delta}{\delta \theta} f(x,\ \theta)\, dx = \int\limits_S \frac{\delta f(x,\ \theta)}{\delta \theta} \frac{f(x,\ \theta)}{f(x,\ \theta)}\, dx = \int\limits_S \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx = 0\]
+\[\int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx = \int\limits_S T(x) \frac{\delta}{\delta \theta} f(x,\ \theta) \frac{f(x,\ \theta)}{f(x,\ \theta)}\, dx = \int\limits_S T(x) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx = 1\]
 Применяя неравенство Коши-Бунякоского:
-\[1 = \int \big( T(x) - \theta \big) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx \leq \underset{=\dev\hat{\theta}}{\underbrace{\int\limits_S \big( T(x) - \theta \big)^2 f(x,\ \theta)\, dx}} \underset{I_n(\theta)}{\underbrace{\int\limits_S\left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \right)^2 f(x,\ \theta)}}\]
+\[1 = \int\limits_S \big( T(x) - \theta \big) \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} f(x,\ \theta)\, dx \leq \underset{=\dev\hat{\theta}}{\underbrace{\int\limits_S \big( T(x) - \theta \big)^2 f(x,\ \theta)\, dx}} \cdot \underset{=I_n(\theta)}{\underbrace{\int\limits_S\left( \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} \right)^2 f(x,\ \theta)\, dx}}\]
 Получили
-\[1 \leq \dev \theta I_n(\theta)\Rightarrow \dev \theta \geq \frac{1}{I_n(\theta)}\]
+\[1 \leq \dev (\theta) \cdot I_n(\theta)\Rightarrow \dev (\theta) \geq \frac{1}{I_n(\theta)}\]
 \subsection*{Определение}
-Оценка $\hat{\theta}$ называется $R$-эффективной, если $E\hat{\theta} = \theta$ и $\dev \hat{\theta} = \frac{1}{I_n(\theta)}$
+Оценка $\hat{\theta}$ называется \underline{$R$-эффективной}, если $E\hat{\theta} = \theta$ и $\dev \hat{\theta} = \frac{1}{I_n(\theta)}$
+\begin{center}
+    Лекция 24 января
+\end{center}
+\subsection*{Замечание 1}
+$I_n(\theta) = \dev \left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \right)$
+\subsection*{Замечание 2}
+$I_n(\theta) = nI_1(\theta)$\\
+$\displaystyle f(x,\ \theta) = f(x_1,\dots,\ x_n,\ \theta) = \prod_{i = 1}^{n} f(x_i,\ \theta)\\
+E\left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \right)^2 = E \left( \sion \frac{\delta \ln f(x_i,\ \theta)}{\delta \theta} \right)^2 = \sum_{i \neq j} E \left( \frac{\delta \ln f(x_i,\ \theta)}{\delta \theta} \cdot \frac{\delta \ln f(x_j,\ \theta)}{\delta \theta} \right) + nE\left( \frac{\delta \ln f(x_1, \theta)}{\delta \theta} \right)^2 =\\
+= \sum_{i \neq j} \left( \underset{=0}{\underbrace{E \left( \frac{\delta \ln f(x_i,\ \theta)}{\delta \theta}\right)}} \cdot \underset{=0}{\underbrace{E\left( \frac{\delta \ln f(x_j,\ \theta)}{\delta \theta} \right)}}\right) + nE\left( \frac{\delta \ln f(x_1, \theta)}{\delta \theta} \right)^2 = nE\left( \frac{\delta \ln f(x_1, \theta)}{\delta \theta} \right)^2 = nI_1(\theta)$
+\subsection*{Замечание 3}
+Пример: $X_1,\dots,\ X_n \sim N(\theta,\ \sigma^2)$\\
+Рассмотрим оценку $\hat{\theta} = \overline{X}$, её дисперсия $\mathcal{D}\overline{X} = \frac{\sigma^2}{n}$. Посчитаем информацию Фишера:\\
+$I_1(\theta) = E\left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \right)^2 = E\left( \frac{\delta}{\delta \theta} \ln\left( \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x - \theta)^2}{2\sigma^2}}\right) \right)^2 = E\left( \frac{\delta}{\delta \theta} \ln\left( \frac{1}{\sqrt{2\pi} \sigma} - \frac{(x - \theta)^2}{2\sigma^2} \right) \right)^2 = E\left( \frac{x - \theta}{\sigma^2} \right)^2 = \\
+=\frac{1}{\sigma^4} E(x - \theta)^2 = \frac{\sigma^2}{\sigma^4} = \frac{1}{\sigma^2}\Rightarrow I_n(\theta) = \frac{n}{\sigma^2}$\\
+Знаем, что $\mathcal{D}\hat{\theta} \geq \frac{1}{nI_1(\theta)} = \frac{\sigma^2}{n} = \mathcal{D}(\overline{X})\Rightarrow$ оценка $\hat{\theta} = \overline{X}$ является R-эффективной.\\
+Критерий эффективности $X_1,\dots,\ X_n \sim F_{\xi}(x,\ \theta),\ \theta \in \Theta \subset \mathbb{R}^1$ выполнены условия регулярности, то есть
+\[ \int T(x)\frac{\delta f(x,\ \theta)}{\delta \theta}\, dx = \frac{\delta}{\delta \theta} \int T(x) f(x,\ \theta)\, dx = E\hat{\theta}\]
+
+\subsection*{Определение}
+Функцией вклада выборки $X_1,\dots,\ X_n$ называется
+\[U(x,\ \theta) = \sion \frac{\delta \ln f(x_i,\ \theta)}{\delta \theta}\]
+Пусть $0 < U(x, \theta) < \infty$.\\
+$\hat{\theta} = T(x_1,\dots,\ x_n)$ --- R-эффективная оценка $\theta \Leftrightarrow \hat{\theta} - \theta = a(\theta) U(x,\ \theta)$, где $a(\theta) = \mathcal{D}\hat{\theta}$\\
+\textit{Доказательство} $\Rightarrow$:\\
+Пусть $\hat{\theta} - \theta = a(\theta) U(x,\ \theta) \Rightarrow \hat{\theta}$ --- R-эффективная оценка $\theta$.\\
+Посчитаем математическое ожидание частей равенства:
+\[E(\hat{\theta} - \theta) = a(\theta) EU(x,\ \theta) = a(\theta) \int \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta) dx = 0\]
+Посчитаем дисперсию частей:
+\[\dev (\hat{\theta} - \theta) = a^2(\theta) \dev U(x,\ \theta) = \underset{=(\dev(\hat{\theta}))^2}{\underbrace{a^2(\theta)}} I_n(\theta)\Rightarrow \dev(\hat{\theta}) = (\dev(\hat{\theta}))^2 I_n(\theta)\Rightarrow 1 = \dev(\theta) I_n(\theta)\]
+Значит оценка является R-эффективной.\\
+\textit{Доказательство} $\Leftarrow$:\\
+Пусть $\hat{\theta}$ --- R-эффективная оценка $\Rightarrow \hat{\theta} - \theta = a(\theta) U(x,\ \theta)$. Хотим доказать, что $\rho(\hat{\theta},\ U(x,\ \theta)) = 1$.\\
+Для подсчёта корреляции нужно посчитать ковариацию:
+\[\cov (\hat{\theta},\ U(x,\ \theta)) = E(\hat{\theta} - \theta) U(x,\ \theta) = E\hat{\theta} U(x,\ \theta) - \theta \underset{=0}{\underbrace{EU(x,\ \theta)}} =\]
+\[= \int\limits_S T(x)U(x,\ \theta) f(x,\ \theta)\, dx = \int\limits_S T(x) \frac{\delta \ln f(x,\ \theta)}{\delta \theta}f(x,\ \theta)\, dx = 1\]
+Так как $\hat{\theta}$ --- R-эффективная оценка, то $\dev \hat{\theta} = \frac{1}{I_n(\theta)}$. Знаем, что $\dev U(x,\ \theta) = I_n(\theta)$, тогда:
+\[\rho(\hat{\theta},\ U(x,\ \theta)) = \frac{\cov (\hat{\theta},\ U(,\ \theta))}{\sqrt{\dev \hat{\theta} \dev U(x,\ \theta)}} = \frac{1}{\sqrt{\frac{I_n(\theta)}{I_n(\theta)}}} = 1\Rightarrow\]
+\[\Rightarrow \hat{\theta} = c_1 + c_2U(x,\ \theta)\]
+$E\hat{\theta} = c_1 + Ec_2 U(x,\ \theta) = c_1 + 0 = \theta$, так как оценка эффективная\\
+$\dev \hat{\theta} = c_2^2 I_n(\theta) = \frac{1}{I_n(\theta)}\Rightarrow c_2^2 = \frac{1}{I_n^2}\Rightarrow c_2 = \frac{1}{I_n} = \dev\hat{\theta} = a(\theta)$.\\
+Итак, $\hat{\theta} = \theta + a(\theta) U(x,\ \theta)\Rightarrow \hat{\theta} - \theta = U(x,\ \theta)$.
+\subsection*{Метод моментов}
+$X_1,\dots,\ X_n\sim F_{\xi}(x,\ \theta),\ \theta \in \Theta\subset R^k$
+\[\exists \mu_j < \infty,\ j = \overline{1,\ k}\quad \underset{=\mu_j(\theta)}{\underbrace{\mu_j}} = E\xi^j = \int\limits_{-\infty}^{+\infty} x^j f(x,\ \theta)\, dx = 1\]
+Тогда можно получить систему уравнений:
+\begin{equation}
+    \begin{cases}
+        \hat{\mu_1} = \mu_1(\theta)\\
+        \vdots\\
+        \hat{\mu_n} = \mu_n(\theta)
+    \end{cases}
+\end{equation}
+Если система уравнений $(1)$ однозначно разрешима относительно $\theta_1,\dots,\ \theta_k$, то решения $\hat{\theta_1},\dots,\ \hat{\theta_k}$ называется равной $\theta_1,\dots,\ \theta_k$ по методу моментов.
+\subsubsection*{Пример}
+$X_1,\dots,\ X_n \sim N(\theta_1,\ \theta_2^2),\ \theta = (\theta_1,\ \theta_2^2)$, тогда:
+\[\begin{cases}
+    \hat{\mu_1} = \frac{1}{n} \sion x_i = \theta_1\Rightarrow \hat{\theta_1} = \overline{X}\\
+    \hat{\mu_2} = \frac{1}{n} \sion x_i^2 = \theta_2^2 + \theta_1^2,\ \big(E\xi^2 = \dev \xi + (E\xi)^2\big)\Rightarrow \hat{\theta}_2^2 = \frac{1}{n}\sion  x_i^2 = \overline{X}^2
+\end{cases}\]
+\subsection*{Метод максимального правдоподобия (ММП)}
+\subsubsection*{Определение}
+Функцией правдоподобия называется функция 
+\[L(x_1,\dots,\ x_n,\ \theta) = \begin{cases}
+    \prod\limits_{i = 1}^{n} f(x_i,\ \theta),\ \text{если $\xi$ --- непрерывная случайная величина}\\
+    \prod\limits_{i = 1}^{n} P(\xi = x_i,\ \theta),\ \text{если $\xi$ --- дискретная случайная величина}
+\end{cases}\]
+\subsubsection*{Определение}
+Реализацией оценки максимального правдоподобия (ОМП) называется значение $\hat{\theta} \in \Theta$, такое что:
+\[\hat{\theta} = \operatorname{argmax} L(x_1,\dots,\ x_n,\ \theta),\ \text{где }\theta \in \Theta\]
+Для нахождения точки максимума нужно взять частные производные по всем составляющим $\theta$ от функции правдоподобия. Однако считать производную произведения нам впадлу, поэтому мы введём следующую вещь:
+\subsubsection*{Определение}
+Функция $\ln L(x_1,\dots,\ x_n,\ \theta)$ называется логарифмической функцией правдоподобия.\\
+Итак, получаем систему уравнений:
+\[\begin{cases}
+    \frac{\delta \ln L(x_1,\dots,\ x_n,\ \theta)}{\delta \theta_1} = 0\\
+    \vdots\\
+    \frac{\delta \ln L(x_1,\dots,\ x_n,\ \theta)}{\delta \theta_k} = 0
+\end{cases}\]
+Логарифм монотонный, поэтому его argmax совпадёт с argmax функции $L(x_1,\dots,\ x_n,\ \theta)$ (НАУКА!).
+\subsubsection*{Пример}
+Для Гауссовской величины $N(\theta_1,\ \theta_2^2)$:
+\[L(x_1,\dots,\ x_n,\ \theta) = \prod\limits_{i = 1}^{n} \frac{1}{\sqrt{2\pi}\sigma^2} e^{-\frac{(x - \theta^1)^2}{2\theta_2^2}} = \left( \frac{1}{\sqrt{2\pi}} \right)^n \left( \frac{1}{\theta_2} \right)^n e^{-\frac{(x - \theta_1)^2}{2\theta_2^2}}\]
+Логарифмируем:
+\[\ln L(x_1,\dots,\ x_n,\ \theta) = \ln \left( \frac{1}{\sqrt{2\pi}} \right)^n - n\ln \theta_2 - \frac{\sion (x_i - \theta_1)^2}{2\theta_2^2}\]
+Возьмём частные производные:
+\[\begin{cases}
+    \frac{\delta \ln L(x_1,\dots,\ x_n,\ \theta)}{ \delta \theta_1} = \frac{\sion (x_i - \hat{\theta}_1)}{\hat{\theta}_2^2}\\
+    \frac{\delta \ln L(x_1,\dots,\ x_n,\ \theta)}{\delta \theta_2} = -\frac{n}{\hat{\theta}_2} + \frac{\sion (x_i - \hat{\theta}_1)^2}{\hat{\theta_2}^3}
+\end{cases}\]
+Посчитаем $\theta_1,\ \theta_2$:
+\[\begin{cases}
+    \sion (x_i - \hat{\theta}_1) = 0 \Rightarrow \hat{\theta}_1 = \frac{1}{n} \sion x_i = \overline{X}\\
+    -n\hat{\theta}_2^2 + \sion (x_i - \overline{x})^2 = 0 \Rightarrow \hat{\theta}_2^2 = \frac{1}{n} \sion (x_i - \overline{x})^2
+\end{cases}\]
 \end{document}
