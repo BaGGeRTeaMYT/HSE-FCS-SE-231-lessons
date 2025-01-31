@@ -156,6 +156,7 @@ $X_1,\dots,\ X_n\sim N(m,\ \theta)\Rightarrow f(x_i,\ \theta) = \frac{1}{\sqrt{2
 $X_1,\dots,\ X_n \sim G(\theta)\Rightarrow Ex = \frac{1}{\theta}$. Проверить оценку $\hat{\theta} = \frac{1}{\overline{X}}$ на несмещённость.\\
 Хотим $E\hat{\theta} = \theta$. Попробуем по определению:
 \[E\hat{\theta} = E \frac{n}{\sum\limits_{i = 1}^{n} x_i} = n E\frac{1}{\sum\limits_{i = 1}^{n} x_i}?\]
+Для $k = 1$ 
 Попробуем решить через функцию правдободобия:
 \[L(x_1,\dots,\ x_n,\ \theta) = \prod_{i = 1}^{n} P(\xi = x_i,\ \theta) = \prod_{i = 1}^{n} (1 - \theta)^{x_i - 1}\theta \approx f(x,\ \theta)\]
 \[\ln f(x_i,\ \theta) = \ln \big( (1 - \theta)^{x_i - 1} \theta \big) = (x_i - 1)\ln (1 - \theta) + \ln \theta\]
@@ -166,11 +167,68 @@ $X_1,\dots,\ X_n \sim G(\theta)\Rightarrow Ex = \frac{1}{\theta}$. Провер�
 \subsubsection*{Задача 4}
 $X_1,\dots,\ X_n \sim Bi(k,\ \theta)$. Показать, что $\hat{\theta}  = \frac{\overline{X}}{k}$ R-эффективная.\\
 Посчитаем функцию правдободобия:
-\[L(x_1,\dots,\ x_n,\ \theta) = \prod_{i = 1}^{n} P(\xi = x_i,\ \theta) = \prod_{i = 1}^{n} C_n^k\theta^{x_i}\cdot (1 - \theta)^{k - x_i} \approx f(x_i,\ \theta)\]
+\[L(x_1,\dots,\ x_n,\ \theta) = \prod_{i = 1}^{n} P(\xi = x_i,\ \theta) = \prod_{i = 1}^{n} C_n^k\theta^{x_i}\cdot (1 - \theta)^{k - x_i} \approx f(x,\ \theta)\]
 \[\ln f(x_i,\ \theta) = \ln\frac{n!}{k!(n - k)!} + x_i \ln \theta + (k - x_i)\ln (1 - \theta)\]
 \[\frac{\delta}{\delta \theta} \ln f(x_i,\ \theta) = \frac{x_i}{\theta} + \frac{x_i - k}{1 - \theta} = \frac{x_i - \theta x_i + \theta x_i - \theta k}{\theta - \theta^2} = \frac{x_i - \theta k}{\theta - \theta^2}\]
-Применим критерий эффективности:
+\[I_1(\theta) = E \left( \frac{x_i - \theta k}{\theta - \theta^2} \right)^2 = \int\limits_{-\infty}^{+\infty} \frac{(x - \theta k)^2}{(\theta - \theta^2)^2} C_n^k \theta^{x} (1 - \theta)^{k - x}\, dx\]
+\subsubsection*{Задача 5}
 \[U(x,\ \theta) = \sum_{i = 1}^{n} \frac{x_i - \theta k}{\theta - \theta^2} = \frac{1}{\theta - \theta^2}\left(-n\theta k + \sum_{i = 1}^{n} x_i\right) = \frac{nk}{\theta - \theta^2}\left( \frac{1}{nk} \sum_{i = 1}^{n} (x_i) - \theta \right) = \frac{nk}{\theta - \theta^2} \left( \frac{\overline{X}}{k} - \theta \right)\]
-Получается, что $\frac{\overline{X}}{k}$ является R-эффективной (тут также выполнена 5 задача, так как я применил критерий эффективности в доказательстве).
-
+Получается, что $\frac{\overline{X}}{k}$ является R-эффективной
+\begin{center}
+    \bf Семинар 31 января
+\end{center}
+\subsection*{Задача 1}
+$X_1,\dots,\ X_n \sim f(x,\ \theta)$\\
+$f(x,\ \theta) = \begin{cases}
+    \frac{2}{\theta} x e^{-\frac{x^2}{\theta}},\ x \geq 0\\
+    0,\ x < 0
+\end{cases}$\\
+Решал у доски.
+\subsection*{Задача 2}
+$X_1,\dots,\ X_n \sim R(\theta_1,\ \theta_2)$, найти оценку максимального правдободобия.\\
+$f(x,\ \theta_1,\ \theta_2) = \begin{cases}
+    \frac{1}{\theta_2 - \theta_1},\ x\in (\theta_1,\ \theta_2)\\
+    0,\ \text{иначе}
+\end{cases}\\
+L(x,\ \theta_1,\ \theta_2) = \prod\limits_{i = 1}^{n} f(x_i,\ \theta) = \begin{cases}
+    \left( \frac{1}{\theta_2 - \theta_1} \right)^n,\ x_i \in (\theta_1,\ \theta_2)\\
+    0,\ \text{иначе}
+\end{cases}$\\
+Тогда $\hat{\theta}_1 = X_{(1)},\ \hat{\theta}_2 = X_{(n)}$.\\
+Попробуем по методу моментов:
+\[\begin{cases}
+    \hat{\mu}_1 = \mu_1\\
+    \hat{\mu}_2 = \mu_2 = \frac{(\theta_2 - \theta_1)^2}{12} + (\mu_1)^2
+\end{cases}\]
+Распишем эту систему:
+\[\begin{cases}
+    \frac{1}{n} \sum_{i = 1}^{n} x_i = \frac{\theta_1 + \theta_2}{2}\\
+    \frac{1}{n} \sum_{i = 1}^{n} x_i^2 = \frac{(\theta_2 - \theta_1)^2}{12} + \left( \frac{\theta_1 + \theta_2}{2} \right)^2
+\end{cases}\Rightarrow \begin{cases}
+    \frac{1}{n} \sum_{i = 1}^{N} X_i^2 = \frac{\theta_2^2 + \theta_1^2 - 2\theta_1 \theta_2}{12} + \frac{\theta_1^2 + \theta_2^2 + 2\theta_1 \theta_2}{4} = \frac{1}{3}(\theta_1^2 + \theta_2^2 + \theta_1 \theta_2)
+\end{cases}\]
+\[\begin{cases}
+    2 \hat{\mu}_1 = \theta_1 + \theta_2\\
+    3 \hat{\mu}_2 = \theta_1^2 + \theta^2_2 + \theta_1 \theta_2
+\end{cases}\]
+Если решать эту систему до конца, можно получить 
+\[\begin{cases}
+    \hat{\theta_1} = \overline{X} - \sqrt{3}S\\
+    \hat{\theta_2} = \overline{X} + \sqrt{3}S
+\end{cases}\]
+\subsection*{Задача 3}
+$X_1,\dots,\ X_n \sim G(\theta)$. Найдём оценку по методу моментов и по методу максимального правдободобия:\\
+Сначала по методу моментов:
+\[\hat{\mu}_1 = \mu_1 = \frac{1}{\theta}\Rightarrow \hat{\theta} = \frac{1}{\overline{X}}\]
+Теперь по методу максимального правдободобия:
+\[L(x,\ \theta) = \prod_{i = 1}^n P(\xi = x_i,\ \theta) = \prod_{i = 1}^n \theta(1 - \theta)^{x_i - 1} = \theta^n (1 - \theta)^{\sum_{i = 1}^{n} (x_i) - n}\]
+\[\ln L(x,\ \theta) = n \ln \theta + \left(\sum_{i = 1}^{n} (x_i) - n\right) \ln(1 - \theta)\]
+\[\frac{\delta }{ \delta \theta} L(x,\ \hat\theta) = \frac{n}{\hat\theta} - \frac{\sum_{i}^{n} (x_i) - n}{1 - \hat\theta} = 0\Rightarrow \frac{n - n\hat\theta - \hat\theta\sum_{i = 1}^{n} + n\hat\theta}{\hat\theta - \hat\theta^2} = 0 \Rightarrow\]
+\[\Rightarrow n - \hat\theta \sum_{i = 1}^{n} = 0\Rightarrow \hat\theta = \frac{n}{\sum_{i  =1}^{n}x_i} = \frac{1}{\overline{X}}\]
+\subsection*{Задача 4}
+$X_1 \sim Bi(12,\ p),\ X_2 \sim Bi(12,\ p),\ X_3 \sim Bi(15,\ p)$. По методу максимального правдободобия построим оценку $p$:
+\[L(x_1,\ x_2,\ x_3,\ p) = \prod_{i = 1}^{n} P(X_i = x_i) = P(X_1 = 5) P(X_2 = 4) P(X_3 = 4) =\]
+\[ = C^5_{12} p^5 (1 - p)^7 \cdot C^4_{12} p^4 (1 - p)^8 C^4_{15} p^4 (1 - p)^{11} = C^5_{12}\cdot C^4_{12} \cdot C^4_{15} \cdot p^{13}\cdot (1 - p)^{26}\]
+\[\ln L(x_1,\ x_2,\ x_3,\ p) = \ln (C^5_{12}\cdot C^4_{12} \cdot C^4_{15}) + 13 \ln p + 26 \ln (1 - p)\]
+\[\frac{\delta}{\delta p} L(x_1,\ x_2,\ x_3,\ p) = \frac{13}{p} - \frac{26}{1 - p}\Rightarrow \frac{13}{\hat p} - \frac{26}{1 - \hat p} = 0\Rightarrow \hat p = \frac{1}{3}\]
 \end{document}
