@@ -112,4 +112,65 @@ $\ln f(x,\ \theta) = \ln \left( \frac{1}{\sqrt{2\pi}\sigma }e^{-\frac{(x - \thet
 \frac{\delta\ln f(x,\ \theta)}{\delta\theta} = -\frac{2(x - \theta)}{2\sigma^2}\cdot (-1) = \frac{x - \theta}{\sigma^2}\\
 E\left( \frac{x - \theta}{\sigma^2} \right)^2 = \frac{1}{\sigma^4} E(x - \theta)^2 = \frac{1}{\sigma^4} \sigma^2 = \frac{1}{\sigma^2} = I_1(\theta)\\
 \dev \hat{\theta} \geq \frac{1}{nI_1(\theta)} = \frac{\sigma^2}{n} =\mathcal{D}\overline{x}$
+\begin{center}
+    Семинар 24 января
+\end{center}
+\subsection*{Задача 4 ДЗ}
+$\hat{K}_{xy} = \frac{1}{n} \sum_{i = 1}^{n} (x_i - \overline{X})(y_i - \overline{Y}) = \frac{1}{n} \sum_{i = 1}^{n} (x_i - \overline{X} + Ex_1 - Ex_1)(y_i - \overline{Y} + Ey_1 - Ey_1)$\\
+$E\hat{K}_{xy} = E\frac{1}{n} \sum_{i = 1}^{n} \left( (x_i - Ex_1) - (\overline{X} - Ex_1) \right) \left( (y_1 - Ey_1) - (\overline{Y} - Ey_1) \right) =\\
+= E\left( (x_i - Ex_1) - (\overline{X} - Ex_1) \right) \cdot \left( (y_1 - Ey_1) - (\overline{Y} - Ey_1) \right) = E\left( (x_1 - Ex_1)(y_1 - Ey_1) + (x_1 - Ex_1)(\overline{Y} - Ey_1) +\\
++(\overline{X} - Ex_1)(y_1 - Ey_1) + (\overline{X} - Ex_1)(\overline{Y} - Ey_1) \right) = \\
+=\cov(x,\ y) - \frac{1}{n}\cov(x,\ y) - \frac{1}{n}\cov(x,\ y) + \frac{1}{n}\cov(x,\ y) $
+\subsection*{Задача 5 ДЗ}
+Решал у доски, всем gl.
+\subsection*{Задача 1}
+$X_1,\dots,\ X_n \sim \Pi(\theta)$. Проверить, что оценка $\hat{\theta} = \overline{X}$ является R-эффективной.\\
+$E\hat{\theta} = E\frac{1}{n} \sum_{i = 1}^{n} x_i = Ex_1 = \theta\\
+\dev \frac{1}{n} \sum_{i = 1}^{n} x_i = \frac{1}{n}\theta\\
+P(\xi = x_1) = \frac{e^{-\theta}\theta^{x_1}}{x_1!}$. Логарифмируем:
+\[\ln \frac{e^{-\theta}\theta^{x_1}}{x_1!} = {-\theta + x_1 \ln \theta - \ln x_1!}\]
+Возьмём частную производную:
+\[\frac{\delta(-\theta + x_1 \ln \theta - \ln x_1!)}{\delta\theta} = -1 + \frac{x_1}{\theta}\]
+Возьмём матожидание квадрата этой величины:
+\[E(-1 + \frac{x_1}{\theta})^2 = \frac{1}{\theta^2} E(x_1 - \theta)^2 = \frac{\dev x_1}{\theta^2} = \frac{1}{\theta}\Rightarrow I_n(\theta) = \frac{n}{\theta}\]
+Попробуем самостоятельно подогнать оценку:\\
+$U(x,\ \theta) = \sum_{i = 1}^{n} -1 + \frac{x_1}{\theta} = \frac{1}{\theta} \sum_{i = 1}^{n} (x_i - \theta) = \frac{1}{\theta}\left(-n\theta + \sum_{i = 1}^{n} \frac{x_i}{n}\right) = \frac{n}{\theta}\left( \sum_{i = 1}^{n} \left( \frac{x_i}{n}\right) - \theta \right)\\
+\hat{\theta} - \theta = a(\theta)U(x,\ \theta)\Rightarrow a(\theta) = \frac{\theta}{n},\ \hat{\theta} = \sum_{i = 1}^{n} \frac{x_i}{n}$
+\begin{center}
+    ДЗ
+\end{center}
+\subsubsection*{Задача 1}
+$X_1,\dots,\ X_n\sim N(\theta, \sigma^2)\Rightarrow \forall i = \overline{1,\ n}\quad f(x_i,\ \theta) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x - \theta)^2}{2\sigma^2}}$\\
+\[\ln f(x_i,\ \theta) = \ln \frac{1}{\sqrt{2\pi}\sigma} - \frac{(x - \theta)^2}{2\sigma^2} = \ln \frac{1}{\sqrt{2\pi}\theta} - \frac{x^2}{2\sigma^2} + \frac{\theta x}{\sigma^2} - \frac{\theta^2}{2\sigma^2}\Rightarrow \frac{\delta}{\delta \theta} f(x_i,\ \theta) = \frac{x}{\sigma} - \frac{\theta}{\sigma^2}\]
+\[U(x,\ \theta) = \sum\limits_{i = 1}^{n}\left( \frac{x_i}{\sigma} - \frac{\theta}{\sigma^2} \right)\]
+По критерию эффективности хотим:
+\[\hat{\theta} - \theta = \alpha(x)U(x,\ \theta)\]
+Преобразуем: $U(x,\ \theta) = \left(\sum\limits_{i = 1}^{n} \frac{x_i}{\sigma}\right) - \frac{n\theta}{\sigma^2}\Rightarrow \underset{\alpha(\sigma)}{\underbrace{\frac{\sigma^2}{n}}} U(x,\ \theta) = \underset{\hat{\theta}}{\underbrace{\left(\frac{1}{n}\sum\limits_{i = 1}^{n} \sigma x_i \right)}} - \theta$
+\subsubsection*{Задача 2}
+$X_1,\dots,\ X_n\sim N(m,\ \theta)\Rightarrow f(x_i,\ \theta) = \frac{1}{\sqrt{2\pi\theta}} e^{-\frac{(x - m)^2}{2\theta}}$\\
+\[\ln f(x,\ \theta) = \ln \frac{1}{\sqrt{2\pi}} - \frac{1}{2}\ln \theta - \frac{(x - m)^2}{2\theta}\Rightarrow \frac{\delta}{\delta \theta} f(x,\ \theta) = -\frac{1}{2\theta} + \frac{(x - m)^2}{2\theta^2}\]
+Применим критерий эффективности:
+\[U(x,\ \theta) = \sum\limits_{i = 1}^{n} \left( \frac{(x - m)^2}{2\theta^2} - \frac{1}{2\theta} \right) = \sum\limits_{i = 1}^{n} \left( \frac{(x - m)^2 - \theta}{2\theta^2}\right) = \frac{1}{2\theta^2} \sum\limits_{i = 1}^{n} \big((x - m)^2 - \theta\big) = \]
+\[= \frac{1}{2\theta^2} \left( \sum\limits_{i = 1}^{n} \big((x - m)^2\big) - n\theta\right) = \frac{n}{2\theta^2} \left( \frac{1}{n} \sum\limits_{i = 1}^{n} \big((x - m)^2\big) - \theta\right)\Rightarrow \underset{\alpha(\theta)}{\underbrace{\frac{2\theta^2}{n}}} U(x,\ \theta) = \underset{\hat{\theta}}{\underbrace{\left(\frac{1}{n} \sum\limits_{i = 1}^{n} (x - m)^2\right)}} - \theta\]
+\subsubsection*{Задача 3}
+$X_1,\dots,\ X_n \sim G(\theta)\Rightarrow Ex = \frac{1}{\theta}$. Проверить оценку $\hat{\theta} = \frac{1}{\overline{X}}$ на несмещённость.\\
+Хотим $E\hat{\theta} = \theta$. Попробуем по определению:
+\[E\hat{\theta} = E \frac{n}{\sum\limits_{i = 1}^{n} x_i} = n E\frac{1}{\sum\limits_{i = 1}^{n} x_i}?\]
+Попробуем решить через функцию правдободобия:
+\[L(x_1,\dots,\ x_n,\ \theta) = \prod_{i = 1}^{n} P(\xi = x_i,\ \theta) = \prod_{i = 1}^{n} (1 - \theta)^{x_i - 1}\theta \approx f(x,\ \theta)\]
+\[\ln f(x_i,\ \theta) = \ln \big( (1 - \theta)^{x_i - 1} \theta \big) = (x_i - 1)\ln (1 - \theta) + \ln \theta\]
+\[\frac{\delta}{\delta \theta} \ln f(x,\ \theta) = \frac{1}{\theta} - \frac{x_i - 1}{1 - \theta} = \frac{1 - \theta - \theta x_i + \theta}{\theta - \theta^2} = \frac{1 - \theta x_i}{\theta - \theta^2}\]
+Применим критерий эффективности:
+\[U(x,\ \theta) = \sum_{i = 1}^{n} \frac{1 - \theta x_i}{\theta - \theta^2} = \frac{1}{\theta - \theta^2} \left( n - \theta \sum_{i = 1}^{n} x_i \right) = \frac{n}{\theta - \theta^2} \left( 1 - \frac{\theta}{n} \sum_{i = 1}^{n} \right) = \frac{n\overline{X}}{\theta - \theta^2} \left( \frac{1}{\overline{X}} - \theta \right)\]
+Значит $\frac{1}{\overline{X}}$ является R-эффективной, то есть несмещённой.
+\subsubsection*{Задача 4}
+$X_1,\dots,\ X_n \sim Bi(k,\ \theta)$. Показать, что $\hat{\theta}  = \frac{\overline{X}}{k}$ R-эффективная.\\
+Посчитаем функцию правдободобия:
+\[L(x_1,\dots,\ x_n,\ \theta) = \prod_{i = 1}^{n} P(\xi = x_i,\ \theta) = \prod_{i = 1}^{n} C_n^k\theta^{x_i}\cdot (1 - \theta)^{k - x_i} \approx f(x_i,\ \theta)\]
+\[\ln f(x_i,\ \theta) = \ln\frac{n!}{k!(n - k)!} + x_i \ln \theta + (k - x_i)\ln (1 - \theta)\]
+\[\frac{\delta}{\delta \theta} \ln f(x_i,\ \theta) = \frac{x_i}{\theta} + \frac{x_i - k}{1 - \theta} = \frac{x_i - \theta x_i + \theta x_i - \theta k}{\theta - \theta^2} = \frac{x_i - \theta k}{\theta - \theta^2}\]
+Применим критерий эффективности:
+\[U(x,\ \theta) = \sum_{i = 1}^{n} \frac{x_i - \theta k}{\theta - \theta^2} = \frac{1}{\theta - \theta^2}\left(-n\theta k + \sum_{i = 1}^{n} x_i\right) = \frac{nk}{\theta - \theta^2}\left( \frac{1}{nk} \sum_{i = 1}^{n} (x_i) - \theta \right) = \frac{nk}{\theta - \theta^2} \left( \frac{\overline{X}}{k} - \theta \right)\]
+Получается, что $\frac{\overline{X}}{k}$ является R-эффективной (тут также выполнена 5 задача, так как я применил критерий эффективности в доказательстве).
+
 \end{document}
