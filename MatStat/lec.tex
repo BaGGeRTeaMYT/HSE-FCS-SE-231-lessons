@@ -201,26 +201,36 @@ $I$ --- индикаторная функция. $I = \begin{cases}
 Рассматриваем выборку $X_1,\ldots,\ X_n \sim f(x,\ \theta),\ \theta\in \Theta \subseteq \mathbb{R}^1$. Назовём модель $(S,\ f(x,\ \theta))$ \underline{регулярной}, если она удовлетворяет следующим условиям:
 \begin{enumerate}
     \item $\forall x\in S\quad \text{функция } f(x,\ \theta) = f(x_1,\dots,\ x_n,\ \theta) > 0$ и дифференцируема по $\theta$.
-    \item $\displaystyle\frac{\delta}{\delta \theta} \int\limits_S f(x,\ \theta)\, dx = \int\limits_S \frac{\delta}{\delta \theta} f(x,\ \theta)\, dx = \frac{\delta}{\delta \theta} \int\limits_S T(x)f(x,\ \theta)\, dx = \int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx$
+    \item $\begin{cases} \displaystyle\frac{\delta}{\delta \theta} \int\limits_S f(x,\ \theta)\, dx = \int\limits_S \frac{\delta}{\delta \theta} f(x,\ \theta)\, dx\\
+        \displaystyle \frac{\delta}{\delta \theta} \int\limits_S T(x)f(x,\ \theta)\, dx = \int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx \end{cases}$
 \end{enumerate}
 Пусть $\hat{\theta} = T(x) = T(x_1,\dots,\ x_n)$ --- несмещённая оценка параметра $\theta$:
-\[\int\limits_S \frac{\delta}{\delta \theta} f(x,\ \theta)\, dx = 0,\ \text{так как не зависит от $\theta$}\]
-\[\int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx = \frac{\delta}{\delta \theta}\theta = 1\]
+\[\int\limits_S \frac{\delta}{\delta \theta} f(x,\ \theta)\, dx = \frac{\delta}{\delta \theta} \int\limits_S f(x,\ \theta)\, dx = \frac{\delta}{\delta \theta} 1 = 0\]
+\[\int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx =  \frac{\delta}{\delta \theta} \int\limits_S T(x) f(x,\ \theta) \, dx = \frac{\delta}{\delta\theta} ET(x) = \frac{\delta}{\delta \theta}\theta = 1\]
 \subsection*{Определение}
 \underline{Информацией Фишера} о параметре $\theta$, содержащейся в выборке $X_1,\dots,\ X_n$ называется величина
 \[I_n(\theta) = E\left( \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} \right)^2 = \int\limits_S\left( \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} \right)^2 f(x,\ \theta)\, dx\]
 \subsection*{Неравенство Рао-Крамера}
 Если $S,\ f(x,\ \theta)$ --- регулярная модель и $\hat{\theta}$ --- несмещённая оценка $\theta$, то 
 \[\dev (\hat{\theta}) \geq \frac{1}{I_n(\theta)}\]
-Докажем это неравенство.
-\subsubsection*{Неравенство Коши-Буняковского}
-\[\left( \int \varphi_1(x)\varphi_2(x)\, dx \right)^2 \leq \int \varphi_1^2(x)\, dx\int \varphi_2^2(x)\, dx\]
-Пользуясь этим:
-\[\int\limits_S \frac{\delta}{\delta \theta} f(x,\ \theta)\, dx = \int\limits_S \frac{\delta f(x,\ \theta)}{\delta \theta} \frac{f(x,\ \theta)}{f(x,\ \theta)}\, dx = \int\limits_S \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx = 0\]
+\textbf{Доказательство}\\
+Выпишем некоторые равенства (пригодятся в доказательстве):
+\[\int\limits_S \frac{\delta}{\delta \theta} f(x,\ \theta)\, dx = \int\limits_S \frac{\delta f(x,\ \theta)}{\delta \theta} \frac{f(x,\ \theta)}{f(x,\ \theta)}\, dx \overset{*}{=} \int\limits_S \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx = 0\]
+Пояснение $\overset{*}{=}$. Логарифм --- сложная функция. По правилу дифференцирования сложной функции:
+\[\frac{\delta \ln f(x,\ \theta)}{\delta \theta} = \frac{1}{f(x,\ \theta)} \cdot \frac{\delta f(x,\ \theta)}{\delta \theta}\]
 \[\int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx = \int\limits_S T(x) \frac{\delta}{\delta \theta} f(x,\ \theta) \frac{f(x,\ \theta)}{f(x,\ \theta)}\, dx = \int\limits_S T(x) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx = 1\]
-Применяя неравенство Коши-Бунякоского:
-\[1 = \int\limits_S \big( T(x) - \theta \big) \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} f(x,\ \theta)\, dx \leq \underset{=\dev\hat{\theta}}{\underbrace{\int\limits_S \big( T(x) - \theta \big)^2 f(x,\ \theta)\, dx}} \cdot \underset{=I_n(\theta)}{\underbrace{\int\limits_S\left( \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} \right)^2 f(x,\ \theta)\, dx}}\]
-Получили
+Чуть преобразуем последнее полученное равенство:
+\[\int\limits_S T(x) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx = \int\limits_S T(x) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx - \theta\underset{=0}{\underbrace{\int\limits_S \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx}} = \]
+\[= \int\limits_S \big( T(x) - \theta \big) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx = 1 \Rightarrow 1 = 1^2 = \left( \int\limits_S \big( T(x) - \theta \big) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx \right)^2 \]
+Далее нам понадобится неравенство Коши-Буняковского, которое выглядит так:
+\[\left( \int \varphi_1(x)\varphi_2(x)\, dx \right)^2 \leq \int \varphi_1^2(x)\, dx\int \varphi_2^2(x)\, dx\]
+Подгоним полученное равенство $\left(f(x,\ \theta) > 0 \Rightarrow f(x,\ \theta) = \sqrt{f(x,\ \theta)}^2\right)$:
+\[\left( \int\limits_S \big( T(x) - \theta \big) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx \right)^2 = \left( \int\limits_S \underset{\varphi_1(x)}{\underbrace{\big( T(x) - \theta \big) \sqrt{f(x,\ \theta)}}}\cdot\underset{\varphi_2(x)}{\underbrace{\frac{\delta \ln f(x,\ \theta)}{\delta \theta} \sqrt{f(x,\ \theta)}}}\, dx \right)^2 = 1\]
+И применим неравенство Коши-Буняковского:
+\[1 = \left( \int\limits_S \underset{\varphi_1(x)}{\underbrace{\big( T(x) - \theta \big) \sqrt{f(x,\ \theta)}}}\cdot\underset{\varphi_2(x)}{\underbrace{\frac{\delta \ln f(x,\ \theta)}{\delta \theta} \sqrt{f(x,\ \theta)}}}\, dx \right)^2 \leq\]
+\[\leq \int\limits_S \left( (T(x) - \theta)\sqrt{f(x,\ \theta)} \right)^2 \, dx \cdot \int\limits_S \left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \sqrt{f(x,\ \theta)} \right)^2 \, dx =\]
+\[= \underset{=\dev\hat{\theta}}{\underbrace{\int\limits_S \big( T(x) - \theta \big)^2 f(x,\ \theta)\, dx}} \cdot \underset{=I_n(\theta)}{\underbrace{\int\limits_S\left( \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} \right)^2 f(x,\ \theta)\, dx}}\]
+Получаем:
 \[1 \leq \dev (\theta) \cdot I_n(\theta)\Rightarrow \dev (\theta) \geq \frac{1}{I_n(\theta)}\]
 \subsection*{Определение}
 Оценка $\hat{\theta}$ называется \underline{$R$-эффективной}, если $E\hat{\theta} = \theta$ и $\dev \hat{\theta} = \frac{1}{I_n(\theta)}$
@@ -319,4 +329,85 @@ $X_1,\dots,\ X_n \sim N(\theta_1,\ \theta_2^2),\ \theta = (\theta_1,\ \theta_2^2
     \sion (x_i - \hat{\theta}_1) = 0 \Rightarrow \hat{\theta}_1 = \frac{1}{n} \sion x_i = \overline{X}\\
     -n\hat{\theta}_2^2 + \sion (x_i - \overline{x})^2 = 0 \Rightarrow \hat{\theta}_2^2 = \frac{1}{n} \sion (x_i - \overline{x})^2
 \end{cases}\]
+\begin{center}
+    \bf Лекция 31 января.
+\end{center}
+\subsection*{Робастные оценки}
+От слова robust.\\
+\subsection*{Определение}
+Пусть оценка $\hat{\theta}_n$ построена по выборке $X_1,\dots,\ X_n$. Затем добавлено наблюдение $x$ и построена оценка $\hat{\theta}_{n + 1}$, тогда \underline{кривой чувствительности}, изучающей влияние наблюдения $x$ на оценку $\hat{\theta}$ называется функция:
+\[S C_n (x) = \frac{\hat{\theta}_{n + 1} - \hat{\theta}_n}{\frac{1}{n + 1}} = (n + 1)\left( \hat{\theta}_{n + 1} - \hat{\theta}_n \right)\]
+\subsection*{Определение}
+Оценка $\hat{\theta}$ называется $B$-робастной, если $SC_n(x)$ ограничена.
+\subsubsection*{Пример}
+Пусть $\hat{\theta} = \overline{X}$
+\[SC_n(x) = (n + 1)\left( \frac{1}{n + 1} \left( \sion (x_i) + x \right) - \frac{1}{n} \sion x_i \right) = \sion x_i + x - \left( \sion x_i + \frac{1}{n} \sion x_i \right) = x - \overline{X}\]
+Это линейная функция от $x$, то есть кривая чувствительности неограничена.\\
+Пусть $\hat{\theta} = \hat{\mu}$ (выборочная медиана)
+\[\hat{\mu} = \begin{cases}
+    X_{(k + 1)},\ n = 2k + 1\\
+    \frac{X_{(k)} + X_{(k + 1)}}{2},\ n = 2k
+\end{cases}\]
+\subsubsection*{Определение}
+Пороговой точкой (BP) $\varepsilon^*_n$ оценки $\hat{\theta}$, построенной на выборке $X_1,\dots,\ X_n$ называется:
+\[\varepsilon^*_n = \frac{1}{n} \max\left\{ m:\ \max_{i_1,\dots,\ i_m} \sup_{y_1,\dots,\ y_m} |\hat{\theta} (z_1,\dots,\ z_m)| < \infty \right\}\]
+Где выборка $z_1,\dots,\ z_m$ получена заменой значений $X_{i_1},\dots,\ X_{i_m}$ на произвольные значения $y_1,\dots,\ y_m$
+\subsection*{Доверительные интервалы}
+\subsection*{Определение}
+Пусть для $X_1,\dots,\ X_n \sim F(x,\ \theta),\ \theta \subset \Theta \subset \mathbb{R}^1$ построены статистики $T_1(x_1,\dots,\ x_n)$ и $T_2(x_1,\dots,\ x_n)$, такие что
+\[\begin{cases}
+T_1(x) < T_2(x)\\
+P\big( T_1(x) < \theta < T_2(x)\big) = 1 - \alpha,\ 0 < \alpha < 1
+\end{cases}\]
+Тогда интервал $\big( T_1(x),\ T_2(x) \big)$ называется доверительным интервалом уровня надёжности (доверия) $1 - \alpha$ параметра $\theta$.
+\subsection*{Определение}
+Случайная функция $G(x_1,\dots,\ x_n,\ \theta) = G(x,\ \theta)$ называется центральной (опорной) статистикой, если 
+\begin{enumerate}
+    \item $G(x,\ \theta)$ непрерывна и монотонна по $\theta$
+    \item $F_G(x)$ не зависит от $\theta$
+\end{enumerate}
+Односторонние доверительные интервалы:
+\[P\big( G(x,\ \theta) < Z_{1 - \alpha} \big) = 1 - \alpha\]
+\[P\big( Z_{\alpha} < G(x,\ \theta) \big) = 1 - \alpha\]
+Квантили не зависят от $\theta$, с их помощью можно выразить односторонние доверительные интервалы.\\
+Центральным доверительным интервалом будет:
+\[P\big( Z_{\frac{\alpha}{2}} < G(x,\ \theta) < Z_{1 - \frac{\alpha}{2}} \big) = 1 - \alpha\]
+\subsection*{Определение}
+Пусть случайные величины $\xi_1,\dots,\ \xi_m \sim N(0,\ 1)$ и независимы.\\
+Тогда случайная величина $\eta = \sum\limits_{i = 1}^{m} \xi_i^2 \sim \chi^2 (m)$ (удовлетворяет распределению хи-квадрат ($\chi^2$) с $m$ степенями свободы).
+\subsection*{Определение}
+Пусть $\xi_0,\ \xi_1,\dots,\ \xi_m \sim N(0,\ 1)$ и независимы.\\
+Тогда случайная величина $\zeta = \frac{\xi_0}{\sqrt{\frac{1}{m} \sum_{i = 1}^{m} \xi_i^2}} \sim t(m)$ (распределение Стьюдента с $m$ степенями свободы)
+\subsection*{Определение}
+Пусть случайная величина $\xi_1 \sim \chi^2(m),\ \xi_2 \sim \chi^2(n)$ и $\xi_1$ и $\xi_2$ --- независимы. Тогда случайная величина $F = \frac{\frac{1}{m} \xi_1}{\frac{1}{n} \xi_2} \sim F(m,\ n)$ (распредление Фишера со степенями свободы $n,\ m$)
+\subsection*{Теорема Фишера}
+Пусть $X_1,\dots,\ X_n$ порождены случайной величиной $X \sim N(m,\ \sigma^2)$, тогда:
+\begin{enumerate}
+    \item $\frac{nS^2}{\sigma^2} = \sion \left( \frac{x_i - \overline{x}}{\sigma} \right)^2 \sim \chi^2(n - 1)$ (так как мы знаем $\overline{X}$, и все наблюдения, а по $n - 1$ наблюдению и $\overline{X}$ можно восстановить последнее наблюдение)
+    \item $\overline{X}$ и $S^2$ --- независимые случайные величины.
+\end{enumerate}
+\subsection*{Пример 1}
+$X_1,\dots,\ X_n \sim N(\theta,\ \sigma^2),\ \sigma^2$ --- известно. Построить доверительный инртервал для $\theta$
+\[\hat{\theta} = \overline{X} \sim N(\theta,\ \frac{\sigma^2}{n})\]
+\[ \frac{\sqrt{n} (\overline{X} - \theta)}{\sigma} \sim N(0,\ 1) \]
+\[P\left( Z_{\frac{\alpha}{2}} < \frac{\sqrt{n} (\overline{X} - \theta)}{\sigma} < Z_{1 - \frac{\alpha}{2}} \right) = 1 - \alpha\]
+Поскольку по середине стоит стандартное гауссовское распределение: $Z_{\frac{\alpha}{2}} = -Z_{1 - \frac{\alpha}{2}}$ 
+\[P\left( -\frac{Z_{1 - \frac{\alpha}{2}}\sigma}{\sqrt{n}} - \overline{X} < -\theta < \frac{Z_{1 - \frac{\alpha}{2}} \sigma}{\sqrt{n}} - \overline{X} \right) = 1 - \alpha\]
+\[P\left( \overline{X} - \frac{Z_{1 - \frac{\alpha}{2}}\sigma}{\sqrt{n}}  < \theta < \overline{X} + \frac{Z_{1 - \frac{\alpha}{2}} \sigma}{\sqrt{n}} \right) = 1 - \alpha\]
+Итак, доверительный интервал: $\left( \overline{X} - \frac{Z_{1 - \frac{\alpha}{2}}\sigma}{\sqrt{n}},\ \overline{X} + \frac{Z_{1 - \frac{\alpha}{2}}\sigma}{\sqrt{n}}\right)$
+\subsection*{Пример 2}
+$X_1,\dots,\ X_n \sim N(m,\ \theta_2^2)$. Построить доверительный интервал для $\theta_2^2$
+\[\sum_{i = 1}^n \left( \frac{x_i - m}{\theta_2} \right)^2 \sim \chi^2(n)\]
+\[P\left(\chi^2_{n,\ \frac{\alpha}{2}} < \frac{\sion (x_i - m)^2}{\theta_2^2} < \chi^2_{n,\ 1 - \frac{\alpha}{2}}\right) = 1 - \alpha \]
+\[P\left( \frac{\sion (x_i - m)^2}{\chi^2_{n,\ 1 - \frac{\alpha}{2}}} < \theta_2^2 < \frac{\sion (x_i - m)^2}{\chi^2_{n,\ \frac{\alpha}{2}}} \right) = 1 - \alpha\]
+Здесь $\chi^2_{n,\ \alpha}$ --- квантиль уровня $\alpha$ распределения $\chi^2(n)$
+\subsection*{Пример 3}
+Если нам неизвестны оба параметра $N(\theta_1,\ \theta_2^2)$. Заменяем $m$ на $\overline{X}$:
+Доверительный интервал для $\theta_2$:
+\[P\left( \frac{\sion (x_i - \overline{X})^2}{\chi^2_{n,\ 1 - \frac{\alpha}{2}}} < \theta_2^2 < \frac{\sion (x_i - \overline{X})^2}{\chi^2_{n,\ \frac{\alpha}{2}}} \right) = 1 - \alpha\]
+Доверительный интервал для $\theta_1$:
+\[\frac{\sqrt{n} \left(\frac{\overline{X} - \theta}{\sigma}\right)}{ \sqrt {\frac{1}{n - 1} \sum\left(\frac{(x_i - \overline{X})}{\sigma} \right)^2}} = \frac{\sqrt{n} (\overline{X} - \theta_1)}{\tilde{S}} \sim t(n - 1)\]
+Обозначим $t_{n,\ \alpha}$ квантиль уровня $\alpha$ распределения $t(n)$, заметим, что $t_{n,\ 1 - \alpha} = t_{n,\ 1 - \frac{\alpha}{2}}$
+\[P(t_{n,\ 1 - \frac{\alpha}{2}} < \frac{\sqrt{n}(\overline{X} - \theta_1)}{\tilde{S}} < t_{n,\ \frac{\alpha}{2}} ) = 1 - \alpha\]
+\[P(\overline{X} - \frac{\tilde{S}\cdot t_{n,\ 1 - \frac{\alpha}{2}}}{\sqrt{n}} < \theta_1 < \overline{X} + \frac{\tilde{S}\cdot t_{n,\ 1 - \frac{\alpha}{2}}}{\sqrt{n}} ) = 1 - \alpha\]
 \end{document}
