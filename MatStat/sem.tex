@@ -17,8 +17,8 @@
 \usepackage{tikz}
 \usepackage{cancel}
 
-\usepackage{fontspec}
-\setmainfont{Times New Roman}
+% \usepackage{fontspec}
+% \setmainfont{Times New Roman}
 
 \title{Математическая статистика.}
 \author{Андрей Тищенко \href{https://t.me/AndrewTGk}{@AndrewTGk}}
@@ -157,7 +157,7 @@ $X_1,\dots,\ X_n \sim G(\theta)\Rightarrow Ex = \frac{1}{\theta}$. Провер�
 Хотим $E\hat{\theta} = \theta$. Попробуем по определению:
 \[E\hat{\theta} = E \frac{n}{\sum\limits_{i = 1}^{n} x_i} = n E\frac{1}{\sum\limits_{i = 1}^{n} x_i}?\]
 Для $k = 1$ 
-Попробуем решить через функцию правдободобия:
+Попробуем решить через функцию правдоподобия:
 \[L(x_1,\dots,\ x_n,\ \theta) = \prod_{i = 1}^{n} P(\xi = x_i,\ \theta) = \prod_{i = 1}^{n} (1 - \theta)^{x_i - 1}\theta \approx f(x,\ \theta)\]
 \[\ln f(x_i,\ \theta) = \ln \big( (1 - \theta)^{x_i - 1} \theta \big) = (x_i - 1)\ln (1 - \theta) + \ln \theta\]
 \[\frac{\delta}{\delta \theta} \ln f(x,\ \theta) = \frac{1}{\theta} - \frac{x_i - 1}{1 - \theta} = \frac{1 - \theta - \theta x_i + \theta}{\theta - \theta^2} = \frac{1 - \theta x_i}{\theta - \theta^2}\]
@@ -166,7 +166,7 @@ $X_1,\dots,\ X_n \sim G(\theta)\Rightarrow Ex = \frac{1}{\theta}$. Провер�
 Значит $\frac{1}{\overline{X}}$ является R-эффективной, то есть несмещённой.
 \subsubsection*{Задача 4}
 $X_1,\dots,\ X_n \sim Bi(k,\ \theta)$. Показать, что $\hat{\theta}  = \frac{\overline{X}}{k}$ R-эффективная.\\
-Посчитаем функцию правдободобия:
+Посчитаем функцию правдоподобия:
 \[L(x_1,\dots,\ x_n,\ \theta) = \prod_{i = 1}^{n} P(\xi = x_i,\ \theta) = \prod_{i = 1}^{n} C_n^k\theta^{x_i}\cdot (1 - \theta)^{k - x_i} \approx f(x,\ \theta)\]
 \[\ln f(x_i,\ \theta) = \ln\frac{n!}{k!(n - k)!} + x_i \ln \theta + (k - x_i)\ln (1 - \theta)\]
 \[\frac{\delta}{\delta \theta} \ln f(x_i,\ \theta) = \frac{x_i}{\theta} + \frac{x_i - k}{1 - \theta} = \frac{x_i - \theta x_i + \theta x_i - \theta k}{\theta - \theta^2} = \frac{x_i - \theta k}{\theta - \theta^2}\]
@@ -185,7 +185,7 @@ $f(x,\ \theta) = \begin{cases}
 \end{cases}$\\
 Решал у доски.
 \subsection*{Задача 2}
-$X_1,\dots,\ X_n \sim R(\theta_1,\ \theta_2)$, найти оценку максимального правдободобия.\\
+$X_1,\dots,\ X_n \sim R(\theta_1,\ \theta_2)$, найти оценку максимального правдоподобия.\\
 $f(x,\ \theta_1,\ \theta_2) = \begin{cases}
     \frac{1}{\theta_2 - \theta_1},\ x\in (\theta_1,\ \theta_2)\\
     0,\ \text{иначе}
@@ -217,18 +217,220 @@ L(x,\ \theta_1,\ \theta_2) = \prod\limits_{i = 1}^{n} f(x_i,\ \theta) = \begin{c
     \hat{\theta_2} = \overline{X} + \sqrt{3}S
 \end{cases}\]
 \subsection*{Задача 3}
-$X_1,\dots,\ X_n \sim G(\theta)$. Найдём оценку по методу моментов и по методу максимального правдободобия:\\
+$X_1,\dots,\ X_n \sim G(\theta)$. Найдём оценку по методу моментов и по методу максимального правдоподобия:\\
 Сначала по методу моментов:
 \[\hat{\mu}_1 = \mu_1 = \frac{1}{\theta}\Rightarrow \hat{\theta} = \frac{1}{\overline{X}}\]
-Теперь по методу максимального правдободобия:
+Теперь по методу максимального правдоподобия:
 \[L(x,\ \theta) = \prod_{i = 1}^n P(\xi = x_i,\ \theta) = \prod_{i = 1}^n \theta(1 - \theta)^{x_i - 1} = \theta^n (1 - \theta)^{\sum_{i = 1}^{n} (x_i) - n}\]
 \[\ln L(x,\ \theta) = n \ln \theta + \left(\sum_{i = 1}^{n} (x_i) - n\right) \ln(1 - \theta)\]
 \[\frac{\delta }{ \delta \theta} L(x,\ \hat\theta) = \frac{n}{\hat\theta} - \frac{\sum_{i}^{n} (x_i) - n}{1 - \hat\theta} = 0\Rightarrow \frac{n - n\hat\theta - \hat\theta\sum_{i = 1}^{n} + n\hat\theta}{\hat\theta - \hat\theta^2} = 0 \Rightarrow\]
 \[\Rightarrow n - \hat\theta \sum_{i = 1}^{n} = 0\Rightarrow \hat\theta = \frac{n}{\sum_{i  =1}^{n}x_i} = \frac{1}{\overline{X}}\]
 \subsection*{Задача 4}
-$X_1 \sim Bi(12,\ p),\ X_2 \sim Bi(12,\ p),\ X_3 \sim Bi(15,\ p)$. По методу максимального правдободобия построим оценку $p$:
+$X_1 \sim Bi(12,\ p),\ X_2 \sim Bi(12,\ p),\ X_3 \sim Bi(15,\ p)$. По методу максимального правдоподобия построим оценку $p$:
 \[L(x_1,\ x_2,\ x_3,\ p) = \prod_{i = 1}^{n} P(X_i = x_i) = P(X_1 = 5) P(X_2 = 4) P(X_3 = 4) =\]
 \[ = C^5_{12} p^5 (1 - p)^7 \cdot C^4_{12} p^4 (1 - p)^8 C^4_{15} p^4 (1 - p)^{11} = C^5_{12}\cdot C^4_{12} \cdot C^4_{15} \cdot p^{13}\cdot (1 - p)^{26}\]
 \[\ln L(x_1,\ x_2,\ x_3,\ p) = \ln (C^5_{12}\cdot C^4_{12} \cdot C^4_{15}) + 13 \ln p + 26 \ln (1 - p)\]
 \[\frac{\delta}{\delta p} L(x_1,\ x_2,\ x_3,\ p) = \frac{13}{p} - \frac{26}{1 - p}\Rightarrow \frac{13}{\hat p} - \frac{26}{1 - \hat p} = 0\Rightarrow \hat p = \frac{1}{3}\]
+
+\begin{center}
+    \bf ДЗ к семинару 7 января
+\end{center}
+
+\subsection*{Задача из учебника №14 стр. 203}
+Пусть $Z_n = (X_1,\dots,\ X_n)$ --- выборка, соответствующая биномиальному распределению $Bi(10,\ \theta)$. Оценить неизвестный параметр $\theta$ методом максимального правдоподобия.\\
+
+Построим функцию правдоподобия для вектора $(X_1,\dots,\ X_n)$:
+\[L(x_1,\dots,\ x_n,\ \theta) = \prod_{i = 1}^{n} P(X_i = x_i) = \prod_{i = 1}^{n} C_n^{x_i} \cdot \theta^{x_i}(1 - \theta)^{n - x_i}\]
+Логарифмируем и дифференцируем по $\theta$ полученное произведение:
+\begin{equation*}
+    \begin{aligned}
+        \frac{\delta}{\delta \theta}\ln L(x_1,\dots,\ x_n,\ \theta) &= \frac{\delta}{\delta \theta}\ln\left(\prod_{i = 1}^{n} C_n^{x_i} \cdot \theta^{x_i}(1 - \theta)^{n - x_i} \right)  = \frac{\delta}{\delta \theta}\sum_{i = 1}^{n} \Big(\ln \big( C_n^{x_i} \cdot \theta^{x_i}(1 - \theta)^{n - x_i} \big)\Big) =\\
+        &=\frac{\delta}{\delta \theta}\sum_{i = 1}^{n} \left(\ln C_{n}^{x_i}\right) + \frac{\delta}{\delta \theta}\sum_{i = 1}^{n} (x_i\ln \theta) + \frac{\delta}{\delta \theta}\sum_{i = 1}^{n} \big( (n - x_i) \ln(1 - \theta)\big) =\\
+        &=0 + \frac{\delta}{\delta \theta}\ln\theta \sum_{i = 1}^{n} x_i + \frac{\delta}{\delta \theta}\ln(1 - \theta) \sum_{i = 1}^{n} (n - x_i) = \frac{1}{\theta} \sum_{i =1}^{n} x_i - \frac{1}{1 - \theta} \sum_{i = 1}^{n} (n - x_i) =\\
+        &=\frac{1}{\theta}\sum_{i = 1}^{n} x_i - \frac{n^2}{1 - \theta} + \frac{1}{1 - \theta}\sum_{i = 1}^{n} x_i = \frac{(1 - \theta)n\overline{x} - \theta n^2 + \theta n\overline{x}}{\theta - \theta^2} =\\
+        &=\frac{n\overline{x} - \theta n\overline{x} - \theta n^2 + \theta n\overline{x}}{\theta - \theta^2} = \frac{n\overline{x} - \theta n^2}{\theta - \theta^2} = n\frac{\overline{x} - \theta n}{\theta - \theta^2}
+    \end{aligned}
+\end{equation*}
+Полученную производную стоит приравнять к 0 для поиска точки экстремума. Стоит заметить, что случаи $\theta = 0$ или $\theta = 1$ интереса не представляют и количество испытаний ненулевое, иначе оценивание параметра бессмысленно, поэтому достаточно приравнять к нулю только числитель:
+\begin{equation*}
+    n\frac{\overline{x} - \hat\theta n}{\hat\theta - \hat\theta^2} =  0 \Rightarrow \overline{x} - \hat\theta n = 0\Rightarrow \hat\theta n = \overline{x}\Rightarrow \hat\theta = \frac{\overline{x}}{n}
+\end{equation*}
+
+\textbf{Ответ:} ОМП для $\theta$ является $\frac{\overline{x}}{n}$.
+\subsection*{Задача 2}
+Выборка $X_1,\dots,\ X_n$ порождена случайной величиной $\xi$ с плотностью распределения
+\[f_{\xi}(x,\ \theta) = \frac{1}{2} \exp(-|x - \theta|)\]
+Построим оценки параметра $\theta$ по методу максимального правдоподобия и по методу моментов.
+\subsubsection*{Метод максимального правдоподобия}
+Построим функцию правдоподобия:
+\begin{equation*}
+    \begin{aligned}
+        L(x_1,\dots,\ x_n,\ \theta) &= \prod_{i = 1}^{n} f_{\xi}(x_i,\ \theta) = \prod_{i = 1}^{n} \frac{1}{2} \exp\left(-|x_i - \theta|\right) = \frac{1}{2^n} \exp\left(-\sum_{i = 1}^{n}|x_i - \theta|\right)
+    \end{aligned}
+\end{equation*}
+Логарифмируем и продифференцируем по $\theta$:
+\begin{equation*}
+    \begin{aligned}
+        \frac{\delta}{\delta \theta} \ln L(x_1,\dots,\ x_n,\ \theta) &= \frac{\delta}{\delta \theta} \ln \frac{1}{2^n} \exp\left(-\sum_{i = 1}^{n}|x_i - \theta|\right) = \frac{\delta}{\delta \theta} \ln \frac{1}{2^n} - \frac{\delta}{\delta \theta} \sum_{i = 1}^{n}|x_i - \theta| = \\
+        &= -\frac{\delta}{\delta \theta} \sum_{i = 1}^{n}|x_i -\theta| = -\sum_{i = 1}^{n} \frac{\delta}{\delta \theta} |x_i - \theta| = -\sum_{i = 1}^{n} g(x_i,\ \theta)
+    \end{aligned}
+\end{equation*}
+Где $g(x,\ \theta) = \begin{cases}
+    -1, & x > \theta\\
+    0, & x = \theta\\
+    1, & x < \theta
+\end{cases}$, (производная модуля).\\
+Приравняем производную к нулю:
+\begin{equation*}
+    -\sum_{i = 1}^{n} g(x_i,\ \theta) = 0\Rightarrow \sum_{i = 1}^{n} g(x_i,\ \theta) = 0
+\end{equation*}
+Пусть $\begin{cases}
+
+    G_{\theta} = \{x\ |\ x\in (x_1,\dots,\ x_n) \wedge x > \theta\}\\
+    E_{\theta} = \{x\ |\ x\in (x_1,\dots,\ x_n) \wedge x = \theta\}\\
+    L_{\theta} = \{x\ |\ x\in (x_1,\dots,\ x_n) \wedge x < \theta\}
+\end{cases}$, тогда
+\[\begin{cases}
+    \forall x\in G_{\theta}\quad g(x,\ \theta) = -1\\
+    \forall x\in E_{\theta}\quad g(x,\ \theta) = 0\\
+    \forall x\in L_{\theta}\quad g(x,\ \theta) = 1\\
+\end{cases}\Rightarrow \sum_{i = 1}^{n} g(x_i,\ \theta) = (-1)\cdot|G_{\theta}| + 0\cdot|E_{\theta}| + 1\cdot |L_{\theta}|\]
+Преобразуем:
+\begin{equation*}
+    -|G_{\theta}| + 0|E_{\theta}| + |L_{\theta}| = 0\Rightarrow |G_{\theta}| = |L_{\theta}|
+\end{equation*}
+То есть количество элементов больше параметра $\theta$ в выборке должно совпадать с количеством элементов меньше параметра $\theta$.\\
+
+Получается $\hat \theta = \begin{cases}
+    x_{(\lfloor n/2 \rfloor)}, & n\underset{2}{\equiv} 1\\
+    \frac{x_{(n/2)} + x_{(n/2 + 1)}}{2}, & n\underset{2}{\equiv} 0
+\end{cases}$
+\subsubsection*{Метод моментов}
+Напишем систему уравнений для моментов (поскольку неизвестный параметр $\theta$ единственный, должно хватить одного уравнения):
+\begin{equation*}
+        \hat\mu_1 = \mu_1(\theta)\Rightarrow \frac{1}{n} \sum_{i = 1}^{n} x_i = E\xi
+\end{equation*}
+Посчитаем математическое ожидание случайной величины $\xi$:
+\begin{equation*}
+    \begin{aligned}
+        E\xi &= \int\limits_{-\infty}^{+\infty} x f_{\xi}(x,\ \theta)\, dx = \int\limits_{-\infty}^{+\infty} x \frac{1}{2}\exp\left( -|x - \theta|\right)\, dx = \left< \begin{aligned}
+            a &= x - \theta\\
+            da &= dx
+        \end{aligned}  \right> = \\
+        &= \frac{1}{2}\int\limits_{-\infty}^{+\infty} (a + \theta)\exp(-|a|)\, da = \frac{1}{2} \underset{=0}{\underbrace{\int\limits_{-\infty}^{+\infty}a\exp(-|a|)\, da}} + \frac{\theta}{2}\int\limits_{-\infty}^{+\infty} e^{-|a|}\, da =\\
+        &= \theta \int\limits_{0}^{+\infty} e^{-a}\, da = -\theta \int\limits_0^{+\infty} e^{-a}\, d(-a) = -\theta e^{-a}\Big|_0^{+\infty} = -\theta (0 - 1) = \theta
+    \end{aligned}
+\end{equation*}
+Итак, получаем уравнение:
+\begin{equation*}
+    \overline{X} = \theta
+\end{equation*}
+Его даже решать не надо, получаем $\hat\theta = \overline{X}$.\\
+
+\textbf{Ответ:}\\
+По методу максимального правдоподобия: $\hat \theta = \begin{cases}
+    x_{(\lfloor n/2 \rfloor)}, & n\underset{2}{\equiv} 1\\
+    \frac{x_{(n/2)} + x_{(n/2 + 1)}}{2}, & n\underset{2}{\equiv} 0
+\end{cases}$\\
+По методу моментов: $\hat \theta = \overline{X}$
+\subsection*{Задача 3}
+Выборка $X_1,\dots,\ X_n \sim \Pi(\theta)\Rightarrow \forall i\quad \begin{cases}
+    P(X_i = k) = \frac{e^{-\theta} \theta^k}{k!}\\
+    EX_i = \theta
+\end{cases}$. Построим оценки ММ и МП для $\theta$
+\subsubsection*{Метод моментов}
+Снова неизвестный параметр только один, поэтому достаточно одного уравнения:
+\begin{equation*}
+    \frac{1}{n} \sum_{i = 1}^{n} x_i = \theta\Rightarrow \hat \theta = \overline{X}
+\end{equation*}
+\subsubsection*{Метод максимального правдоподобия}
+Функция правдоподобия:
+\begin{equation*}
+    L(x_1,\dots,\ x_n,\ \theta) = \prod_{i = 1}^{n} \frac{e^{-\theta} \theta^{x_i}}{x_i!} = e^{-n\theta} \prod_{i = 1}^{n} \frac{\theta^{x_i}}{x_i!}
+\end{equation*}
+Логарифм:
+\begin{equation*}
+    \ln L(x_1,\dots,\ x_n,\ \theta) = -n\theta + \sum_{i = 1}^{n} (x_i\ln \theta - \ln x_i!) = -n\theta + n\overline{X}\ln\theta  - \sum_{i = 1}^{n} \ln x_i!
+\end{equation*}
+Производная по $\theta$
+\begin{equation*}
+    \frac{\delta}{\delta \theta} L(x_1,\dots,\ x_n,\ \theta) = -n + \frac{n\overline{X}}{\theta}
+\end{equation*}
+Приравняем к нулю:
+\begin{equation*}
+    -n + \frac{n\overline{X}}{\hat\theta} = 0 \Rightarrow \hat\theta = \overline{X}
+\end{equation*}
+
+\textbf{Ответ:} оценки МП и ММ равны $\overline{X}$
+\subsection*{Задача 4}
+Ученик и тренер стреляют в цель до первого попадания (геометрическое распределение). Известно, что тренер попадает в цель с вероятностью в два раза большей, чем ученик. В ходе соревнования тренер попал в цель при втором выстреле, а ученик --- при пятом. Построить ОМП для вероятности попадания учеником в цель при единичном выстреле.\\
+
+Пусть $\xi$ --- количество выстрелов, необходимых тренеру для попадания. Знаем $\xi \sim G(\theta_1)$.\\
+Пусть $\eta$ --- количество выстрелов, необходимых ученику для попадания. Знаем $\eta \sim G(\theta_2)$.\\
+Также знаем, что $\theta_1 = 2\theta_2$.\\
+(Неоднородная выборка???) $(\xi,\ \eta)$ получила реализацию $(x_1,\ x_2) = (2,\ 5)$. Нужно построить оценку максимального правдоподобия для параметра $\theta_2$.\\
+
+Функция правдоподобия:
+\begin{equation*}
+    L(x_1,\ x_2,\ \theta_1,\ \theta_2) = P(\xi = 2)\cdot P(\eta = 5) = (1 - \theta_1)\cdot \theta_1 \cdot (1 - \theta_2)^4 \cdot \theta_2 = 2(1 - 2\theta_2)\cdot(1 - \theta_2)^4\cdot\theta_2^2
+\end{equation*}
+Логарифмируем:
+\begin{equation*}
+    \ln L(x_1,\ x_2,\ \theta_1,\ \theta_2) = \ln 2 + \ln(1 - 2\theta_2) + 4\ln(1 - \theta_2) + 2\ln \theta_2
+\end{equation*}
+Продифференцируем:
+\begin{equation*}
+    \begin{aligned}
+        \frac{\delta}{\delta \theta_2} \ln L(x_1,\ x_2,\ \theta_1,\ \theta_2) &= -\frac{2}{1 - 2\theta_2} - \frac{4}{1 - \theta_2} + \frac{2}{\theta_2} = \frac{2(1 - 2\theta_2)(1 - \theta_2) - 4\theta_2 \cdot(1 - 2\theta_2)  -2\theta_2\cdot(1 - \theta_2)}{(\theta_2 - 2\theta^2_2)(1 - \theta_2)} = \\
+        &= \frac{2(1 - 3\theta_2 + 2\theta_2^2) - 4(\theta_2 - 2\theta_2^2) - 2(\theta_2 - \theta_2^2)}{\theta_2 - 3\theta_2^2 + 2\theta_2^3} = \frac{2 - 6\theta_2 + 4\theta_2^2 - 4\theta_2 + 8\theta_2^2 - 2\theta_2 + 2\theta_2^2}{\theta_2 - 3\theta_2^2 + 2\theta_2^3} =\\
+        &= \frac{14\theta_2^2 - 12\theta_2 + 2}{2\theta_2^3 - 3\theta_2^2 + \theta_2}
+    \end{aligned}
+\end{equation*}
+Приравняем к нулю:
+\begin{equation*}
+    \begin{aligned}
+        \frac{14\hat\theta_2^2 - 12\hat\theta_2 + 2}{2\hat\theta_2^3 - 3\hat\theta_2^2 + \hat\theta_2} = 0 \Rightarrow {14\hat\theta_2^2 - 12\hat\theta_2 + 2} = 0 \Rightarrow 7\hat\theta_2^2 - 6\hat\theta_2 + 1 = 0 \Rightarrow \mathcal{D}' = 9 - 7 = 2\Rightarrow \left[\begin{gathered}
+            \begin{aligned}
+                \hat\theta_2 &= \frac{3 + \sqrt{2}}{7} \Rightarrow \theta_1 > 1\\
+                \hat\theta_2 &= \frac{3 - \sqrt{2}}{7}
+            \end{aligned}
+        \end{gathered}\right.
+    \end{aligned}
+\end{equation*}
+\textbf{Ответ:} $\hat \theta_2 = \frac{3 - \sqrt{2}}{7} \approx 0.22654$
+\subsection*{Задача 5}
+Выборка $X_1,\dots,\ X_n$ порождена случаной величиной $X$ с плотностью распределения:
+\[f(x,\ \theta) = \begin{cases}
+    \frac{1}{\theta}x^{\frac{1 - \theta}{\theta}}, & x\in (0,\ 1)\\
+    0,\ & x\notin (0,\ 1)
+\end{cases}\]
+
+Построим оценку максимального правдоподобия для параметра $\theta$ и исследуем его на несмещённость.\\
+Построим функцию правдоподобия:
+\begin{equation*}
+    L(x_1,\dots,\ x_n,\ \theta) = \prod_{i = 1}^{n} f(x_i,\ \theta) = \theta^{-n} \prod_{i = 1}^{n} x_i^{\frac{1 - \theta}{\theta}}
+\end{equation*}
+Логарифмируем функцию правдоподобия:
+\begin{equation*}
+    \ln L(x_1,\dots,\ x_n,\ \theta) = \sum_{i = 1}^{n} \left(\frac{1 - \theta}{\theta} \ln x_i\right) -n\ln \theta = \frac{1}{\theta} \sum_{i = 1}^{n} (\ln x_i) - \sum_{i = 1}^{n} (\ln x_i) - n \ln \theta
+\end{equation*}
+Продифференцируем логарифм по $\theta$:
+\begin{equation*}
+    \frac{\delta}{\delta \theta} L(x_1,\dots,\ x_n,\ \theta) = - \frac{n}{\theta} - \frac{1}{\theta_2} \sum_{i = 1}^{n} \ln x_i = \dfrac{-n\theta - \sum\limits_{i = 1}^{n} \ln x_i}{\theta^2}
+\end{equation*}
+Приравняем к нулю:
+\begin{equation*}
+    -n\hat\theta - \sum_{i = 1}^{n} \ln x_i = 0\Rightarrow \hat\theta = - \frac{1}{n} \sum_{i = 1}^{n} \ln x_i
+\end{equation*}
+Проверим на несмещённость:
+\begin{equation*}
+    \begin{aligned}
+        E\hat\theta &= -E\ln x_1 = -\int\limits_0^1\ln (x) \cdot \frac{1}{\theta}x^{\frac{1 - \theta}{\theta}}\, dx = \left<\begin{aligned}
+            a &= x^{\frac{1}{\theta}},\ \frac{d}{dx} x^{\frac{1}{\theta}} = \frac{1}{\theta} x^{\frac{1}{\theta} - 1}\\
+            da &= \frac{1}{\theta}x^{\frac{1 - \theta}{\theta}}dx,\ x = a^{\theta}\\
+        \end{aligned}  \right> = -\int\limits_{0^{\frac{1}{\theta}}}^{1^{\frac{1}{\theta}}} \ln(a^{\theta})\, da =\\
+        &= -\theta \int\limits_0^1 \ln (a)\, da = -\theta \left( a\ln a - a \right)\Big|_0^1 = \theta
+    \end{aligned}
+\end{equation*}
+Несмещённая.
 \end{document}
