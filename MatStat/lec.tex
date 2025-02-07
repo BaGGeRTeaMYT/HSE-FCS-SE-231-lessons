@@ -282,21 +282,21 @@ $X_1,\dots,\ X_n\sim F_{\xi}(x,\ \theta),\ \theta \in \Theta\subset R^k$
 Тогда можно получить систему уравнений:
 \begin{equation}
     \begin{cases}
-        \hat{\mu_1} = \mu_1(\theta)\\
+        \hat{\mu}_1 = \mu_1(\theta)\\
         \vdots\\
-        \hat{\mu_n} = \mu_n(\theta)
+        \hat{\mu}_k = \mu_k(\theta)
     \end{cases}
 \end{equation}
 Если система уравнений $(1)$ однозначно разрешима относительно $\theta_1,\dots,\ \theta_k$, то решения $\hat{\theta_1},\dots,\ \hat{\theta_k}$ называется равной $\theta_1,\dots,\ \theta_k$ по методу моментов.
 \subsubsection*{Пример}
 $X_1,\dots,\ X_n \sim N(\theta_1,\ \theta_2^2),\ \theta = (\theta_1,\ \theta_2^2)$, тогда:
 \[\begin{cases}
-    \hat{\mu_1} = \frac{1}{n} \sion x_i = \theta_1\Rightarrow \hat{\theta_1} = \overline{X}\\
-    \hat{\mu_2} = \frac{1}{n} \sion x_i^2 = \theta_2^2 + \theta_1^2,\ \big(E\xi^2 = \dev \xi + (E\xi)^2\big)\Rightarrow \hat{\theta}_2^2 = \frac{1}{n}\sion  x_i^2 = \overline{X}^2
+    \hat{\mu}_1 = \frac{1}{n} \sion x_i = \theta_1\Rightarrow \hat{\theta_1} = \overline{X}\\
+    \hat{\mu}_2 = \frac{1}{n} \sion x_i^2 = \theta_2^2 + \theta_1^2,\ \big(E\xi^2 = \dev \xi + (E\xi)^2\big)\Rightarrow \hat{\theta}_2^2 = \frac{1}{n}\sion  x_i^2 = \overline{X}^2
 \end{cases}\]
 \subsection*{Метод максимального правдоподобия (ММП)}
 \subsubsection*{Определение}
-Функцией правдоподобия называется функция 
+Функцией правдоподобия для $X_1,\dots,\ X_n$, порождённых случайной величиной $\xi$, называется функция 
 \[L(x_1,\dots,\ x_n,\ \theta) = \begin{cases}
     \prod\limits_{i = 1}^{n} f(x_i,\ \theta),\ \text{если $\xi$ --- непрерывная случайная величина}\\
     \prod\limits_{i = 1}^{n} P(\xi = x_i,\ \theta),\ \text{если $\xi$ --- дискретная случайная величина}
@@ -316,7 +316,7 @@ $X_1,\dots,\ X_n \sim N(\theta_1,\ \theta_2^2),\ \theta = (\theta_1,\ \theta_2^2
 Логарифм монотонный, поэтому его argmax совпадёт с argmax функции $L(x_1,\dots,\ x_n,\ \theta)$ (НАУКА!).
 \subsubsection*{Пример}
 Для Гауссовской величины $N(\theta_1,\ \theta_2^2)$:
-\[L(x_1,\dots,\ x_n,\ \theta) = \prod\limits_{i = 1}^{n} \frac{1}{\sqrt{2\pi}\sigma^2} e^{-\frac{(x - \theta^1)^2}{2\theta_2^2}} = \left( \frac{1}{\sqrt{2\pi}} \right)^n \left( \frac{1}{\theta_2} \right)^n e^{-\frac{(x - \theta_1)^2}{2\theta_2^2}}\]
+\[L(x_1,\dots,\ x_n,\ \theta) = \prod\limits_{i = 1}^{n} \frac{1}{\sqrt{2\pi}\sigma^2} e^{-\frac{(x - \theta_1)^2}{2\theta_2^2}} = \left( \frac{1}{\sqrt{2\pi}} \right)^n \left( \frac{1}{\theta_2} \right)^n e^{-\frac{(x - \theta_1)^2}{2\theta_2^2}}\]
 Логарифмируем:
 \[\ln L(x_1,\dots,\ x_n,\ \theta) = \ln \left( \frac{1}{\sqrt{2\pi}} \right)^n - n\ln \theta_2 - \frac{\sion (x_i - \theta_1)^2}{2\theta_2^2}\]
 Возьмём частные производные:
@@ -410,4 +410,75 @@ $X_1,\dots,\ X_n \sim N(m,\ \theta_2^2)$. Построить доверител�
 Обозначим $t_{n,\ \alpha}$ квантиль уровня $\alpha$ распределения $t(n)$, заметим, что $t_{n,\ 1 - \alpha} = t_{n,\ 1 - \frac{\alpha}{2}}$
 \[P(t_{n,\ 1 - \frac{\alpha}{2}} < \frac{\sqrt{n}(\overline{X} - \theta_1)}{\tilde{S}} < t_{n,\ \frac{\alpha}{2}} ) = 1 - \alpha\]
 \[P(\overline{X} - \frac{\tilde{S}\cdot t_{n,\ 1 - \frac{\alpha}{2}}}{\sqrt{n}} < \theta_1 < \overline{X} + \frac{\tilde{S}\cdot t_{n,\ 1 - \frac{\alpha}{2}}}{\sqrt{n}} ) = 1 - \alpha\]
+\begin{center}
+    Лекция 7 февраля
+\end{center}
+\subsection*{Задача}
+$X_1,\dots,\ X_{n_1} \sim N(m_1,\ \sigma_1^2)$ и $Y_1,\dots,\ Y_{n_2} \sim N(m_2,\ \sigma_2^2)$. $\sigma$ известны, $m$ --- неизвестны.\\
+$X_1,\dots,\ X_n$ и $Y_1,\dots,\ Y_n$ независимы. Доверительнный интервал для $\theta = m_1 - m_2$
+\[T(x,\ y) = \frac{\overline{X} - \overline{Y} - \theta}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}}\]
+\subsection*{Задача}
+Пусть $X_1,\dots,\ X_{n_1} \sim N(m_1,\ \sigma^2),\ Y_1,\dots,\ Y_{n_2} \sim N(m_2,\ \sigma^2)$. $\sigma$ неизвестна. Выборки независимы.
+\subsubsection*{Утверждение}
+\[\frac{\sum_{i = 1}^{n_1} {(x_i - \overline{X})}^2}{\sum_{i = 1}^{n_2}{(y_i - \overline{Y})}^2} \sim F(n_1 - 1,\ n_2 - 1)\]
+\[\frac{\overline{X} - \overline{Y} - (m_1 - m_2)}{\sqrt{\hat\dev (\overline{X} - \overline{Y})}}\]
+Посчитаем дисперсию в знаменателе:
+\begin{equation*}
+    \begin{aligned}
+        \dev (\overline{X} - \overline{Y}) &= \dev \overline{X} + \dev \overline{Y} = \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2} = \sigma^2\left( \frac{1}{n_1} + \frac{1}{n_2} \right)\\
+        S^2 &= \frac{\sum_{i = 1}^{n_1} {(x_i - \overline{X})}^2 + \sum_{i = 1}^{n_2} {(y_i - \overline{Y})}^2 }{n_1 + n_2 - 2}
+    \end{aligned}    
+\end{equation*}
+Тогда
+\[\frac{\overline{X} - \overline{Y} - (m_1 - m_2)}{\sqrt{\hat\dev (\overline{X} - \overline{Y})}} = \frac{\overline{X} - \overline{Y} - (m_1 - m_2)}{S\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}} \sim t(n_1 + n_2 - 2)\]
+Теперь можно построить доверительный интервал:
+\[P\left( -t_{1 - \alpha/2,\ n_1 + n_2 - 2} < \frac{\overline{X} - \overline{Y} - \theta}{S\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}} < t_{1 - \alpha/2,\ n_1 + n_2 - 2}\right) = 1 - \alpha\]
+\[P\left(-t_{1 - \alpha/2,\ n_1 + n_2 - 2}\cdot S\sqrt{\frac{1}{n_1} + \frac{1}{n_2}} - (\overline{X} - \overline{Y}) < -\theta < t_{1 - \alpha/2,\ n_1 + n_2 - 2}\cdot S\sqrt{\frac{1}{n_1} + \frac{1}{n_2}} - (\overline{X} - \overline{Y})\right) = 1 - \alpha\]
+\[P\left((\overline{X} - \overline{Y}) -t_{1 - \alpha/2,\ n_1 + n_2 - 2}\cdot S\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}  < \theta < t_{1 - \alpha/2,\ n_1 + n_2 - 2}\cdot S\sqrt{\frac{1}{n_1} + \frac{1}{n_2}} + (\overline{X} - \overline{Y})\right) = 1 - \alpha\]
+\subsection*{Асимптотические доверительные интервалы}
+Пусть $X_1,\dots,\ X_n\sim F(x,\ \theta),\ \theta \in \Theta \subset \mathbb{R}^1$\\
+$\hat \theta$ --- состоятельная оценка $\theta$.
+\[\sqrt{n}(\hat\theta_n - \theta) \xrightarrow[n\to\infty]{d} U,\ U \sim N\big(0,\ \sigma^2 (\theta)\big)\]
+И $\sigma^2(\theta)$ непрерывна по $\theta$.
+\[P\left( Z_{\alpha/2} < \frac{\sqrt{n}(\hat \theta_n - \theta)}{\sigma(\hat\theta_n)} < Z_{1 - \alpha/2} \right) \to 1 - \alpha\]
+\[P\left( \hat\theta_n - \frac{\sigma(\hat\theta_n) Z_{1 - \alpha/2}}{\sqrt{n}} < \theta < \frac{\sigma(\hat\theta_n) Z_{1 - \alpha/2}}{\sqrt{n}} + \hat\theta_n\right)\]
+Если $\exists$ R-эффективная оценка $\hat \theta_n$, то выбирая её $\dev \hat \theta_n = \frac{1}{I_n(\theta)}$, тогда $\frac{\sigma(\hat\theta_n)}{\sqrt{n}} = \sqrt{\dev \hat\theta_n} = \frac{1}{\sqrt{nI_1(\hat\theta_n)}}$
+\[P\left( \hat\theta_n - \frac{Z_{1 - \alpha/2}}{\sqrt{n I_1 (\hat \theta_n)}} < \theta < \hat\theta_n + \frac{ Z_{1 - \alpha/2}}{\sqrt{n I_1(\hat \theta_n)}} \right) \to 1 - \alpha\]
+\subsection*{Пример}
+$X_1,\dots,\ X_n \sim Bi(1,\ \theta)$\\
+АДИ для $\theta$:
+\[\hat\theta = \frac{\sum_{i = 1}^{n} x_i}{n} - \text{несмещённая, состоятельная, R-эффективная}\]
+$\dev x_i = \theta(1 - \theta)$.
+\[\sqrt{n} (\hat \theta - \theta) \xrightarrow[n\to \infty]{d} U,\ U\sim N\big(0,\ \theta(1 - \theta)\big)\]
+\[P\left( \hat\theta - Z_{1 - \alpha/2} \sqrt{\frac{\hat\theta(1 - \hat\theta)}{n}} < \theta < \hat \theta + Z_{1 - \alpha/2} \frac{\sqrt{\hat{\theta}(1 - \hat \theta)}}{\sqrt{n}} \right) \to 1 - \alpha\]
+\subsection*{Определение}
+Основная (или нулевая) гипотеза $H_0$, с ней конкурируют $H_1,\ H_2,\dots,\ H_{A}$ (альтернативные гипотезы).
+\subsection*{Определение}
+Сложной гипотезой называют гипотезу, которая не определяет параметры распределения или само распределение однозначно.\\
+Например
+\[H_1: \xi \sim N(m,\ \sigma^2)\]
+\[H_2: \xi \sim N(5,\ \sigma^2)\]
+Простая гипотеза определяет распределение однозначно, например:
+\[H_3: \xi \sim N(5,\ 36)\]
+Односторонние гипотезы выглядят так:
+\[H_4: \xi m < 5\]
+\[H_5: \xi m > 5\]
+Двусторонние:
+\[H_6: n \neq 5\]
+\[H_7: m\in [1,\ 3]\]
+А гипотеза $H_8: \{\text{``Сегодня хорошая погода''}\}$ не является статистической, ведь не относится к распределению и параметрам.
+\subsection*{Определение}
+Статистическим критерием называют правило, руководствуясь которым, на основании реализации $x_1,\dots,\ x_n$ выборки $X_1,\dots,\ X_n$ принимается решение о справедливости/несправедливости гипотезы $H_0$.\\
+Делим множество реализаций выборки $S$ на два множества $S_0,\ S_1$, такие что
+\[S_0 \cdot S_1 = \emptyset\]
+\[S_0 + S_1 = S\]
+Назовём $S_0$ доверительной областью, а $S_1$ --- критической областью. Если реализация попала в $S_0$, то мы принимаем $H_0$, иначе принимает альтернативную гипотезу.\\
+Тогда ошибкой первого рода (уровнем значимости критерия) называется
+\[P(X\in S_1\ |\  \text{верна } H_0) = \alpha\]
+Ошибкой второго рода называется 
+\[P(X\in S_0 \wedge \text{верна } H_1) = 1 - \beta\]
+\subsection*{Определение}
+Пусть критерий предназначен для проверки $H_0: \theta = \theta_0$ против альтернативы $H_1: \theta \neq \theta_0$, тогда функцией мощности критерия называется
+\[\beta(\theta) = P(X \in S_1,\ \theta)\]
+Критерий называется состоятельным, если при отдалении от $\theta_0$ его функция мощности стремится к $1$.
 \end{document}
