@@ -17,8 +17,8 @@
 \usepackage{tikz}
 \usepackage{cancel}
 
-% \usepackage{fontspec}
-% \setmainfont{Times New Roman}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
 
 \title{Математическая статистика.}
 \author{Андрей Тищенко \href{https://t.me/AndrewTGk}{@AndrewTGk}}
@@ -433,4 +433,35 @@ $X_1 \sim Bi(12,\ p),\ X_2 \sim Bi(12,\ p),\ X_3 \sim Bi(15,\ p)$. По мето
     \end{aligned}
 \end{equation*}
 Несмещённая.
+\begin{center}
+    \bf Семинар 7 февраля
+\end{center}
+$X_1,\dots,\ X_n \sim F(x,\ \theta)$. Считается, что $\big( T_1(x_1,\dots,\ x_n),\ T_2(x_1,\dots,\ x_n) \big)$ является доверительным интервалом уровня $1 - \alpha$, если:
+\[P\big(T_1(x_1,\dots,\ x_n) < \theta < T_2(x_1,\dots,\ x_n)\big) = 1 - \alpha\]
+Например, для $X_1,\dots,\ X_n \sim N(m,\ \sigma^2)$, $\sigma$ известна.\\
+$\hat m = \overline{X},\ \dev \overline{X} = \frac{\sigma^2}{n}\Rightarrow \frac{\sqrt{n}(\overline{X} - m)}{\sigma} \sim N(0,\ 1)$. Для построения доверительного интервала нужно оценить вероятность попадания опорной статистики на интервал:
+\[P\left( Z_{\alpha/2} < \frac{\sqrt{n} (\overline{X} - m)}{\sigma} < Z_{1 - \alpha/2} \right) = 1 - \alpha\]
+\[P\left( \overline{X} - \frac{\sigma Z_{1 - \alpha/2}}{\sqrt{n}} < m < \overline{X} + \frac{\sigma Z_{1 - \alpha/2}}{\sqrt{n}} \right) = 1 - \alpha\]
+Если $\sigma$ тоже неизвестна, то подставляем её оценку $\tilde S = \frac{1}{n - 1} \sum\limits_{i = 1}^{n} (x_i - \overline{X})^2$ и получаем распределение Стьюдента, значит стоит брать его квантили.
+\[\frac{\sqrt{n} (\overline{X} - m)}{\tilde S} = \frac{\sqrt{n} (\frac{\overline{X} - m}{\sigma})}{\frac{1}{n - 1} \sum_{i = 1}^{n} \left( \frac{x_i - \overline{X}}{\sigma} \right)^2}\]
+То есть стандартное гауссовское делим на корень из $\chi^2$.\\
+Итого:
+\[P\left( \overline{X} - \frac{\tilde S t_{1 - \alpha/2,\ n - 1}}{\sqrt{n}} < m < \overline{X} + \frac{\tilde S t_{1 - \alpha/2,\ n - 1}}{\sqrt{n}} \right) = 1 - \alpha\]
+Если математическое ожидание известно, но мы хотим интервал для дисперсии:
+\[\sum_{i = 1}^{n} \frac{(x_i - m)^2}{\sigma^2} \sim \chi^2(n)\]
+\[P\left( \chi^2_{n,\ 1 - \alpha/2} < \frac{\sum(x_i - m)^2}{\sigma^2} < \chi^2_{n,\ 1 - \alpha/2} \right) = 1 - \alpha\]
+\[P\left(\frac{\sum_{i = 1}^{n} (x_i - m)^2}{\chi^2_{n,\ 1 - \alpha/2}} < \sigma^2 < \frac{\sum_{i = 1}^{n} (x_i - m)^2}{\chi^2_{n,\ 1 - \alpha/2}} \right) = 1 - \alpha\]
+Если неизвестны оба:
+\[\sum_{i = 1}^{n} \frac{(x_i - \overline{X})^2}{\sigma^2} \sim \chi^2(n - 1)\]
+\[P\left(\frac{\sum_{i = 1}^{n} (x_i - \overline{X})^2}{\chi^2_{n - 1,\ 1 - \alpha/2}} < \sigma^2 < \frac{\sum_{i = 1}^{n} (x_i - \overline{X})^2}{\chi^2_{n - 1,\ 1 - \alpha/2}} \right) = 1 - \alpha\]
+\subsection*{Задача}
+Импортёр упаковывает чай в пакеты с номинальным весом 125 грамм. Известно, что упаковочная машина работает с известным среднеквадратическим отклонением 10 грамм. Выбрали 50 пакетов чая, выборочное среднее их веса оказалось равно $125,8$.\\
+То есть $n = 50,\ \overline{X} = 125,8,\ X_1,\dots,\ X_n \sim N(m,\ 100)$.\\
+$\overline{X} \sim N\left(m,\ \frac{\sigma^2}{n}\right)\Rightarrow \frac{\sqrt{n} (\overline{X} - m)}{\sigma} \sim N(0,\ 1)\Rightarrow$
+\[P\left( Z_{0,025} < \frac{\sqrt{n}(\overline{X} - m)}{\sigma} < Z_{0,95} \right) = 0,95\]
+\[P\left( \overline{X} - \frac{\sigma Z_{0,95}}{\sqrt{n}} < m < \overline{X} + \frac{\sigma Z_{0,95}}{\sqrt{n}} \right) = 0,95\]
+\[P(123,028 < m < 128,571) = 0,95\]
+125 лежит в этом интервале, поэтому всё хорошо.\\
+Длина интервала получается $\frac{2\sigma Z_{0,95}}{\sqrt{n}}$, хотим, чтбы это равнялось $2$
+\[\sqrt{n} = \sigma Z_{0,95} \Rightarrow n \approx 384\]
 \end{document}
