@@ -464,4 +464,31 @@ $\overline{X} \sim N\left(m,\ \frac{\sigma^2}{n}\right)\Rightarrow \frac{\sqrt{n
 125 лежит в этом интервале, поэтому всё хорошо.\\
 Длина интервала получается $\frac{2\sigma Z_{0,95}}{\sqrt{n}}$, хотим, чтбы это равнялось $2$
 \[\sqrt{n} = \sigma Z_{0,95} \Rightarrow n \approx 384\]
+
+\begin{center}
+    ДЗ 14 февраля
+\end{center}
+\subsection*{Задача 1}
+10 изделий сделано за 79, 74, 112, 95, 83, 96, 77, 84, 70, 90 минут. Построить ДИ уровня 0.95 для среднего времени сборки.\\
+Получаем $X_i \sim N(m,\ \sigma)$, просят доверительный интервал для $m$. С прошлого семинара:
+\[P\left( \overline{X} - \frac{\tilde S t_{1 - \alpha/2,\ n - 1}}{\sqrt{n}} < m < \overline{X} + \frac{\tilde S t_{1 - \alpha/2,\ n - 1}}{\sqrt{n}} \right) = 1 - \alpha\]
+Здесь:
+\begin{equation*}
+    \begin{aligned}
+        n =&\, 10\\
+        \alpha =&\, 0.05\\
+        \overline{X} =&\, \frac{1}{n} \sum_{i = 1}^{n} x_i\\
+        \tilde S^2 =&\, \frac{1}{n - 1}\sum_{i = 1}^{n} (x_i - \overline{X})^2\\
+        t_{1 - \alpha/2,\ n - 1} =&\, \text{так и не понял где посмотреть (квантиль распределения Стьюдента)}\\
+    \end{aligned}
+\end{equation*}
+
+\subsection*{Задача 2}
+Теперь ДИ для дисперсии уровня 0.9, опять воспользуемся записями семинара:
+\[P\left(\frac{\sum_{i = 1}^{n} (x_i - \overline{X})^2}{\chi^2_{n - 1,\ 1 - \alpha/2}} < \sigma^2 < \frac{\sum_{i = 1}^{n} (x_i - \overline{X})^2}{\chi^2_{n - 1,\ 1 - \alpha/2}} \right) = 1 - \alpha\]
+
+\subsection*{Задача 3}
+Тоже построить ДИ для матожидания и дисперсии гауссовской величины, только с другими значениями. Из сложностей только $\tilde S^2 = \frac{n}{n - 1} S^2$
+\subsection*{Задача 4}
+Показать, что $S^2 = \hat \mu_2 - (\hat \mu_1)^2 = \frac{1}{n} \sum_{i = 1}^{n} x_i^2 - \left( \frac{1}{n}\sum_{i = 1}^{n} x_i \right)^2$
 \end{document}
