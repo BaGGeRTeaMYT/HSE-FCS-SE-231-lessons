@@ -490,5 +490,46 @@ $\overline{X} \sim N\left(m,\ \frac{\sigma^2}{n}\right)\Rightarrow \frac{\sqrt{n
 \subsection*{Задача 3}
 Тоже построить ДИ для матожидания и дисперсии гауссовской величины, только с другими значениями. Из сложностей только $\tilde S^2 = \frac{n}{n - 1} S^2$
 \subsection*{Задача 4}
-Показать, что $S^2 = \hat \mu_2 - (\hat \mu_1)^2 = \frac{1}{n} \sum_{i = 1}^{n} x_i^2 - \left( \frac{1}{n}\sum_{i = 1}^{n} x_i \right)^2$
+Показать, что $\displaystyle S^2 = \hat \mu_2 - (\hat \mu_1)^2 = \frac{1}{n} \sum_{i = 1}^{n} x_i^2 - \left( \frac{1}{n}\sum_{i = 1}^{n} x_i \right)^2 = \frac{1}{n} \sum_{i = 1}^{n} x_i^2 - \frac{1}{n^2} \sum_{i = 1}^{n} x_i^2 - \frac{2}{n^2}\sum_{i = 1}^{n} x_i \sum_{j = 1}^{n} x_j$
+\[S^2 = \frac{1}{n} \sum_{i = 1}^{n}(x_i - \overline{X})^2 = \frac{1}{n} \sum_{i = 1}^{n} x_i^2 - \frac{2\overline{X}}{n}\sum_{i = 1}^{n} x_i + \frac{1}{n} \sum_{i = 1}^{n} \overline{X}^2\]
+\begin{center}
+    \bf Семинар 14 февраля
+\end{center}
+Даны две выборки:
+\[\begin{cases}
+    X_1,\dots,\ X_n\sim N(m_1,\ \sigma_1^2)\\
+    Y_1,\dots,\ Y_n\sim N(m_2,\ \sigma_2^2) 
+\end{cases}\]
+$\sigma_1,\ \sigma_2$ известны, тогда для построения ДИ $\theta = m_1 - m_2$:
+\[\frac{\overline{X} - \overline{Y} - \theta}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}} \sim N(0,\ 1)\]
+Если дисперсии неизвестны, но одинаковы:
+\[\hat \dev (\overline{X} - \overline{Y}) = \sigma^2 \left(\frac{1}{n_1} + \frac{1}{n_2}\right)\]
+Дисперсию не знаем, поэтому подставим оценку:
+\[S^2 = \frac{\sum_{i = 1}^{n} (x_i - \overline{X})^2 + \sum_{i = 1}^{n} (y_i - \overline{Y})^2}{n_1 + n_2 - 2}\]
+Тогда можно сказать
+\[\frac{\overline{X} - \overline{Y} - \theta}{S\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}} \sim t(n_1 + n_2 - 2)\]
+\subsection*{Задача}
+$\overline{X} = -11.87,\ \overline{Y} = -13.75,\ \sigma_1^2 = 20,\ \sigma_2^2 = 22,\ n_1 = n_2 = 13,\ \alpha = 0.05\\
+X \sim N(m_1,\ 20),\ Y \sim N(m_2,\ 22)$
+Знаем матожидания и дисперсию, тогда ДИ для $\theta = m_2 - m_1$
+\[P \left( (\overline{X} - \overline{Y}) -1.96 \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} \leq \theta \leq (\overline{X} - \overline{Y}) + 1.96 \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} \right) = 0.95\]
+\[P \left( -1.64 \leq \theta \leq 5.4 \right) = 0.95\]
+Модифицирем задачу. $\sigma$ теперь неизвестны, но мы считаем их одинаковыми, тогда
+\[P \left( (\overline{X} - \overline{Y}) -2.06 S \sqrt{\frac{1}{n_1} + \frac{1}{n_2}} \leq \theta \leq (\overline{X} - \overline{Y}) + 2.06 S \sqrt{\frac{1}{n_1} + \frac{1}{n_2}} \right) = 0.95\]
+Если у нас посчитано ${S_{X}}^2$ и $S_Y^2$, то можем посчитать $S$:
+\[S^2 = \frac{n_1 S_X^2 + n_2 S_Y^2}{n_1 + n_2 - 2}\]
+Если посчитать, то получаем 
+\[P \left( -1.98 \leq \theta \leq 5.74 \right) = 0.95\]
+\subsection*{Задача}
+$X_1,\dots,\ X_n \sim \Pi(\theta)$. Построим ассимптотический доверительный интервал.\\
+Для распределения Пуассона верно: $\hat \theta = \overline{X},\ \dev \overline{X} = \frac{\sigma^2}{n} = \frac{\theta}{n}$\\
+Тогда при больших $n$:
+\[\frac{(\hat\theta - \theta)}{\sqrt{\frac{\hat\theta}{n}}} \sim N(0,\ 1)\]
+\begin{equation*}
+    \begin{aligned}
+        P \Bigg( Z_{1 - \alpha/2} &\,\leq  \frac{(\overline X - \theta)}{\sqrt{\frac{\overline X}{n}}} \leq Z_{1 - \alpha/2} \Bigg) = 1- \alpha\\
+        P \Bigg( \sqrt{\frac{n}{\overline X}}Z_{1 - \alpha/2} &\,\leq  {(\overline X - \theta)} \leq  \sqrt{\frac{n}{\overline X}}Z_{1 - \alpha/2} \Bigg) = 1- \alpha\\
+        P \Bigg( \overline{X} - \sqrt{\frac{n}{\overline X}}Z_{1 - \alpha/2} &\,\leq  \theta \leq  \overline{X} + \sqrt{\frac{n}{\overline X}}Z_{1 - \alpha/2} \Bigg) = 1- \alpha
+    \end{aligned}
+\end{equation*}
 \end{document}
