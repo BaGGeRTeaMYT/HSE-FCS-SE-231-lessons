@@ -508,7 +508,7 @@ $H_0: \theta = \theta_0$ и $H_1: \theta \in \Theta_1$, $\theta_0 \notin \Theta_
     \item Сформулировать проверяемую гипотезу $H_0$ и альтернативную к ней $H_1$.
     \item Выбрать уровень значимости $\alpha$
     \item Выбрать статистику $T$ для проверки гипотезы $H_0$
-    \item Найти распределение $F(z\ |\ H_0)$ статистики $T$, при условии $\{``\text{$H_0$ верна}''\}$
+    \item Найти распределение $F(z\ |\ H_0)$ статистики $T$, при условии $\{\text{``$H_0$ верна''}\}$
     \item Построить, в зависимости от формулировки гипотезы $H_1$ и уровня значимости $\alpha$, критическую область $\overline{G}$
     \item Получить реализацию выборки наблюдений $x_1,\dots,\ x_n$ и вычислить реализацию $t = \varphi(x_1,\dots,\ x_n)$ статистики $T$ критерия
     \item Принять статистическое решение на уровне доверия $1 - \alpha$: если $t\in \overline{G}$, то отклонить гипотезу $H_0$ как не согласующуюся с результатами наблюдений, а если $t\in G$, то принять гипотезу $H_0$ как не противоречащую результатам наблюдений.
@@ -536,4 +536,207 @@ $H_0: \theta = \theta_0$ и $H_1: \theta \in \Theta_1$, $\theta_0 \notin \Theta_
 Оценим $p$:
 \[\hat p = \frac{\sum\limits_{i = 1}^{n_1} x_{i\, 1} + \sum\limits_{i = 1}^{n_2} x_{i\, 2}}{n_1 + n_2}\]
 Тогда $\tilde T(x) = \frac{\hat p_1 - \hat p_2}{\sqrt{\hat p (1 - \hat p)\left( \frac{1}{n_1} + \frac{1}{n_2} \right)}}$. По этой статистике уже можем принимать решения.
+
+\begin{center}
+\bf Лекция 21 февраля
+\end{center}
+\subsection*{Лемма Неймана-Пирсона}
+Пусть $X_1,\dots,\ X_n \sim f(x,\ \theta)$, параметр $\theta$ неизвестен. Проверяется простая гипотеза $H_0: \theta = \theta_0$ против простой альтернативной гипотезы $H_1: \theta = \theta_1 > \theta_0$.\\
+Существует наиболее мощный критерий для проверки $H_0$ против $H_1$ с критической областью\\
+$\displaystyle S^*_{1\, \alpha} = \{(x_1,\dots,\ x_n)\ |\ T(x_1,\dots,\ x_n) \geq c_{\alpha}\}$, где $T(x_1,\dots,\ x_n) = \frac{L(x_1,\dots,\ x_n,\ \theta_1)}{L(x_1,\dots,\ x_n,\ \theta_0)} = \frac{\prod_{i = 1}^{n} f(x_i,\ \theta_1)}{\prod_{i = 1}^{n} f(x_i,\ \theta_0)}$, а $c_{\alpha}$ такое что $P_{\theta_0}(T(x) \geq c_{\alpha}) = \alpha$  
+\subsubsection*{Доказательство}
+Пусть есть критерий с критической областью $S_{1\, \alpha}$ лучше (более мощный) предложенного нашей леммой. Тогда:
+\[\beta (\theta_1,\ S_{1\, \alpha}) = \int\limits_{S_{1\, \alpha}} \prod_{i = 1}^{n} f(x_i,\ \theta_1)\, dx_1\dots dx_n = \int\limits L(x,\ \theta_1)\, dx = \int\limits_{S_{1\,\alpha}S^*_{1\,\alpha}} L(x,\ \theta_1)\, dx + \int\limits_{S_{1\, \alpha} \overline{S}^*_{1\, \alpha}} L(x,\ \theta_1),\ dx =\]
+\[= \int\limits_{S_{1\,\alpha}S^*_{1\,\alpha}} T(x) L(x,\ \theta_0)\, dx + \int\limits_{S_{1\, \alpha} \overline{S}^*_{1\, \alpha}} T(x) L(x,\ \theta_0),\ dx\]
+\[\beta (\theta_1,\ S^*_{1\, \alpha}) = \int\limits_{S^*_{1\, \alpha}} L(x,\ \theta_1)\, dx = \dots = \int\limits_{S_{1\,\alpha}S^*_{1\,\alpha}} T(x) L(x,\ \theta_1)\, dx + \int\limits_{\overline{S}_{1\, \alpha} S^*_{1\, \alpha}} T(x) L(x,\ \theta_1),\ dx\]
+Тогда справедливо равенство:
+\[\beta(\theta_1,\ S_{1\, \alpha}) = \beta(\theta_1,\ S^*_{1\, \alpha}) + \int\limits_{S_{1\, \alpha} \overline{S}^*_{1\, \alpha}} \underset{< c_{\alpha}}{\underbrace{T(x)}} L(x,\ \theta_0)\, dx - \int\limits_{S^*_{1\, \alpha} \overline{S}_{1\, \alpha}} \underset{\geq c_{\alpha}}{\underbrace{T(x)}} L(x,\ \theta_0)\, dx\]
+Перепишем это в неравенство:
+\[\beta(\theta_1,\ S_{1\, \alpha}) < \beta(\theta_1\, S^*_{1\, \alpha}) + c_{\alpha}\left( \int\limits_{S_{1\, \alpha} \overline{S}^*_{1\, \alpha}} L(x,\ \theta_0)\, dx - \int\limits_{S^*_{1\, \alpha} \overline{S}_{1\, \alpha}} L(x,\ \theta_0)\, dx \right)\]
+Теперь запишем равенство:
+\[\alpha = \int\limits_{S_{1\, \alpha}} L(x,\ \theta_0)\, dx = \int\limits_{S^*_{1\, \alpha}} L(x,\ \theta_0)\, dx\]
+При этом
+\begin{equation*}
+    \begin{aligned}
+        \int\limits_{S_{1\, \alpha}} L(x,\ \theta_0)\, dx &= \int\limits_{S_{1\, \alpha} S^*_{1\, \alpha}} L(x,\ \theta_0)\, dx + \int\limits_{S_{1\, \alpha} \overline{S}_{1\, \alpha}^*} L(x,\ \theta_0)\, dx\\
+        \int\limits_{S^*_{1\, \alpha}} L(x,\ \theta_0)\, dx &= \int\limits_{ S^*_{1\, \alpha} S_{1\, \alpha}} L(x,\ \theta_0)\, dx + \int\limits_{S^*_{1\, \alpha} \overline{S}_{1\, \alpha}} L(x,\ \theta_0)\, dx\\
+        \Rightarrow \int\limits_{S_{1\, \alpha} \overline{S}_{1\, \alpha}^*} L(x,\ \theta_0)\, dx = \int\limits_{S^*_{1\, \alpha} \overline{S}_{1\, \alpha}} L(x,\ \theta_0)\, dx \Rightarrow \beta(\theta_1,\ S_{1\, \alpha}) < \beta(\theta_1\, S^*_{1\, \alpha})
+    \end{aligned}
+\end{equation*}
+
+\subsection*{Задача}
+$X_1,\dots,\ X_n \sim N(m, \sigma^2)$, дисперсия известна. Построить наиболее мощный критерий для проверки $H_0: m = m_0$ против $H_1: m = m_1 > m_0$
+\subsubsection*{Ответ:}
+$S^*_{1\, \alpha} \{(x_1,\dots,\ x_n)\ | \ \overline{X} \geq m_0 + \frac{Z_{1 - \alpha}\sqrt{n}}{\sigma}\} = \{(x_1,\dots,\ x_n)\ |\ \frac{(\overline{X} - m_0)\sqrt{n}}{\sigma} \geq Z_{1 - \alpha}\}$
+\subsection*{Задача}
+Для проверки гипотезы $H_0: m = m_0$
+\[T(x) = \frac{(\overline{X} - m_0)\sqrt{n}}{\sigma}\Rightarrow T(x)\big|_{H_0: m = m_0} \sim N(0,\ 1)\]
+Против гипотезы $H_1: m > m_0$
+\[\begin{tikzpicture}
+    \draw[color=green] (-2, 0) -- (1, 0);
+    \draw[color=red] (1, 0) -- (2, 0);
+    \draw (1, 0.15) -- (1, -0.15);
+    \node at (1, -0.5) (a) {$Z_{1 - \alpha}$};
+\end{tikzpicture}\]
+Против гипотезы $H_2: m < m_0$
+\[\begin{tikzpicture}
+    \draw[color=green] (-1, 0) -- (2, 0);
+    \draw[color=red] (-2, 0) -- (-1, 0);
+    \draw (-1, -0.15) -- (-1, 0.15);
+    \node at (-1, -0.5) (a) {$Z_{\alpha}$};
+\end{tikzpicture}\]
+Против гипотезы $H_3: m \neq m_0$
+\[\begin{tikzpicture}
+    \draw[color=red] (-2, 0) -- (-0.5, 0);
+    \draw[color=red] (0.5, 0) -- (2, 0);
+    \draw[color=green] (-0.5, 0) -- (0.5, 0);
+    \draw (0.5, -0.15) -- (0.5, 0.15);
+    \draw (-0.5, -0.15) -- (-0.5, 0.15);
+    \node at(-0.5, -0.5) (a) {$Z_{\alpha/2}$};
+    \node at(0.5, 0.5) (a) {$Z_{1 - \alpha/2}$};
+\end{tikzpicture}\]
+\textbf{Пояснение:} на рисунках зелёным обозначена доверительная область, красным обозначена критическая область.
+\subsection*{Задача}
+Снова гауссовская выборка, но дисперсия неизвестна. Хотим проверить гипотезу $H_0: m = m_0$. Тогда нужно поменять статистику на:
+\[T(x) = \frac{(\overline{X} - m_0) \sqrt{n}}{\tilde{S}} = \frac{(\overline{X} - m_0)\sqrt{n - 1}}{S}\]
+\[T(x) \big|_{H_0} \sim t(n - 1)\]
+Против гипотезы $H_1: m > m_0$
+\[\begin{tikzpicture}
+    \draw[color=green] (-2, 0) -- (1, 0);
+    \draw[color=red] (1, 0) -- (2, 0);
+    \draw (1, 0.15) -- (1, -0.15);
+    \node at (1, -0.5) (a) {$t_{n - 1,\ 1 - \alpha}$};
+\end{tikzpicture}\]
+Против гипотезы $H_2: m < m_0$
+\[\begin{tikzpicture}
+    \draw[color=green] (-1, 0) -- (2, 0);
+    \draw[color=red] (-2, 0) -- (-1, 0);
+    \draw (-1, -0.15) -- (-1, 0.15);
+    \node at (-1, -0.5) (a) {$t_{n - 1,\ \alpha}$};
+\end{tikzpicture}\]
+Против гипотезы $H_3: m \neq m_0$
+\[\begin{tikzpicture}
+    \draw[color=red] (-2, 0) -- (-0.5, 0);
+    \draw[color=red] (0.5, 0) -- (2, 0);
+    \draw[color=green] (-0.5, 0) -- (0.5, 0);
+    \draw (0.5, -0.15) -- (0.5, 0.15);
+    \draw (-0.5, -0.15) -- (-0.5, 0.15);
+    \node at(-0.5, -0.5) (a) {$t_{n - 1,\ \alpha/2}$};
+    \node at(0.5, 0.5) (a) {$t_{n - 1,\ 1 - \alpha/2}$};
+\end{tikzpicture}\]
+Та же самая идея, только разделение идёт по квантилям распределения Стьюдента.
+\subsection*{Задача}
+Теперь строим критерий для оценки дисперсии при известном математическом ожидании. Проверяем гипотезу $H_0: \sigma = \sigma_0$:
+\[T(x) = \frac{\sum_{i = 1}^{n} (x_i - m)^2}{\sigma_0^2}\]
+\[T(x) \big|_{H_0: \sigma = \sigma_0} \sim \chi^2(n)\]
+Против гипотезы $H_1: \sigma < \sigma_0$
+\[\begin{tikzpicture}
+    \draw[green] (-1, 0) -- (0, 0);
+    \draw[red] (0, 0) -- (0.5, 0);
+    \draw[green] (0.5, 0) -- (2, 0);
+    \draw (0, -0.15) -- ++(0, 0.3);
+    \node at (0, -0.5) (a) {$0$};
+    \draw (0.5, -0.15) -- ++(0, 0.3);
+    \node at (0.5, 0.5) (a) {$\chi^2_{n, \alpha}$};
+\end{tikzpicture}\]
+Против гипотезы $H_2: \sigma > \sigma_0$
+\[\begin{tikzpicture}
+    \draw[green] (-1, 0) -- (0, 0);
+    \draw[green] (0, 0) -- (1, 0);
+    \draw[red] (1, 0) -- (2, 0);
+    \draw (0, -0.15) -- ++(0, 0.3);
+    \node at (0, -0.5) (a) {$0$};
+    \draw (1, -0.15) -- ++(0, 0.3);
+    \node at (1, -0.5) (a) {$\chi^2_{n, 1 - \alpha}$};
+\end{tikzpicture}\]
+Против гипотезы $H_3: \sigma \neq \sigma_0$
+\[\begin{tikzpicture}
+    \draw[green] (-1, 0) -- (0, 0);
+    \draw[green] (0, 0) -- (0.5, 0);
+    \draw[green] (1.5, 0) -- ++(0.5, 0);
+    \draw[red] (0.5, 0) -- (1.5, 0);
+    \draw (0, -0.15) -- ++(0, 0.3);
+    \node at (0, -0.5) (a) {$0$};
+    \draw (0.5, -0.15) -- ++(0, 0.3);
+    \draw (1.5, -0.15) -- ++(0, 0.3);
+    \node at (0.5, 0.5) (a) {$\chi^2_{n, \alpha}$};
+    \node at (1.5, -0.5) (a) {$\chi^2_{n, 1 - \alpha}$};
+\end{tikzpicture}\]
+\subsection*{Задача}
+Если математическое ожидание неизвестно:
+\[T(x) = \frac{\sum_{i = 1}^{n} (x_i - \overline{X})^2}{\sigma_0^2}\]
+\[T(x) \big|_{H_0: \sigma = \sigma_0} \sim \chi^2(n - 1)\]
+Против гипотезы $H_1: \sigma < \sigma_0$
+\[\begin{tikzpicture}
+    \draw[green] (-1, 0) -- (0, 0);
+    \draw[red] (0, 0) -- (0.5, 0);
+    \draw[green] (0.5, 0) -- (2, 0);
+    \draw (0, -0.15) -- ++(0, 0.3);
+    \node at (0, -0.5) (a) {$0$};
+    \draw (0.5, -0.15) -- ++(0, 0.3);
+    \node at (0.5, 0.5) (a) {$\chi^2_{n - 1, \alpha}$};
+\end{tikzpicture}\]
+Против гипотезы $H_2: \sigma > \sigma_0$
+\[\begin{tikzpicture}
+    \draw[green] (-1, 0) -- (0, 0);
+    \draw[green] (0, 0) -- (1, 0);
+    \draw[red] (1, 0) -- (2, 0);
+    \draw (0, -0.15) -- ++(0, 0.3);
+    \node at (0, -0.5) (a) {$0$};
+    \draw (1, -0.15) -- ++(0, 0.3);
+    \node at (1, -0.5) (a) {$\chi^2_{n - 1, 1 - \alpha}$};
+\end{tikzpicture}\]
+Против гипотезы $H_3: \sigma \neq \sigma_0$
+\[\begin{tikzpicture}
+    \draw[green] (-1, 0) -- (0, 0);
+    \draw[green] (0, 0) -- (0.5, 0);
+    \draw[green] (1.5, 0) -- ++(0.5, 0);
+    \draw[red] (0.5, 0) -- (1.5, 0);
+    \draw (0, -0.15) -- ++(0, 0.3);
+    \node at (0, -0.5) (a) {$0$};
+    \draw (0.5, -0.15) -- ++(0, 0.3);
+    \draw (1.5, -0.15) -- ++(0, 0.3);
+    \node at (0.5, 0.5) (a) {$\chi^2_{n - 1, \alpha}$};
+    \node at (1.5, -0.5) (a) {$\chi^2_{n - 1, 1 - \alpha}$};
+\end{tikzpicture}\]
+\subsection*{Проверка гипотез о распределении случайных величин}
+\section*{Критерий Колмогорова (КАКОЙ ЖЕ ОН КРУТОЙ)}
+$X_1,\dots,\ X_n \sim F_{\xi} (x,\ \theta_0) = F_0(x),\ \theta_0$ известна. Проверяем гипотезу $H_0: \xi \sim F_0(x)$\\
+Колмогоров предложил считать $D_n = \max\limits_{1 \leq i \leq n} \left| \hat F_n (x_i) - F_0(x_i) \right|$.\\
+Если $n\to \infty$ (начиная с 20 уже хорошая апроксимация) и при условии верности $H_0$ получаем 
+\[\sqrt{n} D_n \sim K(t)\]
+Функция распределения Колмогорова
+\[K(t) = \sum_{j = -\infty}^{+\infty} (-1)^j \exp\{-j^2 t^2\}\]
+\subsection*{Критерий хи-квадрат}
+$X_1,\dots,\ X_n \sim F_{\xi}(x,\ \theta_0) = F_0(x)$, $\theta_0$ знаем. Проверяем гипотезу $H_0: \xi \sim F_0(x)$.\\
+Делим $\mathbb{R}^1$ на $l + 2$ интервала, где $S_0 = -\infty,\ S_{l + 1} = +\infty$ тогда $\hat p_k = \frac{n_k}{n},\ p_k^{(0)} = F_0(S_k) - F_0(S_{k - 1})$, где $k = \overline{1,\ l + 1}$.\\
+Здесь возникает $\hat \chi^2 = \sum_{k = 1}^{l + 1} \frac{n}{p^{(0)}_k} \left( \hat p_k - p_k^{(0)}\right)^2$
+\subsection*{Утверждение}
+Если $0 < p_k^{(0)} < 1$ для $\forall k = \overline{1,\ l + 1},\ n \to \infty$ и справедлива $H_0$, то 
+\[\hat \chi^2 \sim \chi^2 (l)\] 
+Тогда график будет выглядеть так
+\[\begin{tikzpicture}
+    \draw[green] (-1, 0) -- (0, 0);
+    \draw[green] (0, 0) -- (1, 0);
+    \draw[red] (1, 0) -- (2, 0);
+    \draw (0, -0.15) -- ++(0, 0.3);
+    \node at (0, -0.5) (a) {$0$};
+    \draw (1, -0.15) -- ++(0, 0.3);
+    \node at (1, -0.5) (a) {$\chi^2_{l, 1 - \alpha}$};
+\end{tikzpicture}\]
+\subsection*{Задача}
+Проверяем теории из биологии
+\[\begin{tabular}{|c|c|c|c|}
+    \hline
+   & $p_{k}^{(0)}$ & $n_k$ & $\hat p_k = \frac{n_k}{n}$\\\hline
+AB & $\frac{9}{16}$ & 315 & 0.556\\    \hline
+Ab & $\frac{3}{16}$ & 108 & 0.194\\    \hline
+aB & $\frac{3}{16}$ & 101 & 0.182\\    \hline
+ab & $\frac{1}{16}$ & 32  & 0.058\\    \hline
+\end{tabular}\]
+Теперь проверим $H_0: \vec{p}^{(0)} = \left( \frac{9}{16},\ \frac{3}{16},\ \frac{3}{16},\ \frac{1}{16} \right)$\\
+Применяя критерий хи-квадрат:
+\[\hat \chi^2 = 0.49,\ \text{посчитали за кадром}\]
+\[\hat \chi^2 \big|_{H_0} \sim \chi^2 (3)\]
+Тогда при параметрах $\alpha = 0.05,\ \chi^2_{3,\ 0.95} = 7.81\Rightarrow$ наш результат лежит в доверительной области.
 \end{document}
