@@ -874,5 +874,89 @@ ab & $\frac{1}{16}$ & 32  & 0.058\\    \hline
 \[\max W_{m,\ n} = \sum_{i = 1}^{n} R_i = (n + 2m + 1)\frac{n}{2}\]
 Если $\theta = 0$, то выборка должна быть перемешана, тогда для статистики справедливо.
 \[EW_{m,\ n}\big|_{H_0} = (n + m + 1)\frac{n}{2},\ \dev W_{m,\ n} = \frac{mn}{12}(m + n + 1)\]
-
+\begin{center}
+    \bf Лекция 7 марта
+\end{center}
+Разбираем пример на применение критерия Вилкоксона.\\
+$X_1,\dots,\ X_m \sim F_{x}(t)$ и $Y_1,\dots,\ Y_n \sim F_{y}(t - \theta)$. Проверяем гипотезу $H_0: \theta = 0$.
+\[W_{m,\ n} = \sum_{i = 1}^{n} R_i\]
+Пусть $m = 4,\ n = 2$, тогда есть $C^2_6 = 15$ способов расставить $y$. Пусть $(R_1,\ R_2) = (r_1,\ r_2)$, тогда: 
+\[\begin{tabular}{|c|c|c|}
+    \hline
+    $(r_1,\ r_2)$ & $W_{4,\ 2}$ & $P_{H_0}\big( (R_1,\ R_2) = (r_1,\ r_2) \big)$\\
+    \hline
+    $ (1,\ 2) $ & 3 & $\frac{1}{15}$\\
+    \hline
+    $ (1,\ 3) $ & 4 & $\frac{1}{15}$\\ 
+    \hline
+    $ (1,\ 4) $ & 5 & $\frac{1}{15}$\\ 
+    \hline
+    $ (1,\ 5) $ & 6 & $\frac{1}{15}$\\ 
+    \hline
+    $ (1,\ 6) $ & 7 & $\frac{1}{15}$\\ 
+    \hline
+    $ (2,\ 3) $ & 5 & $\frac{1}{15}$\\ 
+    \hline
+    $ (2,\ 4) $ & 6 & $\frac{1}{15}$\\ 
+    \hline
+    $ (2,\ 5) $ & 7 & $\frac{1}{15}$\\ 
+    \hline
+    $ (2,\ 6) $ & 8 & $\frac{1}{15}$\\ 
+    \hline
+    $ (3,\ 4) $ & 7 & $\frac{1}{15}$\\ 
+    \hline
+    $ (3,\ 5) $ & 8 & $\frac{1}{15}$\\ 
+    \hline
+    $ (3,\ 6) $ & 9 & $\frac{1}{15}$\\ 
+    \hline
+    $ (4,\ 5) $ & 9 & $\frac{1}{15}$\\ 
+    \hline
+    $ (4,\ 6) $ & 10 & $\frac{1}{15}$\\ 
+    \hline
+    $ (5,\ 6) $ & 11 & $\frac{1}{15}$\\ 
+    \hline
+\end{tabular}\]
+Теперь можем составить таблицу
+\[\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    $W_{4,\ 2}$ & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11\\
+    \hline
+    $P$ & $\frac{1}{15}$ & $\frac{1}{15}$ & $\frac{2}{15}$ & $\frac{2}{15}$ & $\frac{3}{15}$ & $\frac{2}{15}$ & $\frac{2}{15}$ & $\frac{1}{15}$ & $\frac{1}{15}$\\
+    \hline
+\end{tabular}\]
+Получается симметричное распределение, его функция распределения в некоторых точках:
+\[F_{W}(3) = \frac{1}{15},\ F_{W}(4) = \frac{2}{15}\]
+$E W_{m,\ n} = (m + n + 1)\frac{n}{2}\Rightarrow EW_{4,\ 2} = 7$\\
+Распределение дискретное, поэтому квантиль считается так 
+\[Z_{\beta} = \min\{x\ \big|\ F(x) \geq \beta\}\]
+Если $\min(m,\ n) \to\infty$, то 
+\[W^* = \left.\frac{W - EW_{m,\ n}}{\sqrt{\dev W_{m,\ n}}}\right|_{H_0} \to N(0,\ 1)\]
+Поправка на наличие связок. Имеется $l$ связок и $t_k$ --- размер $k$-ой связки ($k = \overline{1,\ l}$). Тогда
+\[\tilde \dev W_{m,\ n} = \dev W_{m,\ n} - \frac{mn\sum_{i = 1}^{l} t_k(t_k^2 - 1)}{12 N(N - 1)},\ \text{где $N = m + n$}\]
+Далее идёт 10 минут обсуждения плюсов данного метода.
+\subsection*{Проверка гипотезы об однородности против гипотезы о растяжении (сжатии)}
+$X_1,\dots,\ X_m \sim F(t - \mu)$ и $Y_1,\dots,\ Y_n \sim F\left( \frac{t - \mu}{\Delta} \right),\ \Delta > 0$\\
+Если $\displaystyle \int\limits_{-\infty}^{+\infty} tf(t)\, dt = 0$ и $\exists \dev X$, то\\
+$EX = \displaystyle \int\limits_{-\infty}^{+\infty} tf(t - \mu)\, dt = \left< z = t - \mu \right> = \int\limits_{-\infty}^{+\infty} (z + \mu) t(z)\, dz = \mu\\
+\dev X = \int\limits_{-\infty}^{+\infty} (t - \mu)^2 f(t - \mu)\, dt = \int\limits_{-\infty}^{+\infty} z^2\, f(z)\, dz\\
+\dev Y = \int\limits_{-\infty}^{+\infty} (t - \mu)^2 \frac{1}{\Delta} f\left( \frac{t - \mu}{\Delta} \right) \, dt = \left< \begin{aligned}
+    & z =\frac{t - \mu}{\Delta}\\
+    & dz = \frac{1}{\Delta} dt
+\end{aligned} \right> \int\limits_{-\infty}^{+\infty} \Delta^2 z^2 f(z)\, dz = \Delta^2 \dev X\Rightarrow \frac{\dev Y}{\dev X} = \Delta^2$
+\subsection*{Критерий Фишера}
+$X_1,\dots,\ X_m \sim N(m_1,\ \sigma_1^2),\ Y_1,\dots,\ Y_n \sim N(m_2,\ \sigma_2^2)$\\
+Случайные величины независимы, параметры неизвестны. Проверяем гипотезу $H_0: \sigma_1^2 = \sigma_2^2$
+\[T(x,\ y) = \frac{\frac{1}{m - 1} \sum_{i = 1}^{m} (x_i - \overline{X})^2}{\frac{1}{n - 1} \sum_{i = 1}^{n} (y_i - \overline{Y})^2} \Big|_{H_0} \sim F(m - 1,\ n - 1),\ \text{распределение Фишера}\]
+$\xi \sim F(m,\ n)\Rightarrow \frac{1}{\xi} \sim F(n,\ m)$. Тогда для квантилей справедливо:
+\[z_{\beta} - \text{ квантиль уровня $\beta$ распределения $F(m,\ n)$}, \frac{1}{z_{\beta}} - \text{квантиль уровня $(1 - \beta)$ распределения $F(n,\ m)$}\]
+$\beta = P(\xi \leq z_{\beta}) = P(\frac{1}{\xi} \geq \frac{1}{z_{\beta}}) = 1 - \underset{=1 - \beta}{\underbrace{P(\frac{1}{\xi} \leq \frac{1}{z_{\beta}})}}$\\
+$H_1: \sigma_1^2 < \sigma_2^2$\\
+$\tilde S_1^2 > \tilde S_2^2 \Rightarrow \text{принимаем $H_0$}$\\
+$\tilde S_1^2 < \tilde S_2^2,\ T(x,\ y) = \frac{\tilde S_2^2}{\tilde S_1^2} \sim F(n - 1,\ m - 1)\Rightarrow$ на правом хвосте критическая область.\\
+$H_2: \sigma_1^2 > \sigma^2_2\\
+\tilde S_1^2 < \tilde S_2^2 \Rightarrow \text{принимаем $H_0$}\\
+\tilde S_1^2 > \tilde S_2^2,\ T(x,\ y) = \frac{\tilde S_1^2}{\tilde S_2^2} \sim F(m - 1,\ n - 1)\Rightarrow$ снова на правом хвосте критическая область (поменяли числитель и знаменатель).\\
+$H_3: \sigma_1 \neq \sigma_2$\\
+$\tilde S_1^2 < \tilde S_2^2,\ T(x,\ y) = \frac{\tilde S_2^2}{\tilde S_1^2}\sim F(n - 1,\ m - 1)\Rightarrow$ критическая область на правом хвосте.\\
+$\tilde S_1^2 > \tilde S_2^2,\ T(x,\ y) = \frac{\tilde S_1^2}{\tilde S_2^2} \sim F(m - 1,\ n - 1)\Rightarrow$ на правом хвосте критическая область.\\
 \end{document}
