@@ -17,8 +17,8 @@
 \usepackage{tikz}
 \usepackage{cancel}
 
-\usepackage{fontspec}
-\setmainfont{Times New Roman}
+% \usepackage{fontspec}
+% \setmainfont{Calibri}
 
 \title{Математическая статистика.}
 \author{Андрей Тищенко \href{https://t.me/AndrewTGk}{@AndrewTGk}}
@@ -810,4 +810,82 @@ $n = 25,\ \frac{1}{n}\sum_{i = 1}^{n}(x_i - \mu)^2 = 0.02,\ \alpha = 0.05$. Пр
 \[T(x) = \frac{\overset{=nS^2}{\overbrace{\sum_{i = 1}^{n}\left( x_i - \overline{X} \right)^2}}}{18} = \frac{17\cdot 16}{18}\approx 15.11 \sim \chi^2(16)\]
 Доверительный интервал $(\chi^2_{0.25,\ 16},\ \chi^2_{0.975,\ 16}) \approx (6.9,\ 28.84)\Rightarrow$ статистика не попала, принимаем $H_1$. 
 
+\begin{center}
+    \bf Семинар 7 марта
+\end{center}
+\subsection*{Задача}
+В первых 10\,000 знаках после запятой числа $\pi$ справедлива такая таблица 
+\[\begin{tabular}{|c|c|}
+    \hline
+    Цифра & Количество вхождений $\nu_i$\\
+    \hline
+    0 & 968\\
+    \hline
+    1 & 1026\\
+    \hline
+    2 & 1021\\
+    \hline
+    3 & 974\\
+    \hline
+    4 & 1014\\
+    \hline
+    5 & 1046\\
+    \hline
+    6 & 1021\\
+    \hline
+    7 & 970\\
+    \hline
+    8 & 948\\
+    \hline
+    9 & 1012\\
+    \hline
+\end{tabular}\]
+Проверяем $H_0: p_1 = \dots = p_{10} = \frac{1}{10}\\
+\hat \chi^2 = \sum\limits_{k = 1}^{10} \frac{n}{p_k^{(0)}} \left( \hat p_k - p_k^{(0)}\right)\Big|_{H_0} \sim \chi^2 (9)$. $\hat p_k = \frac{\nu_k}{n},\ p_k\big|_{H_0} = \frac{1}{10}$.\\
+В нашем случае $\hat \chi^2 = \sum_{i =1}^{10}\frac{\left(\frac{\nu_i}{n} - p_k\right)^2}{p_k} = 9.318$, квантиль $\chi^2_{9,\ 0.95} = 16.92$. Попали в доверительную облатсь, значит $H_0$ верна.
+\subsection*{Задачи на критерий Стьюдента}
+$X_1,\dots,\ X_m \sim N(m_1,\ \sigma^2)\\
+Y_1,\dots,\ Y_n \sim N(m_2,\ \sigma^2)$\\
+$X,\ Y$ независимы, $\sigma$ неизвестны, но одинаковы (если сомневаемся, то проверяем критерием Фишера). Тогда для проверки гипотезы $H_0: \theta =  m_1 - m_2 = 0$ можно использовать статистику
+\[T(x,\ y) = \frac{\overline{X} - \overline{Y}}{S\sqrt{\frac{1}{n} + \frac{1}{m}}}\Big|_{H_{0}} \sim t(m + n - 2)\]
+$S^2 = \frac{\sum_{i = 1}^{m} (x_i - \overline{X})^2 = \sum_{i = 1}^{n} (y_i - \overline{Y})^2}{m + n - 2}$
+\subsection*{Задача}
+$X_1,\dots,\ X_{29} \sim N(m_1,\ \sigma^2)\\
+Y_1,\dots,\ Y_{16} \sim N(m_2,\ \sigma^2)\\
+H_0: m_1 = m_2$ против $H_1: m_1 > m_2$.\\
+Дано $\overline{X} = 2.5,\ \overline{Y} = 2.06,\ S_{x}^2 = 0.67,\ S_{y}^2 = 0.42\\
+T(x,\ y) = \frac{\overline{X} - \overline{Y}}{S\sqrt{\frac{1}{n} + \frac{1}{m} }}\\
+S^2 = \frac{\sum_{i = 1}^{29} (x_i - \overline{X})^2 + \sum_{i = 1}^{16} (y_i - \overline{Y})}{m + n - 2} = \frac{nS_x^2 + mS_y^2}{m + n - 2} = 0.608\Rightarrow S = 0.78$\\
+Подставим числа в статистику, получаем $T(x,\ y) = 1.81$, а квантиль $t_{43,\ 0.95} \approx 1.68$. Критическая область находится справа, значит статистика попала в критическую область и мы принимаем $H_1$.
+\subsection*{Задача про кобальт и кроликов}
+$X_1,\dots,\ X_m \sim F(t),\ \text{контрольная выборка}\\
+Y_1,\dots,\ Y_n \sim F(t - \theta),\ \text{опытная группа}$.\\
+Проверяем гипотезу $H_0: \theta = 0$ против $H_1: \theta > 0$. На лекции доказывалось, что $\theta = EY - EX$.\\
+Распределение мы не знаем, значит не знаем ничего про равенство дисперсий, значит критерий Стьюдента применять мы здесь не можем, воспользуемся критерием Вилкоксона.\\
+\[W = \sum_{i = 1}^{n} R_i,\ \text{сумма рангов $y$ в вариационном ряду}\]
+Контрольная группа: 560, 580, 600, 420, 530, 490, 580, 740\\
+Опытная группа: 692, 700, 621, 640, 561, 680, 630\\
+Упорядочим: $420_x,\ 490_x,\ 530_x,\ 560_x,\ 561_y,\ 580_x,\ 580_x,\ 600_x,\ 621_y,\ 630_y,\ 640_y,\ 680_y,\ 692_y,\ 700_y,\ 740_x$\\
+Итого ранги $y:$ 5, 9, 10, 11, 12, 13, 14. Сумма рангов $74$. Если хотим проверить на уровне значимости $0.05$ столкнёмся с проблемой дискретности распределения, поэтому придётся брать квантиль уровня $0.047$, который равен 71. Попали в критическую область, значит кобальтовые добавки влияют на вес кроликов.\\
+$EW_{8,\ 7} = (8 + 7 + 1)\frac{7}{2} = 56,\ \dev W_{8,\ 7} = \frac{7\cdot 8}{12} \cdot (8 + 7 + 1) \approx 74.667$\\
+Если брать аппроксимацию гауссовской величиной:
+\[W^* = \frac{W - 56}{\sqrt{72}} \sim N(0,\ 1)\]
+В наших числах $W^* \approx 2,12$. На уровне значимости 0.95, а критическая область начинается с $1.64$, то есть тут тоже приняли бы альтернативу. 
+\begin{center}
+    \bf ДЗ
+\end{center}
+\subsection*{Задача 5}
+Показать, что если $X\sim F(t)$, а $Y\sim F(t - \theta)$, то $H_0: \theta < 0 \Rightarrow EY < EX$\\
+Распишем по определению:
+\begin{equation*}
+    \begin{aligned}
+        EX &= \int\limits_{-\infty}^{+\infty} tf(t)\, dt\\
+        EY &= \int\limits_{-\infty}^{+\infty} tf(t - \theta)\, dt = \left< \begin{aligned}
+            z &= t - \theta\\
+            dt &= dz
+        \end{aligned} \right> = \int\limits_{-\infty}^{+\infty} (z + \theta) f(z)\, dz = \int\limits_{-\infty}^{+\infty} zf(z)\, dz + \theta \underset{=1}{\underbrace{\int\limits_{-\infty}^{+\infty} f(z)\, dz}} = EX + \theta\\
+        EY = EX + \theta\Big|_{H_0} < EX
+    \end{aligned}
+\end{equation*}
+Доказали.
 \end{document}

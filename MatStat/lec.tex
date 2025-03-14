@@ -17,8 +17,8 @@
 \usepackage{tikz}
 \usepackage{cancel}
 
-\usepackage{fontspec}
-\setmainfont{Calibri}
+% \usepackage{fontspec}
+% \setmainfont{Calibri}
 
 \newcommand{\sion}{\sum\limits_{i = 1}^{n}}
 \newcommand{\dev}{\mathcal{D}}
@@ -946,10 +946,10 @@ $EX = \displaystyle \int\limits_{-\infty}^{+\infty} tf(t - \mu)\, dt = \left< z 
 \subsection*{Критерий Фишера}
 $X_1,\dots,\ X_m \sim N(m_1,\ \sigma_1^2),\ Y_1,\dots,\ Y_n \sim N(m_2,\ \sigma_2^2)$\\
 Случайные величины независимы, параметры неизвестны. Проверяем гипотезу $H_0: \sigma_1^2 = \sigma_2^2$
-\[T(x,\ y) = \frac{\frac{1}{m - 1} \sum_{i = 1}^{m} (x_i - \overline{X})^2}{\frac{1}{n - 1} \sum_{i = 1}^{n} (y_i - \overline{Y})^2} \Big|_{H_0} \sim F(m - 1,\ n - 1),\ \text{распределение Фишера}\]
+\[T(x,\ y) = \frac{\frac{1}{m - 1} \sum_{i = 1}^{m} {\left(x_i - \overline{X}\right)}^2}{\frac{1}{n - 1} \sum_{i = 1}^{n} {\left(y_i - \overline{Y}\right)}^2} \Bigg|_{H_0} \sim F(m - 1,\ n - 1),\ \text{распределение Фишера}\]
 $\xi \sim F(m,\ n)\Rightarrow \frac{1}{\xi} \sim F(n,\ m)$. Тогда для квантилей справедливо:
 \[z_{\beta} - \text{ квантиль уровня $\beta$ распределения $F(m,\ n)$}, \frac{1}{z_{\beta}} - \text{квантиль уровня $(1 - \beta)$ распределения $F(n,\ m)$}\]
-$\beta = P(\xi \leq z_{\beta}) = P(\frac{1}{\xi} \geq \frac{1}{z_{\beta}}) = 1 - \underset{=1 - \beta}{\underbrace{P(\frac{1}{\xi} \leq \frac{1}{z_{\beta}})}}$\\
+$\beta = P\left(\xi \leq z_{\beta}\right) = P\left(\frac{1}{\xi} \geq \frac{1}{z_{\beta}}\right) = 1 - \underset{=1 - \beta}{\underbrace{P\left(\frac{1}{\xi} \leq \frac{1}{z_{\beta}}\right)}}$\\
 $H_1: \sigma_1^2 < \sigma_2^2$\\
 $\tilde S_1^2 > \tilde S_2^2 \Rightarrow \text{принимаем $H_0$}$\\
 $\tilde S_1^2 < \tilde S_2^2,\ T(x,\ y) = \frac{\tilde S_2^2}{\tilde S_1^2} \sim F(n - 1,\ m - 1)\Rightarrow$ на правом хвосте критическая область.\\
