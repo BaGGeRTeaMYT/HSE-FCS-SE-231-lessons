@@ -35,46 +35,46 @@
 \subsection*{Задача 1}
 $x_1,\dots,\ x_n\sim F_{\xi}(x)$, найти функцию распределения для $X_{(n)},\ X_{(1)}$\\
 $F_{X_{(n)}}(x) = P(X_{(n)} \leq x) = P(X_{(1)} \leq x,\dots,\ X_{(n)} \leq x) = P(X_1 \leq x,\dots,\ X_n \leq x) =\\
-=P(X_1\leq x) \dots P(X_n \leq x) =(F_{\xi}(x))^{n}$\\
+    =P(X_1\leq x) \dots P(X_n \leq x) ={(F_{\xi}(x))}^{n}$\\
 $F_{X_{(1)}}(x) = P(X_{(1)} \leq x) = 1 - P(X_{(1)} > x) = 1 - P(X_{(1)} > x,\dots,\ X_{(n)} > x) =\\
-= 1 - P(X_1 > x,\dots,\ X_n > x) = 1 - P(X_1 > x)\dots P(X_n > x) = 1 - \big(1 - F_{\xi}(x)\big)^n$
+    = 1 - P(X_1 > x,\dots,\ X_n > x) = 1 - P(X_1 > x)\dots P(X_n > x) = 1 - {\big(1 - F_{\xi}(x)\big)}^n$
 \subsection*{Задача 2}
 $x_1,\dots,\ x_n \sim R(0,\ 1)$. Найти $EX_{(n)},\ EX_{(1)}$.\\
 $F_{X_{(n)}}(x) = \big( F_{\xi}(x) \big)^n$\\
 $f_{X_{(n)}}(x) = \big( F_{X_{(n)}}(x) \big)' = n\big(F_{\xi}(x)\big)^{n - 1}\cdot f_{\xi}(x)$\\
 $F_{\xi}(x) = \begin{cases}
-    0,\ x < 0\\
-    x,\ x\in [0,\ 1]\\
-    1,\ x > 1
-\end{cases}$\\
+        0,\ x < 0        \\
+        x,\ x\in [0,\ 1] \\
+        1,\ x > 1
+    \end{cases}$\\
 Подставим в предыдущее уравнение:
 \[f_{X_{(n)}} = \begin{cases}
-    0,\ x < 0\\
-    nx^{n - 1},\ x\in [0,\ 1]\\
-    0,\ x > 1
-\end{cases}\]
+        0,\ x < 0                 \\
+        nx^{n - 1},\ x\in [0,\ 1] \\
+        0,\ x > 1
+    \end{cases}\]
 $EX_{(n)} = \displaystyle\int\limits_{-\infty}^{+\infty} xf_{X_{(n)}}(x)\, dx = \int\limits_0^1 xnx^{n - 1}\, dx = n\int\limits_0^1 x^n\, dx = \frac{n}{n + 1}$\\
 Посчитаем для $X_{(1)}$:\\
 $F_{X_{(1)}}(x) = 1 - (1 - F_{\xi}(x))^n\\
-f_{X_{(1)}}(x) = \big(F_{X_{(1)}}(x)\big)' = n(1 - F_{\xi}(x))^{n - 1} \big(F_{\xi}(x)\big)' = n(1 - F_{\xi}(x))^{n - 1} f_{\xi}(x) = \begin{cases}
-    0,\ x < 0\\
-    n(1 - x)^{n - 1},\ 0 \leq x \leq 1\\
-    0,\ x > 1
-\end{cases}$\\
+    f_{X_{(1)}}(x) = \big(F_{X_{(1)}}(x)\big)' = n(1 - F_{\xi}(x))^{n - 1} \big(F_{\xi}(x)\big)' = n(1 - F_{\xi}(x))^{n - 1} f_{\xi}(x) = \begin{cases}
+        0,\ x < 0                          \\
+        n(1 - x)^{n - 1},\ 0 \leq x \leq 1 \\
+        0,\ x > 1
+    \end{cases}$\\
 $EX_{(1)} = \displaystyle \int\limits_0^1 xn(1 - x)^{n - 1}\, dx = n\int\limits_0^1 x(1 - x)^{n - 1}\, dx = \left< \begin{matrix}
-    t = 1 - x\\
-    x = 1 - t
-\end{matrix}\right> = -n\int\limits_1^0 (1 - t)t^{n - 1}\, dt = n\int\limits_0^1(1 - t)t^{n - 1}\, dt =\\
-= n\int\limits_0^1 t^{n - 1}\, dt - n\int\limits_0^1 t^{n}\, dt = 1 - \frac{n}{n + 1}$
+        t = 1 - x \\
+        x = 1 - t
+    \end{matrix}\right> = -n\int\limits_1^0 (1 - t)t^{n - 1}\, dt = n\int\limits_0^1(1 - t)t^{n - 1}\, dt =\\
+    = n\int\limits_0^1 t^{n - 1}\, dt - n\int\limits_0^1 t^{n}\, dt = 1 - \frac{n}{n + 1}$
 \subsection*{Задача 3}
 $\overline{x} = \frac{1}{n}\sum_{i = 1}^{n} x_i$\\
 $E\overline{x} = E\left( \frac{1}{n} \sum_{i = 1}^{n} x_i \right) = \frac{1}{n} \sum_{i = 1}^{n} E(x_i) = Ex_i\\
-\mathcal{D}(\overline{x}) = \mathcal{D}\left( \frac{1}{n} \sum_{i = 1}^{n} x_i \right) = \frac{1}{n^2} \sum_{i = 1}^{n} \mathcal{D}x_i = \frac{\mathcal{D}x_i}{n}$\\
+    \mathcal{D}(\overline{x}) = \mathcal{D}\left( \frac{1}{n} \sum_{i = 1}^{n} x_i \right) = \frac{1}{n^2} \sum_{i = 1}^{n} \mathcal{D}x_i = \frac{\mathcal{D}x_i}{n}$\\
 Посчитаем выборочную дисперсию:
 \[S^2 = \frac{1}{n} \sum_{i = 1}^{n}(x_i - \overline{x})^2\]
 $ES^2 = E\left( \frac{1}{n} \sum_{i = 1}^{n} (x_i - \overline{x})^2 \right) = \frac{1}{n}\sum_{i = 1}^{n} E(x_i - \overline{x})^2 = \mathcal{D}(x_1 - \overline{x}) = \mathcal{D}(x_1) + \mathcal{D}(\overline{x}) - 2\cov(x_1,\ \overline{x}) = \frac{(n + 1)\dev(x_1)}{n} -\\- 2\cov(x_1,\ \overline{x})\\
-\cov (x_1,\ \overline{x}) = \cov(x_1,\ \frac{1}{n} \sum_{i = 1}^{n} x_i) = \frac{1}{n}\cov (x_1,\ \sum_{i = 1}^{n} x_i) = \frac{1}{n} \cov (x_1,\ x_1) = \frac{\dev(x_1)}{n}$\\
-Тогда 
+    \cov (x_1,\ \overline{x}) = \cov(x_1,\ \frac{1}{n} \sum_{i = 1}^{n} x_i) = \frac{1}{n}\cov (x_1,\ \sum_{i = 1}^{n} x_i) = \frac{1}{n} \cov (x_1,\ x_1) = \frac{\dev(x_1)}{n}$\\
+Тогда
 \[ES^2 = \frac{(n + 1)\dev(x_1)}{n} - \frac{2\dev(x_1)}{n} = \dev(x_1)\left(1 - \frac{1}{n}\right)\]
 Несмещённая выборачная дисперсия (её математическое ожидание равняется дисперсии $x_1$):
 \[\tilde{S}^2 = \frac{1}{n - 1} \sum_{i = 1}^{n} (x_i - \overline{x})^2\]
@@ -87,21 +87,20 @@ $ES^2 = E\left( \frac{1}{n} \sum_{i = 1}^{n} (x_i - \overline{x})^2 \right) = \f
 \end{center}
 $T(x_1, x_2, \dots, x_n) = \sqrt{\frac{\pi}{2}}\frac{1}{n}\sum \limits_{i=1}^n |x_i - m|$, $x_i \sim N(m, \theta^2)$
 
-$\displaystyle E T(x_1, x_2, \dots, x_n) = \sqrt{\frac{\pi}{2}}\frac{1}{n}\sum \limits_{i=1}^n E |x_i - m| = \sqrt{\frac{\pi}{2}}\ E |x_1 - m| = \sqrt{\frac{\pi}{2}}\ \int \limits_{-\infty}^{+\infty} {|x - m| \frac{1}{\sqrt{2\pi}\theta} e^{-\frac{(x-m)^2}{2\theta^2}} dx}$ 
+$\displaystyle E T(x_1, x_2, \dots, x_n) = \sqrt{\frac{\pi}{2}}\frac{1}{n}\sum \limits_{i=1}^n E |x_i - m| = \sqrt{\frac{\pi}{2}}\ E |x_1 - m| = \sqrt{\frac{\pi}{2}}\ \int \limits_{-\infty}^{+\infty} {|x - m| \frac{1}{\sqrt{2\pi}\theta} e^{-\frac{(x-m)^2}{2\theta^2}} dx}$
 
-Заменим $\frac{x-m}{\theta}$ на $y$ 
+Заменим $\frac{x-m}{\theta}$ на $y$
 
 $\displaystyle\frac{\theta}{2}\int \limits_{-\infty}^{+\infty}|y|\cdot e^{\frac{-y^2}{2}} dy  = \theta \int \limits_{0}^{+\infty} y\cdot e^{\frac{-y^2}{2}} dy = \theta (1-0) = \theta$
-
 
 \[\frac{1}{n}\sum \limits_{i=1}^{n} \sqrt{\frac{\pi}{2}} \ |x_i-m| \xrightarrow[n\to+\infty]{\text{п.\ н.}}  E\sqrt{\frac{\pi}{2}} \ |x_i-m|\]
 
 \subsection*{Задача}
 $X = (X_1,\dots,\ X_n),\ X_i\sim R(0,\ \theta)$\\
 $\hat{\theta} = X_{(n)},$ доказать $ \lim\limits_{n\to\infty} EX_{(n)} = \theta\\
-F_{X_{(n)}} (x) = (F_{X_i}(x))^n = \left(\frac{x}{\theta}\right)^n\\
-f_{X_{(n)}} (x) = \frac{d F_{X_{(n)}}}{dx} = \frac{nx^{n - 1}}{\theta}\\
-\displaystyle E X_{(n)} = \int \limits _0^{\theta} \frac{n x^n}{\theta^n}\, dx = \left.\frac{n x^{n + 1}}{(n + 1)\theta^n} \right|_0^{\theta} = \frac{n}{n + 1}\theta \xrightarrow[n\to\infty]{} \theta$. То есть смещённая, но асимптотически несмещённая.\\
+    F_{X_{(n)}} (x) = (F_{X_i}(x))^n = \left(\frac{x}{\theta}\right)^n\\
+    f_{X_{(n)}} (x) = \frac{d F_{X_{(n)}}}{dx} = \frac{nx^{n - 1}}{\theta}\\
+    \displaystyle E X_{(n)} = \int \limits _0^{\theta} \frac{n x^n}{\theta^n}\, dx = \left.\frac{n x^{n + 1}}{(n + 1)\theta^n} \right|_0^{\theta} = \frac{n}{n + 1}\theta \xrightarrow[n\to\infty]{} \theta$. То есть смещённая, но асимптотически несмещённая.\\
 Докажем состоятельность, хотим:
 \[\forall \varepsilon > 0\quad P(|\hat{\theta} - \theta| < \varepsilon) \xrightarrow[n\to\infty]{} 1\]
 \[P(-\varepsilon < X_{(n)} - \theta < \varepsilon) = F_{X_(n)} (\varepsilon + \theta) - F_{X_{(n)}}(\theta - \varepsilon) = 1 - \left( \frac{\theta - \varepsilon}{\theta} \right)^n \xrightarrow[n\to\infty]{} 1\]
@@ -109,25 +108,25 @@ f_{X_{(n)}} (x) = \frac{d F_{X_{(n)}}}{dx} = \frac{nx^{n - 1}}{\theta}\\
 $I_n(\theta) = E\left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \right)^2,\ I_n(\theta) = nI_1(\theta),\ x_1,\dots,\ x_n\sim N(\theta,\ \sigma^2)$.\\
 $f(x,\ \theta) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x - \theta)^2}{2\sigma^2}}$\\
 $\ln f(x,\ \theta) = \ln \left( \frac{1}{\sqrt{2\pi}\sigma }e^{-\frac{(x - \theta)^2}{2\sigma^2}} \right) = -\frac{(x - \theta)^2}{2\sigma^2} + \ln \frac{1}{\sqrt{2\pi}\sigma}\\
-\frac{\delta\ln f(x,\ \theta)}{\delta\theta} = -\frac{2(x - \theta)}{2\sigma^2}\cdot (-1) = \frac{x - \theta}{\sigma^2}\\
-E\left( \frac{x - \theta}{\sigma^2} \right)^2 = \frac{1}{\sigma^4} E(x - \theta)^2 = \frac{1}{\sigma^4} \sigma^2 = \frac{1}{\sigma^2} = I_1(\theta)\\
-\dev \hat{\theta} \geq \frac{1}{nI_1(\theta)} = \frac{\sigma^2}{n} =\mathcal{D}\overline{x}$
+    \frac{\delta\ln f(x,\ \theta)}{\delta\theta} = -\frac{2(x - \theta)}{2\sigma^2}\cdot (-1) = \frac{x - \theta}{\sigma^2}\\
+    E\left( \frac{x - \theta}{\sigma^2} \right)^2 = \frac{1}{\sigma^4} E(x - \theta)^2 = \frac{1}{\sigma^4} \sigma^2 = \frac{1}{\sigma^2} = I_1(\theta)\\
+    \dev \hat{\theta} \geq \frac{1}{nI_1(\theta)} = \frac{\sigma^2}{n} =\mathcal{D}\overline{x}$
 \begin{center}
     Семинар 24 января
 \end{center}
 \subsection*{Задача 4 ДЗ}
 $\hat{K}_{xy} = \frac{1}{n} \sum_{i = 1}^{n} (x_i - \overline{X})(y_i - \overline{Y}) = \frac{1}{n} \sum_{i = 1}^{n} (x_i - \overline{X} + Ex_1 - Ex_1)(y_i - \overline{Y} + Ey_1 - Ey_1)$\\
 $E\hat{K}_{xy} = E\frac{1}{n} \sum_{i = 1}^{n} \left( (x_i - Ex_1) - (\overline{X} - Ex_1) \right) \left( (y_1 - Ey_1) - (\overline{Y} - Ey_1) \right) =\\
-= E\left( (x_i - Ex_1) - (\overline{X} - Ex_1) \right) \cdot \left( (y_1 - Ey_1) - (\overline{Y} - Ey_1) \right) = E\left( (x_1 - Ex_1)(y_1 - Ey_1) + (x_1 - Ex_1)(\overline{Y} - Ey_1) +\\
-+(\overline{X} - Ex_1)(y_1 - Ey_1) + (\overline{X} - Ex_1)(\overline{Y} - Ey_1) \right) = \\
-=\cov(x,\ y) - \frac{1}{n}\cov(x,\ y) - \frac{1}{n}\cov(x,\ y) + \frac{1}{n}\cov(x,\ y) $
+    = E\left( (x_i - Ex_1) - (\overline{X} - Ex_1) \right) \cdot \left( (y_1 - Ey_1) - (\overline{Y} - Ey_1) \right) = E\left( (x_1 - Ex_1)(y_1 - Ey_1) + (x_1 - Ex_1)(\overline{Y} - Ey_1) +\\
+    +(\overline{X} - Ex_1)(y_1 - Ey_1) + (\overline{X} - Ex_1)(\overline{Y} - Ey_1) \right) = \\
+    =\cov(x,\ y) - \frac{1}{n}\cov(x,\ y) - \frac{1}{n}\cov(x,\ y) + \frac{1}{n}\cov(x,\ y) $
 \subsection*{Задача 5 ДЗ}
 Решал у доски, всем gl.
 \subsection*{Задача 1}
 $X_1,\dots,\ X_n \sim \Pi(\theta)$. Проверить, что оценка $\hat{\theta} = \overline{X}$ является R-эффективной.\\
 $E\hat{\theta} = E\frac{1}{n} \sum_{i = 1}^{n} x_i = Ex_1 = \theta\\
-\dev \frac{1}{n} \sum_{i = 1}^{n} x_i = \frac{1}{n}\theta\\
-P(\xi = x_1) = \frac{e^{-\theta}\theta^{x_1}}{x_1!}$. Логарифмируем:
+    \dev \frac{1}{n} \sum_{i = 1}^{n} x_i = \frac{1}{n}\theta\\
+    P(\xi = x_1) = \frac{e^{-\theta}\theta^{x_1}}{x_1!}$. Логарифмируем:
 \[\ln \frac{e^{-\theta}\theta^{x_1}}{x_1!} = {-\theta + x_1 \ln \theta - \ln x_1!}\]
 Возьмём частную производную:
 \[\frac{\delta(-\theta + x_1 \ln \theta - \ln x_1!)}{\delta\theta} = -1 + \frac{x_1}{\theta}\]
@@ -135,7 +134,7 @@ P(\xi = x_1) = \frac{e^{-\theta}\theta^{x_1}}{x_1!}$. Логарифмируем
 \[E(-1 + \frac{x_1}{\theta})^2 = \frac{1}{\theta^2} E(x_1 - \theta)^2 = \frac{\dev x_1}{\theta^2} = \frac{1}{\theta}\Rightarrow I_n(\theta) = \frac{n}{\theta}\]
 Попробуем самостоятельно подогнать оценку:\\
 $U(x,\ \theta) = \sum_{i = 1}^{n} -1 + \frac{x_1}{\theta} = \frac{1}{\theta} \sum_{i = 1}^{n} (x_i - \theta) = \frac{1}{\theta}\left(-n\theta + \sum_{i = 1}^{n} \frac{x_i}{n}\right) = \frac{n}{\theta}\left( \sum_{i = 1}^{n} \left( \frac{x_i}{n}\right) - \theta \right)\\
-\hat{\theta} - \theta = a(\theta)U(x,\ \theta)\Rightarrow a(\theta) = \frac{\theta}{n},\ \hat{\theta} = \sum_{i = 1}^{n} \frac{x_i}{n}$
+    \hat{\theta} - \theta = a(\theta)U(x,\ \theta)\Rightarrow a(\theta) = \frac{\theta}{n},\ \hat{\theta} = \sum_{i = 1}^{n} \frac{x_i}{n}$
 \begin{center}
     ДЗ
 \end{center}
@@ -156,7 +155,7 @@ $X_1,\dots,\ X_n\sim N(m,\ \theta)\Rightarrow f(x_i,\ \theta) = \frac{1}{\sqrt{2
 $X_1,\dots,\ X_n \sim G(\theta)\Rightarrow Ex = \frac{1}{\theta}$. Проверить оценку $\hat{\theta} = \frac{1}{\overline{X}}$ на несмещённость.\\
 Хотим $E\hat{\theta} = \theta$. Попробуем по определению:
 \[E\hat{\theta} = E \frac{n}{\sum\limits_{i = 1}^{n} x_i} = n E\frac{1}{\sum\limits_{i = 1}^{n} x_i}?\]
-Для $k = 1$ 
+Для $k = 1$
 Попробуем решить через функцию правдоподобия:
 \[L(x_1,\dots,\ x_n,\ \theta) = \prod_{i = 1}^{n} P(\xi = x_i,\ \theta) = \prod_{i = 1}^{n} (1 - \theta)^{x_i - 1}\theta \approx f(x,\ \theta)\]
 \[\ln f(x_i,\ \theta) = \ln \big( (1 - \theta)^{x_i - 1} \theta \big) = (x_i - 1)\ln (1 - \theta) + \ln \theta\]
@@ -180,42 +179,42 @@ $X_1,\dots,\ X_n \sim Bi(k,\ \theta)$. Показать, что $\hat{\theta}  =
 \subsection*{Задача 1}
 $X_1,\dots,\ X_n \sim f(x,\ \theta)$\\
 $f(x,\ \theta) = \begin{cases}
-    \frac{2}{\theta} x e^{-\frac{x^2}{\theta}},\ x \geq 0\\
-    0,\ x < 0
-\end{cases}$\\
+        \frac{2}{\theta} x e^{-\frac{x^2}{\theta}},\ x \geq 0 \\
+        0,\ x < 0
+    \end{cases}$\\
 Решал у доски.
 \subsection*{Задача 2}
 $X_1,\dots,\ X_n \sim R(\theta_1,\ \theta_2)$, найти оценку максимального правдоподобия.\\
 $f(x,\ \theta_1,\ \theta_2) = \begin{cases}
-    \frac{1}{\theta_2 - \theta_1},\ x\in (\theta_1,\ \theta_2)\\
-    0,\ \text{иначе}
-\end{cases}\\
-L(x,\ \theta_1,\ \theta_2) = \prod\limits_{i = 1}^{n} f(x_i,\ \theta) = \begin{cases}
-    \left( \frac{1}{\theta_2 - \theta_1} \right)^n,\ x_i \in (\theta_1,\ \theta_2)\\
-    0,\ \text{иначе}
-\end{cases}$\\
+        \frac{1}{\theta_2 - \theta_1},\ x\in (\theta_1,\ \theta_2) \\
+        0,\ \text{иначе}
+    \end{cases}\\
+    L(x,\ \theta_1,\ \theta_2) = \prod\limits_{i = 1}^{n} f(x_i,\ \theta) = \begin{cases}
+        \left( \frac{1}{\theta_2 - \theta_1} \right)^n,\ x_i \in (\theta_1,\ \theta_2) \\
+        0,\ \text{иначе}
+    \end{cases}$\\
 Тогда $\hat{\theta}_1 = X_{(1)},\ \hat{\theta}_2 = X_{(n)}$.\\
 Попробуем по методу моментов:
 \[\begin{cases}
-    \hat{\mu}_1 = \mu_1\\
-    \hat{\mu}_2 = \mu_2 = \frac{(\theta_2 - \theta_1)^2}{12} + (\mu_1)^2
-\end{cases}\]
+        \hat{\mu}_1 = \mu_1 \\
+        \hat{\mu}_2 = \mu_2 = \frac{(\theta_2 - \theta_1)^2}{12} + (\mu_1)^2
+    \end{cases}\]
 Распишем эту систему:
 \[\begin{cases}
-    \frac{1}{n} \sum_{i = 1}^{n} x_i = \frac{\theta_1 + \theta_2}{2}\\
-    \frac{1}{n} \sum_{i = 1}^{n} x_i^2 = \frac{(\theta_2 - \theta_1)^2}{12} + \left( \frac{\theta_1 + \theta_2}{2} \right)^2
-\end{cases}\Rightarrow \begin{cases}
-    \frac{1}{n} \sum_{i = 1}^{N} X_i^2 = \frac{\theta_2^2 + \theta_1^2 - 2\theta_1 \theta_2}{12} + \frac{\theta_1^2 + \theta_2^2 + 2\theta_1 \theta_2}{4} = \frac{1}{3}(\theta_1^2 + \theta_2^2 + \theta_1 \theta_2)
-\end{cases}\]
+        \frac{1}{n} \sum_{i = 1}^{n} x_i = \frac{\theta_1 + \theta_2}{2} \\
+        \frac{1}{n} \sum_{i = 1}^{n} x_i^2 = \frac{(\theta_2 - \theta_1)^2}{12} + \left( \frac{\theta_1 + \theta_2}{2} \right)^2
+    \end{cases}\Rightarrow \begin{cases}
+        \frac{1}{n} \sum_{i = 1}^{N} X_i^2 = \frac{\theta_2^2 + \theta_1^2 - 2\theta_1 \theta_2}{12} + \frac{\theta_1^2 + \theta_2^2 + 2\theta_1 \theta_2}{4} = \frac{1}{3}(\theta_1^2 + \theta_2^2 + \theta_1 \theta_2)
+    \end{cases}\]
 \[\begin{cases}
-    2 \hat{\mu}_1 = \theta_1 + \theta_2\\
-    3 \hat{\mu}_2 = \theta_1^2 + \theta^2_2 + \theta_1 \theta_2
-\end{cases}\]
-Если решать эту систему до конца, можно получить 
+        2 \hat{\mu}_1 = \theta_1 + \theta_2 \\
+        3 \hat{\mu}_2 = \theta_1^2 + \theta^2_2 + \theta_1 \theta_2
+    \end{cases}\]
+Если решать эту систему до конца, можно получить
 \[\begin{cases}
-    \hat{\theta_1} = \overline{X} - \sqrt{3}S\\
-    \hat{\theta_2} = \overline{X} + \sqrt{3}S
-\end{cases}\]
+        \hat{\theta_1} = \overline{X} - \sqrt{3}S \\
+        \hat{\theta_2} = \overline{X} + \sqrt{3}S
+    \end{cases}\]
 \subsection*{Задача 3}
 $X_1,\dots,\ X_n \sim G(\theta)$. Найдём оценку по методу моментов и по методу максимального правдоподобия:\\
 Сначала по методу моментов:
@@ -244,11 +243,11 @@ $X_1 \sim Bi(12,\ p),\ X_2 \sim Bi(12,\ p),\ X_3 \sim Bi(15,\ p)$. По мето
 Логарифмируем и дифференцируем по $\theta$ полученное произведение:
 \begin{equation*}
     \begin{aligned}
-        \frac{\delta}{\delta \theta}\ln L(x_1,\dots,\ x_n,\ \theta) &= \frac{\delta}{\delta \theta}\ln\left(\prod_{i = 1}^{n} C_n^{x_i} \cdot \theta^{x_i}(1 - \theta)^{n - x_i} \right)  = \frac{\delta}{\delta \theta}\sum_{i = 1}^{n} \Big(\ln \big( C_n^{x_i} \cdot \theta^{x_i}(1 - \theta)^{n - x_i} \big)\Big) =\\
-        &=\frac{\delta}{\delta \theta}\sum_{i = 1}^{n} \left(\ln C_{n}^{x_i}\right) + \frac{\delta}{\delta \theta}\sum_{i = 1}^{n} (x_i\ln \theta) + \frac{\delta}{\delta \theta}\sum_{i = 1}^{n} \big( (n - x_i) \ln(1 - \theta)\big) =\\
-        &=0 + \frac{\delta}{\delta \theta}\ln\theta \sum_{i = 1}^{n} x_i + \frac{\delta}{\delta \theta}\ln(1 - \theta) \sum_{i = 1}^{n} (n - x_i) = \frac{1}{\theta} \sum_{i =1}^{n} x_i - \frac{1}{1 - \theta} \sum_{i = 1}^{n} (n - x_i) =\\
-        &=\frac{1}{\theta}\sum_{i = 1}^{n} x_i - \frac{n^2}{1 - \theta} + \frac{1}{1 - \theta}\sum_{i = 1}^{n} x_i = \frac{(1 - \theta)n\overline{x} - \theta n^2 + \theta n\overline{x}}{\theta - \theta^2} =\\
-        &=\frac{n\overline{x} - \theta n\overline{x} - \theta n^2 + \theta n\overline{x}}{\theta - \theta^2} = \frac{n\overline{x} - \theta n^2}{\theta - \theta^2} = n\frac{\overline{x} - \theta n}{\theta - \theta^2}
+        \frac{\delta}{\delta \theta}\ln L(x_1,\dots,\ x_n,\ \theta) & = \frac{\delta}{\delta \theta}\ln\left(\prod_{i = 1}^{n} C_n^{x_i} \cdot \theta^{x_i}(1 - \theta)^{n - x_i} \right)  = \frac{\delta}{\delta \theta}\sum_{i = 1}^{n} \Big(\ln \big( C_n^{x_i} \cdot \theta^{x_i}(1 - \theta)^{n - x_i} \big)\Big) = \\
+                                                                    & =\frac{\delta}{\delta \theta}\sum_{i = 1}^{n} \left(\ln C_{n}^{x_i}\right) + \frac{\delta}{\delta \theta}\sum_{i = 1}^{n} (x_i\ln \theta) + \frac{\delta}{\delta \theta}\sum_{i = 1}^{n} \big( (n - x_i) \ln(1 - \theta)\big) =                    \\
+                                                                    & =0 + \frac{\delta}{\delta \theta}\ln\theta \sum_{i = 1}^{n} x_i + \frac{\delta}{\delta \theta}\ln(1 - \theta) \sum_{i = 1}^{n} (n - x_i) = \frac{1}{\theta} \sum_{i =1}^{n} x_i - \frac{1}{1 - \theta} \sum_{i = 1}^{n} (n - x_i) =                \\
+                                                                    & =\frac{1}{\theta}\sum_{i = 1}^{n} x_i - \frac{n^2}{1 - \theta} + \frac{1}{1 - \theta}\sum_{i = 1}^{n} x_i = \frac{(1 - \theta)n\overline{x} - \theta n^2 + \theta n\overline{x}}{\theta - \theta^2} =                                              \\
+                                                                    & =\frac{n\overline{x} - \theta n\overline{x} - \theta n^2 + \theta n\overline{x}}{\theta - \theta^2} = \frac{n\overline{x} - \theta n^2}{\theta - \theta^2} = n\frac{\overline{x} - \theta n}{\theta - \theta^2}
     \end{aligned}
 \end{equation*}
 Полученную производную стоит приравнять к 0 для поиска точки экстремума. Стоит заметить, что случаи $\theta = 0$ или $\theta = 1$ интереса не представляют и количество испытаний ненулевое, иначе оценивание параметра бессмысленно, поэтому достаточно приравнять к нулю только числитель:
@@ -265,36 +264,36 @@ $X_1 \sim Bi(12,\ p),\ X_2 \sim Bi(12,\ p),\ X_3 \sim Bi(15,\ p)$. По мето
 Построим функцию правдоподобия:
 \begin{equation*}
     \begin{aligned}
-        L(x_1,\dots,\ x_n,\ \theta) &= \prod_{i = 1}^{n} f_{\xi}(x_i,\ \theta) = \prod_{i = 1}^{n} \frac{1}{2} \exp\left(-|x_i - \theta|\right) = \frac{1}{2^n} \exp\left(-\sum_{i = 1}^{n}|x_i - \theta|\right)
+        L(x_1,\dots,\ x_n,\ \theta) & = \prod_{i = 1}^{n} f_{\xi}(x_i,\ \theta) = \prod_{i = 1}^{n} \frac{1}{2} \exp\left(-|x_i - \theta|\right) = \frac{1}{2^n} \exp\left(-\sum_{i = 1}^{n}|x_i - \theta|\right)
     \end{aligned}
 \end{equation*}
 Логарифмируем и продифференцируем по $\theta$:
 \begin{equation*}
     \begin{aligned}
-        \frac{\delta}{\delta \theta} \ln L(x_1,\dots,\ x_n,\ \theta) &= \frac{\delta}{\delta \theta} \ln \frac{1}{2^n} \exp\left(-\sum_{i = 1}^{n}|x_i - \theta|\right) = \frac{\delta}{\delta \theta} \ln \frac{1}{2^n} - \frac{\delta}{\delta \theta} \sum_{i = 1}^{n}|x_i - \theta| = \\
-        &= -\frac{\delta}{\delta \theta} \sum_{i = 1}^{n}|x_i -\theta| = -\sum_{i = 1}^{n} \frac{\delta}{\delta \theta} |x_i - \theta| = -\sum_{i = 1}^{n} g(x_i,\ \theta)
+        \frac{\delta}{\delta \theta} \ln L(x_1,\dots,\ x_n,\ \theta) & = \frac{\delta}{\delta \theta} \ln \frac{1}{2^n} \exp\left(-\sum_{i = 1}^{n}|x_i - \theta|\right) = \frac{\delta}{\delta \theta} \ln \frac{1}{2^n} - \frac{\delta}{\delta \theta} \sum_{i = 1}^{n}|x_i - \theta| = \\
+                                                                     & = -\frac{\delta}{\delta \theta} \sum_{i = 1}^{n}|x_i -\theta| = -\sum_{i = 1}^{n} \frac{\delta}{\delta \theta} |x_i - \theta| = -\sum_{i = 1}^{n} g(x_i,\ \theta)
     \end{aligned}
 \end{equation*}
 Где $g(x,\ \theta) = \begin{cases}
-    -1, & x > \theta\\
-    0, & x = \theta\\
-    1, & x < \theta
-\end{cases}$, (производная модуля).\\
+        -1, & x > \theta \\
+        0,  & x = \theta \\
+        1,  & x < \theta
+    \end{cases}$, (производная модуля).\\
 Приравняем производную к нулю:
 \begin{equation*}
     -\sum_{i = 1}^{n} g(x_i,\ \theta) = 0\Rightarrow \sum_{i = 1}^{n} g(x_i,\ \theta) = 0
 \end{equation*}
 Пусть $\begin{cases}
 
-    G_{\theta} = \{x\ |\ x\in (x_1,\dots,\ x_n) \wedge x > \theta\}\\
-    E_{\theta} = \{x\ |\ x\in (x_1,\dots,\ x_n) \wedge x = \theta\}\\
-    L_{\theta} = \{x\ |\ x\in (x_1,\dots,\ x_n) \wedge x < \theta\}
-\end{cases}$, тогда
+        G_{\theta} = \{x\ |\ x\in (x_1,\dots,\ x_n) \wedge x > \theta\} \\ E_{\theta} =
+        \{x\ |\ x\in (x_1,\dots,\ x_n) \wedge x = \theta\}              \\ L_{\theta} = \{x\ |\ x\in
+        (x_1,\dots,\ x_n) \wedge x < \theta\}
+    \end{cases}$, тогда
 \[\begin{cases}
-    \forall x\in G_{\theta}\quad g(x,\ \theta) = -1\\
-    \forall x\in E_{\theta}\quad g(x,\ \theta) = 0\\
-    \forall x\in L_{\theta}\quad g(x,\ \theta) = 1\\
-\end{cases}\Rightarrow \sum_{i = 1}^{n} g(x_i,\ \theta) = (-1)\cdot|G_{\theta}| + 0\cdot|E_{\theta}| + 1\cdot |L_{\theta}|\]
+        \forall x\in G_{\theta}\quad g(x,\ \theta) = -1 \\
+        \forall x\in E_{\theta}\quad g(x,\ \theta) = 0  \\
+        \forall x\in L_{\theta}\quad g(x,\ \theta) = 1  \\
+    \end{cases}\Rightarrow \sum_{i = 1}^{n} g(x_i,\ \theta) = (-1)\cdot|G_{\theta}| + 0\cdot|E_{\theta}| + 1\cdot |L_{\theta}|\]
 Преобразуем:
 \begin{equation*}
     -|G_{\theta}| + 0|E_{\theta}| + |L_{\theta}| = 0\Rightarrow |G_{\theta}| = |L_{\theta}|
@@ -302,23 +301,23 @@ $X_1 \sim Bi(12,\ p),\ X_2 \sim Bi(12,\ p),\ X_3 \sim Bi(15,\ p)$. По мето
 То есть количество элементов больше параметра $\theta$ в выборке должно совпадать с количеством элементов меньше параметра $\theta$.\\
 
 Получается $\hat \theta = \begin{cases}
-    x_{(\lfloor n/2 \rfloor)}, & n\underset{2}{\equiv} 1\\
-    \frac{x_{(n/2)} + x_{(n/2 + 1)}}{2}, & n\underset{2}{\equiv} 0
-\end{cases}$
+        x_{(\lfloor n/2 \rfloor)},           & n\underset{2}{\equiv} 1 \\
+        \frac{x_{(n/2)} + x_{(n/2 + 1)}}{2}, & n\underset{2}{\equiv} 0
+    \end{cases}$
 \subsubsection*{Метод моментов}
 Напишем систему уравнений для моментов (поскольку неизвестный параметр $\theta$ единственный, должно хватить одного уравнения):
 \begin{equation*}
-        \hat\mu_1 = \mu_1(\theta)\Rightarrow \frac{1}{n} \sum_{i = 1}^{n} x_i = E\xi
+    \hat\mu_1 = \mu_1(\theta)\Rightarrow \frac{1}{n} \sum_{i = 1}^{n} x_i = E\xi
 \end{equation*}
 Посчитаем математическое ожидание случайной величины $\xi$:
 \begin{equation*}
     \begin{aligned}
-        E\xi &= \int\limits_{-\infty}^{+\infty} x f_{\xi}(x,\ \theta)\, dx = \int\limits_{-\infty}^{+\infty} x \frac{1}{2}\exp\left( -|x - \theta|\right)\, dx = \left< \begin{aligned}
-            a &= x - \theta\\
-            da &= dx
-        \end{aligned}  \right> = \\
-        &= \frac{1}{2}\int\limits_{-\infty}^{+\infty} (a + \theta)\exp(-|a|)\, da = \frac{1}{2} \underset{=0}{\underbrace{\int\limits_{-\infty}^{+\infty}a\exp(-|a|)\, da}} + \frac{\theta}{2}\int\limits_{-\infty}^{+\infty} e^{-|a|}\, da =\\
-        &= \theta \int\limits_{0}^{+\infty} e^{-a}\, da = -\theta \int\limits_0^{+\infty} e^{-a}\, d(-a) = -\theta e^{-a}\Big|_0^{+\infty} = -\theta (0 - 1) = \theta
+        E\xi & = \int\limits_{-\infty}^{+\infty} x f_{\xi}(x,\ \theta)\, dx = \int\limits_{-\infty}^{+\infty} x \frac{1}{2}\exp\left( -|x - \theta|\right)\, dx = \left< \begin{aligned}
+                                                                                                                                                                             a  & = x - \theta \\
+                                                                                                                                                                             da & = dx
+                                                                                                                                                                         \end{aligned}  \right> =                                                   \\
+             & = \frac{1}{2}\int\limits_{-\infty}^{+\infty} (a + \theta)\exp(-|a|)\, da = \frac{1}{2} \underset{=0}{\underbrace{\int\limits_{-\infty}^{+\infty}a\exp(-|a|)\, da}} + \frac{\theta}{2}\int\limits_{-\infty}^{+\infty} e^{-|a|}\, da = \\
+             & = \theta \int\limits_{0}^{+\infty} e^{-a}\, da = -\theta \int\limits_0^{+\infty} e^{-a}\, d(-a) = -\theta e^{-a}\Big|_0^{+\infty} = -\theta (0 - 1) = \theta
     \end{aligned}
 \end{equation*}
 Итак, получаем уравнение:
@@ -329,15 +328,15 @@ $X_1 \sim Bi(12,\ p),\ X_2 \sim Bi(12,\ p),\ X_3 \sim Bi(15,\ p)$. По мето
 
 \textbf{Ответ:}\\
 По методу максимального правдоподобия: $\hat \theta = \begin{cases}
-    x_{(\lfloor n/2 \rfloor)}, & n\underset{2}{\equiv} 1\\
-    \frac{x_{(n/2)} + x_{(n/2 + 1)}}{2}, & n\underset{2}{\equiv} 0
-\end{cases}$\\
+        x_{(\lfloor n/2 \rfloor)},           & n\underset{2}{\equiv} 1 \\
+        \frac{x_{(n/2)} + x_{(n/2 + 1)}}{2}, & n\underset{2}{\equiv} 0
+    \end{cases}$\\
 По методу моментов: $\hat \theta = \overline{X}$
 \subsection*{Задача 3}
 Выборка $X_1,\dots,\ X_n \sim \Pi(\theta)\Rightarrow \forall i\quad \begin{cases}
-    P(X_i = k) = \frac{e^{-\theta} \theta^k}{k!}\\
-    EX_i = \theta
-\end{cases}$. Построим оценки ММ и МП для $\theta$
+        P(X_i = k) = \frac{e^{-\theta} \theta^k}{k!} \\
+        EX_i = \theta
+    \end{cases}$. Построим оценки ММ и МП для $\theta$
 \subsubsection*{Метод моментов}
 Снова неизвестный параметр только один, поэтому достаточно одного уравнения:
 \begin{equation*}
@@ -381,29 +380,29 @@ $X_1 \sim Bi(12,\ p),\ X_2 \sim Bi(12,\ p),\ X_3 \sim Bi(15,\ p)$. По мето
 Продифференцируем:
 \begin{equation*}
     \begin{aligned}
-        \frac{\delta}{\delta \theta_2} \ln L(x_1,\ x_2,\ \theta_1,\ \theta_2) &= -\frac{2}{1 - 2\theta_2} - \frac{4}{1 - \theta_2} + \frac{2}{\theta_2} = \frac{2(1 - 2\theta_2)(1 - \theta_2) - 4\theta_2 \cdot(1 - 2\theta_2)  -2\theta_2\cdot(1 - \theta_2)}{(\theta_2 - 2\theta^2_2)(1 - \theta_2)} = \\
-        &= \frac{2(1 - 3\theta_2 + 2\theta_2^2) - 4(\theta_2 - 2\theta_2^2) - 2(\theta_2 - \theta_2^2)}{\theta_2 - 3\theta_2^2 + 2\theta_2^3} = \frac{2 - 6\theta_2 + 4\theta_2^2 - 4\theta_2 + 8\theta_2^2 - 2\theta_2 + 2\theta_2^2}{\theta_2 - 3\theta_2^2 + 2\theta_2^3} =\\
-        &= \frac{14\theta_2^2 - 12\theta_2 + 2}{2\theta_2^3 - 3\theta_2^2 + \theta_2}
+        \frac{\delta}{\delta \theta_2} \ln L(x_1,\ x_2,\ \theta_1,\ \theta_2) & = -\frac{2}{1 - 2\theta_2} - \frac{4}{1 - \theta_2} + \frac{2}{\theta_2} = \frac{2(1 - 2\theta_2)(1 - \theta_2) - 4\theta_2 \cdot(1 - 2\theta_2)  -2\theta_2\cdot(1 - \theta_2)}{(\theta_2 - 2\theta^2_2)(1 - \theta_2)} =                                            \\
+                                                                              & = \frac{2(1 - 3\theta_2 + 2\theta_2^2) - 4(\theta_2 - 2\theta_2^2) - 2(\theta_2 - \theta_2^2)}{\theta_2 - 3\theta_2^2 + 2\theta_2^3} = \frac{2 - 6\theta_2 + 4\theta_2^2 - 4\theta_2 + 8\theta_2^2 - 2\theta_2 + 2\theta_2^2}{\theta_2 - 3\theta_2^2 + 2\theta_2^3} = \\
+                                                                              & = \frac{14\theta_2^2 - 12\theta_2 + 2}{2\theta_2^3 - 3\theta_2^2 + \theta_2}
     \end{aligned}
 \end{equation*}
 Приравняем к нулю:
 \begin{equation*}
     \begin{aligned}
         \frac{14\hat\theta_2^2 - 12\hat\theta_2 + 2}{2\hat\theta_2^3 - 3\hat\theta_2^2 + \hat\theta_2} = 0 \Rightarrow {14\hat\theta_2^2 - 12\hat\theta_2 + 2} = 0 \Rightarrow 7\hat\theta_2^2 - 6\hat\theta_2 + 1 = 0 \Rightarrow \mathcal{D}' = 9 - 7 = 2\Rightarrow \left[\begin{gathered}
-            \begin{aligned}
-                \hat\theta_2 &= \frac{3 + \sqrt{2}}{7} \Rightarrow \theta_1 > 1\\
-                \hat\theta_2 &= \frac{3 - \sqrt{2}}{7}
+                                                                                                                                                                                                                                                                                 \begin{aligned}
+                \hat\theta_2 & = \frac{3 + \sqrt{2}}{7} \Rightarrow \theta_1 > 1 \\
+                \hat\theta_2 & = \frac{3 - \sqrt{2}}{7}
             \end{aligned}
-        \end{gathered}\right.
+                                                                                                                                                                                                                                                                             \end{gathered}\right.
     \end{aligned}
 \end{equation*}
 \textbf{Ответ:} $\hat \theta_2 = \frac{3 - \sqrt{2}}{7} \approx 0.22654$
 \subsection*{Задача 5}
 Выборка $X_1,\dots,\ X_n$ порождена случаной величиной $X$ с плотностью распределения:
 \[f(x,\ \theta) = \begin{cases}
-    \frac{1}{\theta}x^{\frac{1 - \theta}{\theta}}, & x\in (0,\ 1)\\
-    0,\ & x\notin (0,\ 1)
-\end{cases}\]
+        \frac{1}{\theta}x^{\frac{1 - \theta}{\theta}}, & x\in (0,\ 1)    \\
+        0,\                                            & x\notin (0,\ 1)
+    \end{cases}\]
 
 Построим оценку максимального правдоподобия для параметра $\theta$ и исследуем его на несмещённость.\\
 Построим функцию правдоподобия:
@@ -425,11 +424,11 @@ $X_1 \sim Bi(12,\ p),\ X_2 \sim Bi(12,\ p),\ X_3 \sim Bi(15,\ p)$. По мето
 Проверим на несмещённость:
 \begin{equation*}
     \begin{aligned}
-        E\hat\theta &= -E\ln x_1 = -\int\limits_0^1\ln (x) \cdot \frac{1}{\theta}x^{\frac{1 - \theta}{\theta}}\, dx = \left<\begin{aligned}
-            a &= x^{\frac{1}{\theta}},\ \frac{d}{dx} x^{\frac{1}{\theta}} = \frac{1}{\theta} x^{\frac{1}{\theta} - 1}\\
-            da &= \frac{1}{\theta}x^{\frac{1 - \theta}{\theta}}dx,\ x = a^{\theta}\\
-        \end{aligned}  \right> = -\int\limits_{0^{\frac{1}{\theta}}}^{1^{\frac{1}{\theta}}} \ln(a^{\theta})\, da =\\
-        &= -\theta \int\limits_0^1 \ln (a)\, da = -\theta \left( a\ln a - a \right)\Big|_0^1 = \theta
+        E\hat\theta & = -E\ln x_1 = -\int\limits_0^1\ln (x) \cdot \frac{1}{\theta}x^{\frac{1 - \theta}{\theta}}\, dx = \left<\begin{aligned}
+                                                                                                                                 a  & = x^{\frac{1}{\theta}},\ \frac{d}{dx} x^{\frac{1}{\theta}} = \frac{1}{\theta} x^{\frac{1}{\theta} - 1} \\
+                                                                                                                                 da & = \frac{1}{\theta}x^{\frac{1 - \theta}{\theta}}dx,\ x = a^{\theta}                                     \\
+                                                                                                                             \end{aligned}  \right> = -\int\limits_{0^{\frac{1}{\theta}}}^{1^{\frac{1}{\theta}}} \ln(a^{\theta})\, da = \\
+                    & = -\theta \int\limits_0^1 \ln (a)\, da = -\theta \left( a\ln a - a \right)\Big|_0^1 = \theta
     \end{aligned}
 \end{equation*}
 Несмещённая.
@@ -475,11 +474,11 @@ $\overline{X} \sim N\left(m,\ \frac{\sigma^2}{n}\right)\Rightarrow \frac{\sqrt{n
 Здесь:
 \begin{equation*}
     \begin{aligned}
-        n =&\, 10\\
-        \alpha =&\, 0.05\\
-        \overline{X} =&\, \frac{1}{n} \sum_{i = 1}^{n} x_i\\
-        \tilde S^2 =&\, \frac{1}{n - 1}\sum_{i = 1}^{n} (x_i - \overline{X})^2\\
-        t_{1 - \alpha/2,\ n - 1} =&\, \text{так и не понял где посмотреть (квантиль распределения Стьюдента)}\\
+        n =                        & \, 10                                                                      \\
+        \alpha =                   & \, 0.05                                                                    \\
+        \overline{X} =             & \, \frac{1}{n} \sum_{i = 1}^{n} x_i                                        \\
+        \tilde S^2 =               & \, \frac{1}{n - 1}\sum_{i = 1}^{n} (x_i - \overline{X})^2                  \\
+        t_{1 - \alpha/2,\ n - 1} = & \, \text{так и не понял где посмотреть (квантиль распределения Стьюдента)} \\
     \end{aligned}
 \end{equation*}
 
@@ -497,9 +496,9 @@ $\overline{X} \sim N\left(m,\ \frac{\sigma^2}{n}\right)\Rightarrow \frac{\sqrt{n
 \end{center}
 Даны две выборки:
 \[\begin{cases}
-    X_1,\dots,\ X_n\sim N(m_1,\ \sigma_1^2)\\
-    Y_1,\dots,\ Y_n\sim N(m_2,\ \sigma_2^2) 
-\end{cases}\]
+        X_1,\dots,\ X_n\sim N(m_1,\ \sigma_1^2) \\
+        Y_1,\dots,\ Y_n\sim N(m_2,\ \sigma_2^2)
+    \end{cases}\]
 $\sigma_1,\ \sigma_2$ известны, тогда для построения ДИ $\theta = m_1 - m_2$:
 \[\frac{\overline{X} - \overline{Y} - \theta}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}} \sim N(0,\ 1)\]
 Если дисперсии неизвестны, но одинаковы:
@@ -510,7 +509,7 @@ $\sigma_1,\ \sigma_2$ известны, тогда для построения �
 \[\frac{\overline{X} - \overline{Y} - \theta}{S\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}} \sim t(n_1 + n_2 - 2)\]
 \subsection*{Задача}
 $\overline{X} = -11.87,\ \overline{Y} = -13.75,\ \sigma_1^2 = 20,\ \sigma_2^2 = 22,\ n_1 = n_2 = 13,\ \alpha = 0.05\\
-X \sim N(m_1,\ 20),\ Y \sim N(m_2,\ 22)$
+    X \sim N(m_1,\ 20),\ Y \sim N(m_2,\ 22)$
 Знаем матожидания и дисперсию, тогда ДИ для $\theta = m_2 - m_1$
 \[P \left( (\overline{X} - \overline{Y}) -1.96 \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} \leq \theta \leq (\overline{X} - \overline{Y}) + 1.96 \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} \right) = 0.95\]
 \[P \left( -1.64 \leq \theta \leq 5.4 \right) = 0.95\]
@@ -518,7 +517,7 @@ X \sim N(m_1,\ 20),\ Y \sim N(m_2,\ 22)$
 \[P \left( (\overline{X} - \overline{Y}) -2.06 S \sqrt{\frac{1}{n_1} + \frac{1}{n_2}} \leq \theta \leq (\overline{X} - \overline{Y}) + 2.06 S \sqrt{\frac{1}{n_1} + \frac{1}{n_2}} \right) = 0.95\]
 Если у нас посчитано ${S_{X}}^2$ и $S_Y^2$, то можем посчитать $S$:
 \[S^2 = \frac{n_1 S_X^2 + n_2 S_Y^2}{n_1 + n_2 - 2}\]
-Если посчитать, то получаем 
+Если посчитать, то получаем
 \[P \left( -1.98 \leq \theta \leq 5.74 \right) = 0.95\]
 \subsection*{Задача}
 $X_1,\dots,\ X_n \sim \Pi(\theta)$. Построим асимптотический доверительный интервал.\\
@@ -527,9 +526,9 @@ $X_1,\dots,\ X_n \sim \Pi(\theta)$. Построим асимптотическ�
 \[\frac{(\hat\theta - \theta)}{\sqrt{\frac{\hat\theta}{n}}} \sim N(0,\ 1)\]
 \begin{equation*}
     \begin{aligned}
-        P \Bigg( Z_{1 - \alpha/2} &\,\leq  \frac{(\overline X - \theta)}{\sqrt{\frac{\overline X}{n}}} \leq Z_{1 - \alpha/2} \Bigg) = 1- \alpha\\
-        P \Bigg( \sqrt{\frac{n}{\overline X}}Z_{1 - \alpha/2} &\,\leq  {(\overline X - \theta)} \leq  \sqrt{\frac{n}{\overline X}}Z_{1 - \alpha/2} \Bigg) = 1- \alpha\\
-        P \Bigg( \overline{X} - \sqrt{\frac{n}{\overline X}}Z_{1 - \alpha/2} &\,\leq  \theta \leq  \overline{X} + \sqrt{\frac{n}{\overline X}}Z_{1 - \alpha/2} \Bigg) = 1- \alpha
+        P \Bigg( Z_{1 - \alpha/2}                                            & \,\leq  \frac{(\overline X - \theta)}{\sqrt{\frac{\overline X}{n}}} \leq Z_{1 - \alpha/2} \Bigg) = 1- \alpha \\
+        P \Bigg( \sqrt{\frac{n}{\overline X}}Z_{1 - \alpha/2}                & \,\leq  {(\overline X - \theta)} \leq  \sqrt{\frac{n}{\overline X}}Z_{1 - \alpha/2} \Bigg) = 1- \alpha       \\
+        P \Bigg( \overline{X} - \sqrt{\frac{n}{\overline X}}Z_{1 - \alpha/2} & \,\leq  \theta \leq  \overline{X} + \sqrt{\frac{n}{\overline X}}Z_{1 - \alpha/2} \Bigg) = 1- \alpha
     \end{aligned}
 \end{equation*}
 \begin{center}
@@ -545,9 +544,9 @@ $X \sim N(m_1,\ \sigma^2)$ (доход в ЦФО), $Y \sim N(m_2,\ \sigma^2)$ (�
 Для гауссовских величин хорошей оценкой $m$ будет величина $\overline{X} - \overline{Y}$.
 \begin{equation*}
     \begin{aligned}
-        E\left( \overline{X} - \overline{Y} \right) &= m\\
-        \hat\dev \left( \overline{X} - \overline{Y} \right) &= \sigma^2\left( \frac{1}{n_x} + \frac{1}{n_y} \right)\\
-        \text{$\sigma$ не знаем, подставим оценку}\ S^2 &= \frac{\sum\limits_{i = 1}^{n_x} (x_i - \overline{X})^2 + \sum\limits_{i = 1}^{n_y} (y_i - \overline{Y})^2}{n_x + n_y - 2}
+        E\left( \overline{X} - \overline{Y} \right)         & = m                                                                                                                         \\
+        \hat\dev \left( \overline{X} - \overline{Y} \right) & = \sigma^2\left( \frac{1}{n_x} + \frac{1}{n_y} \right)                                                                      \\
+        \text{$\sigma$ не знаем, подставим оценку}\ S^2     & = \frac{\sum\limits_{i = 1}^{n_x} (x_i - \overline{X})^2 + \sum\limits_{i = 1}^{n_y} (y_i - \overline{Y})^2}{n_x + n_y - 2}
     \end{aligned}
 \end{equation*}
 Теперь мы можем составить хорошую случайную величину:
@@ -556,9 +555,9 @@ $X \sim N(m_1,\ \sigma^2)$ (доход в ЦФО), $Y \sim N(m_2,\ \sigma^2)$ (�
 \[\frac{\overline{X} - \overline{Y} - m}{S \sqrt{\frac{1}{n_x} + \frac{1}{n_y}}} = \frac{\frac{\overline{X} - \overline{Y} - m}{\sigma}}{\frac{S}{\sigma} \sqrt{\frac{1}{n_x} + \frac{1}{n_y}}}\]
 Далее во избежание страшных дробей я распишу числитель и знаменатель отдельно. Начнём с числителя:
 \[\frac{\overline{X} - \overline{Y} - m}{\sigma}: \begin{cases}
-    E\left( \frac{\overline{X} - \overline{Y} - m}{\sigma}  \right) = 0\\
-    \dev \left( \frac{\overline{X} - \overline{Y} - m}{\sigma}  \right) = 1
-\end{cases}\Rightarrow \frac{\overline{X} - \overline{Y} - m}{\sigma}  \sim N(0,\ 1)\]
+        E\left( \frac{\overline{X} - \overline{Y} - m}{\sigma}  \right) = 0 \\
+        \dev \left( \frac{\overline{X} - \overline{Y} - m}{\sigma}  \right) = 1
+    \end{cases}\Rightarrow \frac{\overline{X} - \overline{Y} - m}{\sigma}  \sim N(0,\ 1)\]
 Теперь знаменатель:
 \[\frac{S}{\sigma} \sqrt{\frac{1}{n_x} + \frac{1}{n_y}} = \frac{\sqrt{\sum\limits_{i = 1}^{n_x} (x_i - \overline{X})^2 + \sum\limits_{i = 1}^{n_y} (y_i - \overline{Y})^2}}{\sigma\sqrt{n_x + n_y - 2}} \sqrt{\frac{1}{n_x} + \frac{1}{n_y}} = \frac{\sqrt{\sum\limits_{i = 1}^{n_x} \frac{(x_i - \overline{X})^2}{\sigma^2} + \sum\limits_{i = 1}^{n_y} \frac{(y_i - \overline{Y})^2}{\sigma^2}}}{\sqrt{n_x + n_y - 2}} \sqrt{\frac{1}{n_x} + \frac{1}{n_y}} =\]
 \[= \frac{\sqrt{\sum\limits_{i = 1}^{n_x} \left(\frac{x_i - \overline{X}}{\sigma}\right)^2 + \sum\limits_{i = 1}^{n_y} \left( \frac{y_i - \overline{Y}}{\sigma}\right)^2}}{\sqrt{n_x + n_y - 2}}  \sqrt{\frac{1}{n_x} + \frac{1}{n_y}}\]
@@ -580,18 +579,18 @@ $X \sim N(m_1,\ \sigma^2)$ (доход в ЦФО), $Y \sim N(m_2,\ \sigma^2)$ (�
 $X\sim Bi(n_1,\ p_1),\ Y\sim Bi(n_2,\ p_2)$. По условию $n_1,\ n_2$ большие. Построить асимптотический доверительный интервал для $p = p_1 - p_2$. \Big(Показать, что статистика $\frac{\hat p_1 - \hat p_2 - (p_1 - p_2)}{\sqrt{\hat \dev \left( \hat p_1 - \hat p_2 \right)}}$, где $\hat\dev \left( \hat p_1 - \hat p_2 \right) = \frac{\hat p_1(1 - \hat p_1)}{n_1} + \frac{\hat p_2 (1 - \hat p_2)}{n_2}$, имеет асимптотически стандартное нормальное распределение\Big).\\
 Найдём оценку максимального правдоподобия для $p$:
 \[\xi = X - Y \Rightarrow \begin{cases}
-    P(\xi = 1) = P(X = 1)\cdot P(Y = 0) = p_1 q_2\\
-    P(\xi = 0) = P(X = 1)\cdot P(Y = 1) + P(X = 0)\cdot P(Y = 0) = p_1 p_2 + q_1 q_2\\
-    P(\xi = -1) = P(X = 0)\cdot P(Y = 1) = q_1 p_2
-\end{cases}\]
+        P(\xi = 1) = P(X = 1)\cdot P(Y = 0) = p_1 q_2                                    \\
+        P(\xi = 0) = P(X = 1)\cdot P(Y = 1) + P(X = 0)\cdot P(Y = 0) = p_1 p_2 + q_1 q_2 \\
+        P(\xi = -1) = P(X = 0)\cdot P(Y = 1) = q_1 p_2
+    \end{cases}\]
 Построим функцию правдоподобия для реализации вектора $(Z_1,\dots,\ Z_n)$, порождённого случайной величиной $\xi$:
 \[L(z_1,\dots,\ z_n,\ p) = \prod_{i = 1}^{n} P(\xi = z_i)\]
 Дальше непонятно, значит всё-таки надо воспользоваться подсказкой. Обозначим $T(\hat p_1 - \hat p_2) = \frac{(\hat p_1 - \hat p_2) - (p_1 - p_2)}{\sqrt{\hat \dev \left( \hat p_1 - \hat p_2 \right)}}$\\
 Из предыдущей задачи:
 \[\hat p_1 = \frac{\overline{X}}{n_1},\ \hat p_2 = \frac{\overline{Y}}{n_2}\]
 $E\left( \hat p_1 - \hat p_2 \right) = E\hat p_1 - E\hat p_2 = p_1 - p_2\\
-\dev \left( p_1 - p_2 \right) = \frac{p_1(1 -  p_1)}{n_1} + \frac{p_2(1 - p_2)}{n_2}\\
-\hat\dev \left( \hat p_1 - \hat p_2 \right) = \hat\dev \left( \hat p_1 \right) + \hat\dev \left( \hat p_2 \right)$\\
+    \dev \left( p_1 - p_2 \right) = \frac{p_1(1 -  p_1)}{n_1} + \frac{p_2(1 - p_2)}{n_2}\\
+    \hat\dev \left( \hat p_1 - \hat p_2 \right) = \hat\dev \left( \hat p_1 \right) + \hat\dev \left( \hat p_2 \right)$\\
 Тогда при больших $n_1,\ n_2$ (в нашем случае это так) должно выполняться:
 \[\frac{\hat p_1 - \hat p_2 - (p_1 - p_2)}{\sqrt{\hat \dev \left( \hat p_1 - \hat p_2 \right)}} \sim N(0,\ 1)\]
 Что-то очень странное, надо будет уточнить на семинаре.\\
@@ -629,9 +628,9 @@ $X_1,\dots,\ X_{200} \sim Bi(1,\ p)$\\
 $H_0: p = 0.05 = p_0$ против $H_1: p > 0.05$ при $\alpha = 0.05$.\\
 $X = \sum_{i = 1}^{200} x_i$ --- количество успехов\\
 $T(x) = \frac{x - 200\cdot p_0}{\sqrt{200p_0(1 - p_0)}}\\
-T(x)\big|_{H_0} \sim N(0,\ 1)$\\
+    T(x)\big|_{H_0} \sim N(0,\ 1)$\\
 Тогда доверительная область $(-\infty,\ Z_{0.95}) = (-\infty,\ 1.64)$\\
-$T(x) = \frac{12 - 10}{\sqrt{200\cdot 0.05\cdot 0.95}} = 0.649\Rightarrow$ попали в доверительную область, значит верим $H_0$.  
+$T(x) = \frac{12 - 10}{\sqrt{200\cdot 0.05\cdot 0.95}} = 0.649\Rightarrow$ попали в доверительную область, значит верим $H_0$.
 \subsection*{Задача}
 Проводится тестирование по английскому языку. Предлагается 100 вопросов, на каждый из которых 4 ответа, 1 из них правильный. Один студент ответил правильно на 30 вопросов. Можно ли считать при $\alpha = 0.05$, что этот студент не знает английский язык?\\
 $X_1,\dots,\ X_{100} \sim Bi(1,\ p)$\\
@@ -662,9 +661,9 @@ $H_1: p > 0.25$\\
 В общем случае про эту статистику мы ничего сказать не можем, но при условии верности $H_0$ она становится центрированной и нормированной, потому что:
 \begin{equation*}
     \begin{aligned}
-        &\overline{X} = \hat{p}\\
-        &E\left( \hat{p} \right)\big|_{H_0} = E\left( \frac{1}{n}\sum_{i = 1}^{n}x_i \right) = Ex_i = p_0\\
-        &\dev\left( \hat{p} \right)\big|_{H_0} = \dev \left( \frac{1}{n}\sum_{i = 1}^{n}x_i \right) = \frac{1}{n^2}\sum_{i = 1}^{n} \dev\left( x_i \right) = \frac{\dev(x_i)}{n} = \frac{p_0(1 - p_0)}{n} = \frac{p_0( 1 - p_0)}{1\,000}
+         & \overline{X} = \hat{p}                                                                                                                                                                                                          \\
+         & E\left( \hat{p} \right)\big|_{H_0} = E\left( \frac{1}{n}\sum_{i = 1}^{n}x_i \right) = Ex_i = p_0                                                                                                                                \\
+         & \dev\left( \hat{p} \right)\big|_{H_0} = \dev \left( \frac{1}{n}\sum_{i = 1}^{n}x_i \right) = \frac{1}{n^2}\sum_{i = 1}^{n} \dev\left( x_i \right) = \frac{\dev(x_i)}{n} = \frac{p_0(1 - p_0)}{n} = \frac{p_0( 1 - p_0)}{1\,000}
     \end{aligned}
 \end{equation*}
 В этих уравнениях я преобразовал $\xi$ в случайный вектор $X$ состоящий из $1\,000$ случайных величин $Be(p_0)$.\\
@@ -679,7 +678,7 @@ $H_1: p > 0.25$\\
 \subsection*{Задача 2}
 Известно, что женщины-водители составляют $30\%$ от общего числа водителей. Зафиксировали $n = 635$ ДТП, 132 из которых произошли по вине женщин-водителей. Можно ли на уровне значимости $0.01$ считать, что женщины водят машину аккуратнее (реже попадают в ДТП)?
 \subsubsection*{Решение}
-Пусть случаный вектор $X$, каждый элемент которого $x\sim Be(p)$ равен $1$, если причиной ДТП была женщина и 0 иначе. 
+Пусть случаный вектор $X$, каждый элемент которого $x\sim Be(p)$ равен $1$, если причиной ДТП была женщина и 0 иначе.
 Составим две гипотезы
 \[H_0: p = p_0 = 0.3,\ \text{против } H_1: p < 0.3\]
 Принятие $H_0$ означает, что женщины водят не аккуратнее мужчин (отрицательный ответ на вопрос задачи).\\
@@ -710,15 +709,15 @@ $H_1: p > 0.25$\\
 Если считать $H_0$ верной, можно сделать следующие преобразования:
 \begin{equation*}
     \begin{aligned}
-        p_1 - p_2 &= 0;\\
-        \dev(\overline{X} - \overline{Y}) &= \dev(\overline{X}) + \dev(\overline{Y}) = \frac{\left( \dev (\xi) \right)^2}{n_1} + \frac{\left( \dev (\eta) \right)^2}{n_2} = \left< \begin{aligned}
-            &H_0: p_1 = p_2\Rightarrow \xi \sim \eta\\
-            &\dev(\xi) = \dev(\eta) = \sigma^2
-        \end{aligned} \right> =\\
-         &=\sigma^2\left( \frac{1}{n_1} + \frac{1}{n_2} \right);\\
-         \sigma^2 &= (n_1 + n_2) \hat p \left( 1 - \hat p \right) = (n_1 + n_2)\frac{\overline{X} + \overline{Y}}{n_1 + n_2} \left( 1 - \frac{\overline{X} + \overline{Y}}{n_1 + n_2} \right) = \left(\overline{X} + \overline{Y}\right)\left( 1 - \frac{\overline{X} + \overline{Y}}{n_1 + n_2} \right);\\
-         \dev\left( \overline{X} - \overline{Y} \right) &= \left( \overline{X} + \overline{Y} \right)\left( 1 - \frac{\overline{X} + \overline{Y}}{n_1 + n_2} \right)\left( \frac{1}{n_1} + \frac{1}{n_2} \right) = (25 + 18)\left( 1 - \frac{25 + 18}{1\,000 + 800} \right)\left( \frac{1}{1\,000} + \frac{1}{800} \right) \approx \\
-         &\approx 0.0944 \Rightarrow \sqrt{\dev\left( \overline{X} - \overline{Y} \right)} \approx 0.307
+        p_1 - p_2                                      & = 0;                                                                                                                                                                                                                                                                                   \\
+        \dev(\overline{X} - \overline{Y})              & = \dev(\overline{X}) + \dev(\overline{Y}) = \frac{\left( \dev (\xi) \right)^2}{n_1} + \frac{\left( \dev (\eta) \right)^2}{n_2} = \left< \begin{aligned}
+                                                                                                                                                                                                      & H_0: p_1 = p_2\Rightarrow \xi \sim \eta \\
+                                                                                                                                                                                                      & \dev(\xi) = \dev(\eta) = \sigma^2
+                                                                                                                                                                                                 \end{aligned} \right> =                                                                                                     \\
+                                                       & =\sigma^2\left( \frac{1}{n_1} + \frac{1}{n_2} \right);                                                                                                                                                                                                                                 \\
+        \sigma^2                                       & = (n_1 + n_2) \hat p \left( 1 - \hat p \right) = (n_1 + n_2)\frac{\overline{X} + \overline{Y}}{n_1 + n_2} \left( 1 - \frac{\overline{X} + \overline{Y}}{n_1 + n_2} \right) = \left(\overline{X} + \overline{Y}\right)\left( 1 - \frac{\overline{X} + \overline{Y}}{n_1 + n_2} \right); \\
+        \dev\left( \overline{X} - \overline{Y} \right) & = \left( \overline{X} + \overline{Y} \right)\left( 1 - \frac{\overline{X} + \overline{Y}}{n_1 + n_2} \right)\left( \frac{1}{n_1} + \frac{1}{n_2} \right) = (25 + 18)\left( 1 - \frac{25 + 18}{1\,000 + 800} \right)\left( \frac{1}{1\,000} + \frac{1}{800} \right) \approx             \\
+                                                       & \approx 0.0944 \Rightarrow \sqrt{\dev\left( \overline{X} - \overline{Y} \right)} \approx 0.307
     \end{aligned}
 \end{equation*}
 Снова получаем что-то сходящееся к центрированной и нормированной гауссовской величине:
@@ -745,10 +744,10 @@ $Y = (y_1,\dots,\ y_{500}),\ \forall y\quad y\in Y\Rightarrow y\sim Be(p_2)$\\
 Это идентично предыдущей задаче, поэтому сразу запишу всё получаемое при условии верности $H_0$:
 \begin{equation*}
     \begin{aligned}
-        p_1 - p_2 &= 0;\\
-        \dev\left( \overline{X} - \overline{Y} \right) &= \left( \overline{X} + \overline{Y} \right)\left( 1 - \frac{\overline{X} + \overline{Y}}{n_1 + n_2} \right)\left( \frac{1}{n_1} + \frac{1}{n_2} \right)=\\
-        &=(66 + 60)\left( 1 - \frac{66+60}{600+500} \right)\left( \frac{1}{600} + \frac{1}{500} \right) \approx 0.409;\\
-        \sqrt{\dev\left( \overline{X} - \overline{Y} \right)} &\approx 0.634
+        p_1 - p_2                                             & = 0;                                                                                                                                                      \\
+        \dev\left( \overline{X} - \overline{Y} \right)        & = \left( \overline{X} + \overline{Y} \right)\left( 1 - \frac{\overline{X} + \overline{Y}}{n_1 + n_2} \right)\left( \frac{1}{n_1} + \frac{1}{n_2} \right)= \\
+                                                              & =(66 + 60)\left( 1 - \frac{66+60}{600+500} \right)\left( \frac{1}{600} + \frac{1}{500} \right) \approx 0.409;                                             \\
+        \sqrt{\dev\left( \overline{X} - \overline{Y} \right)} & \approx 0.634
     \end{aligned}
 \end{equation*}
 Думаю уже понятно, что полученная нами центрированная и нормированная статистика сходится к $N(0,\ 1)$.
@@ -774,6 +773,7 @@ $X = (x_1,\dots,\ x_{5\,000}),\ \forall x\in X\quad x\sim Be(p)$, в таком 
 Доверительный интервал в нашем случае $(Z_{0.05},\ +\infty) \approx (-1.645,\ +\infty)$. Статистика попадает в критическую область, значит мы принимаем $H_1$.
 \subsubsection*{Ответ}
 Нет, нельзя.
+\newpage
 \begin{center}
     \bf Семинар 28 февраля.
 \end{center}
@@ -808,8 +808,72 @@ $n = 25,\ \frac{1}{n}\sum_{i = 1}^{n}(x_i - \mu)^2 = 0.02,\ \alpha = 0.05$. Пр
 Станок штампует валики, в выборке объёма $n = 17$, выборочное среднее получилось $20.5$, выборочная дисперсия $S^2 = 16$. Проверить на уровне значимости 0.05 гипотезу $H_0: \sigma^2 = 18$ (альтернативой будет $H_1: \sigma^2 \neq 18$).\\
 Математическое ожидание и дисперсию мы не знаем, поэтому берём статистику
 \[T(x) = \frac{\overset{=nS^2}{\overbrace{\sum_{i = 1}^{n}\left( x_i - \overline{X} \right)^2}}}{18} = \frac{17\cdot 16}{18}\approx 15.11 \sim \chi^2(16)\]
-Доверительный интервал $(\chi^2_{0.25,\ 16},\ \chi^2_{0.975,\ 16}) \approx (6.9,\ 28.84)\Rightarrow$ статистика не попала, принимаем $H_1$. 
-
+Доверительный интервал $(\chi^2_{0.25,\ 16},\ \chi^2_{0.975,\ 16}) \approx (6.9,\ 28.84)\Rightarrow$ статистика не попала, принимаем $H_1$.
+\begin{center}
+    Домашнее задание к 14 марта.
+\end{center}
+\subsection*{Задача 1}
+Наблюдались показания $n = 500$ наугад выбранных часов, выставленных в витринах  часовщиков. Пусть $i$ - номер промежутка от $i$ – го часа до $(i+1)$-го часа, $i = 0,\ 1,\dots,\ 11$.
+\[\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        $i$   & 0  & 1  & 2  & 3  & 4  & 5  & 6  & 7  & 8  & 9  & 10 & 11 \\
+        \hline
+        $n_i$ & 41 & 34 & 54 & 39 & 49 & 45 & 41 & 33 & 37 & 41 & 47 & 39 \\
+        \hline
+    \end{tabular}\]
+Согласуются ли эти данные с гипотезой о том, что показания часов распределены равномерно в интервале (0;12)? Уровень значимости принять равным 0.05.
+\subsubsection*{Решение}
+Нам дана гипотеза $H_0: X_1,\dots,\ X_{500} \sim R(0,\ 12)\Rightarrow F(x) = \begin{cases}
+        0,\             & x < 0          \\
+        \frac{x}{12},\  & x \in [0,\ 12] \\
+        1,\             & x > 12
+    \end{cases}$\\
+На интервалы уже всё разбили, неизвестных параметров в распределении нет, значит оценивать их не надо. Посчитаем частоты попадания на интервалы:
+\[\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        $i$        & 0                & 1                & 2                & 3                & 4                & 5                & 6                & 7                & 8                & 9                & 10               & 11               \\
+        \hline
+        $\hat p_i$ & $\frac{41}{500}$ & $\frac{34}{500}$ & $\frac{54}{500}$ & $\frac{39}{500}$ & $\frac{49}{500}$ & $\frac{45}{500}$ & $\frac{41}{500}$ & $\frac{33}{500}$ & $\frac{37}{500}$ & $\frac{41}{500}$ & $\frac{47}{500}$ & $\frac{39}{500}$ \\
+        \hline
+    \end{tabular}\]
+При справедливости $H_0$ вероятность попадания на все интервалы должна быть одинаковой (так как интервалы поровну делят область некоторого равномерного распределения), то есть $\forall i = \overline{0,\ 11}\quad p_i^{(0)} = \frac{1}{12}$\\
+По критерию хи-квадрат:
+\[\hat \chi^2 = \sum_{i = 0}^{11} \frac{500}{p_{i}^{(0)}} {\left( \hat p_i - p^{(0)}_i \right)}^2\Big|_{H_0} \sim \chi^2\left( 11 \right)\]
+Доверительным интервалом будет $(0,\ \chi^2_{0.95,\ 11}) = (0,\ 19.675)$. Наша оценка примерно равна 10, значит попала в доверительную область.
+\subsubsection*{Ответ}
+Согласуются.
+\subsection*{Задача 2}
+В некоторой компании работает $n = 500$ продавцов, на каждого из которых может поступить жалоба. За последний месяц на 275 продавцов жалоб не поступало, на 150 поступило по одной жалобе, на 50 – по две жалобы, на остальных – три или более жалоб. С помощью критерия хи-квадрат проверьте гипотезу о том, что количество жалоб на продавца есть случайная величина подчиняющаяся распределению Пуассона со средним значением одна жалоба в месяц. Уровень значимости считать равным 0.05.
+\[\begin{tabular}{|c|c|c|c|c|}
+        \hline
+        $i$   & 0   & 1   & 2  & 3+ \\
+        \hline
+        $n_i$ & 275 & 150 & 50 & 25 \\
+        \hline
+    \end{tabular}\]
+\subsubsection*{Решение}
+Нужно проверить гипотезу $H_0: X_1,\dots,\ X_{500} \sim \Pi(1)\Rightarrow P(X_i = k) = \frac{e^{-1} 1^k}{k!} = \frac{1}{k!\cdot e}$\\
+Разбили на 4 интервала (для продавцов с 0, 1, 2, 3+ жалобами), неизвестных параметров в распределении нет, значит ничего не надо оценивать. Посчитаем частоты:
+\[\begin{tabular}{|c|c|c|c|c|}
+        \hline
+        $i$        & 0                 & 1                 & 2                & 3+               \\
+        \hline
+        $\hat p_i$ & $\frac{275}{500}$ & $\frac{150}{500}$ & $\frac{50}{500}$ & $\frac{25}{500}$ \\
+        \hline
+    \end{tabular}\]
+При справедливости $H_0$ они должны выглядеть так:
+\[\begin{tabular}{|c|c|c|c|c|}
+        \hline
+        $i$         & 0             & 1             & 2              & 3+                 \\
+        \hline
+        $p_i^{(0)}$ & $\frac{1}{e}$ & $\frac{1}{e}$ & $\frac{1}{2e}$ & $1 - \frac{5}{2e}$ \\
+        \hline
+    \end{tabular}\]
+По критерию хи-квадрат должно выполняться:
+\[\hat \chi^2 = \sum_{i = 0}^{3} \frac{500}{p_i^{(0)}}{\left( \hat p_i - p_i^{(0)}\right)}^2\Big|_{H_0} \sim \chi^2\left( 3 \right)\]
+Доверительная область будет $(0,\ \chi^2_{0.95,\ 3}) = (0,\ 7.814)$. Оценка получилась 76.21, походу мимо.
+\subsubsection*{Ответ}
+Гипотеза отвергается.
 \begin{center}
     \bf Семинар 7 марта
 \end{center}
