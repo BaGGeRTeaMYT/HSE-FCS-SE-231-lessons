@@ -17,8 +17,8 @@
 \usepackage{tikz}
 \usepackage{cancel}
 
-% \usepackage{fontspec}
-% \setmainfont{Calibri}
+\usepackage{fontspec}
+\setmainfont{Calibri}
 
 \newcommand{\sion}{\sum\limits_{i = 1}^{n}}
 \newcommand{\dev}{\mathcal{D}}
@@ -959,4 +959,126 @@ $H_2: \sigma_1^2 > \sigma^2_2\\
 $H_3: \sigma_1 \neq \sigma_2$\\
 $\tilde S_1^2 < \tilde S_2^2,\ T(x,\ y) = \frac{\tilde S_2^2}{\tilde S_1^2}\sim F(n - 1,\ m - 1)\Rightarrow$ критическая область на правом хвосте.\\
 $\tilde S_1^2 > \tilde S_2^2,\ T(x,\ y) = \frac{\tilde S_1^2}{\tilde S_2^2} \sim F(m - 1,\ n - 1)\Rightarrow$ на правом хвосте критическая область.\\
+\begin{center}
+    \bf Лекция 14 марта
+\end{center}
+\subsection*{Критерий Ансари-Брэйли}
+$X_1,\dots,\ X_m \sim F(t - \mu)$\\
+$Y_1,\dots,\ Y_n \sim F\left( \frac{t - \mu}{\Delta} \right),\ \Delta > 0$
+\subsubsection*{Предположения}
+Выборки независимы, $F(\mu) = 0.5$\\
+Проверяем гипотезу $H_0: \Delta = 1$
+\subsubsection*{Замечание 1}
+Если $\dev X < \infty$ и $\displaystyle\int\limits_{-\infty}^{+\infty} tf(t)\, dt = 0$, то $\Delta^2 = \frac{\dev Y}{\dev X}$\\
+Если $\dev X = +\infty$, то $\begin{cases}
+    \Delta < 1\Rightarrow \text{выборка $Y$ сжата относительно $X$}\\
+    \Delta > 1\Rightarrow \text{выборка $Y$ растянута относительно $X$}
+\end{cases}$
+\subsubsection*{Замечание 2}
+Если $X_1,\dots,\ X_m \sim F(t - \mu_1)$ и $Y_1,\dots,\ Y_n \sim F\left( \frac{t - \mu_2}{\Delta} \right)$ (то есть сдвиги $\mu_1,\ \mu_2$ различные), то рекомендуется найти выборочную медиану $\hat \mu_x$ и $\hat \mu_y$ и рассматривать выборки $x_1 - \hat \mu_x,\dots,\ x_m - \hat \mu_x$ и $y_1 - \hat \mu_y,\dots,\ y_n - \hat\mu_y$
+\subsection*{Реально критерий Ансари-Брейли}
+Вводим обозначение $m + n = N$, а также статистика:
+\[A_{m,\ n} = \sum_{i = 1}^{N} \left( \frac{N + 1}{2} - \left| R_i - \frac{N + 1}{2} \right| \right)\]
+Здесь $R_i$ --- ранг $X_i$ в объединённой выборке. По своей сути $\left| R_i - \frac{N + 1}{2} \right|$ есть расстояние до ближайшего конца выборки (если мы пронумеруем выборку в прямом и в обратном порядке, то каждый элемент получит минимальный из номеров).\\
+Если $n + m \leq 20$, то существует таблица точных значений квантилей статистики $A$\\
+Если $\min(m,\ n) \to \infty$, то
+\[A^* = \left.\frac{A - EA_{m,\ n}}{\sqrt{\dev A_{m,\ n}}}\right|_{H_0} \sim N(0,\ 1)\]
+Свойства данной статистики:
+\[EA_{m,\ n} = \begin{cases}
+    \frac{m(N + 2)}{4},\ & N \underset{2}{\equiv} 0\\
+    \frac{m(N + 1)^2}{4N},\ & N \underset{2}{\equiv} 1\\
+\end{cases}\]
+\[\dev A_{m,\ n} = \begin{cases}
+    \frac{mn(N + 2)(N - 2)}{48(N - 1)},\ & N \underset{2}{\equiv} 0\\
+    \frac{mn(N^2 + 3)(N + 1)}{48 {N}^2},\   & N \underset{2}{\equiv} 1
+\end{cases}\]
+Если проверяем гипотезу $H_0: \Delta = 1$ (используем значение $A^*$)\\
+Против гипотезы $H_1: \Delta < 1$
+\[\begin{tikzpicture}[scale = 2]
+    \draw[color=green] (-1, 0) -- (2, 0);
+    \draw[color=red] (-2, 0) -- (-1, 0);
+    \draw (-1, -0.15) -- (-1, 0.15);
+    \node at (-1, -0.3) (a) {$Z_{\alpha}$};
+\end{tikzpicture}\]
+Против гипотезы $H_2: \Delta > 1$
+\[\begin{tikzpicture}[scale = 2]
+    \draw[color=green] (-2, 0) -- (1, 0);
+    \draw[color=red] (1, 0) -- (2, 0);
+    \draw (1, 0.15) -- (1, -0.15);
+    \node at (1, -0.3) (a) {$Z_{1 - \alpha}$};
+\end{tikzpicture}\]
+Против гипотезы $H_3: \Delta \neq 1$
+\[\begin{tikzpicture}[scale = 2]
+    \draw[color=red] (-2, 0) -- (-1.5, 0);
+    \draw[color=red] (1.5, 0) -- (2, 0);
+    \draw[color=green] (-1.5, 0) -- (1.5, 0);
+    \draw (1.5, -0.15) -- (1.5, 0.15);
+    \draw (-1.5, -0.15) -- (-1.5, 0.15);
+    \node at(-1.5, -0.3) (a) {$Z_{\alpha/2}$};
+    \node at(1.5, -0.3) (a) {$Z_{1 - \alpha/2}$};
+\end{tikzpicture}\]
+\subsection*{MAD оценка (Medium Absolute Deviation)}
+Оценка среднеквадратичного отклонения выборки с неизвестным распределением:
+\[MAD = \underset{1 \leq i \leq n}{\operatorname{med}}\left| x_i - \underset{\hat mu}{\underbrace{\operatorname{med}(x_1,\dots,\ x_n)}} \right|\]
+Это медиана модулей отклонения от выборочной медианы.
+\subsection*{Критерий КОЛМОГОРОВА-Смирнова}
+Даны две выборки $X_1,\dots,\ X_m \sim F(t)$ и $Y_1,\dots,\ Y_n \sim G(t)$.
+\subsubsection*{Предположения}
+Выборки независимые, $F(t),\ G(t)$ непрерывные.
+\subsubsection*{Применение}
+Проверяем гипотезу $H_0: \forall t\quad F(t) = G(t)$ против альтернативы общего вида: $H_1: \exists t\quad F(t) \neq G(t)$.\\
+Оцениваем функции распределения с помощью эмпирических функций распределения.\\
+Рассматривается статистика:
+\[D_{m,\ n} = \max\limits_{1 \leq i \leq m + n} \left| \hat F_{m}(z_i) - \hat G_{n}(z_i) \right|\]
+Здесь $z = (z_1,\dots,\ z_{m + n})$ --- объединённая выборка из $x_1,\dots,\ x_m,\ y_1,\dots,\ y_n$.\\
+Если $m + n \leq 20$, то есть таблица с точными квантилями.\\
+Если $m + n > 20$, тогда хорошей апроксимацией будет:
+\[D_{m,\ n} \sim K(t),\ \text{(распределение Колмогорова)}\]
+Тогда прямая разбивается на следующие области (отрицательные ):
+\[\begin{tikzpicture}[scale = 2]
+    \draw[color=green] (-2, 0) -- (1, 0);
+    \draw[color=red] (1, 0) -- (2, 0);
+    \draw (1, 0.15) -- (1, -0.15);
+    \draw (-2, 0.15) -- ++(0, -0.3);
+    \node at (-2, -0.3) (0) {0};
+    \node at (1, -0.3) (a) {$k_{1 - \alpha}$};
+\end{tikzpicture}\]
+$k_{\alpha}$ --- квантиль Колмогорова уровня $\alpha$. Известная точка $k_{0.95} = 1.36$\\
+Данный критерий наименее мощный среди всех упомянутых ранее, поскольку является более общим. Если понятно, с чем связана неоднородность выборок, то стоит применять более специализированные критерии.
+\section*{Однофакторный дисперсионный анализ}
+\subsection*{Определения}
+Фактор --- какая-то переменная, которая по нашему мнению влияет на конечный результат.\\
+Уровень фактора --- значение переменной фактора (в задаче их должно быть конечное число).\\
+Отклик:
+\[\begin{tabular}{|c|c|c|c|}
+    \hline
+    1 & 2 & $\dots$ & k\\
+    \hline
+    $x_{1\, 1}$ & $x_{1\, 2}$ & $\dots$ & $x_{1\, k}$\\
+    \hline
+    $x_{2\, 1}$ & $x_{2\, 2}$ & $\dots$ & $x_{2\, k}$\\
+    \hline
+    $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$\\
+    \hline
+    $x_{{n_1}\, 1}$ & $x_{{n_2}\, 2}$ & $\dots$ & $x_{{n_k}\, k}$\\
+    \hline
+\end{tabular}\]
+$x_{i\, j} = \theta + \tau_j + \varepsilon_{i\, j}$\\
+$\varepsilon_{i\, j}$ --- независимое одинаковое распределение случайной величины с $E\varepsilon_{i\, j} = 0,\ \dev \varepsilon_{i\, j} = \sigma^2$ (дисперсия неизвестная).\\
+$H_0: \tau_1 = \dots = \tau_k = 0$.
+\subsection*{Критерий Фишера}
+\subsubsection*{Обозначения}
+$N = n_1 + \dots + n_k\\
+\overline{X}_N = \displaystyle \frac{1}{N} \sum_{j = 1}^{k} \sum_{i = 1}^{n_j} x_{i\, j}\\$
+
+\subsubsection*{Предположения}
+$\varepsilon_{i\, j} \sim N(0,\ \sigma^2)$.
+\subsubsection*{Формулировка}
+\begin{equation*}
+    \begin{aligned}
+    SS_{\text{общ}} =& \sum_{j = 1}^{k} \sum_{i = 1}^{n_j} {(x_{i\, j} - \overline{X}_N)}^2 = \sum_{j = 1}^{k} \sum_{i = 1}^{n_j} \left( X_{i\, j} \pm \overline{X}_{\bullet\, j} - \overline{X}_N \right) = \underset{SS_{\text{случ.}}}{\underbrace{\sum_{j = 1}^{k} \sum_{i = 1}^{n_j} \left( x_{i\, j} - \overline{X}_{\bullet\, j} \right)^2}} + \underset{SS_{\text{ур. ф.}}}{\underbrace{\sum_{j = 1}^{k}\sum_{i = 1}^{n_j} (\overline{X}_{\bullet\, j} - \overline{X}_N)^2}} +\\
+    & + \underset{ = 0}{\underbrace{\sum_{j = 1}^{k} \sum_{i = 1}^{n_j} \left( x_{i\, j} - \overline{X}_{\bullet\, j} \right)\left( \overline{X}_{\bullet\, j} - \overline{X}_N \right)}}
+    \end{aligned}
+\end{equation*}
+
 \end{document}
