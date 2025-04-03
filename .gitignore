@@ -12,4 +12,6 @@ algebra/*.aux
 */*.out
 */hw*
 *.ps1
+py_test
+calc.py
 .vscode

@@ -17,8 +17,8 @@
 \usepackage{tikz}
 \usepackage{cancel}
 
-\usepackage{fontspec}
-\setmainfont{Calibri}
+% \usepackage{fontspec}
+% \setmainfont{Calibri}
 
 \newcommand{\sion}{\sum\limits_{i = 1}^{n}}
 \newcommand{\dev}{\mathcal{D}}
@@ -1184,8 +1184,8 @@ $H_0: \theta_1 = \dots = \theta_k = \theta$ против $H_1: \theta_1 \leq \th
 Введём функцию:
 \[\varphi(y,\ z) = \begin{cases}
     1,\ &y < z\\
-    0.5,\ &y = z\\
-    0,\ &u < z
+    0.5,\ & y = z\\
+    0,\ & y > z
 \end{cases}\]
 И функцию:
 \[U_{l,\ m} = \sum_{i = 1}^{n_l} \sum_{j = 1}^{n_m} \varphi(x_{i\, j},\ x_{j\, m})\]
