@@ -1203,4 +1203,187 @@ $H_0: \theta_1 = \dots = \theta_k = \theta$ против $H_1: \theta_1 \leq \th
 Заметим, что при $k = 2$:
 \[W = J + \frac{n_2(n_2 + 1)}{2}\]
 Да и вообще статистика $J$ является статистикой Вилкоксона с каким-то смещением, то есть все его свойства наследуются.
+\begin{center}
+    \bf Лекция 4 апреля
+\end{center}
+\begin{center}
+{\Large\textbf{Исследование зависимостей}}\\
+Шкалы измерений
+\end{center}
+\begin{enumerate}
+    \item Количественная (насколько одно больше другого, операция вычитания)
+    \item Порядковая/ординальная (разделение на группы, операции больше или меньше)
+    \item Номинальная (можем только проверять равенство элементов)
+\end{enumerate}
+Из более высокой шкалы можно перейти в более низкую, наоборот --- нельзя. Если сравниваются две метрики, измеряемые в разных шкалах, то нужно перевести их в одну (низшую из них).\\
+Имеется две метрики:
+\begin{equation*}
+    \begin{aligned}
+        & A: A_1,\dots,\ A_m\\
+        & B: B_1,\dots,\ B_k
+    \end{aligned}
+\end{equation*}
+Можем составить гипотезу независимости
+\[H_0: \forall i,\ j\quad P(A = A_i,\ B = B_j) = \underset{=p_{i\, \bullet}}{\underbrace{P(A = A_i)}} \cdot \underset{=p_{\bullet\, j}}{\underbrace{P (B = B_j)}},\ \text{против}\ H_1: \exists (i,\ j)\quad P_{i\, j} \neq P(A = A_i) \cdot P(B = B_j)\]
+\subsection*{Определение}
+\underline{Таблицей сопряжённости коэффициентов} называется:
+\[\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    & $B_1$ & $\dots$ & $B_k$ &  \\
+    \hline
+    $A_1$ & $n_{1\, 1}$ & $\dots$ & $n_{1\, k}$ & $n_{1\, \bullet}$\\
+    \hline
+    $\vdots$ & $\vdots$ & & $\vdots$ & $\vdots$\\
+    \hline
+    $A_{m} $ & $n_{m\, 1}$ & $\dots$ & $n_{m\, k}$ & $n_{m\, \bullet}$\\
+    \hline
+     & $n_{\bullet\, 1}$ & $\dots$ & $n_{\bullet\, k}$ & $n$\\
+     \hline
+\end{tabular}\]
+Теперь можем построить оценки:
+\begin{equation*}
+    \begin{aligned}
+        &\hat p_{i\, j} = \frac{n_{i\, j}}{n} \xrightarrow[n \to \infty]{p} p_{i\, j}\\
+        &\hat p_{i\, \bullet} = \frac{n_{i\, \bullet}}{n} \xrightarrow[n\to \infty]{p} p_{i\, \bullet}\\
+        &\hat p_{\bullet\, j} = \frac{n_{\bullet\, j}}{n} \xrightarrow[n\to\infty]{p} p_{\bullet\, j}
+    \end{aligned}
+\end{equation*}
+Для выполнения независимости хотелось бы:
+\[p_{i\, j} = p_{i\, \bullet} \cdot p_{\bullet\, j} \Rightarrow \hat p_{i\, j} = \hat p_{i\, \bullet} \cdot \hat p_{\bullet\, j} \Rightarrow \frac{n_{i\, j}}{n} \approx \frac{n_{i\, \bullet}}{n} \cdot \frac{n_{\bullet\, j}}{n}\]
+Можем составить статистику:
+\[\hat \chi^2 = \sum_{i = 1}^{m} \sum_{j = 1}^{k} \frac{n \cdot {\left(n_{i\, j} - \frac{n_{i\, \bullet} n_{\bullet\, j}}{n}\right)}^2}{n_{i\, \bullet} n_{\bullet\, j}}\]
+При справедливости $H_0$ выполняется
+\[\hat \chi^2 \sim \chi^2\left( (m - 1)(k - 1) \right)\]
+Критическая область справа.
+\subsubsection*{Частный случай}
+Для $m = k = 2$ верно:
+\[\hat \chi^2 = \frac{n {(n_{11} n_{22} - n_{12} n_{21})}^2}{ n_{1\, \bullet}\, n_{2\, \bullet}\, n_{\bullet\, 1}\, n _{\bullet\, 2} }\]
+\subsection*{Определение}
+\underline{Коэффициентом контингенции} $\Phi$ для таблицы $2\times 2$ называется:
+\[\begin{tabular}{|c|c|c|c|}
+    \hline
+    $A\setminus B$& 1 & 0 & \\
+    \hline 
+    1 & $a$ & $b$ & $a + b$\\
+    \hline
+    0 & $c$ & $d$ & $c + d$\\
+    \hline
+     & $a + c$ & $b + d$ & \\
+     \hline
+\end{tabular} \Rightarrow \Phi = \frac{ad - bc}{\sqrt{(a + b)(c + d)(a + c)(b + d)}}\]
+Для коэффециента контингенции выполняется неравенство:
+\[-1 \leq \Phi \leq 1\]
+Если $\Phi = 1$:
+\[\begin{tabular}{|c|c|c|}
+    \hline
+    $A\setminus B$& 1 & 0\\
+    \hline 
+    1 & $a$ & $0$\\
+    \hline
+    0 & $0$ & $d$\\
+    \hline
+\end{tabular}\]
+Если $\Phi = -1$:
+\[\begin{tabular}{|c|c|c|}
+    \hline
+    $A\setminus B$& 1 & 0\\
+    \hline 
+    1 & $0$ & $b$\\
+    \hline
+    0 & $c$ & $0$\\
+    \hline
+\end{tabular}\]
+\subsection*{Определение}
+\underline{Коэффициентом ассоциации Юла} для таблицы $2\times 2$ является:
+\[Q = \frac{ad - bc}{ad + bc}\]
+Для него также справедливо неравенство:
+\[-1 \leq Q \leq 1\]
+Если $Q = 1$, тогда:
+\[\begin{tabular}{|c|c|c|}
+    \hline
+    $A\setminus B$& 1 & 0\\
+    \hline 
+    1 & $a$ & $0$\\
+    \hline
+    0 & $0$ & $d$\\
+    \hline
+\end{tabular},\ \text{или}\ \begin{tabular}{|c|c|c|}
+    \hline
+    $A\setminus B$& 1 & 0\\
+    \hline 
+    1 & $a$ & $b$\\
+    \hline
+    0 & $0$ & $d$\\
+    \hline
+\end{tabular},\ \text{или}\ \begin{tabular}{|c|c|c|}
+    \hline
+    $A\setminus B$& 1 & 0\\
+    \hline 
+    1 & $a$ & $0$\\
+    \hline
+    0 & $c$ & $d$\\
+    \hline
+\end{tabular}\]
+Если $Q = -1$, тогда:
+\[\begin{tabular}{|c|c|c|}
+    \hline
+    $A\setminus B$& 1 & 0\\
+    \hline 
+    1 & $0$ & $b$\\
+    \hline
+    0 & $c$ & $0$\\
+    \hline
+\end{tabular},\ \text{или}\ \begin{tabular}{|c|c|c|}
+    \hline
+    $A\setminus B$& 1 & 0\\
+    \hline 
+    1 & $a$ & $b$\\
+    \hline
+    0 & $c$ & $0$\\
+    \hline
+\end{tabular},\ \text{или}\ \begin{tabular}{|c|c|c|}
+    \hline
+    $A\setminus B$& 1 & 0\\
+    \hline 
+    1 & $0$ & $b$\\
+    \hline
+    0 & $c$ & $d$\\
+    \hline
+\end{tabular}\]
+Также справедливо:
+\[|\Phi| \leq |Q|\]
+\subsection*{Пример}
+Рассматривается связь между здоровьем зрения пациента до операции ($A$ --- число от 0 до 10)и осложнениями после операции ($B$ --- есть или нет). Получили таблицу:
+\[\begin{tabular}{|c|c|c|c|}
+    \hline
+    $A\setminus B$& нет & есть & \\
+    \hline 
+    $0-1$ & 129 & 14 & 143\\
+    \hline
+    $2-10$ & 807 & 4 & 811\\
+    \hline
+     & 936 & 18 & 954\\
+     \hline
+\end{tabular}\]
+Проверяем $H_0: p_{i\, j} = p_{i\, \bullet} \cdot p_{\bullet\, j}$ против $H_1: p_{i\, j} \neq p_{i\, \bullet} \cdot p_{\bullet\, j}$.
+\[\hat \chi^2 = \frac{954{(129\cdot 4 - 14\cdot 807)}^2}{143\cdot 811 \cdot 936 \cdot 18} \approx 51.8 \]
+Долнжо выполняться
+\[\hat \chi^2 \sim \chi^2 (1)\]
+Знаем квантиль $\chi^2_{0.95,\ 1} \approx 3.84 \Rightarrow$ принимается альтернативная гипотеза.\\
+Посчитаем коэффициенты контингенции и Юла:
+\[\begin{cases}
+    \Phi = -0.244\\
+    Q = -0.91
+\end{cases}\]
+Коэффициент Юла близок к $-1$, то есть среди людей с осложнениями после операции больше людей с изначально плохим зрением.
+\subsection*{Определение}
+Для таблиц произвольного размера считается \underline{коэффициент Пирсона}:
+\[P = \sqrt{\frac{\hat \chi^2}{\hat \chi^2 + n}}\]
+Если таблица порождена гауссовскими случайными величинами $(X_1,\ Y_1),\dots,\ (X_n,\ Y_n)$ (для построения таблицы стоит разбить плоскость на прямоугольники, значением в ячейке таблицы будет количество точек, попавших в соответствующий прямоугольник), выполняется:
+\[\frac{\hat \chi^2}{\hat \chi^2 + n} \xrightarrow[n\to\infty]{} \hat \rho^2_{X Y}\]
+Где $\hat \rho_{XY}^2$ --- выборочный коэффициент корреляции.\\
+\subsection*{Определение}
+Краммеру не понравилось, что коэффициент Пирсона никогда не равен 1 (а корреляция может быть 1), поэтому придумал свой \underline{коэффициент Краммера}:
+\[C = \sqrt{\frac{\hat \chi^2}{n \cdot \min \{ (k - 1),\ (m - 1) \}}}\]
+Этот коэффициент уже может быть равен 1.
 \end{document}
