@@ -17,8 +17,8 @@
 \usepackage{tikz}
 \usepackage{cancel}
 
-% \usepackage{fontspec}
-% \setmainfont{Calibri}
+\usepackage{fontspec}
+\setmainfont{Calibri}
 
 \newcommand{\sion}{\sum\limits_{i = 1}^{n}}
 \newcommand{\dev}{\mathcal{D}}
@@ -1188,7 +1188,7 @@ $H_0: \theta_1 = \dots = \theta_k = \theta$ против $H_1: \theta_1 \leq \th
     0,\ & y > z
 \end{cases}\]
 И функцию:
-\[U_{l,\ m} = \sum_{i = 1}^{n_l} \sum_{j = 1}^{n_m} \varphi(x_{i\, j},\ x_{j\, m})\]
+\[U_{l,\ m} = \sum_{i = 1}^{n_l} \sum_{j = 1}^{n_m} \varphi(x_{i\, l},\ x_{j\, m})\]
 Теперь возьмём статистику:
 \[ J = \sum_{1 \leq l < m \leq k} U_{l,\ m} \]
 Если $\min (n_1,\dots,\ n_k) \to \infty$:
