@@ -60,7 +60,7 @@
 У вектора $X = (X_1,\dots,\ X_{10})$ каждый элемент $X_i$ которой порождён случайной величиной $\xi\sim U(0,\ 1)$, выборочным пространством является $\mathbb{R}^{10}$ (так как $X_i$ может принять любое значение на $\mathbb{R}$)
 \subsection*{Определение}
 Обозначим $x_{(i)}$ --- $i$-ый по возрастанию элемент, тогда будет справедливо:
-\[x_{(1)} \leq x_{(2)} \leq \dots \leq x_{(n)}\]
+\[x_{(1)} \leq x_{(2)} \leq \cdots \leq x_{(n)}\]
 Обозначим $X_{(k)}$ случайную величину, реализация которой при каждой реализации $x$ выборки $X$ принимает значение $x_{(k)}$. Тогда последовательность $X_{(1)},\dots,\ X_{(n)}$ называется \underline{вариационным рядом выборки}.
 \subsection*{Определение}
 Случайная величина $X_{(k)}$ называется \underline{$k$-ой порядковой статистикой выборки}.
@@ -76,7 +76,8 @@ $I$ --- индикаторная функция. $I = \begin{cases}
     0,\ \text{иначе}
 \end{cases}$\\
 Пусть $x_1,\dots,\ x_n$ --- реализация выборки $X_1,\dots,\ X_n$\\
-\[\begin{tikzpicture}[scale=2, >=latex]
+\[
+\begin{tikzpicture}[scale=2, >=latex]
     \draw[->, >=latex] (0, -1) -- (0, 1) node(0)[anchor = east]{$\hat{F}_n(x)$};
     \draw (-2, -0.05) node(1)[anchor=north]{$x_1$} -- (-2, 0.05);
     \draw (-1, -0.05) node(2)[anchor=north]{$x_2$}-- (-1, 0.05);
@@ -94,7 +95,8 @@ $I$ --- индикаторная функция. $I = \begin{cases}
     \draw[dashed] (2, 0) -- (2, 1);
     \draw[->] (2, 1) -- (3, 1);
     \draw[->] (-3, 0) -- (3, 0) node(2)[anchor = south]{$x$};
-\end{tikzpicture}\]
+\end{tikzpicture}
+\]
 \begin{center}
     Свойства $\hat{F}_n(x)$
 \end{center}
@@ -105,7 +107,8 @@ $I$ --- индикаторная функция. $I = \begin{cases}
 \end{enumerate}
 \subsection*{Гистограмма}
 Разбить $\mathbb{R}$ на $(m + 2)$ непересекающихся интервала. Рассматриваются $x_{(1)},\dots,\ x_{(m)}$
-\[\begin{tabular}{|c|c|c|}
+\[
+\begin{tabular}{|c|c|c|}
     \hline
     Название & Обозначение & Формула\\
     \hline
@@ -134,22 +137,23 @@ $I$ --- индикаторная функция. $I = \begin{cases}
     \draw (-0.75, 0) rectangle (-0.0, 0.8);
     \draw (-0.0, 0) rectangle (0.75, 0.75);
     \draw (0.75, 0) rectangle (1.5, 0.2);
-\end{tikzpicture}\]
+\end{tikzpicture}
+\]
 \begin{center}
     Лекция 17 января
 \end{center}
 \subsection*{Определение}
 Пусть $X_1,\dots,\ X_n \sim F(x,\ \theta)$. \underline{$k$-ым начальным выборочным моментом} называется \[\hat{\mu}_k = \frac{1}{n} \sum_{i = 1}^{n} x_i^k,\ k \in \mathbb{N}\]
 \underline{Выборочным средним} называется:
-\[\hat{\mu}_1 = \overline{x} = \frac{1}{n} \sum_{i = 1}^{n} x_i\]
+\[\hat{\mu}_1 = \overline{X} = \frac{1}{n} \sum_{i = 1}^{n} x_i\]
 \subsection*{Определение}
 \underline{$k$-ым центральным выборочным моментом} называется 
-\[\hat{\nu}_k = \frac{1}{n} \sum_{i = 1}^{n} (x_i - \overline{x})^k,\ k = 2,\ 3,\dots\]
-\[\hat{\nu}_2 = S^2 = \frac{1}{n} \sum_{i = 1}^{n} (x_i - \overline{x})^2 \text{ называется выборочной дисперсией}\]
+\[\hat{\nu}_k = \frac{1}{n} \sum_{i = 1}^{n} {(x_i - \overline{X})}^k,\ k = 2,\ 3,\dots\]
+\[\hat{\nu}_2 = S^2 = \frac{1}{n} \sum_{i = 1}^{n} {(x_i - \overline{X})}^2 \text{ называется выборочной дисперсией}\]
 Пусть $(x_1,\ y_1),\dots,\ (x_n,\ y_n)$ соответствует распределению $F(x,\ y,\ \theta)$
 \subsection*{Определение}
 \underline{Выборочной ковариацией} называется
-\[\hat{K}_{xy} = \frac{1}{n}\sum_{i = 1}^{n} (x_i - \overline{x}) (y_i - \overline{y})\]
+\[\hat{K}_{xy} = \frac{1}{n}\sum_{i = 1}^{n} (x_i - \overline{X}) (y_i - \overline{Y})\]
 \subsection*{Определение}
 \underline{Выборочным коэффициентом корреляции} называется 
 \[\hat{\rho}_{xy} = \frac{\hat{K}_{xy}}{\sqrt{S_x^2 S_y^2}}\]
@@ -159,16 +163,16 @@ $I$ --- индикаторная функция. $I = \begin{cases}
 \begin{enumerate}
     \item $E\hat{\mu}_k = E\left( \frac{1}{n} \sum_{i = 1}^{n} X_i^k \right) = \frac{1}{n} \sum_{i = 1}^{n} E X_i^k = EX_1^k = \mu_k$
     \item $E\overline{X} = m_x$
-    \item $\mathcal{D} \hat{\mu}_k = \mathcal{D} \left( \frac{1}{n} \sum_{i = 1}^{n} x_i^k \right) = \frac{1}{n^2} \sum_{i = 1}^{n} \mathcal{D} X_i^k = \frac{1}{n} \mathcal{D} X_i^k = \frac{1}{n} \left( EX_1^{2k} - (EX_1^{K})^2 \right) = \frac{1}{n}(\mu_{2k} - \mu_k^2)$
-    \item $\mathcal{D}\overline{x} = \frac{\sigma^2_{x_1}}{n}$
+    \item $\mathcal{D} \hat{\mu}_k = \mathcal{D} \left( \frac{1}{n} \sum_{i = 1}^{n} x_i^k \right) = \frac{1}{n^2} \sum_{i = 1}^{n} \mathcal{D} X_i^k = \frac{1}{n} \mathcal{D} X_i^k = \frac{1}{n} \left( EX_1^{2k} - {(EX_1^{K})}^2 \right) = \frac{1}{n}(\mu_{2k} - \mu_k^2)$
+    \item $\mathcal{D}\overline{X} = \frac{\sigma^2_{x_1}}{n}$
     \item По УЗБЧ
     \[\hat{\mu}_k = \frac{1}{n} \sum_{i = 1}^{n} x_i^k \xrightarrow[n\to \infty]{\text{п. н.}} E\hat{\mu}_k = \mu_k\]
     \[\hat{\nu}_k \xrightarrow[n\to \infty]{\text{п. н.}} \nu_k\]
     \item По ЦПТ
     \[\frac{\hat{\mu}_k - \mu_k}{\sqrt{\frac{\mu_{2k} - \mu_k^2}{n} }}\xrightarrow[d]{n\to\infty}U,\ U\sim N(0,\ 1)\]
-    \[\frac{\sqrt{n}(\overline{x} - m_{x_1})}{\sigma} \xrightarrow[n\to\infty]{d} U\]
-    \item $ES^2 = E\left( \frac{1}{n} \sum_{i = 1}^{n}(x_i - \overline{x})^2 \right) =  \frac{1}{n} E\left( \sion \left(x_i^2 - 2x_i \overline{X} + \overline{X}^2\right) \right) = E(x^2) - \frac{2}{n} \sion E(x_i\overline{X}) + \frac{1}{n}\sion E\overline{X}^2 =\\
-    = E(x^2) - \frac{2}{n} \sion E x_i \sum\limits _{j = 1}^{n} x_j + \frac{1}{n} \sion E \left( \sum\limits_{j = 1}^{n} x_j \right)^2 = E(x^2) - \frac{2}{n} E\sum\limits_{i = 1}^{n} x_i \sum_{j = 1}^{n} x_j +  = \frac{n - 1}{n} \sigma^2$
+    \[\frac{\sqrt{n}(\overline{X} - m_{x_1})}{\sigma} \xrightarrow[n\to\infty]{d} U\]
+    \item $ES^2 = E\left( \frac{1}{n} \sum_{i = 1}^{n}{(x_i - \overline{X})}^2 \right) =  \frac{1}{n} E\left( \sion \left(x_i^2 - 2x_i \overline{X} + \overline{X}^2\right) \right) = E(x^2) - \frac{2}{n} \sion E(x_i\overline{X}) + \frac{1}{n}\sion E\overline{X}^2 =\\
+    = E(x^2) - \frac{2}{n} \sion E x_i \sum\limits _{j = 1}^{n} x_j + \frac{1}{n} \sion E {\left( \sum\limits_{j = 1}^{n} x_j \right)}^2 = E(x^2) - \frac{2}{n} E\sum\limits_{i = 1}^{n} x_i \sum_{j = 1}^{n} x_j +  = \frac{n - 1}{n} \sigma^2$
     \item $E \hat{K}_{xy} = \frac{n - 1}{n} \cov(x,\ y)$
 \end{enumerate}
 \subsection*{Определение}
@@ -184,7 +188,7 @@ $I$ --- индикаторная функция. $I = \begin{cases}
 \[\lim_{n\to\infty} ES^2 = \lim_{n\to\infty} \frac{n - 1}{n}\sigma^2 = \sigma^2\]
 \subsection*{Определение}
 \underline{Несмещённой выборочной} (или исправленной) \underline{выборочной дисперсией} называется
-\[\tilde{S}^2 = \frac{1}{n - 1} \sum_{i = 1}^{n} (x_i - \overline{x})^2\]
+\[\tilde{S}^2 = \frac{1}{n - 1} \sum_{i = 1}^{n} {(x_i - \overline{x})}^2\]
 Оценки
 \[\begin{aligned}
     \hat{m}_1 &= \frac{x_1 + x_2 + x_3}{3}\\
@@ -214,7 +218,7 @@ $I$ --- индикаторная функция. $I = \begin{cases}
 \[\int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx =  \frac{\delta}{\delta \theta} \int\limits_S T(x) f(x,\ \theta) \, dx = \frac{\delta}{\delta\theta} ET(x) = \frac{\delta}{\delta \theta}\theta = 1\]
 \subsection*{Определение}
 \underline{Информацией Фишера} о параметре $\theta$, содержащейся в выборке $X_1,\dots,\ X_n$ называется величина
-\[I_n(\theta) = E\left( \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} \right)^2 = \int\limits_S\left( \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} \right)^2 f(x,\ \theta)\, dx\]
+\[I_n(\theta) = E{\left( \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} \right)}^2 = \int\limits_S{\left( \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} \right)}^2 f(x,\ \theta)\, dx\]
 \subsection*{Неравенство Рао-Крамера}
 Если $S,\ f(x,\ \theta)$ --- регулярная модель и $\hat{\theta}$ --- несмещённая оценка $\theta$, то 
 \[\dev (\hat{\theta}) \geq \frac{1}{I_n(\theta)}\]
@@ -226,15 +230,15 @@ $I$ --- индикаторная функция. $I = \begin{cases}
 \[\int\limits_S \frac{\delta}{\delta \theta} T(x) f(x,\ \theta)\, dx = \int\limits_S T(x) \frac{\delta}{\delta \theta} f(x,\ \theta) \frac{f(x,\ \theta)}{f(x,\ \theta)}\, dx = \int\limits_S T(x) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx = 1\]
 Чуть преобразуем последнее полученное равенство:
 \[\int\limits_S T(x) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx = \int\limits_S T(x) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx - \theta\underset{=0}{\underbrace{\int\limits_S \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx}} = \]
-\[= \int\limits_S \big( T(x) - \theta \big) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx = 1 \Rightarrow 1 = 1^2 = \left( \int\limits_S \big( T(x) - \theta \big) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx \right)^2 \]
+\[= \int\limits_S \big( T(x) - \theta \big) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx = 1 \Rightarrow 1 = 1^2 = {\left( \int\limits_S \big( T(x) - \theta \big) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx \right)}^2 \]
 Далее нам понадобится неравенство Коши-Буняковского, которое выглядит так:
-\[\left( \int \varphi_1(x)\varphi_2(x)\, dx \right)^2 \leq \int \varphi_1^2(x)\, dx\int \varphi_2^2(x)\, dx\]
+\[{\left( \int \varphi_1(x)\varphi_2(x)\, dx \right)}^2 \leq \int \varphi_1^2(x)\, dx\int \varphi_2^2(x)\, dx\]
 Подгоним полученное равенство $\left(f(x,\ \theta) > 0 \Rightarrow f(x,\ \theta) = \sqrt{f(x,\ \theta)}^2\right)$:
-\[\left( \int\limits_S \big( T(x) - \theta \big) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx \right)^2 = \left( \int\limits_S \underset{\varphi_1(x)}{\underbrace{\big( T(x) - \theta \big) \sqrt{f(x,\ \theta)}}}\cdot\underset{\varphi_2(x)}{\underbrace{\frac{\delta \ln f(x,\ \theta)}{\delta \theta} \sqrt{f(x,\ \theta)}}}\, dx \right)^2 = 1\]
+\[{\left( \int\limits_S \big( T(x) - \theta \big) \frac{\delta \ln f(x,\ \theta)}{\delta \theta} f(x,\ \theta)\, dx \right)}^2 = {\left( \int\limits_S \underset{\varphi_1(x)}{\underbrace{\big( T(x) - \theta \big) \sqrt{f(x,\ \theta)}}}\cdot\underset{\varphi_2(x)}{\underbrace{\frac{\delta \ln f(x,\ \theta)}{\delta \theta} \sqrt{f(x,\ \theta)}}}\, dx \right)}^2 = 1\]
 И применим неравенство Коши-Буняковского:
-\[1 = \left( \int\limits_S \underset{\varphi_1(x)}{\underbrace{\big( T(x) - \theta \big) \sqrt{f(x,\ \theta)}}}\cdot\underset{\varphi_2(x)}{\underbrace{\frac{\delta \ln f(x,\ \theta)}{\delta \theta} \sqrt{f(x,\ \theta)}}}\, dx \right)^2 \leq\]
-\[\leq \int\limits_S \left( (T(x) - \theta)\sqrt{f(x,\ \theta)} \right)^2 \, dx \cdot \int\limits_S \left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \sqrt{f(x,\ \theta)} \right)^2 \, dx =\]
-\[= \underset{=\dev\hat{\theta}}{\underbrace{\int\limits_S \big( T(x) - \theta \big)^2 f(x,\ \theta)\, dx}} \cdot \underset{=I_n(\theta)}{\underbrace{\int\limits_S\left( \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} \right)^2 f(x,\ \theta)\, dx}}\]
+\[1 = {\left( \int\limits_S \underset{\varphi_1(x)}{\underbrace{\big( T(x) - \theta \big) \sqrt{f(x,\ \theta)}}}\cdot\underset{\varphi_2(x)}{\underbrace{\frac{\delta \ln f(x,\ \theta)}{\delta \theta} \sqrt{f(x,\ \theta)}}}\, dx \right)}^2 \leq\]
+\[\leq \int\limits_S {\left( (T(x) - \theta)\sqrt{f(x,\ \theta)} \right)}^2 \, dx \cdot \int\limits_S {\left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \sqrt{f(x,\ \theta)} \right)}^2 \, dx =\]
+\[= \underset{=\dev\hat{\theta}}{\underbrace{\int\limits_S {\big( T(x) - \theta \big)}^2 f(x,\ \theta)\, dx}} \cdot \underset{=I_n(\theta)}{\underbrace{\int\limits_S{\left( \frac{\delta \ln \big(f(x,\ \theta)\big)}{\delta \theta} \right)}^2 f(x,\ \theta)\, dx}}\]
 Получаем:
 \[1 \leq \dev (\theta) \cdot I_n(\theta)\Rightarrow \dev (\theta) \geq \frac{1}{I_n(\theta)}\]
 \subsection*{Определение}
@@ -247,7 +251,7 @@ $I_n(\theta) = \dev \left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \right
 \subsection*{Замечание 2}
 $I_n(\theta) = nI_1(\theta)$\\
 $\displaystyle f(x,\ \theta) = f(x_1,\dots,\ x_n,\ \theta) = \prod_{i = 1}^{n} f(x_i,\ \theta)\\
-E\left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \right)^2 = E \left( \sion \frac{\delta \ln f(x_i,\ \theta)}{\delta \theta} \right)^2 = \sum_{i \neq j} E \left( \frac{\delta \ln f(x_i,\ \theta)}{\delta \theta} \cdot \frac{\delta \ln f(x_j,\ \theta)}{\delta \theta} \right) + nE\left( \frac{\delta \ln f(x_1, \theta)}{\delta \theta} \right)^2 =\\
+E{\left( \frac{\delta \ln f(x,\ \theta)}{\delta \theta} \right)}^2 = E \left( \sion \frac{\delta \ln f(x_i,\ \theta)}{\delta \theta} \right)^2 = \sum_{i \neq j} E \left( \frac{\delta \ln f(x_i,\ \theta)}{\delta \theta} \cdot \frac{\delta \ln f(x_j,\ \theta)}{\delta \theta} \right) + nE\left( \frac{\delta \ln f(x_1, \theta)}{\delta \theta} \right)^2 =\\
 = \sum_{i \neq j} \left( \underset{=0}{\underbrace{E \left( \frac{\delta \ln f(x_i,\ \theta)}{\delta \theta}\right)}} \cdot \underset{=0}{\underbrace{E\left( \frac{\delta \ln f(x_j,\ \theta)}{\delta \theta} \right)}}\right) + nE\left( \frac{\delta \ln f(x_1, \theta)}{\delta \theta} \right)^2 = nE\left( \frac{\delta \ln f(x_1, \theta)}{\delta \theta} \right)^2 = nI_1(\theta)$
 \subsection*{Замечание 3}
 Пример: $X_1,\dots,\ X_n \sim N(\theta,\ \sigma^2)$\\
@@ -618,7 +622,8 @@ $S^*_{1\, \alpha} \{(x_1,\dots,\ x_n)\ | \ \overline{X} \geq m_0 + \frac{Z_{1 - 
     \node at (-1, -0.3) (a) {$Z_{\alpha}$};
 \end{tikzpicture}\]
 Против гипотезы $H_3: m \neq m_0$
-\[\begin{tikzpicture}[scale = 2]
+\[
+\begin{tikzpicture}[scale = 2]
     \draw[color=red] (-2, 0) -- (-0.5, 0);
     \draw[color=red] (0.5, 0) -- (2, 0);
     \draw[color=green] (-0.5, 0) -- (0.5, 0);
@@ -626,7 +631,8 @@ $S^*_{1\, \alpha} \{(x_1,\dots,\ x_n)\ | \ \overline{X} \geq m_0 + \frac{Z_{1 - 
     \draw (-0.5, -0.15) -- (-0.5, 0.15);
     \node at(-0.5, -0.3) (a) {$Z_{\alpha/2}$};
     \node at(0.5, -0.3) (a) {$Z_{1 - \alpha/2}$};
-\end{tikzpicture}\]
+\end{tikzpicture}
+\]
 \textbf{Пояснение:} на рисунках зелёным обозначена доверительная область, красным обозначена критическая область.
 \subsection*{Задача}
 Снова гауссовская выборка, но дисперсия неизвестна. Хотим проверить гипотезу $H_0: m = m_0$. Тогда нужно поменять статистику на:
@@ -1228,6 +1234,7 @@ $H_0: \theta_1 = \dots = \theta_k = \theta$ против $H_1: \theta_1 \leq \th
 \end{equation*}
 Можем составить гипотезу независимости
 \[H_0: \forall i,\ j\quad P(A = A_i,\ B = B_j) = \underset{=p_{i\, \bullet}}{\underbrace{P(A = A_i)}} \cdot \underset{=p_{\bullet\, j}}{\underbrace{P (B = B_j)}},\ \text{против}\ H_1: \exists (i,\ j)\quad P_{i\, j} \neq P(A = A_i) \cdot P(B = B_j)\]
+\section*{Работаем с номинальной шкалой}
 \subsection*{Определение}
 \underline{Таблицей сопряжённости коэффициентов} называется:
 \[\begin{tabular}{|c|c|c|c|c|}
@@ -1394,6 +1401,7 @@ $H_0: \theta_1 = \dots = \theta_k = \theta$ против $H_1: \theta_1 \leq \th
 \begin{center}
     \bf Лекция 11 апреля
 \end{center}
+\section*{Работаем с порядковыми величинами}
 \subsection*{Коэффициенты прогноза Гутмана $\lambda$-меры}
 \subsubsection*{Пример}
 Признак $A$ --- удовлетворённость уровнем жизни. $B$ --- материальное положение семьи.
@@ -1521,5 +1529,212 @@ S = Q - K
 \[\tau_{X\, Y} = 1 - \frac{4\cdot 15}{10 \cdot 9} = \frac{1}{3}\]
 Точный квантиль $\tau_{10,\ 0.95} = 0.422$, доверительной областью будет $(-0.422,\ 0.422)$, значит статистика попала в доверительный интервал. Критерий Кендалла также не позволил установить наличие монотонной зависимости, то есть данные необходимо отправить на дальнейшую проверку для установления зависимостей. 
 
-
+\newpage
+\begin{center}
+    \bf Лекция 18 апреля
+\end{center}
+\section*{Исследование зависимости количественных показателей}
+Для начала поработаем с двумерными случайными величинами, имеющими гауссовское распределение.\\
+То есть рассматривается двумерная выборка $(X_1,\ Y_1),\dots,\ (X_n,\ Y_n)$, порождённая случайной величиной $z = (X,\ Y) \sim N(m_z,\ k_z)$.
+\subsection*{Воспоминание}
+Случайные величины $X,\ Y$ называются независимыми, если $\forall x,\ y \in \real^1:\quad F_z (x,\ y) = F_x(x)\cdot F_y(y)$.
+\subsection*{Ещё одно воспоминание}
+Если $z \sim N(m_z,\ k_z)$ и $\rho_{X\, Y} = 0 \Rightarrow$ случайные величины $X,\ Y$ независимы.\\
+\textit{Замечание}: эта фишка работает только для гауссовских величин, в общем случае применять нельзя.
+\subsubsection*{Доказательство}
+Если $\rho_{X\, Y} = 0 \Rightarrow K_z = \begin{pmatrix}
+    \sigma_x^2 & 0\\
+    0 & \sigma_y^2
+\end{pmatrix} \Rightarrow C = K_{z}^{-1} = \begin{pmatrix}
+    \frac{1}{\sigma_x^2} & 0\\
+    0 & \frac{1}{\sigma_y^2}
+\end{pmatrix} \Rightarrow c_{1\, 2} = 0$.\\
+Теперь распишем функцию плотности для величины $z$:
+\[f_z(x,\ y) = \frac{\sqrt{\det C}}{ 2\pi} \exp \left\{ -\frac{1}{2} \left( {\left( x - m_x \right)}^2 c_{1\, 1} + {\left( y - m_y \right)}^2 c_{2\, 2} + 2c_{1\, 2} (x - m_x)(y - m_y) \right) \right\}\]
+С нашей матрицей $C$ плотность можно переписать в виде:
+\[f_z(x,\ y) = \frac{1}{2\pi \sigma_x \sigma_y} \exp \left\{ -\frac{{(x - m_x)}^2}{2\sigma_x^2} + \frac{ {\left( y - m_y \right)}^2 }{2\sigma_y^2} \right\} = \frac{1}{\sqrt{2\pi} \sigma_x} e^{-\frac{ {\left( x - m_x \right)}^2 }{2\sigma^2_x}} \frac{1}{\sqrt{2\pi} \sigma_y} e^{ -\frac{ {\left( y - m_y \right)}^2 }{2\sigma^2_y} } = f_x(x) f_y(y)\]
+\subsection*{Возможные гипотезы}
+Пусть $Z \sim N(m_z,\ K_z)$\\
+Для гауссовских величин достаточно проверять гипотезу $H_0: \rho_{X\, Y} = 0$.\\
+Возможные альтернативы:
+\begin{enumerate}
+    \item $H_1: \rho_{X\, Y} < 0$, то есть при возрастании одного показателя, второй убывает.
+    \item $H_2: \rho_{X\, Y} > 0$, то есть при возрастании одного показателя, второй также возрастает.
+    \item $H_3: \rho_{X\, Y} \neq 0$, то есть величины просто как-то зависимы.
+\end{enumerate}
+Для оценки корреляции можно использовать выборочный коэффициент корреляции:
+\[
+\hat \rho_{X\, Y} = \frac{ \sum_{i =  1}^{n} \left( x_i - \overline{X} \right) \left( y_i - \overline{Y} \right) }{ \sqrt{ \sum_{i = 1}^{n} {\left( x_i - \overline{X} \right)}^2 \sum_{i = 1}^{n} {\left( y_i - \overline{Y} \right)}^2 } }
+\]
+Умные люди придумали статистику и доказали для неё следующее:
+\[
+\left. \frac{\sqrt{n - 2} \hat \rho_{X\, Y}}{\sqrt{1 - \hat \rho^2_{X\, Y}}} \right|_{H_0} \sim t(n - 2)
+\]
+В этом случае основной гипотезой будет $H_0: \rho_{X\, Y} = 0$, против возможных альтернатив:
+\begin{enumerate}
+    \item Против гипотезы $H_1: \rho_{X\, Y} > 0$
+\[\begin{tikzpicture}[scale = 2]
+    \draw[color=green] (-2, 0) -- (1, 0);
+    \draw[color=red] (1, 0) -- (2, 0);
+    \draw (1, 0.15) -- (1, -0.15);
+    \node at (1, -0.3) (a) {$t_{1 - \alpha}$};
+\end{tikzpicture}\]
+    \item Против гипотезы $H_2: \rho_{X\, Y} < 0$
+\[\begin{tikzpicture}[scale = 2]
+    \draw[color=green] (-1, 0) -- (2, 0);
+    \draw[color=red] (-2, 0) -- (-1, 0);
+    \draw (-1, -0.15) -- (-1, 0.15);
+    \node at (-1, -0.3) (a) {$t_{\alpha}$};
+\end{tikzpicture}\]
+    \item Против гипотезы $H_3: \rho_{X\, Y} \neq 0$
+\[
+\begin{tikzpicture}[scale = 2]
+    \draw[color=red] (-2, 0) -- (-1.5, 0);
+    \draw[color=red] (1.5, 0) -- (2, 0);
+    \draw[color=green] (-1.5, 0) -- (1.5, 0);
+    \draw (1.5, -0.15) -- (1.5, 0.15);
+    \draw (-1.5, -0.15) -- (-1.5, 0.15);
+    \node at(-1.5, -0.3) (a) {$t_{\alpha/2}$};
+    \node at(1.5, -0.3) (a) {$t_{1 - \alpha/2}$};
+\end{tikzpicture}
+\]
+\end{enumerate}
+При $n \to \infty$ справедливым будет:
+\[
+\sqrt{n} \hat \rho_{X\, Y} \Big|_{H_0} \sim N(0,\ 1)
+\]
+Рассмотрим свойства выборочного коэффициента корреляции:
+\begin{equation*}
+    \begin{aligned}
+        & E\hat \rho_{X\, Y} = \rho_{X\, Y} - \rho_{X\, Y} \frac{ (1 - \rho_{X\, Y}^2) }{2n}\\
+        & \dev \rho_{X\, Y} = \frac{ {\left( 1 - \rho_{X\, Y} \right)}^2 }{n}
+    \end{aligned}
+\end{equation*}
+В этих величинах используется неизвестная нам настоящая корреляция, поэтому её придётся заменять на оценку. При $n \to \infty$:
+\[
+\frac{\hat \rho_{X\, Y} - E\hat \rho_{X\, Y}}{\sqrt{\dev \hat\rho_{X\, Y}}} \sim N(0,\ 1)
+\]
+\subsection*{z-преобразования Фишера (наш слон?)}
+Выглядят следующим образом (там гиперболический арктангенс):
+\[
+z = \operatorname{arcth} \rho = \frac{1}{2} \ln \frac{1 + \rho_{X\, Y}}{1 - \rho_{X\, Y}}
+\]
+В неё можно подставить выборочный коэффициент корреляции:
+\[
+\hat z = \frac{1}{2} \ln \frac{1 + \hat \rho_{X\, Y}}{1 - \hat \rho_{X\, Y}}
+\]
+Про параметры $\hat z$ известно:
+\begin{equation*}
+    \begin{aligned}
+        & E \hat z = z + \frac{\rho_{X\, Y}}{2 (n - 1)}\\
+        & \dev \hat z = \frac{1}{n - 3}
+    \end{aligned}
+\end{equation*}
+При $n \to \infty$:
+\[
+\frac{\hat z - E\hat z}{\sqrt{\dev \hat z}} \sim N(0,\ 1)
+\]
+А ещё у величины $z$ прикольный гиперболический тангенс:
+\[
+\operatorname{th} z = \frac{e^z - e^{-z}}{e^z + e^{-z}} = \rho_{X\, Y}
+\]
+Сходимость к гауссовской величине здесь происходит быстрее, чем в предыдущем случае.
+\subsection*{Адаптация критерия хи-квадрат}
+\subsubsection*{Для дискретных величин}
+Пусть случайная величина $X$ дискретная и принимает значения $a_1,\dots,\ a_m$,\\
+Пусть случайная величина $Y$ дискретная и принимает значения $b_1,\dots,\ b_k$\\
+По дискретным величинам мы умеем составлять таблицы:
+\[
+\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    $X\setminus Y$ & $b_1$ & $\dots$ & $d_k$ & \\
+    \hline
+    $a_1$          & $n_{1\, 1}$ & $\dots$ & $n_{1\, k}$ & $n_{1\, \bullet}$\\
+    \hline
+    $\vdots$       & $\vdots$ & $\ddots$ & $\vdots$ & $\vdots$\\
+    \hline
+    $a_m$          & $n_{m\, 1}$ & $\dots$ & $n_{m\, k}$ & $n_{m\, \bullet}$\\
+    \hline
+                 & $n_{m\, \bullet}$ & $\dots$ & $n_{m\, \bullet}$ & $n$\\
+    \hline
+\end{tabular}
+\]
+\subsubsection*{Для непрерывных величин}
+Если случайные величины $X,\ Y$ имеют непрерывное распределение, то нужно разбить их пространство значений (в нашем случае плоскость) на несколько непересекающихся интервалов, обладающих свойствами:
+\begin{equation*}
+    \begin{aligned}
+        & \forall i,\ j:\quad i \neq j \Rightarrow \Delta x_i \cap \Delta x_j = \emptyset\\
+        & \bigcup\limits_{i = 1}^{m} \Delta x_i = \real^1\\
+        & \forall i,\ j:\quad i \neq j \Rightarrow \Delta y_i \cap \Delta y_j = \emptyset\\
+        & \bigcup\limits_{i = 1}^{k} \Delta y_i = \real^1\\
+    \end{aligned}
+\end{equation*}
+$n_{i\, j}$ --- количество наблюдений, попавших в прямоугольник $\Delta x_i \times \Delta y_i$.\\
+По полученным данным строим таблицу:
+\[
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        $X\setminus Y$ & $\Delta y_1$ & $\dots$ & $\Delta y_k$ & \\
+        \hline
+        $\Delta x_1$          & $n_{1\, 1}$ & $\dots$ & $n_{1\, k}$ & $n_{1\, \bullet}$\\
+        \hline
+        $\vdots$       & $\vdots$ & $\ddots$ & $\vdots$ & $\vdots$\\
+        \hline
+        $\Delta x_m$          & $n_{m\, 1}$ & $\dots$ & $n_{m\, k}$ & $n_{m\, \bullet}$\\
+        \hline
+                     & $n_{m\, \bullet}$ & $\dots$ & $n_{m\, \bullet}$ & $n$\\
+        \hline
+    \end{tabular}
+\]
+Теперь к данным в таблицах можем применять уже известный нам критерий хи-квадрат для проверки гипотезы $H_0: \forall i = \overline{1,\ m}\ j = \overline{1,\ k}\quad P(X = a_{i},\ Y = b_{j}) = P(X = a_{i\, j}) P(y = b_j)$\\
+Для проверки этой гипотезы можно использовать статистику:
+\[
+\hat \chi^2 = \sum_{i = 1}^{m} \sum_{j = 1}^{k} \frac{ { \left( n_{i\, j} - \frac{n_{i\, \bullet} n_{\bullet\, j}}{n} \right) }^2 }{\frac{n_{i\, \bullet} n_{\bullet\, j}}{n}}
+\]
+Для этой статистики выполняется:
+\[
+\hat \chi^2 \Big|_{H_0} \sim \chi^2\big( (k - 1)(m - 1) \big)
+\]
+Критическая область будет выглядеть следующим образом: $(\chi^2_{(k - 1)(m - 1),\ 1 - \alpha})$
+\[\begin{tikzpicture}[scale=2]
+    \draw[green] (-1, 0) -- (0, 0);
+    \draw[green] (0, 0) -- (1.5, 0);
+    \draw[red] (1.5, 0) -- (2, 0);
+    \draw (0, -0.15) -- ++(0, 0.3);
+    \node at (0, -0.3) (a) {$0$};
+    \draw (1.5, -0.15) -- ++(0, 0.3);
+    \node at (1.5, -0.3) (a) {$\chi^2_{1 - \alpha,\ (k - 1)(m - 1)}$};
+\end{tikzpicture}\]
+\textit{Замечание:} если в вашем разбиении получается так, что в каком-то из интервалов $\frac{n_{i\, \bullet} n_{\bullet\, j}}{n} < 3$, то его рекомендуется объединить с соседним.
+\section*{Теперь работаем с больш$\acute{\textbf{и}}$м количеством переменных}
+Под большим количеством понимается число больше 2.\\
+\textit{Мотивация}: наличие корреляции между двумя величинами не означает наличие причинно-следственной связи между этими переменными (например, летом увеличивается количество мух и белых панамок, влияют ли панамки на мух?). Часто бывает так, что связь между исследуемыми нами переменными связана с изменением какой-то третьей (солнечной активности, в случае примера с мухами и панамками).
+\subsection*{Определение}
+\underline{Частные коэффициенты корреляции} для случайного вектора $z = (x_1,\dots,\ x_l)$ записываются в виде \underline{корреляционной матрицы}:
+\[
+R_z = \begin{pmatrix}
+    \rho_{i\, j}
+\end{pmatrix},\ \text{где } \forall i,\ j = \overline{1,\ l}\quad \rho_{i\, j} = \rho_{x_i\, x_j}
+\]
+\subsection*{Определение}
+Частным коэффициентом корреляции случайных величин $X_1,\ X_2$ при фиксированных значениях $X_3,\dots,\ X_l$ называется:
+\[
+\rho_{1\, 2;\ 3,\dots,\ l} = \frac{-\mathbb{R}_{1\, 2}}{\sqrt{\mathbb{R}_{1\, 1}\mathbb{R}_{2\, 2} }}
+\]
+Здесь $\mathbb{R}_{i\, j}$ --- алгебраическое дополнение элемента $(i,\ j)$ матрицы $R_z$\\
+\subsubsection*{Пример}
+Пусть $z = (x_1,\ x_2,\ x_3),\ R_z = \begin{pmatrix}
+    1 & \rho_{1\, 2} & \rho_{1,\ 3}\\
+    \rho_{1\, 2} & 1 & \rho_{2,\ 3}\\
+    \rho_{3\, 1} & \rho_{1\, 2} & 1\\
+\end{pmatrix}$, тогда:
+\[
+\rho_{1\, 2;\ 3} = \frac{\rho_{2\, 1} - \rho_{2\, 3}\rho_{3\, 1}}{\sqrt{ (1 - \rho_{2\, 3}^2) (1 - \rho_{1\, 3}^2) }}
+\]
+Оценка матрицы $R_z$ --- матрица $\hat R_z = \begin{pmatrix}
+    \hat \rho_{i\, j}
+\end{pmatrix}$, состоящей из выборочных частных коэффициентов корреляции:
+\[
+\hat \rho_{1\, 2;\ 3} = \frac{\hat \rho_{2\, 1} - \hat\rho_{2\, 3} \hat\rho_{3\, 1}}{\sqrt{ (1 - \hat\rho_{2\, 3}^2) (1 - \hat\rho_{1\, 3}^2) }}
+\]
 \end{document}
