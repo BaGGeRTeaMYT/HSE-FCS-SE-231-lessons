@@ -2188,4 +2188,72 @@ P\left( 0.762 < \operatorname{arcth} \rho_{x\, y} < 1.774 \right) = 0.95
 \[
 P\left( 0.642 < \rho_{x\, y} < 0.944 \right) = 0.95
 \]
+
+\begin{center}
+    \bf ДЗ к 25 апреля
+\end{center}
+
+\subsection*{Задача 1}
+Показать, что выборочный коэффициент корреляции можно преобразовать к виду (опечатка в оригинальном условии исправлена)
+\[
+\hat \rho_{x\, y} = \frac{ \sum\limits_{i = 1}^{n} x_i y_i - n\overline{X} \cdot \overline{Y} }{ \sqrt{\sum\limits_{i = 1}^{n} x_i^2 - n {\overline{X}}^2} \sqrt{ \sum\limits_{i = 1}^{n} y_i^2  - n {\overline{Y}}^2} }
+\]
+\subsection*{Задача 1}
+Оригинальная формула выглядит вот так:
+\[
+\hat \rho_{x\, y} = \frac{ \sum\limits_{i = 1}^{n} {\left( x_i - \overline{X} \right)}{\left( y_i - \overline{Y} \right)} }{ \sqrt{ \sum\limits_{i = 1}^{n} {\left( x_i - \overline{X} \right)}^2  \cdot \sum\limits_{i = 1}^{n} {\left( y_i - \overline{Y} \right)}^2 } } 
+\]
+Преобразуем числитель дроби:
+\begin{equation*}
+    \begin{aligned}
+        \sum\limits_{i = 1}^{n} {\left( x_i - \overline{X} \right)}{\left( y_i - \overline{Y} \right)} &= \sum_{i = 1}^{n} \left( x_i y_i - x_i \overline{Y} -  y_i \overline{X} + \overline{X} \cdot \overline{Y} \right) = \sum_{i = 1}^{n} \left( x_i y_i + \overline{X} \cdot \overline{Y} \right) - \overline{Y}\sum_{i = 1}^{n} x_i - \overline{X} \sum_{i = 1}^{n} y_i =\\
+        &= \sum_{i = 1}^{n} \left( x_i y_i \right) - n\overline{X} \cdot \overline{Y} - n\overline{X} \cdot \overline{Y} + n\overline{X} \cdot \overline{Y} = \sum_{i = 1}^{n} \left( x_i y_i \right) - n\overline{X} \cdot \overline{Y}
+    \end{aligned}
+\end{equation*}
+Преобразуем знаменатель:
+\begin{equation*}
+    \begin{aligned}
+        \sqrt{\sum_{i = 1}^{n} {\left( x_i - \overline{X} \right)}^2 \cdot \sum_{i = 1}^{n} {\left( y_i - \overline{Y} \right)}^2 } &= \sqrt{\sum_{i = 1}^{n} {\left( x_i^2 - 2x_i \overline{X} + {\overline{X}}^2 \right)} \cdot \sum_{i = 1}^{n} {\left( y_i^2 - 2y_i \overline{Y} + {\overline{Y}}^2 \right)} } = \\
+        & = \sqrt{ \left(\sum_{i = 1}^{n} x_i^2 - \sum_{i = 1}^{n} 2x_i\overline{X} + n\overline{X}^2\right) \left( \sum_{i = 1}^{n} y_i^2 - \sum_{i = 1}^{n} 2y_i \overline{Y} + n\overline{Y}^2 \right)}\\
+        & = \sqrt{ \left(\sum_{i = 1}^{n} x_i^2 - 2n\overline{X}^2 + n\overline{X}^2\right) \left( \sum_{i = 1}^{n} y_i^2 - 2n \overline{Y}^2 + n\overline{Y}^2 \right)}\\
+        & = \sqrt{ \sum_{i = 1}^{n} x_i^2 - n\overline{X}^2 } \sqrt{ \sum_{i = 1}^{n} y_i^2 - n\overline{Y}^2 }
+    \end{aligned}
+\end{equation*}
+Тут можно понять, что в оригинальном условии должна быть опечатка (символы такие же, но от корня никак не избавиться, да и в условии получается несимметричная формула, хотя должно быть $\hat \rho_{x\, y} = \hat \rho_{y\, x}$)
+
+\subsection*{Задача 2}
+В ДЗ семинара №2 требовалось вычислить выборочный коэффициент корреляции между экзаменационными оценками студентов вашей группы по двум (на ваш выбор) предметам. Используя эти данные, проверьте гипотезу: а) о некоррелированности показателей оценок по двум дисциплинам; б) о независимости оценок по двум дисциплинам.
+\subsection*{Решение}
+Искать таблички с оценками мне лень, поэтому решу перед семинаром (идейно не должно отличаться от задачи 4)
+\subsection*{Задача 3}
+Постройте асимптотический ДИ уровня надежности 0.95 для коэффициента корреляции показателей оценок по двум дисциплинам. Постройте ДИ уровня надежности 0.95 для коэффициента корреляции этих показателей, используя преобразование Фишера.
+\subsection*{Решение}
+Та же проблема, что и с задачей 2 (идейно не отличается от последней задачи с семинара)
+
+\subsection*{Задача 4}
+Согласно переписи населения Швеции 1936 года из совокупности супружеских пар была получена выборка 25263 пары, вступивших в брак в 1931-1936 годах. В таблице приведено распределение годовых доходов (в тыс. крон) и количество детей (показатель X) у супружеских пар в этой выборке.
+\[\begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    $X\setminus Y$ & $0-1$ & $1-2$ & $2-3$ & $>3$ & \\
+    \hline
+    $0$            & 2\,161  & 3\,577  & 2\,184  & 1\,636 & 9\,558 \\
+    \hline      
+    $ 1-2$         & 3\,691  & 6\,834  & 2\,862  & 1\,358 & 14\,745\\
+    \hline      
+    $ \geq 3$      & 264   & 517   & 127   & 52   & 960\\
+    \hline      
+                   & 6\,116 & 10\,928 & 5\,173 & 3046 & 25263 \\
+    \hline
+\end{tabular}\]
+Являются ли зависимыми уровень дохода семьи и количество детей в этой семье? Уровень значимости считать равным 0.05
+\subsection*{Решение}
+Будем использовать критерий хи-квадрат, так как данные уже за нас разбили на интервалы.
+
+\noindent
+Проверяем гипотезу $H_0: \forall x,\ y\quad  F_{x\, y} = F_x(x) \cdot F_y(y)$ против $H_1: \exists x,\ y\quad  F_{x\, y} \neq F_x(x) \cdot F_y(y) $
+
+\noindent
+Посчитаем статистику:
+\[\hat \chi^2 = \sum_{i = 1}^{m} \sum_{j = 1}^{k} \frac{ n {\left( n_{i\, j} - \frac{n_{i\, \bullet} n_{\bullet\, j}}{n} \right)}^2 }{ n_{i\, \bullet} n_{\bullet\, j} } \approx 547.467\]
+Критическая область начинается с точки $\chi^2_{0.95,\ 6} \approx 12.59$, поэтому принимаем гипотезу о зависимости.
 \end{document}
