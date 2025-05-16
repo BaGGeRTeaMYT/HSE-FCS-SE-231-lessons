@@ -1889,7 +1889,6 @@ m(n - 1)\hat W(m) \Big|_{H_0} \sim \chi^2(n - 1)
 \begin{enumerate}
     \item Физические соображения
     \item Геометрические соображения
-    \item 
 \end{enumerate}
 \subsection*{Простая парная линейная регрессия}
 $y_i = \theta_0 + \theta_1 x_i + \varepsilon_i,\ i = \overline{1,\ n}$\\
@@ -1921,4 +1920,184 @@ S(\theta) = \sum_{i = 1}^{n} {\left( y_i - (\theta_0 + \theta_1 x_i) \right)}^2 
     &\hat \theta_1 = \frac{\sum_{i = 1}^{n} \left( x_i - \overline{X} \right) \left( y_i - \overline{Y} \right)}{\sum_{i = 1}^{n} {\left( x_i - \overline{X} \right)}^2} = \hat \rho_{x\, y} \frac{\hat \sigma_y}{ \hat \sigma_x}
 \end{aligned}
 \]
+
+\begin{center}
+    \bf Лекция 16 мая
+\end{center}
+Описанная ранее функция потерь отлично работает, если погрешности гауссовские, однако крайне уязвима к выбросам. Скоро будем рассматривать робастные штуки для этой задачи.
+\subsection*{Определение}
+\underline{Множественной линейной регрессией} называется модель, в которой:
+\[
+y_i = \theta_0 + \theta_1 x_{i\, 1} + \dots + \theta_p x_{i\, p} + \varepsilon_i,\ i = \overline{1,\ n}
+\]
+Пусть $Y = \begin{pmatrix}
+    y_1\\
+    \vdots\\
+    y_n
+\end{pmatrix},\ \theta = \begin{pmatrix}
+    \theta_0\\
+    \vdots\\
+    \theta_p
+\end{pmatrix},\ \varepsilon = \begin{pmatrix}
+    \varepsilon_1\\
+    \vdots\\
+    \varepsilon_n
+\end{pmatrix},\ X = \begin{pmatrix}
+    1 & x_{1\, 1} & \dots & x_{1\, p}\\
+    \vdots & \vdots & \ddots & \vdots\\
+    1 & x_{n\, 1} & \dots & x_{n\, p}
+\end{pmatrix}$
+В матричном виде можно записать:
+\[Y = X\theta + \varepsilon\]
+\subsubsection*{Предположения}
+\begin{enumerate}
+    \item $E\varepsilon = 0$
+    \item $K_{\varepsilon} = \sigma_{\varepsilon}^2 I$
+    \item $\det \left( X^T X \right)^{-1} \neq 0$
+\end{enumerate}
+\subsubsection*{МНК-оценка}
+(расшифровывается как метод наименьших квадратов)
+\[
+S(\theta) = (Y - X\theta)^T (Y - X\theta)
+\]
+Вспоминаем приколы из линейной алгебры:
+\begin{equation*}
+    \begin{aligned}
+        &\frac{\partial}{\partial \theta} A \theta = A\\
+        &\frac{\partial}{\partial \theta} \theta^T A \theta = \theta^T(A + A^T)
+    \end{aligned}
+\end{equation*}
+Продифференцируем $S(\theta)$:
+\[
+\frac{\partial}{\partial \theta} S(\theta) = (Y - X\theta)^T (I + I) (-X) = -2(Y - X\theta)^T X
+\]
+Теперь надо приравнять производную к нулю:
+\begin{equation*}
+    \begin{aligned}
+        & \left( Y - X\hat \theta \right)^T X = 0\\
+        & Y^T X - \hat \theta^T X^T X = 0\\
+        & Y^T X = \hat \theta^T X^T X\\
+        & Y^T X {\left(X^T X\right)}^{-1} = \hat \theta^T\\
+        & \hat \theta = {\left(X^T X\right)}^{-1} X^T Y
+    \end{aligned}
+\end{equation*}
+\subsection*{Свойства МНК-оценки}
+\begin{enumerate}
+    \item Несмещённость
+    \[
+    \begin{aligned}
+        E \hat \theta &= E \left( X^T X \right)^{-1} X^T Y = E \left( X^T X \right)^{-1} X^T (X\theta + \varepsilon) =\\
+        & = \theta + E\left( X^T X \right)^{-1} X^T \varepsilon = \theta + \left( X^T X \right)^{-1} X^T \underset{=0}{\underbrace{E\varepsilon}} = \theta
+    \end{aligned}
+    \]
+    \item Ковариационная матрица:
+    \[
+    \begin{aligned}
+        K_{\hat \theta} &= E\left(\hat \theta - \theta \right) \left( \hat \theta \right)^T = E\left( \theta + \left( X^T X \right)^{-1} X^T \varepsilon - \theta \right) \left( \theta + \left( X^T X \right)^{-1} X^T \varepsilon - \theta \right)^T =\\
+        & =E \left( X^T X \right)^{-1} X^T \varepsilon \varepsilon^T X (X^T X)^{-1} = \left( X^T X \right)^{-1} E\varepsilon \varepsilon^T = \left( X^T X \right)^{-1} K_{\varepsilon} = \sigma_{\varepsilon}^2 \left( X^T X \right)^{-1}
+    \end{aligned}
+    \]
+    В частности, если $y_1 = \theta_0 + \theta_1 x_i + \varepsilon_i,\ i = \overline{1,\ n}$, то в матричном виде это выглядит так:
+    \[
+    \begin{aligned}
+        & X = \begin{pmatrix}
+            1 & x_1\\
+            \vdots & \vdots\\
+            1 & x_n
+        \end{pmatrix},\ X^T = \begin{pmatrix}
+            1 & \dots & 1\\
+            x_1 & \dots & x_n
+        \end{pmatrix}\\
+        & X^T X = \begin{pmatrix}
+            n & \sum_{i = 1}^{n} x_i\\
+            \sum_{i = 1}^{n} x_i & \sum_{i = 1}^{n} x_i^2
+        \end{pmatrix}\\
+        & \left( X^T X \right)^{-1} = \frac{1}{n \sum_{i = 1}^{n} x_i^2 - \left( \sum_{i = 1}^{n} x_i \right)^2} \begin{pmatrix}
+            \sum_{i = 1}^{n} x_i^2 & -\sum_{i = 1}^{n} x_i\\
+            -\sum_{i = 1}^{n} x_i & n
+        \end{pmatrix}\\
+        & \dev \hat \theta_0 = \sigma_{\varepsilon}^2 \frac{\sum_{i = 1}^{n} x_i^2}{n \sum_{i = 1}^{n} x_i^2 - \left( \sum_{i = 1}^{n} x_i \right)^2}\\
+        & \dev \hat \theta_1 = \sigma_{\varepsilon}^2 \frac{n}{n \sum_{i = 1}^{n} x_i^2 - \left( \sum_{i = 1}^{n} x_i \right)^2} = \sigma_{\varepsilon}^2 \frac{1}{\sum_{i = 1}^{n} {\left( x_i - \overline{X} \right)}^2 }
+    \end{aligned}
+    \]
+    \item Если $n \to \infty$, то ассимптотически выполняется:
+    \[
+    \hat \theta \sim N\left( \theta,\ \sigma_{\varepsilon}^2 (X^T X)^{-1} \right)
+    \]
+    \item $\hat \varepsilon_i = y_i - \left( \hat \theta_0 + \hat \theta_1 x_{i\, 1} + \dots + \hat \theta_p x_{i\, p} \right)$, пользуясь этим можем составить оценку:
+    \[
+    \sigma^2_{\varepsilon} = \frac{1}{n - (p + 1)} \sum_{i = 1}^{n} \hat \varepsilon^2_i,\text{ --- несмещённая оценка $\sigma^2_{\varepsilon}$}
+    \]
+    \item Теорема Гаусса-Маркова:\\
+    $\hat \theta$ МНК-оценка $\Leftrightarrow$ $\hat \theta$ является BLUE (best linear unbiased estimator, то есть наилучшая линейная по $y$ несмещённая оценка).\\
+    В данном случае наилучшая обозначает:
+    \[
+    \hat \theta\text{ --- наилучшая} \Leftrightarrow \forall \tilde {\theta}\quad K_{\tilde {\theta}} - K_{\hat{\theta}},\ \text{неотрицательно определённая}
+    \]
+\end{enumerate}
+\subsubsection*{Доказательство}
+Пусть $\hat \theta$ --- МНК-оценка, $\tilde \theta$ --- несмещённая, линейная по $y$ и претендует быть лучшей.\\
+Тогда справедливо следующее:
+\[
+\begin{aligned}
+    & E\hat \theta = E\tilde \theta = \theta\\
+    & \hat \theta  = (X^T X)^{-1} X^T Y = AY\\
+    & \tilde \theta = (A + C)Y\\
+    & E\tilde \theta = E(A + C)Y = E(A + C)(X\theta + \varepsilon) = E(AX\theta + CX \theta + (A + C)\varepsilon) = \theta + CX \Rightarrow CX = 0\\
+    & K_{\tilde \theta} = E(\tilde \theta - \theta) \left( \tilde \theta - \theta \right)^T = E(A + C)\varepsilon \varepsilon^T \left( A + C^T \right) = \left( A + C \right)\left( A + C \right)^T \underset{K_{\varepsilon}}{\underbrace{E \varepsilon \varepsilon^T}} =\\
+    & =\sigma^2_{\varepsilon} \left( A + C \right) \left( A + C \right)^T = \sigma_{\varepsilon}^2 \left(AA^T + CA^T + AC^T + CC^T \right) = \underset{K_{\hat \theta}}{\underbrace{\sigma_{\varepsilon}^2 \left( X^T X \right)^{-1}}} + \sigma^2_{\varepsilon} CC^T\\
+    & AA^T = \left( X^T X \right)^{-1} X^T X \left( X^T X \right)^{-1} = \left( X^T X \right)^{-1}\\
+    & CA^T = CX \left( X^T X \right)^{-1} = 0
+\end{aligned}
+\]
+Итак, получили, что разность ковариационных матриц МНК-оценки и любой оценки будет неотрицательно определена (см. выражение $K_{\tilde \theta}$).
+\subsection*{Дополнительное предположение}
+$\varepsilon \sim N(0,\ \sigma^2 I)$
+\subsubsection*{Свойства МНК-оценки в гауссовской модели}
+\begin{enumerate}
+    \item $\hat \theta \sim N\left(\theta,\ \sigma^2_{\varepsilon} \left( X^T X \right)^{-1}\right)$
+    \item $\dfrac{\sum_{i = 1}^{n} \hat \varepsilon^2_i}{\sigma^2} \sim \chi^2 \left( n - (p + 1) \right)$
+    \item Пусть $c$ --- детерминированный веткор размера $p + 1$, тогда:
+    \[
+    \dev c\hat\theta \leq \dev c\tilde \theta,\ \text{где $\tilde \theta$ --- любая несмещённая оценка}
+    \]
+    \item МНК-оценка $\hat \theta$ совпадает с оценкой максимального правдоподобия. 
+\end{enumerate}
+\subsection*{Применение при проверке гипотез (в гауссовской модели)}
+\subsubsection*{Пример 1}
+\[
+y_i = \theta_0 + \theta_1 x_{i\, 1} + \dots + \theta_p x_{i\, p} + \varepsilon_i,\ i = \overline{1,\ n}
+\]
+Хотим проверить гипотезу
+\[
+H_0: \theta_k = 0,\ \text{против}\ H_1: \theta_k \neq 0
+\]
+Если верна $H_0$, то показатель можно не включать в уравнение.\\
+Можем построить оценку МНК оценку $\hat \theta_k$, тогда:
+\[
+\hat \theta_k \sim N(\theta_k,\ \sigma^2_{\varepsilon} C_{k + 1,\ k + 1})
+\]
+Здесь $C_{k + 1,\ k + 1}$ --- элемент $\left( (k + 1),\ (k + 1) \right)$ матрицы $\left( X^T X \right)^{-1}$\\
+Центрируем, нормируем, получим статистику:
+\[
+\frac{\hat \theta_k - \theta_k}{ \sigma \sqrt{C_{k + 1,\ k + 1}}} \sim N(0,\ 1)
+\]
+Дисперсию мы не знаем, поэтому её можно заменяем на оценку:
+\[
+\hat \sigma^2 = \frac{1}{n - (p + 1)} \sum_{i = 1}^{n} \hat \varepsilon_i^2
+\]
+Теперь получаем финальную версию статистики:
+\[
+\frac{\hat \theta_k}{\hat \sigma_{\varepsilon} \sqrt{C_{k + 1,\ k + 1}}} \Big|_{H_0} \sim t(n - (p + 1))
+\]
+Доверительные и критические области будут выглядеть так:
+\[\begin{tikzpicture}[scale = 2]
+    \draw[color=red] (-2, 0) -- (-1, 0);
+    \draw[color=red] (1, 0) -- (2, 0);
+    \draw[color=green] (-1, 0) -- (1, 0);
+    \draw (1, -0.15) -- (1, 0.15);
+    \draw (-1, -0.15) -- (-1, 0.15);
+    \node at(-1, -0.3) (a) {$t_{n - 1,\ \alpha/2}$};
+    \node at(1, -0.3) (a) {$t_{n - 1,\ 1 - \alpha/2}$};
+\end{tikzpicture}\]
 \end{document}
