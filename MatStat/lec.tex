@@ -987,7 +987,7 @@ $Y_1,\dots,\ Y_n \sim F\left( \frac{t - \mu}{\Delta} \right),\ \Delta > 0$
 Если $X_1,\dots,\ X_m \sim F(t - \mu_1)$ и $Y_1,\dots,\ Y_n \sim F\left( \frac{t - \mu_2}{\Delta} \right)$ (то есть сдвиги $\mu_1,\ \mu_2$ различные), то рекомендуется найти выборочную медиану $\hat \mu_x$ и $\hat \mu_y$ и рассматривать выборки $x_1 - \hat \mu_x,\dots,\ x_m - \hat \mu_x$ и $y_1 - \hat \mu_y,\dots,\ y_n - \hat\mu_y$
 \subsection*{Реально критерий Ансари-Бредли}
 Вводим обозначение $m + n = N$, а также статистика:
-\[A_{m,\ n} = \sum_{i = 1}^{N} \left( \frac{N + 1}{2} - \left| R_i - \frac{N + 1}{2} \right| \right)\]
+\[A_{m,\ n} = \sum_{i = 1}^{m} \left( \frac{N + 1}{2} - \left| R_i - \frac{N + 1}{2} \right| \right)\]
 Здесь $R_i$ --- ранг $X_i$ в объединённой выборке. По своей сути $\left| R_i - \frac{N + 1}{2} \right|$ есть расстояние до ближайшего конца выборки (если мы пронумеруем выборку в прямом и в обратном порядке, то каждый элемент получит минимальный из номеров).\\
 Если $n + m \leq 20$, то существует таблица точных значений квантилей статистики $A$\\
 Если $\min(m,\ n) \to \infty$, то
@@ -1503,39 +1503,39 @@ $X \sim R(-1,\ 1)\quad Y = X^2$. Посчитаем параметр согла�
     \end{tikzpicture}
 \end{figure}\\
 То есть в этом случае величины зависимы, но параметр согласованности равен 0, потому что он отлавливает только монотонные зависимости, а квадратичная зависимость такой не является.\\
-Докажем, что это действительно так:
-\begin{equation*}
-    \begin{aligned}
-        & \xi,\ \eta \sim R(-1,\ 1),\quad \gamma = \xi + \eta\\
-        & P\left( \gamma \leq y \right) = P\left( \xi + \eta \leq y \right) = P\left(\xi \leq y - \eta\right) = \int\limits_{-\infty}^{y - \eta} f_{\xi}(x)\, dx =\\
-        & = F_{\xi} (y - \eta) - F_{\xi} (-1) = F_{\xi}(y - \eta) = \begin{cases}
-            0,\ & y - \eta < -1\\
-            \frac{y - \eta}{2} + \frac{1}{2}, & y - \eta \in [-1,\ 1] \\
-            1,\ & y - \eta > 1
-        \end{cases}\\
-        & P (-1 \leq {y - \eta} \leq 1) = P(y - 1 \leq \eta \leq y + 1) = F_{\eta}(y + 1) - F_{\eta}(y - 1) = \begin{cases}
-            0, & y < -2\\
-            \frac{(y + 1) + 1}{2}, & y \in [-2,\ 0)\\
-            1 - \frac{(y - 1) + 1}{2}, & y\in[0,\ 2)\\
-            0, & y > 2
-        \end{cases} =\\
-        & = \begin{cases}
-            0, & y < -2\\
-            \frac{y + 2}{2}, & y \in [-2,\ 0)\\
-            \frac{2 - y}{2}, & y \in [0,\ 2)\\
-            0, & y > 2 
-        \end{cases}\\
-        & P(\xi + \eta \leq k) = \int\limits_{-\infty}^{+\infty} f_{\xi}(x) \cdot f_{\eta}(k - x)\, dx = \begin{cases}
-            0,\ & k < -1\\
-            \displaystyle\int\limits_{-1}^{k} \frac{1}{2} f_{\eta}(k - x)\, dx,\ & k \geq 1
-        \end{cases} =\\
-        &= \begin{cases}
-            0, & k < 2\\
-            \displaystyle\int\limits_{-1}^{k + 1}\\
-            \displaystyle\int\limits_{k - 1}^{k + 1} \frac{1}{4}\, dx, & k - x \in [-1,\ 1]\\
-        \end{cases}
-    \end{aligned}
-\end{equation*}
+% Докажем, что это действительно так:
+% \begin{equation*}
+%     \begin{aligned}
+%         & \xi,\ \eta \sim R(-1,\ 1),\quad \gamma = \xi + \eta\\
+%         & P\left( \gamma \leq y \right) = P\left( \xi + \eta \leq y \right) = P\left(\xi \leq y - \eta\right) = \int\limits_{-\infty}^{y - \eta} f_{\xi}(x)\, dx =\\
+%         & = F_{\xi} (y - \eta) - F_{\xi} (-1) = F_{\xi}(y - \eta) = \begin{cases}
+%             0,\ & y - \eta < -1\\
+%             \frac{y - \eta}{2} + \frac{1}{2}, & y - \eta \in [-1,\ 1] \\
+%             1,\ & y - \eta > 1
+%         \end{cases}\\
+%         & P (-1 \leq {y - \eta} \leq 1) = P(y - 1 \leq \eta \leq y + 1) = F_{\eta}(y + 1) - F_{\eta}(y - 1) = \begin{cases}
+%             0, & y < -2\\
+%             \frac{(y + 1) + 1}{2}, & y \in [-2,\ 0)\\
+%             1 - \frac{(y - 1) + 1}{2}, & y\in[0,\ 2)\\
+%             0, & y > 2
+%         \end{cases} =\\
+%         & = \begin{cases}
+%             0, & y < -2\\
+%             \frac{y + 2}{2}, & y \in [-2,\ 0)\\
+%             \frac{2 - y}{2}, & y \in [0,\ 2)\\
+%             0, & y > 2 
+%         \end{cases}\\
+%         & P(\xi + \eta \leq k) = \int\limits_{-\infty}^{+\infty} f_{\xi}(x) \cdot f_{\eta}(k - x)\, dx = \begin{cases}
+%             0,\ & k < -1\\
+%             \displaystyle\int\limits_{-1}^{k} \frac{1}{2} f_{\eta}(k - x)\, dx,\ & k \geq 1
+%         \end{cases} =\\
+%         &= \begin{cases}
+%             0, & k < 2\\
+%             \displaystyle\int\limits_{-1}^{k + 1}\\
+%             \displaystyle\int\limits_{k - 1}^{k + 1} \frac{1}{4}\, dx, & k - x \in [-1,\ 1]\\
+%         \end{cases}
+%     \end{aligned}
+% \end{equation*}
 \subsubsection*{Гипотезы}
 $H_0: \tau_{X\, Y} = 0$ против одной из $H_1: \tau_{X\, Y} < 0,\ H_2: \tau_{X\, Y} > 0,\ H_3: \tau_{X\, Y} \neq 0$. Для других альтернатив критерий несостоятелен.
 \subsubsection*{Определение}
@@ -1793,7 +1793,7 @@ H_2: \rho_{1\, 2;\ 3\dots l} > 0,\\
 H_3: \rho_{1\, 2;\ 3\dots l} \neq 0$\\
 Для их проверки существует статистика:
 \[
-\frac{\sqrt{n - 2 - a} \hat \rho_{1\, 2;\ 3\dots l}}{\sqrt{\hat \rho_{1\, 2;\ 3\dots l}}} \Bigg|_{H_0} \sim t(n - 2 - a)
+\frac{\sqrt{n - 2 - a} \hat \rho_{1\, 2;\ 3\dots l}}{\sqrt{1 - \hat \rho^2_{1\, 2;\ 3\dots l}}} \Bigg|_{H_0} \sim t(n - 2 - a)
 \]
 Здесь $a$ --- количетсво фиксированных элементов выборки, $n$ --- размер выборки.
 \subsection*{Определение}
@@ -1916,7 +1916,9 @@ S(\theta) = \sum_{i = 1}^{n} {\left( y_i - (\theta_0 + \theta_1 x_i) \right)}^2 
 \]
 Какой-то чемпион решил эту систему за нас, вот ответ:
 \[
-\hat \theta_0 = \overline{Y} - \hat \theta_1 \overline{X}\\
-\hat \theta_1 = \frac{\sum_{i = 1}^{n} \left( x_i - \overline{X} \right) \left( y_i - \overline{Y} \right)}{\sum_{i = 1}^{n} {\left( x_i - \overline{X} \right)}^2} = \hat \rho_{x\, y} \frac{\hat \sigma_y}{ \hat \sigma_x}
+\begin{aligned}
+    &\hat \theta_0 = \overline{Y} - \hat \theta_1 \overline{X}\\
+    &\hat \theta_1 = \frac{\sum_{i = 1}^{n} \left( x_i - \overline{X} \right) \left( y_i - \overline{Y} \right)}{\sum_{i = 1}^{n} {\left( x_i - \overline{X} \right)}^2} = \hat \rho_{x\, y} \frac{\hat \sigma_y}{ \hat \sigma_x}
+\end{aligned}
 \]
 \end{document}
