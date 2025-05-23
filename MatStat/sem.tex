@@ -2641,4 +2641,112 @@ K_{\hat \theta} = \sigma^2_{\varepsilon} \left( X^T X \right)^{-1},\ \hat \sigma
 \[
 \hat f(6) = 2.3,\ G = t_{0.025} \sqrt{\frac{1}{50} + (6 - 3)^2 \frac{1}{10}}
 \]
+
+\begin{center}
+    \bf ДЗ к семинару 23 мая
+\end{center}
+\subsection*{Задача 1}
+В таблице указана динамика веса поросят:
+\[
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+    \hline
+    Возраст $X$ & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+    \hline
+    Вес $Y$ & 1.2 & 2.5 & 3.9 & 5.2 & 6.4 & 7.7 & 9.2 \\
+    \hline
+\end{tabular}
+\]
+Предполагается, что справедлива модель вида:
+\[
+Y_i = a + bX_i + \varepsilon_i,\ \varepsilon \sim N(0,\ \sigma^2 I)
+\]
+\subsubsection*{МНК оценки a, b}
+МНК оценка для вектора $\theta = \begin{pmatrix}
+    a\\b
+\end{pmatrix}$:
+\[
+\hat \theta = \left( X^T X \right)^{-1} X^T \cdot Y \approx \begin{pmatrix}
+    1.204\\
+    1.318
+\end{pmatrix}
+\]
+\subsubsection*{Оценка дисперсии}
+\[\hat \sigma^2_{\varepsilon} = \frac{1}{n - p - 1} \sum_{i = 1}^{n} \hat \varepsilon_i^2\]
+\subsubsection*{Проверка гипотезы}
+$H_0: b = 0$ против $H_1: b \neq 0$
+\[
+\frac{\hat b}{ \hat \sigma_{\varepsilon}\sqrt{C_{2,\ 2}}} \Big|_{H_0} \sim t(n - p - 1)
+\]
+\subsubsection*{Построить точечную и интервальную оценку}
+\[
+\hat f(x) = \hat a + \hat b x
+\]
+\[
+\frac{\hat f(x) - f(x)}{ \sqrt{\hat \dev \hat f(x)}} \sim t(n - p - 1)
+\]
+\subsection*{Задача 2}
+Имеются данные о количестве $NaNO_3$, которое можно растворить в 100 граммах воды в зависимости от температуры $t$:
+\[
+\begin{tabular}{|c|c|}
+    \hline
+    t & Y\\
+    \hline
+    0 & 66.7\\
+    \hline
+    4 & 71\\
+    \hline
+    10& 76.3\\
+    \hline
+    15& 80.6\\
+    \hline
+    21& 85.7\\
+    \hline
+    29& 92.9\\
+    \hline
+    36& 99.4\\
+    \hline
+    51& 113.6\\
+    \hline
+    68& 125.1\\
+    \hline
+\end{tabular}
+\]
+Модель $y_i = \theta_0 + \theta_1 t_i + \theta_2 t_i^2 + \varepsilon_i,\ \varepsilon\sim N(0,\ \sigma^2 I)$
+\subsubsection*{Оценка параметров}
+\[
+\hat \theta = \begin{pmatrix}
+    66.706\\
+    0.96\\
+    -0.001
+\end{pmatrix}
+\]
+\subsubsection*{Проверка гипотезы}
+Проверяем $H_0: \theta_2 = 0$ против $H_1: \theta_2 \neq 0$.\\
+Посчитаем матрицу $C$:
+\[
+C = \sigma^2_{\varepsilon} \left( X^T X \right)^{-1}
+\]
+Для этого необходимо оценить $\sigma_{\varepsilon}$:
+\[
+\hat \sigma^2_{\varepsilon} = \frac{1}{n - p - 1} \sum_{i = 1}^{n} \hat \varepsilon^2_i = \frac{1}{n - p - 1} \sum_{i = 1}^{n} {\left( y_i - \hat y \right)}^2 \approx 1.202
+\]
+\[
+\frac{\hat \theta_2}{\hat\sigma_{\varepsilon}\sqrt{C_{3,\ 3}}} \approx -1.07
+\]
+То есть попадаем в доверительную область, значит можно перейти к более короткой 
+\subsubsection*{3 часть задания}
+\[
+SS_{\text{общ}} = \sum_{i = 1}^{n} {\left( y_i - \overline{Y} \right)}^2 \approx 3083.98
+\]
+Проверим значимость самой модели (в задании такого не было):
+\[
+T = \frac{SS_{\text{регр.}}}{p} \cdot \frac{n -p - 1}{SS_{\text{случ.}}} = \approx 12000 > f_{0.95,\ 1,\ 7} 
+\]
+Попали в критическую область, значит модель значимая.
+\[
+R_{y\, x}^2 = 1 - \frac{SS_{\text{случ.}}}{SS_{\text{общ.}}} = 0.998
+\]
+\[
+R^2_{\text{adj}} \approx 0.9976
+\]
 \end{document}
