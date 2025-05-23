@@ -2100,4 +2100,143 @@ H_0: \theta_k = 0,\ \text{против}\ H_1: \theta_k \neq 0
     \node at(-1, -0.3) (a) {$t_{n - 1,\ \alpha/2}$};
     \node at(1, -0.3) (a) {$t_{n - 1,\ 1 - \alpha/2}$};
 \end{tikzpicture}\]
+
+\begin{center}
+    \bf Лекция 23 мая
+\end{center}
+\subsection*{Задача}
+Рассматриваем ``длинную'' модель:
+\[
+Y_i = \theta_0 + \theta_1 x_{i\, 1} + \dots + \theta_p x_{i\, p} + \varepsilon_i,\quad \varepsilon \sim N(0,\ \sigma^2 I)
+\]
+И ``короткую'' модель:
+\[
+Y_i = \theta_0 + \theta_1 x_{i\, 1} + \dots + \theta_q x_{i\, q} + \varepsilon_i,\quad q < p
+\]
+Проверяем гипотезу $H_0: \theta_{q + 1} = \dots = \theta_p = 0$ против $H_1: \exists j \in (q + 1,\dots,\ p): \theta_j \neq 0$
+\subsubsection*{Действия}
+Оцениваем с помощью МНК по ``длинной'' модели $\theta_0,\dots,\ \theta_p$, получаем $\hat \theta_0,\dots,\ \hat\theta_p$, считаем следующие величины:
+\[
+\begin{aligned}
+    & SS_1 = \sum_{i = 1}^{n} {\left( y_i - \hat y_i \right)}^2\\
+    & \hat y_i = \hat \theta_0 + \sum_{i = 1}^{p} \hat \theta_j x_{i\, j}
+\end{aligned}
+\]
+Оцениваем с помощью МНК по ``короткой'' модели $\theta_0,\dots,\ \theta_q$, получаем $\tilde \theta_0,\dots,\ \tilde\theta_q$, считаем величины:
+\[
+    \begin{aligned}
+    & SS_2 = \sum_{i = 1}^{n} {\left( y_i - \hat y_i \right)}^2\\
+    & \hat y_i = \tilde \theta_0 + \sum_{i = 1}^{q} \tilde \theta_j x_{i\, j}
+\end{aligned}
+\]
+Теперь составим статистику:
+\[
+\frac{ \frac{1}{p - q} \frac{SS_2 - SS_1}{  \sigma_{\varepsilon}^2}}{ \frac{1}{n - p - 1} \frac{SS_1}{\sigma_{\varepsilon}^2} } = \frac{n - p - 1}{p - q} \cdot \frac{SS_2 - SS_1}{SS_1} \Bigg|_{H_0} \sim F(p - q,\ n - p - 1)
+\]
+Доверительной областью этой статистики является интервал $(0,\ f_{1 - \alpha,\ p - q,\ n - p - 1})$
+
+\subsection*{Задача}
+Рассматриваем ``длинную'' модель:
+\[
+Y_i = \theta_0 + \theta_1 x_{i\, 1} + \dots + \theta_p x_{i\, p} + \varepsilon_i,\quad \varepsilon \sim N(0,\ \sigma_{\varepsilon}^2 I)
+\]
+И модель:
+\[
+Y_i = \theta_0 + \varepsilon_i
+\]
+Проверяем гипотезу $H_0: \theta_{1} = \dots = \theta_p = 0$ против $H_1: \exists j \neq 0 \theta_j \neq 0$
+\subsubsection*{Действия}
+Считаем следующие штуки:
+\[
+\begin{aligned}
+    & SS_{\text{общ}} = \sum_{ i = 1}^{n} {\left( y_i - \hat y_i \right)}^2 = \sum_{i = 1}^{n} {\left( y_i \pm \hat y_i - \overline{Y} \right)}^2 = \sum_{i = 1}^{n} {\left( y_i - \hat y_i \right)}^2 + \sum_{i = 1}^{n} {\left( \hat y_i - \overline{Y} \right)}^2 + 2 \sum_{i = 1}^{n} \left( y_i - \hat y_i \right)\left( \hat y_i - \overline{Y} \right)\\
+    & \sum_{i = 1}^{n} \left( y_i - \hat y_i \right)\left( \hat y_i - \overline{Y} \right) = \sum_{i = 1}^{n} \hat\varepsilon_i \left( \hat \theta_0 + \hat\theta_1 x_i - \overline{Y} \right) = \sum_{i = 1}^{n} \hat \varepsilon \left( \overline{Y} - \hat\theta_1 \overline{X} + \hat \theta_1 x_i - \overline{Y} \right) = \hat \theta_1 \sum_{i = 1}^{n} \hat \varepsilon_i \left( x_i - \overline{X} \right) = 0\\
+    & \sum_{i = 1}^{n} \left( y_i - \hat y_i \right) \left( x_i - \overline{X} \right) = \sum_{i  = 1}^{n} \left( y_i - \hat \theta_0 - \hat \theta_1 x_i \right) \left( x_i - \overline{X} \right) = \underset{=0}{\underbrace{\sum_{i  = 1}^{n} \left( y_i - \hat \theta_0 - \hat \theta_1 x_i \right) x_i}} + \overline{X} \underset{=0}{\underbrace{\sum_{i  = 1}^{n} \left( y_i - \hat \theta_0 - \hat \theta_1 x_i \right)}}
+\end{aligned}
+\]
+Итого, получаем:
+\[
+\begin{aligned}
+    & SS_{\text{общ}} = \underset{SS_{\text{случ.}}}{\underbrace{\sum_{i = 1}^{n} {\left( y_i - \hat y_i \right)}^2}} + \underset{SS_{\text{регр.}}}{\underbrace{\sum_{i = 1}^{n} {\left( \hat y_i - \overline{Y} \right)}^2}}\
+\end{aligned}
+\]
+Поработаем с частями этого равенства:
+\[
+\frac{SS_{\text{общ}}}{\sigma_{\varepsilon}^2} \sim \chi^2\left( n - 1 \right)
+\]
+\[
+\frac{SS_{\text{случ}}}{\sigma_{\varepsilon}^2} \sim \chi^2\left( n - p - 1 \right)
+\]
+\[
+\frac{SS_{\text{регр.}}}{\sigma_{\varepsilon}^2} \Big|_{H_0} \sim \chi^2(p)
+\]
+Здесь $p$ --- количество оцененных параметров (размерность $\theta$).\\
+С этими знаниями можно составить статистику:
+\[
+\frac{n - p - 1}{p} \cdot \frac{SS_{\text{регр.}}}{SS_{\text{случ.}}} \Bigg|_{H_0} \sim F(p,\ n - p - 1)
+\]
+Доверительным интервалом будет $(0,\ f_{1 - \alpha,\ p,\ n - p - 1})$
+\subsection*{Определение}
+\underline{Коэффициентом детерминации} регрессии порядка $p \geq 1$ называется
+\[
+\hat R^2 = 1 - \frac{SS_{\text{случ.}}}{SS_{\text{общ.}}}
+\]
+\subsection*{Определение}
+\underline{Скорректированным коэффициентом детерминации} называют:
+\[
+R^2_{\text{adj}} = 1 - \frac{ \frac{1}{n - p - 1} SS_{\text{случ.}} }{ \frac{1}{n - 1} SS_{\text{общ.}} }
+\]
+\subsection*{title}
+Рассматривается парная регрессия:
+\[
+y_i =  \theta_0 + \theta_1 x_i + \varepsilon_i,\ \varepsilon \sim N(0,\ \sigma_{\varepsilon}^2 I)
+\]
+Введём обозначение:
+\[
+f(x,\ \theta) = \theta_0 + \theta_1 x
+\]
+Построим доверительную область для $f(x,\ \theta)$.\\
+Пусть $\hat \theta_0,\ \hat\theta_1$ --- МНК оценки параметров $\theta_0,\ \theta_1$ соответственно. Тогда:
+\[
+\begin{aligned}
+    & \hat f(x,\ \theta) = \hat \theta_0 + \hat\theta_1 x\\
+    & E\hat f(x,\ \theta) = \theta_0 + \theta_1 x\\
+    &\begin{aligned}
+        \dev \hat f(x,\ \theta) &= \dev \left( \hat \theta_0 + \hat \theta_1 x \right) = \dev \left( \overline{Y} - \hat \theta_1 \overline{X} + \hat \theta_1 x \right) = \dev \left( \overline{Y} + \hat \theta_1 \left( x - \overline{X} \right) \right) =\\
+        &= \frac{\sigma^2_{\varepsilon}}{n} + {\left( x - \overline{X} \right)}^2 \frac{\sigma^2_{\varepsilon}}{\sum_{i = 1}^{n} {\left( x_i - \overline{X} \right)}^2} =  \sigma^2_{\varepsilon} \left( \frac{1}{n} + \frac{{\left( x - \overline{X} \right)}^2}{ \sum_{i = 1}^{n} {\left( x_i - \overline{X} \right)}^2 } \right)
+    \end{aligned}
+\end{aligned}
+\]
+Теперь можно составить статистику:
+\[
+\frac{\hat f(x,\ \theta) - f(x,\ \theta)}{ \hat \sigma_{\varepsilon} \sqrt{ \frac{1}{n} + \frac{{\left( x - \overline{X} \right)}^2}{ \sum_{i = 1}^{n} {\left( x_i - \overline{X} \right)}^2 } } } \sim t(n - p - 1)
+\]
+Теперь можно начинать строить доверительную область:
+\[
+P\left( t_{\alpha/2,\ n - p - 1} < \frac{\hat f(x,\ \theta) - f(x,\ \theta)}{ \hat \sigma_{\varepsilon} \sqrt{ \frac{1}{n} + \frac{{\left( x - \overline{X} \right)}^2}{ \sum_{i = 1}^{n} {\left( x_i - \overline{X} \right)}^2 } } } < t_{1 - \alpha/2,\ n - p - 1} \right) = 1 - \alpha
+\]
+Умные люди за нас проделали преобразования и получили (обозначил $t = t_{\alpha/2,\ n - p- 1}$):
+\[
+P\left( \hat f(x,\ \theta) - t \hat \sigma_{\varepsilon} \sqrt{ \frac{1}{n} + \frac{{\left( x - \overline{X} \right)}^2}{ \sum_{i = 1}^{n} {\left( x_i - \overline{X} \right)}^2 } } < f(x,\ \theta) < \hat f(x,\ \theta) + t \hat \sigma_{\varepsilon} \sqrt{ \frac{1}{n} + \frac{{\left( x - \overline{X} \right)}^2}{ \sum_{i = 1}^{n} {\left( x_i - \overline{X} \right)}^2 } } \right) = 1 - \alpha
+\]
+Полученная область не параллельна прямой, задаваемой $f(x,\ \theta)$ (нелинейно расширяется при удалении $x$ от $\overline{X}$)
+
+\subsection*{Регрессионные модели с переменной структурой}
+При построении модели:
+\[
+y_i = \theta_0 + \sum_{j = 1}^{p} \theta_j x_{i\, j} + \varepsilon_i,\ i = \overline{1,\ n} 
+\]
+Могут понадобиться \underline{фиктивные переменные} (dummy variables), например:
+\[
+d_i = \begin{cases}
+    0,\ \text{если $i$-ый респондент без высшего образования}\\
+    1,\ \text{если $i$-ый респондент с высшим образованием}\\
+\end{cases}
+\]
+То
+гда модель будет выглядеть так:
+\[
+y_i = \theta_0 + \sum_{j = 1}^{p} \theta_j x_{i\, j} + \delta d_i + \varepsilon_i,\ i = \overline{1,\ n}     
+\]
+Теперь нужно проверить гипотезу $H_0: \delta = 0$ против $H_1: \delta \neq 0$
 \end{document}
