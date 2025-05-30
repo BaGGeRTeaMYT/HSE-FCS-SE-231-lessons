@@ -2239,4 +2239,203 @@ d_i = \begin{cases}
 y_i = \theta_0 + \sum_{j = 1}^{p} \theta_j x_{i\, j} + \delta d_i + \varepsilon_i,\ i = \overline{1,\ n}     
 \]
 Теперь нужно проверить гипотезу $H_0: \delta = 0$ против $H_1: \delta \neq 0$
+
+\newpage
+\begin{center}
+    \bf Лекция 30 мая
+\end{center}
+\subsection*{Ввод нескольких фиктивных переменных}
+Пусть справедлива модель:
+\[
+\begin{aligned}
+    & Y_t = \theta_0 + \theta_1 d_{1\, t} + \theta_2 d_{2\, t} + \theta_p d_{3\, t} + \varepsilon_t\\
+    & d_{1\, t} = \begin{cases}
+        1,\ \text{если $t$ --- зимний месяц}\\
+        0,\ \text{иначе}
+    \end{cases}\\
+    & d_{2\, t} = \begin{cases}
+        1,\ \text{если $t$ --- весенний месяц}\\
+        0,\ \text{иначе}
+    \end{cases}\\
+    & d_{3\, t} = \begin{cases}
+        1,\ \text{если $t$ --- летний месяц}\\
+        0,\ \text{иначе}
+    \end{cases}
+\end{aligned}
+\]
+\subsection*{Структурный сдвиг}
+\subsubsection*{Первый случай}
+\[
+\begin{tikzpicture}
+    \draw[->] (-1, 0) -- (5, 0);
+    \draw[->] (0, -1) -- (0, 3);
+    \draw (0, 0) -- (2, 2);
+    \draw[dashed] (2 , 2) -- (2, 1);
+    \draw (2, 1) -- (4, 3);
+    \node at (2, -0.5) (a) {$t_0$};
+\end{tikzpicture}
+\]
+\[
+\begin{aligned}
+    & Y_t = \theta_0 + \theta_1 x_t + \theta_2 \delta_{t_0}  + \varepsilon_{t_0}\\
+    & \delta_{t_0} = \begin{cases}
+        0,\ & t \leq t_0\\
+        1,\ & t > t_0
+    \end{cases}
+\end{aligned}
+\]
+\subsubsection*{Второй случай}
+\[
+\begin{tikzpicture}
+    \draw[->] (-1, 0) -- (5, 0);
+    \draw[->] (0, -1) -- (0, 3);
+    \draw (0, 0) -- (2, 2);
+    \draw[dashed] (2 , 2) -- (2, 3);
+    \draw (2, 3) -- (4, 1);
+    \node at (2, -0.5) (a) {$t_0$};
+\end{tikzpicture}
+\]
+\[
+\begin{aligned}
+    & Y_t = \theta_0 + \theta_1 x_t + \theta_2 \delta_{t_0} + \theta_3 \delta_{t_0} x_t + \varepsilon_{t_0}\\
+\end{aligned}
+\]
+\newpage
+\subsubsection*{Третий случай}
+\[
+\begin{tikzpicture}
+    \draw[->] (-1, 0) -- (5, 0);
+    \draw[->] (0, -1) -- (0, 4);
+    \draw (0, 0) -- (2, 2);
+    \draw (2, 2) -- (3, 4);
+    \node at (2, -0.5) (a) {$t_0$};
+\end{tikzpicture}
+\]
+\[
+Y_t = \theta_0 + \theta_1 x_t + \theta_2 \delta_{t_0}(x_t - t_0) + \varepsilon_i
+\]
+\subsection*{Критерий Чоу}
+Пусть для объединения двух выборок справедлива модель:
+\[
+Y_i = \theta_0 + \theta_1 x_{i\, 1} + \dots + \theta_p x_{i\, p} + \varepsilon_i,\ i = \overline{1,\ n + m}
+\]
+Проверяем, стоит ли строить отдельные регрессии для каждой выборки, то есть:
+\[
+\begin{aligned}
+    & Y_0 = \tilde \theta_0 + \tilde \theta_1 x_{i\, 1} + \dots + \tilde \theta_p x_{i\, p} + \tilde \varepsilon_i,\ i = \overline{1,\ n}\\
+    & Y_1 = \tilde{\tilde \theta}_0 + \tilde{\tilde \theta}_1 x_{i\, 1} + \dots + \tilde{\tilde \theta}_p x_{i\, p} + \tilde{\tilde \varepsilon}_i,\ i = n + 1,\dots\ n + m
+\end{aligned}
+\]
+\subsubsection*{Гипотезы}
+\[
+H_0: \tilde \theta_0 = \tilde{\tilde \theta}_0,\dots,\ \tilde \theta_p = \tilde{\tilde \theta}_p
+\]
+\[
+H_1: \exists j \in \overline{1,\ p}: \tilde \theta_j \neq \tilde{\tilde \theta}_j
+\]
+\subsubsection*{Действия}
+\begin{enumerate}
+    \item Оценить по МНК параметры $\theta_0,\dots,\ \theta_p$ по объединённой выборке:
+    \[
+    SS_{\text{случ.}} = \sum_{i = 1}^{n + m} {\left( y_i - \hat y_i \right)}^2
+    \]
+    \item Оценить по МНК параметры $\tilde \theta_0,\dots,\ \theta_p$ по выборке 1:
+    \[
+    SS_{\text{случ.}}^1 = \sum_{i = 1}^{n} {\left( y_i - \hat y_i \right)}^2
+    \]
+    \item Оценить по МНК параметры $\tilde{\tilde \theta}_0,\dots,\ \tilde{\tilde \theta}_p$ по выборке 2:
+    \[
+    SS_{\text{случ.}}^2 = \sum_{i = n + 1}^{n + m} {\left( y_i - \hat y_i \right)}^2
+    \]
+    \item Составить статистику:
+    \[
+    \frac{ \frac{1}{p + 1} \left( SS_{\text{случ.}} - \left( SS_{\text{случ.}}^1 + SS_{\text{случ.}}^2 \right) \right)}{ \frac{1}{n + m - 2p - 2} \left( SS_{\text{случ.}}^1 + SS_{\text{случ.}}^2 \right) } \Bigg|_{H_0} \sim F(p + 1,\ n + m - 2p - 2)
+    \]
+    При справедливости гипотезы значение статистики должно быть маленьким, то есть доверительной областью является $(0,\ f_{1 - \alpha,\ p + 1,\ n + m - 2p - 2})$
+\end{enumerate}
+\subsection*{Гетеро- и гомоскедастичность моделей}
+\subsubsection*{Определение}
+Если $\varepsilon$ в модели имеют разные дисперсии, то такая модель называется \underline{гетероскедастичной}, иначе --- \underline{гомоскедастичной}.
+\subsubsection*{Обозначения}
+Подразумевается, что справедлива модель:
+\[
+Y_i = \theta_0 + \theta_1 x_{i\, 1} + \dots + \theta_p x_{i\, p} + \varepsilon_i,\ i = \overline{1,\ n}
+\]
+Пусть ковариационная матрица $\varepsilon$ имеет вид:
+\[
+K_{\varepsilon} = \begin{pmatrix}
+    \sigma_1^2 & 0 & \dots & 0\\
+    0 & \sigma_2^2 & \dots & 0\\
+    \vdots & \vdots & \ddots & \vdots\\
+    0 & 0 & \dots & \sigma_n^2
+\end{pmatrix}
+\]
+Применим взвешенный МНК:
+\[
+S(\theta) = \sum_{i = 1}^{n} \frac{1}{w_i} {\left( y_i - \sum_{j = 1}^{p} \theta_j x_{i\, j} \right)}^2,\ w_i = \sigma_i,\ i = \overline{1,\ n}
+\]
+Теперь посчитаем оценку $\theta$ в этом случае:
+\[
+\begin{aligned}
+    & V^{-1} = \begin{pmatrix}
+        \frac{1}{\sigma^2_1} & 0 & \dots & 0\\
+        0 & \frac{1}{\sigma^2_2} & \dots & 0\\
+        \vdots & \vdots & \ddots & \vdots\\
+        0 & 0 & \dots & \frac{1}{\sigma^2_n}
+    \end{pmatrix}\\
+    & V^{-\frac{1}{2}} = \begin{pmatrix}
+        \frac{1}{\sigma_1} & 0 & \dots & 0\\
+        0 & \frac{1}{\sigma_2} & \dots & 0\\
+        \vdots & \vdots & \ddots & \vdots\\
+        0 & 0 & \dots & \frac{1}{\sigma_n}
+    \end{pmatrix}\\
+    & X^* = V^{-\frac{1}{2}} X\\
+    & Y^* = V^{-\frac{1}{2}} Y\\
+    & \hat \theta = {\left( {X^*}^T X^* \right)}^{-1} {X^*}^T Y^*
+\end{aligned}
+\]
+\subsection*{Критерий Голдфельда-Квандта}
+Проверяется гипотеза $H_0: \sigma_1^2 = \dots = \sigma_n^2$ против $H_1: \sigma_i = \sigma x_{i\, j},\ i = \overline{1,\ n},\ j \in (1,\dots,\ p)$ (то есть пропорциональна одному из регрессоров)\\
+\subsubsection*{Действия}
+\begin{enumerate}
+    \item Упорядочить наблюдения по убыванию регрессора $x_{j}$
+    \item Из ``средней части'' удалить $d$ наблюдений. (удаляем примерно четверть наблюдений)
+    \item Построить регрессию по первым $\frac{n - d}{2}$ наблюдениям и найти $\hat\varepsilon_1^T \hat\varepsilon_1 = \sum_{i = 1}^{\frac{n - d}{2}} \hat \varepsilon_i^2$ 
+    \item Построить регрессию по последним $\frac{n - d}{2}$ наблюдениям и найти $\hat\varepsilon_2^T \hat\varepsilon_2 = \sum_{i = \frac{n + d}{2}}^{n} \hat \varepsilon_i^2$ 
+    \item Рассматриваем $F$-статистику:
+    \[
+    \hat F = \frac{\hat\varepsilon_1^T \hat\varepsilon_1}{\hat\varepsilon_2^T \hat\varepsilon_2} \Bigg|_{H_0} \sim F\left(\frac{n - d}{2} - p,\ \frac{n - d}{2} - p\right)
+    \]
+    Если оказались правее $f_{1 - \alpha,\ \frac{n - d}{2} - p,\ \frac{n - d}{2} - p}$, то гетероскедастичность имеется, значит всё уравнение нужно делить на $X_j$, чтобы нормализовать дисперсию.
+\end{enumerate}
+\subsection*{Тест Бреуша-Пагана}
+Разбирался не очень подробно, используется для проверки гипотезы $H_0: \sigma_1^2=  \dots = \sigma^2_n$ против альтернативы $H_1:$ дисперсия зависит от какой-то линейной комбинации регрессоров.
+
+\section*{Робастные методы}
+\subsection*{Метод наименьших модулей (МНМ)}
+Оценкой МНМ в модели называется такое значения $\hat \theta$, при котором достигается минимум следующей функции потерь:
+\[
+S(\theta) = \sum_{i = 1}^{n} \left| Y_i - f(X_i\, 1,\dots,\ X_{i,\ p},\ \theta) \right|
+\]
+Проблема данного метода в том, что он не имеет аналитического решения (только численное, которое было на ИАДе, кстати)
+
+\subsection*{Ранговая R-оценка}
+Ранговой оценкой параметров в модели называется такое значение $\hat \theta$, при котором достигается минимум следующей функции потерь (формулу не успел записать)
+\subsection*{Семейство M-оценок}
+Идея в том, чтобы минимизировать некую выпуклую функцию $\rho(X)$ (МНК и МНМ являются M-оценками).\\
+Примеры $M$-оценок:
+\subsubsection*{Оценка Тьюки}
+\[
+\rho(z) = \begin{cases}
+    z, & |z| \leq c\\
+    c|z| + c^2, & |z| > c
+\end{cases}
+\]
+\subsubsection*{Оценка Хьюбера}
+\[
+\rho(z) = \begin{cases}
+    1,\ |z| > c\\
+    1 - {\left( 1 - {\left( \frac{x}{c} \right)}^2 \right)}^3,\ |z| \leq c
+\end{cases}
+\]
 \end{document}
