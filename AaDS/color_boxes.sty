@@ -1,0 +1,79 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{color_boxes}[28/07/2025 Предоставляет окружения для красивого выделения блоков текста]
+
+\RequirePackage{listings}
+\RequirePackage{caption}
+\RequirePackage[T1,T2A]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[russian]{babel}
+\RequirePackage{xcolor}
+\RequirePackage{tcolorbox}
+
+\newenvironment{Theorem}[1]{%
+\begin{tcolorbox}[%
+  colback=blue!5!white,    % Цвет фона
+  colframe=blue!50!black, % Цвет рамки
+  arc=3mm,                % Радиус скругления углов
+  title=Теорема,    % Заголовок
+  #1%
+]%
+}{%
+\end{tcolorbox}
+}
+
+\newenvironment{Definition}{%
+\begin{tcolorbox}[%
+  colback=green!15!white,  
+  colframe=green!70!white,  
+  arc=3mm,
+  title=Определение
+]
+}{%
+\end{tcolorbox}
+}
+
+\newenvironment{Attention}{%
+\begin{tcolorbox}[%
+  colback=red!15!white,  
+  colframe=red!70!white,  
+  arc=3mm,
+  title=Замечание
+]%
+}{
+\end{tcolorbox}
+}
+
+\newenvironment{Properties}{%
+\begin{tcolorbox}[%
+  colback=magenta!15!white,  
+  colframe=magenta!70!white,  
+  arc=3mm,
+  title=Свойства
+]%
+}{
+\end{tcolorbox}
+}
+
+\newenvironment{Variations}{%
+\begin{tcolorbox}[%
+  colback=purple!15!white,  
+  colframe=purple!70!white,  
+  arc=3mm,
+  title=Разновидности
+]%
+}{
+\end{tcolorbox}
+}
+
+\newenvironment{Designation}{%
+\begin{tcolorbox}[%
+  colback=blue!15!white,  
+  colframe=blue!70!white,  
+  arc=3mm,
+  title=Обозначение
+]%
+}{
+\end{tcolorbox}
+}
+
+\endinput

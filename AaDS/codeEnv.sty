@@ -1,0 +1,175 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{codeEnv}[28/07/2025 Предоставляет окружение CodeEnv для вставки кода с русскими комментариями]
+
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=codeEnv,
+  prefix=codeEnv@
+}
+
+\edef\defaultTheme{dracula}
+
+\DeclareStringOption[\defaultTheme]{theme}
+\DeclareBoolOption[false]{linenumbers}
+
+\ProcessKeyvalOptions{codeEnv}
+\RequirePackage{xcolor}
+
+\definecolor{dracula@background}{rgb}{0.16, 0.16, 0.21}
+\definecolor{dracula@text}{rgb}{0.87, 0.87, 0.85}
+\definecolor{dracula@keyword}{rgb}{0.99, 0.47, 0.77}
+\definecolor{dracula@comment}{rgb}{0.36, 0.41, 0.59}
+\definecolor{dracula@string}{rgb}{0.86, 0.89, 0.51}
+
+\colorlet{light@background}{white}
+\colorlet{light@text}{black}
+\colorlet{light@keyword}{blue}
+\colorlet{light@comment}{gray}
+\colorlet{light@string}{green}
+
+\newcommand{\codeEnv@settheme}[1]{%
+  \ifcase\pdf@strcmp{#1}{dracula}\relax
+    \colorlet{codeEnv@background}{dracula@background}
+    \colorlet{codeEnv@text}{dracula@text}
+    \colorlet{codeEnv@keyword}{dracula@keyword}
+    \colorlet{codeEnv@comment}{dracula@comment}
+    \colorlet{codeEnv@string}{dracula@string}
+  \or
+    \colorlet{codeEnv@background}{light@background}
+    \colorlet{codeEnv@text}{light@text}
+    \colorlet{codeEnv@keyword}{light@keyword}
+    \colorlet{codeEnv@comment}{light@comment}
+    \colorlet{codeEnv@string}{light@string}
+  \else
+    \PackageWarning{codeEnv}{Unknown theme '#1', using \defaultTheme}
+    \codeEnv@settheme{\defaultTheme}
+  \fi
+}
+
+\codeEnv@settheme{\codeEnv@theme}
+
+\RequirePackage{listings}
+\RequirePackage{caption}
+\RequirePackage[T1,T2A]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[russian]{babel}
+
+\DeclareCaptionFormat{mycodeformat}{#3} % Убираем "Листинг X.X"
+\captionsetup[lstlisting]{
+  format=mycodeformat,
+  singlelinecheck=false,
+  justification=centering
+}
+
+
+\lstdefinestyle{mycode@base}{
+  language=C++,
+  basicstyle=\ttfamily\small\color{codeEnv@text},
+  backgroundcolor=\color{codeEnv@background},
+  keywordstyle=\color{codeEnv@keyword},
+  commentstyle=\color{codeEnv@comment}\ttfamily,
+  stringstyle=\color{codeEnv@string},
+  numbers=left,
+  numberstyle=\tiny\color{darkgray},
+  stepnumber=1,
+  showtabs=true,
+  numbersep=5pt,
+  frame=single,
+  tabsize=2,
+  captionpos=t,
+  breaklines=false,
+  breakatwhitespace=true,
+  showspaces=false,
+  showstringspaces=false,
+  extendedchars=true,
+  inputencoding=utf8,
+  literate={%
+    {а}{{\cyra}}1
+    {б}{{\cyrb}}1
+    {в}{{\cyrv}}1
+    {г}{{\cyrg}}1
+    {д}{{\cyrd}}1
+    {е}{{\cyre}}1
+    {ё}{{\cyryo}}1
+    {ж}{{\cyrzh}}1
+    {з}{{\cyrz}}1
+    {и}{{\cyri}}1
+    {й}{{\cyrishrt}}1
+    {к}{{\cyrk}}1
+    {л}{{\cyrl}}1
+    {м}{{\cyrm}}1
+    {н}{{\cyrn}}1
+    {о}{{\cyro}}1
+    {п}{{\cyrp}}1
+    {р}{{\cyrr}}1
+    {с}{{\cyrs}}1
+    {т}{{\cyrt}}1
+    {у}{{\cyru}}1
+    {ф}{{\cyrf}}1
+    {х}{{\cyrh}}1
+    {ц}{{\cyrc}}1
+    {ч}{{\cyrch}}1
+    {ш}{{\cyrsh}}1
+    {щ}{{\cyrshch}}1
+    {ъ}{{\cyrhrdsn}}1
+    {ы}{{\cyrery}}1
+    {ь}{{\cyrsftsn}}1
+    {э}{{\cyrerev}}1
+    {ю}{{\cyryu}}1
+    {я}{{\cyrya}}1
+    {А}{{\CYRA}}1
+    {Б}{{\CYRB}}1
+    {В}{{\CYRV}}1
+    {Г}{{\CYRG}}1
+    {Д}{{\CYRD}}1
+    {Е}{{\CYRE}}1
+    {Ё}{{\CYRYO}}1
+    {Ж}{{\CYRZH}}1
+    {З}{{\CYRZ}}1
+    {И}{{\CYRI}}1
+    {Й}{{\CYRISHRT}}1
+    {К}{{\CYRK}}1
+    {Л}{{\CYRL}}1
+    {М}{{\CYRM}}1
+    {Н}{{\CYRN}}1
+    {О}{{\CYRO}}1
+    {П}{{\CYRP}}1
+    {Р}{{\CYRR}}1
+    {С}{{\CYRS}}1
+    {Т}{{\CYRT}}1
+    {У}{{\CYRU}}1
+    {Ф}{{\CYRF}}1
+    {Х}{{\CYRH}}1
+    {Ц}{{\CYRC}}1
+    {Ч}{{\CYRCH}}1
+    {Ш}{{\CYRSH}}1
+    {Щ}{{\CYRSHCH}}1
+    {Ъ}{{\CYRHRDSN}}1
+    {Ы}{{\CYRERY}}1
+    {Ь}{{\CYRSFTSN}}1
+    {Э}{{\CYREREV}}1
+    {Ю}{{\CYRYU}}1
+    {Я}{{\CYRYA}}1
+  },
+  morekeywords={T, array}
+}
+
+\lstnewenvironment{CodeEnv}[2][]{%
+  \if\relax\detokenize{#2}\relax%
+    \lstset{style=mycode@base, #1}%
+  \else%
+    \codeEnv@settheme{#2}%
+    \lstset{style=mycode@base, #1}%
+  \fi%
+}{}
+
+\lstnewenvironment{CodeSnippet}[2][]{%
+  \if\relax\detokenize{#2}\relax%
+    \lstset{style=mycode@base, numbers=none, #1}%
+  \else%
+    \codeEnv@settheme{#2}%
+    \lstset{style=mycode@base, numbers=none, #1}%
+  \fi%
+}{}
+
+\endinput

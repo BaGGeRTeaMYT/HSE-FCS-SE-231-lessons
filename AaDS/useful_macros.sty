@@ -1,0 +1,16 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{useful_macros}[28/07/2025 Предоставляет окружения для красивого выделения блоков текста]
+
+\RequirePackage[T1,T2A]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[russian]{babel}
+\RequirePackage{xcolor}
+
+\newcommand{\colored}[2]{\textcolor{#1}{\text{#2}}}
+
+\newcommand{\defAccent}{\@ifstar{\defAccent@star}{\defAccent@nostar}}
+
+\newcommand{\defAccent@nostar}[1]{\textsl{#1}}
+\newcommand{\defAccent@star}[2]{\textsl{#1}\label{#2}}
+
+\endinput
